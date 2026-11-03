@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portail des Applications Pedagogiques et Decisionnelles | CSSMB</title>
+  <style>
+    :root {
+      --primary: #004b87;
+      --primary-light: #0269b8;
+      --accent: #00a3e0;
+      --bg: #f4f6fa;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 10px 24px rgba(0, 75, 135, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 2.5rem 1.5rem;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    header {
+      background: var(--card-bg);
+      padding: 2rem 2.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border-left: 6px solid var(--primary);
+      margin-bottom: 2rem;
+    }
+    .header-sub {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.35rem;
+    }
+    h1 {
+      font-size: 1.85rem;
+      color: var(--primary);
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+    .intro {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+    .search-bar {
+      margin-top: 1.25rem;
+      position: relative;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      font-size: 0.95rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #ffffff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-bar input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0, 75, 135, 0.1);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--primary-light);
+    }
+    .card-icon {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--primary);
+      background: #eef5fc;
+      width: 65px;
+      height: 65px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+    .card-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
+    }
+    .card-desc {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      margin-bottom: 0.45rem;
+      line-height: 1.35;
+    }
+    .card-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #0369a1;
+      background: #e0f2fe;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+    }
+    .card-arrow {
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      transition: transform 0.2s ease;
+    }
+    .card:hover .card-arrow {
+      transform: translateX(4px);
+      color: var(--primary);
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-sub">Centre de services scolaire Marguerite-Bourgeoys (CSSMB)</div>
+      <h1>Portail des Outils Pedagogiques et Decisionnels</h1>
+      <p class="intro">Suite d applications analytiques executees localement en memoire vive via WebAssembly / Stlite. Cliquez sur une application pour la lancer.</p>
+      <div class="search-bar">
+        <input type="text" id="filterInput" placeholder="Rechercher un outil (ex: docimologie, triage, math, pfae...)" onkeyup="filterCards()">
+      </div>
+    </header>
+
+    <main class="grid" id="toolsGrid">
+      <a href="./tdb-ingenierie-pedagogique/" class="card" target="_blank" rel="noopener noreferrer">
+        <div class="card-icon">[TdB]</div>
+        <div class="card-content">
+          <div class="card-title">Tableau de Bord : Ingenierie Pedagogique et Moderation</div>
+          <div class="card-desc">Analyse et moderation des epreuves, tableaux de bord de pilotage pedagogique.</div>
+          <div class="card-badge">WebAssembly / Stlite</div>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+      <a href="./tdb-triage-decisionnel/" class="card" target="_blank" rel="noopener noreferrer">
+        <div class="card-icon">[Ete]</div>
+        <div class="card-content">
+          <div class="card-title">Triage Decisionnel et Pilotage des Cours d Ete</div>
+          <div class="card-desc">Outil d aide a la decision et de triage des inscriptions aux cours d ete.</div>
+          <div class="card-badge">WebAssembly / Stlite</div>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+      <a href="./tdb-docimologie/" class="card" target="_blank" rel="noopener noreferrer">
+        <div class="card-icon">[Doci]</div>
+        <div class="card-content">
+          <div class="card-title">Tableau de Bord : Docimologie des Epreuves Uniques</div>
+          <div class="card-desc">Analyses psychometriques, indices de difficulte et fidelite docimologique.</div>
+          <div class="card-badge">WebAssembly / Stlite</div>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+      <a href="./cartographie-primaire/" class="card" target="_blank" rel="noopener noreferrer">
+        <div class="card-icon">[Carto]</div>
+        <div class="card-content">
+          <div class="card-title">Cartographie du Primaire</div>
+          <div class="card-desc">Visualisation et cartographie des progressions et profils du primaire.</div>
+          <div class="card-badge">WebAssembly / Stlite</div>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+      <a href="./rh-ttp-estimation/" class="card" target="_blank" rel="noopener noreferrer">
+        <div class="card-icon">[RH]</div>
+        <div class="card-content">
+          <div class="card-title">Estimateur RH - Technicien en Travaux Pratiques (TTP)</div>
+          <div class="card-desc">Calculateur et simulateur de dotation en soutien technique laboratoire.</div>
+          <div class="card-badge">WebAssembly / Stlite</div>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+      <a href="./pfae-orientation/" class="card" target="_blank" rel="noopener noreferrer">
+        <div class="card-icon">[PFAE]</div>
+        <div class="card-content">
+          <div class="card-title">Aide au Discernement Clinique et Ethique - PFAE et Pre-DEP</div>
+          <div class="card-desc">Arbre decisionnel pour comites de classement et directions du CSSMB.</div>
+          <div class="card-badge">WebAssembly / Stlite</div>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+      <a href="./labo-produits-chimiques/" class="card" target="_blank" rel="noopener noreferrer">
+        <div class="card-icon">[Labo]</div>
+        <div class="card-content">
+          <div class="card-title">Gestion Securitaire des Laboratoires de Sciences</div>
+          <div class="card-desc">Repertoire des substances prohibees, fiches de securite SIMDUT et inventaire.</div>
+          <div class="card-badge">WebAssembly / Stlite</div>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+      <a href="./applab-omr-math-v5/" class="card" target="_blank" rel="noopener noreferrer">
+        <div class="card-icon">[OMR-M]</div>
+        <div class="card-content">
+          <div class="card-title">AppLab - Correction Optique OMR Math (v5)</div>
+          <div class="card-desc">Lecture optique de grilles de reponses et correction automatisee.</div>
+          <div class="card-badge">WebAssembly / Stlite</div>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+      <a href="./stlite-stages-pfae/" class="card" target="_blank" rel="noopener noreferrer">
+        <div class="card-icon">[Stage]</div>
+        <div class="card-content">
+          <div class="card-title">Gestionnaire des Stages PFAE</div>
+          <div class="card-desc">Suivi des milieux de stage, conventions et evaluation des competences.</div>
+          <div class="card-badge">WebAssembly / Stlite</div>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+      <a href="./lecteur-omr-likert/" class="card" target="_blank" rel="noopener noreferrer">
+        <div class="card-icon">[OMR-L]</div>
+        <div class="card-content">
+          <div class="card-title">Lecteur OMR - Sondages et Echelles Likert</div>
+          <div class="card-desc">Numerisation et compilation d enquetes de satisfaction et questionnaires.</div>
+          <div class="card-badge">WebAssembly / Stlite</div>
+        </div>
+        <div class="card-arrow">&rarr;</div>
+      </a>
+    </main>
+
+    <footer>
+      Heberge sur GitHub Pages - Accessible via l intranet SharePoint - CSSMB &copy; 2026
+    </footer>
+  </div>
+
+  <script>
+    function filterCards() {
+      var q = document.getElementById('filterInput').value.toLowerCase();
+      var cards = document.querySelectorAll('.card');
+      cards.forEach(function(card) {
+        var text = card.textContent.toLowerCase();
+        card.style.display = text.indexOf(q) !== -1 ? 'flex' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

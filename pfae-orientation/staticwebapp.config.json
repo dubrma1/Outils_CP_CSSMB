@@ -1,0 +1,14 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["*.{css,scss,js,png,gif,ico,jpg,svg,py}"]
+  },
+  "mimeTypes": {
+    ".json": "application/json",
+    ".py": "text/plain",
+    ".wasm": "application/wasm"
+  },
+  "globalHeaders": {
+    "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob: data:; worker-src 'self' blob: https:; img-src 'self' data: https: blob:; font-src 'self' https: data:; connect-src 'self' https: blob: data:;"
+  }
+}

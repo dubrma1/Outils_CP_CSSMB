@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orientation PFAE & Pré-DEP (CSSMB) — Carte Mentale Décisionnelle</title>
+    <style>
+        /* Réinitialisation et dimensions plein écran pour intégration iframe / Google Sites */
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        /* Conteneur SVG plein écran */
+        #mindmap-container {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+
+        /* Barre d'outils flottante discrète en bas à droite */
+        .toolbar-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border: 1px solid #e2e8f0;
+            border-radius: 30px;
+            padding: 6px 12px;
+            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+            user-select: none;
+        }
+
+        .toolbar-btn {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        .toolbar-btn:hover {
+            background: #0d3b66;
+            color: #ffffff;
+            border-color: #0d3b66;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(13, 59, 102, 0.2);
+        }
+
+        .toolbar-btn:active {
+            transform: translateY(0);
+        }
+
+        .toolbar-badge {
+            font-size: 11px;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding-right: 4px;
+            border-right: 1px solid #e2e8f0;
+            margin-right: 2px;
+        }
+
+        /* Personnalisation visuelle subtile des nœuds SVG Markmap */
+        .markmap-node text {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+            font-size: 13.5px !important;
+        }
+        .markmap-node strong {
+            color: #0d3b66;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Conteneur SVG principal pour Markmap -->
+    <svg id="mindmap-container"></svg>
+
+    <!-- Barre d'outils de navigation et de centrage -->
+    <div class="toolbar-container">
+        <span class="toolbar-badge">CSSMB • Art. 23.3</span>
+        <button id="btn-zoom-in" class="toolbar-btn" title="Agrandir (+)">
+            <span>➕</span> Zoom
+        </button>
+        <button id="btn-zoom-out" class="toolbar-btn" title="Réduire (−)">
+            <span>➖</span> Dézoom
+        </button>
+        <button id="btn-fit" class="toolbar-btn" title="Recadrer et centrer la carte">
+            <span>⛶</span> Ajuster
+        </button>
+    </div>
+
+    <!-- Dépendances CDN D3 et Markmap -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.17"></script>
+
+    <script>
+        // Récupération des classes depuis l'objet global window.markmap
+        const { Transformer, Markmap } = window.markmap;
+
+        // Instanciation du transformateur Markdown vers AST Markmap
+        const transformer = new Transformer();
+
+        // Référence vers l'élément SVG
+        const svgEl = document.querySelector('#mindmap-container');
+
+        // Arbre décisionnel clinique et réglementaire complet en Markdown
+        const markdownData = `
+# **Orientation PFAE & Pré-DEP (CSSMB)**<br>Arbre décisionnel — Critère 23.3 (1°)
+
+## 1. Portrait global de l'élève (14-15 ans)
+- **Intérêts & Projet d'avenir (COSP / PPO)**
+    - Champs d'intérêt et secteur d'activité privilégié
+    - Préférence marquée : atelier/manipulation vs abstraction théorique
+    - Rapport subjectif aux stages en milieu adulte
+- **Besoins & Adaptations (Plan d'intervention - PI)**
+    - Mesures d'adaptation actuelles et niveau de fatigue cognitive
+    - Nécessité d'apprentissages contextualisés en situation réelle
+    - Encadrement affectif ou comportemental requis
+- **Capacités & Forces fonctionnelles**
+    - Autonomie dans les déplacements et transports collectifs
+    - Habiletés sociales avec des collègues et superviseurs adultes
+    - Endurance physique et manipulation d'outils
+- **Besoins particuliers (profil adapté)**
+    - Régulier ou adaptation standard
+    - Trouble du spectre de l'autisme (TSA)
+    - Trouble primaire du langage (dysphasie)
+
+## 2. Garde-fous préalables & Éthique
+- **Garde-fou 1 : Âge légal pivot**
+    - Moins de 15 ans au 30 septembre
+        - Inéligible au PFAE / Pré-DEP immédiat
+        - Maintien au 1er cycle du secondaire (Sec. 1 ou 2)
+        - Révision du plan d'intervention (PI) et soutien intensif
+        - Démarche exploratoire préventive (COSP)
+    - 15 ans ou plus au 30 septembre
+        - Admissibilité légale confirmée -> Passer au Garde-fou 2
+- **Garde-fou 2 : Consentement libre et éclairé de l'adolescent**
+    - Hésitation, crainte vive ou refus
+        - Démarche exploratoire préalable obligatoire
+        - Visite d'ateliers en CFP
+        - Stage d'observation d'un jour
+        - Échange avec un élève pair / ambassadeur
+        - Entretien d'explicitation avec le conseiller d'orientation (c.o.)
+    - Accord documenté
+        - Engagement actif du jeune validé -> Passer à l'évaluation du parcours
+
+## 3. Analyse comparée des parcours
+- **Option Pré-DEP**
+    - Conditions académiques : Réussite de 2 matières de base sur 3 en 2e secondaire (FR, MATH, ANG)
+    - Profil de l'élève : Vise directement un Diplôme d'études professionnelles (DEP en CFP)
+    - Pédagogie : Maintien des matières de base + 3 jours de stage exploratoire en nov. et avril
+- **Option FMS (Métier semi-spécialisé — 1 an)**
+    - Conditions académiques : Objectifs du primaire acquis en français et mathématiques
+    - Profil de l'élève : Volonté d'insertion rapide sur le marché du travail
+    - Pédagogie : Préparation au marché du travail (PMT) + 375h de stage supervisé
+- **Option FPT (Formation préparatoire au travail — 3 ans)**
+    - Conditions académiques : Objectifs du primaire non atteints
+    - Profil de l'élève : Grand besoin d'accompagnement socioprofessionnel et d'autonomie
+    - Pédagogie : Insertion progressive (FPT 1, 2, 3), stages graduels en entreprise
+
+## 4. Points de service & Réduction de l'extraction (Bottin CSSMB)
+- **Règle prioritaire**
+    - Si l'école d'origine offre le service : Maintien prioritaire (impact nul)
+- **Pôle Ouest**
+    - Des Sources (DDO) : FMS, Pré-DEP (Dir: Nathalie Dubois / Valérie Gagnon)
+    - Rose-Virginie-Pelletier (Pierrefonds) : FPT, FMS, Pré-DEP (Dir: Mireille Laliberté / Elsa Drouin)
+    - De l’Altitude (Pierrefonds) : FPT 1-2-3 (Dir: Nathalie Krumhorn)
+- **Pôle Sud**
+    - Cavelier-De LaSalle (LaSalle) : FPT 1-2-3, FMS, Pré-DEP (Dir FPT: Manuela Bugariu / Dir FMS-PréDEP: Marjorie Côté)
+    - Dalbé-Viau (Lachine) : FPT 1-2-3, Pré-DEP (Dir: Gabrielle Roy-Béliveau)
+    - Dorval-Jean-XXIII (Dorval) : FPT 1-2-3 (Dir: Simplice Lambert)
+    - Monseigneur-Richard (Verdun) : FMS, Pré-DEP (Dir: Stéphany-Pascale Gauthier / Anouk Bilodeau)
+- **Pôle Centre / Est & Services Spécialisés**
+    - SAS Outremont (Outremont) : FPT, FMS, Pré-DEP — Groupes réguliers, TSA et Troubles du langage (Dir: José Bélanger)
+
+## 5. Validation finale & Accord parental (Art. 23.3)
+- **Accord parental favorable**
+    - Validation officielle du classement multidisciplinaire
+    - Intégration de la justification au Plan d'intervention (PI)
+- **Accord en attente**
+    - Convocation formelle de la rencontre de concertation (Direction, C.O., Parents, Élève)
+- **Refus parental**
+    - Mesure alternative : Maintien adapté dans l'école d'origine
+`;
+
+        // Étape 1 : Transformer le texte Markdown en AST de nœuds Markmap
+        const { root } = transformer.transform(markdownData);
+
+        // Étape 2 : Création de la carte mentale avec niveau d'expansion initiale à 2
+        const mm = Markmap.create(svgEl, {
+            initialExpandLevel: 2,
+            autoFit: true,
+            duration: 400
+        }, root);
+
+        // Étape 3 : Branchement des boutons de la barre d'outils
+        document.getElementById('btn-fit').addEventListener('click', () => {
+            mm.fit();
+        });
+
+        document.getElementById('btn-zoom-in').addEventListener('click', () => {
+            mm.rescale(1.25);
+        });
+
+        document.getElementById('btn-zoom-out').addEventListener('click', () => {
+            mm.rescale(0.8);
+        });
+
+        // Recalcul du centrage lors du redimensionnement de l'écran ou de l'iframe
+        window.addEventListener('resize', () => {
+            mm.fit();
+        });
+    </script>
+</body>
+</html>

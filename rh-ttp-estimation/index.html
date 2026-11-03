@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Estimateur RH - Technicien en travaux pratiques (TTP)</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚜️</text></svg>">
+    
+    <!-- Stlite Mountable CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.75.0/build/stlite.css" />
+
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-color: #f8fafc;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      }
+
+      /* Écran de démarrage élégant - Thème Bleu Québec */
+      #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: radial-gradient(circle at 50% 30%, #ffffff 0%, #f0f4f9 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 999999;
+        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+      }
+
+      .loading-logo {
+        font-size: 3.5rem;
+        margin-bottom: 0.8rem;
+        filter: drop-shadow(0 4px 6px rgba(0, 51, 153, 0.2));
+      }
+
+      .loading-title {
+        color: #003399;
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin: 0;
+        text-align: center;
+        letter-spacing: -0.01em;
+      }
+
+      .loading-subtitle {
+        color: #64748b;
+        font-size: 0.9rem;
+        margin-top: 0.4rem;
+        text-align: center;
+      }
+
+      .loading-spinner {
+        width: 44px;
+        height: 44px;
+        margin-top: 1.5rem;
+        border: 4px solid #e2e8f0;
+        border-top: 4px solid #003399;
+        border-radius: 50%;
+        animation: spin 0.9s cubic-bezier(0.55, 0.15, 0.45, 0.85) infinite;
+      }
+
+      .loading-status {
+        margin-top: 1rem;
+        font-size: 0.82rem;
+        color: #095797;
+        font-weight: 500;
+        background: #e8f0fe;
+        padding: 0.35rem 0.8rem;
+        border-radius: 20px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      #root {
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Splash Screen de chargement initial -->
+    <div id="loading-screen">
+      <div class="loading-logo">⚜️</div>
+      <h1 class="loading-title">Estimateur RH — Technicien en travaux pratiques</h1>
+      <p class="loading-subtitle">Écoles secondaires du Québec &middot; Modèle 160 jours</p>
+      <div class="loading-spinner"></div>
+      <div id="status-text" class="loading-status">Démarrage du moteur WebAssembly...</div>
+    </div>
+
+    <!-- Conteneur de l'application Stlite -->
+    <div id="root"></div>
+
+    <!-- Script Stlite Mountable -->
+    <script src="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.75.0/build/stlite.js"></script>
+
+    <script>
+      const defaultAppCode = "import streamlit as st\nimport pandas as pd\n\n# -----------------------------------------------------------------------------\n# Configuration de la page\n# -----------------------------------------------------------------------------\nst.set_page_config(\n    page_title=\"Estimateur RH - TTP en Laboratoire\",\n    page_icon=\"⚜️\",\n    layout=\"wide\",\n    initial_sidebar_state=\"expanded\",\n)\n\n# -----------------------------------------------------------------------------\n# Thème visuel épuré & professionnel \"Bleu Québec\"\n# -----------------------------------------------------------------------------\nst.markdown(\n    \"\"\"\n    <style>\n    /* Palette Bleu Québec */\n    :root {\n        --qc-blue: #003399;\n        --qc-blue-dark: #002266;\n        --qc-blue-light: #e8f0fe;\n        --qc-blue-subtle: #f4f7fc;\n        --qc-border: #cbd5e1;\n        --qc-text: #1e293b;\n    }\n\n    /* Style global */\n    .main-header {\n        background: linear-gradient(135deg, #003399 0%, #002266 100%);\n        color: white;\n        padding: 1.5rem 2rem;\n        border-radius: 12px;\n        margin-bottom: 1.5rem;\n        box-shadow: 0 4px 12px rgba(0, 51, 153, 0.15);\n    }\n    .main-header h1 {\n        color: white !important;\n        font-size: 1.75rem;\n        font-weight: 700;\n        margin: 0;\n        display: flex;\n        align-items: center;\n        gap: 0.6rem;\n    }\n    .main-header p {\n        color: #dbeafe;\n        font-size: 0.95rem;\n        margin: 0.35rem 0 0 0;\n    }\n\n    /* Carte KPI principale */\n    .kpi-card-main {\n        background: linear-gradient(135deg, #003399 0%, #084298 100%);\n        color: white;\n        padding: 1.5rem;\n        border-radius: 12px;\n        box-shadow: 0 6px 16px rgba(0, 51, 153, 0.2);\n        border: 1px solid rgba(255, 255, 255, 0.15);\n        text-align: center;\n        margin-bottom: 1rem;\n    }\n    .kpi-card-main .kpi-title {\n        font-size: 0.9rem;\n        text-transform: uppercase;\n        letter-spacing: 0.05em;\n        color: #bfdbfe;\n        margin-bottom: 0.3rem;\n        font-weight: 600;\n    }\n    .kpi-card-main .kpi-value {\n        font-size: 2.8rem;\n        font-weight: 800;\n        line-height: 1.1;\n        color: #ffffff;\n    }\n    .kpi-card-main .kpi-unit {\n        font-size: 1.2rem;\n        color: #e0f2fe;\n        font-weight: 500;\n    }\n    .kpi-card-main .kpi-sub {\n        font-size: 0.85rem;\n        color: #dbeafe;\n        margin-top: 0.6rem;\n        border-top: 1px solid rgba(255, 255, 255, 0.2);\n        padding-top: 0.5rem;\n    }\n\n    /* Cartes secondaires */\n    .kpi-card-sec {\n        background: white;\n        border: 1px solid var(--qc-border);\n        border-left: 5px solid var(--qc-blue);\n        padding: 1rem 1.2rem;\n        border-radius: 10px;\n        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);\n        margin-bottom: 0.75rem;\n    }\n    .kpi-card-sec .title {\n        font-size: 0.8rem;\n        color: #64748b;\n        font-weight: 600;\n        text-transform: uppercase;\n    }\n    .kpi-card-sec .value {\n        font-size: 1.5rem;\n        color: var(--qc-blue-dark);\n        font-weight: 700;\n    }\n    .kpi-card-sec .desc {\n        font-size: 0.75rem;\n        color: #64748b;\n    }\n\n    /* Badge québécois */\n    .qc-badge {\n        background-color: var(--qc-blue-light);\n        color: var(--qc-blue);\n        padding: 0.2rem 0.6rem;\n        border-radius: 6px;\n        font-weight: 600;\n        font-size: 0.75rem;\n        display: inline-block;\n    }\n\n    /* Style des formulaires et tableaux */\n    .stNumberInput input {\n        border-radius: 6px !important;\n        font-weight: 600 !important;\n    }\n    .table-container {\n        background: white;\n        border-radius: 10px;\n        padding: 1rem;\n        border: 1px solid #e2e8f0;\n        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);\n    }\n    </style>\n    \"\"\",\n    unsafe_allow_html=True,\n)\n\n# -----------------------------------------------------------------------------\n# Données de référence issues du fichier Excel\n# -----------------------------------------------------------------------------\nCOURS_DEFAULTS = [\n    {\n        \"id\": \"sec1\",\n        \"cycle\": 1,\n        \"code\": \"055-104\",\n        \"parcours\": \"Régulier (Sec 1)\",\n        \"tot_prat\": 12,\n        \"groupes\": 1,\n        \"detail\": \"Sec 1 : 7 labos + 5 ateliers = 12 périodes pratiques annuelles.\",\n    },\n    {\n        \"id\": \"sec2\",\n        \"cycle\": 1,\n        \"code\": \"055-204\",\n        \"parcours\": \"Régulier (Sec 2)\",\n        \"tot_prat\": 12,\n        \"groupes\": 1,\n        \"detail\": \"Sec 2 : 7 labos + 5 ateliers = 12 périodes pratiques annuelles.\",\n    },\n    {\n        \"id\": \"sec3\",\n        \"cycle\": 2,\n        \"code\": \"055-306\",\n        \"parcours\": \"Régulier (Sec 3)\",\n        \"tot_prat\": 17,\n        \"groupes\": 1,\n        \"detail\": \"Sec 3 : 12 labos + 5 ateliers = 17 périodes pratiques annuelles (cours à 6 pér./cycle).\",\n    },\n    {\n        \"id\": \"sec4_st\",\n        \"cycle\": 2,\n        \"code\": \"055-444\",\n        \"parcours\": \"Régulier ST (Sec 4)\",\n        \"tot_prat\": 12,\n        \"groupes\": 1,\n        \"detail\": \"Sec 4 ST : 7 labos + 5 ateliers = 12 périodes pratiques annuelles.\",\n    },\n    {\n        \"id\": \"sec4_ste\",\n        \"cycle\": 2,\n        \"code\": \"058-404\",\n        \"parcours\": \"Option STE (Sec 4)\",\n        \"tot_prat\": 30,\n        \"groupes\": 1,\n        \"detail\": \"Sec 4 STE : 14 labos + 16 ateliers = 30 périodes pratiques annuelles (volet technologique avancé).\",\n    },\n    {\n        \"id\": \"sec5_ch\",\n        \"cycle\": 2,\n        \"code\": \"051-504\",\n        \"parcours\": \"Option chimie (Sec 5)\",\n        \"tot_prat\": 15,\n        \"groupes\": 1,\n        \"detail\": \"Sec 5 Chimie : 15 laboratoires spécialisés annuels.\",\n    },\n    {\n        \"id\": \"sec5_ph\",\n        \"cycle\": 2,\n        \"code\": \"053-504\",\n        \"parcours\": \"Option physique (Sec 5)\",\n        \"tot_prat\": 15,\n        \"groupes\": 1,\n        \"detail\": \"Sec 5 Physique : 15 laboratoires spécialisés annuels.\",\n    },\n]\n\n# Constantes institutionnelles de la grille\nNB_JOURS_ANNEE = 160\nNB_PER_JOUR = 4\nBASE_PER_AN = NB_JOURS_ANNEE * NB_PER_JOUR  # 640 périodes / an pour un poste à temps complet\n\n# -----------------------------------------------------------------------------\n# Initialisation de l'état (Session State)\n# -----------------------------------------------------------------------------\nif \"facteur_prep\" not in st.session_state:\n    st.session_state[\"facteur_prep\"] = 2.0\n\nif \"ttp_admin\" not in st.session_state:\n    st.session_state[\"ttp_admin\"] = 160.0\n\nfor c in COURS_DEFAULTS:\n    grp_key = f\"grp_{c['id']}\"\n    prat_key = f\"prat_{c['id']}\"\n    if grp_key not in st.session_state:\n        st.session_state[grp_key] = c[\"groupes\"]\n    if prat_key not in st.session_state:\n        st.session_state[prat_key] = c[\"tot_prat\"]\n\n# -----------------------------------------------------------------------------\n# En-tête de l'application\n# -----------------------------------------------------------------------------\nst.markdown(\n    \"\"\"\n    <div class=\"main-header\">\n        <h1>⚜️ Estimation de la tâche RH — Technicien en travaux pratiques (TTP)</h1>\n        <p>Outil d'aide à la décision pour gestionnaires d'établissements scolaires — Calcul basé sur l'offre de service pratique en laboratoire et atelier de sciences (160 jours / an).</p>\n    </div>\n    \"\"\",\n    unsafe_allow_html=True,\n)\n\n# -----------------------------------------------------------------------------\n# Barre latérale : Paramètres globaux et explications\n# -----------------------------------------------------------------------------\nwith st.sidebar:\n    st.markdown(\"### ⚙️ Paramètres globaux\")\n\n    # 1. Facteur de préparation\n    col_fp_label, col_fp_info = st.columns([0.85, 0.15])\n    with col_fp_label:\n        st.markdown(\"**Facteur de préparation**\")\n    with col_fp_info:\n        with st.popover(\"❓\"):\n            st.markdown(\n                \"\"\"\n                **Facteur de préparation**\n                - **Définition** : Multiplicateur appliqué à chaque période de laboratoire/atelier pour couvrir le temps de préparation, de montage, d'essais préalables, d'assistance technique et de démontage/nettoyage.\n                - **Plage permise** : de 1.0 à 3.0 (par bonds de 0.1).\n                - **Valeur par défaut** : 2.0 (soit 1 période de préparation/rangement pour 1 période en laboratoire).\n                \"\"\"\n            )\n\n    facteur_prep = st.number_input(\n        \"Facteur de préparation (min 1.0, max 3.0)\",\n        min_value=1.0,\n        max_value=3.0,\n        value=float(st.session_state[\"facteur_prep\"]),\n        step=0.1,\n        format=\"%.1f\",\n        key=\"facteur_prep\",\n        label_visibility=\"collapsed\",\n        help=\"Incrément de 0.1 — Facteur multiplicateur pour la préparation et le démontage des manipulations.\",\n    )\n\n    st.markdown(\"---\")\n\n    # 2. Périodes TTP Administratif\n    col_adm_label, col_adm_info = st.columns([0.85, 0.15])\n    with col_adm_label:\n        st.markdown(\"**Périodes TTP — Administratif**\")\n    with col_adm_info:\n        with st.popover(\"❓\"):\n            st.markdown(\n                \"\"\"\n                **Tâches administratives et entretien (périodes)**\n                - **Définition** : Temps alloué aux tâches transversales non liées directement à une séance spécifique de cours :\n                  - Gestion des stocks, inventaire annuel et commandes de produits/matériel.\n                  - Conformité SIMDUT / SGHL, gestion des déchets chimiques et matières dangereuses.\n                  - Entretien, calibration et réparation des appareils de laboratoire.\n                  - Sécurité des locaux de sciences et comités de santé-sécurité.\n                - **Incrément** : par bonds de 0.5 période.\n                - **Valeur de référence** : 160 périodes (équivalent à 1 période par jour sur 160 jours d'école, soit 0.25 d'une tâche complète).\n                \"\"\"\n            )\n\n    ttp_admin = st.number_input(\n        \"Périodes TTP- Administratif\",\n        min_value=0.0,\n        max_value=1280.0,\n        value=float(st.session_state[\"ttp_admin\"]),\n        step=0.5,\n        format=\"%.1f\",\n        key=\"ttp_admin\",\n        label_visibility=\"collapsed\",\n        help=\"Incrément de 0.5 — Périodes annuelles allouées à l'entretien, l'inventaire, les commandes et la sécurité.\",\n    )\n\n    st.markdown(\"---\")\n\n    # 3. Paramètres de l'année scolaire (référence 160 jours)\n    with st.expander(\"ℹ️ Base de calcul réglementaire (160 jours)\", expanded=False):\n        st.markdown(\n            f\"\"\"\n            - **Jours ouvrables / an** : `{NB_JOURS_ANNEE} jours`\n            - **Périodes par jour** : `{NB_PER_JOUR} périodes/jour`\n            - **Total annuel (tâche pleine)** : `{BASE_PER_AN} périodes/an`\n            \n            *Formule de l'ETP requis :*  \n            $$\\\\text{{TTP}} = \\\\frac{{\\\\text{{Pédago}} + \\\\text{{Admin}}}}{{{BASE_PER_AN}}}$$\n            \"\"\"\n        )\n\n    # 4. Action rapide pour ajuster les groupes\n    st.markdown(\"### ⚡ Répartition rapide\")\n    col_apply, col_reset = st.columns(2)\n    with col_apply:\n        uniform_grp = st.number_input(\"Tous les groupes à :\", min_value=0, max_value=50, value=1, step=1)\n        if st.button(\"Appliquer à tous\", use_container_width=True):\n            for c in COURS_DEFAULTS:\n                st.session_state[f\"grp_{c['id']}\"] = uniform_grp\n            st.rerun()\n\n    with col_reset:\n        st.markdown(\"<div style='height: 28px;'></div>\", unsafe_allow_html=True)\n        if st.button(\"🔄 Réinitialiser\", use_container_width=True, help=\"Remet tous les paramètres par défaut du fichier Excel.\"):\n            st.session_state[\"facteur_prep\"] = 2.0\n            st.session_state[\"ttp_admin\"] = 160.0\n            for c in COURS_DEFAULTS:\n                st.session_state[f\"grp_{c['id']}\"] = c[\"groupes\"]\n                st.session_state[f\"prat_{c['id']}\"] = c[\"tot_prat\"]\n            st.rerun()\n\n# -----------------------------------------------------------------------------\n# Traitement des calculs\n# -----------------------------------------------------------------------------\ntable_data = []\ntotal_groupes = 0\ntotal_prat_base = 0\ntotal_prat_annee_par_niveau = 0\n\nfor c in COURS_DEFAULTS:\n    grp = int(st.session_state[f\"grp_{c['id']}\"])\n    prat = int(st.session_state[f\"prat_{c['id']}\"])\n    tot_niveau = grp * prat\n    \n    total_groupes += grp\n    total_prat_base += prat\n    total_prat_annee_par_niveau += tot_niveau\n\n    table_data.append({\n        \"id\": c[\"id\"],\n        \"cycle\": c[\"cycle\"],\n        \"code\": c[\"code\"],\n        \"parcours\": c[\"parcours\"],\n        \"tot_prat\": prat,\n        \"groupes\": grp,\n        \"tot_niveau\": tot_niveau,\n        \"detail\": c[\"detail\"]\n    })\n\n# Formules directes de la feuille 1 (lignes 16-19)\nttp_pedago = total_prat_annee_par_niveau * facteur_prep\ntotal_travail = ttp_pedago + ttp_admin\nttp_requis = total_travail / BASE_PER_AN  # M16 / D19\nttp_pct = (ttp_requis * 100.0)\n\n# -----------------------------------------------------------------------------\n# Tableau de bord principal : Objectif & Résultats clés (KPI)\n# -----------------------------------------------------------------------------\nst.markdown(\"### 📊 Résultat de l'estimation de la ressource TTP\")\n\nkpi_col1, kpi_col2, kpi_col3, kpi_col4 = st.columns([1.6, 1.1, 1.1, 1.1])\n\nwith kpi_col1:\n    st.markdown(\n        f\"\"\"\n        <div class=\"kpi-card-main\">\n            <div class=\"kpi-title\">Poste(s) TTP requis (ETP)</div>\n            <div class=\"kpi-value\">{ttp_requis:.3f} <span class=\"kpi-unit\">TTP</span></div>\n            <div class=\"kpi-sub\">\n                Soit <b>{ttp_pct:.1f}%</b> d'une tâche à temps plein<br/>\n                <small>Pour assurer les activités pratiques des {total_groupes} groupes</small>\n            </div>\n        </div>\n        \"\"\",\n        unsafe_allow_html=True,\n    )\n\nwith kpi_col2:\n    st.markdown(\n        f\"\"\"\n        <div class=\"kpi-card-sec\">\n            <div class=\"title\">Total Pédagogique</div>\n            <div class=\"value\">{ttp_pedago:.1f} <span style=\"font-size:0.9rem; font-weight:normal;\">pér.</span></div>\n            <div class=\"desc\">{total_prat_annee_par_niveau} pér. pratiques × {facteur_prep:.1f} facteur</div>\n        </div>\n        \"\"\",\n        unsafe_allow_html=True,\n    )\n\nwith kpi_col3:\n    st.markdown(\n        f\"\"\"\n        <div class=\"kpi-card-sec\">\n            <div class=\"title\">Total Administratif</div>\n            <div class=\"value\">{ttp_admin:.1f} <span style=\"font-size:0.9rem; font-weight:normal;\">pér.</span></div>\n            <div class=\"desc\">Entretien, inventaire, SIMDUT, etc.</div>\n        </div>\n        \"\"\",\n        unsafe_allow_html=True,\n    )\n\nwith kpi_col4:\n    st.markdown(\n        f\"\"\"\n        <div class=\"kpi-card-sec\">\n            <div class=\"title\">Total Heures / Périodes</div>\n            <div class=\"value\">{total_travail:.1f} <span style=\"font-size:0.9rem; font-weight:normal;\">/ {BASE_PER_AN}</span></div>\n            <div class=\"desc\">Pédagogique + Administratif sur 160 jrs</div>\n        </div>\n        \"\"\",\n        unsafe_allow_html=True,\n    )\n\nst.markdown(\"---\")\n\n# -----------------------------------------------------------------------------\n# Grille d'édition des cours et paramètres\n# -----------------------------------------------------------------------------\nst.markdown(\"### 🧪 Offre de cours et configuration des groupes\")\nst.caption(\n    \"Ajustez le **nombre de groupes** et le **nombre d'ateliers/laboratoires par année (tot prat./année)** pour chaque niveau. Les formules s'actualisent en temps réel.\"\n)\n\n# En-tête des colonnes du tableau\nhead_col1, head_col2, head_col3, head_col4, head_col5, head_col6, head_col7 = st.columns([0.7, 1.0, 1.8, 1.4, 1.3, 1.3, 0.5])\nwith head_col1:\n    st.markdown(\"**Cycle**\")\nwith head_col2:\n    st.markdown(\"**Code**\")\nwith head_col3:\n    st.markdown(\"**Parcours**\")\nwith head_col4:\n    st.markdown(\"**Tot prat./an**\")\nwith head_col5:\n    st.markdown(\"**Nb de groupes**\")\nwith head_col6:\n    st.markdown(\"**Pratique total**\")\nwith head_col7:\n    st.markdown(\"**Info**\")\n\nst.markdown(\"<hr style='margin: 0.2rem 0 0.8rem 0; border: 0; border-top: 1px solid #cbd5e1;' />\", unsafe_allow_html=True)\n\n# Lignes de données éditables\nfor row in table_data:\n    cid = row[\"id\"]\n    r_col1, r_col2, r_col3, r_col4, r_col5, r_col6, r_col7 = st.columns([0.7, 1.0, 1.8, 1.4, 1.3, 1.3, 0.5])\n    \n    with r_col1:\n        st.markdown(f\"<span class='qc-badge'>Cycle {row['cycle']}</span>\", unsafe_allow_html=True)\n    with r_col2:\n        st.markdown(f\"<code>{row['code']}</code>\", unsafe_allow_html=True)\n    with r_col3:\n        st.markdown(f\"**{row['parcours']}**\")\n    with r_col4:\n        st.number_input(\n            label=f\"Pratique {cid}\",\n            min_value=0,\n            max_value=120,\n            value=row[\"tot_prat\"],\n            step=1,\n            key=f\"prat_{cid}\",\n            label_visibility=\"collapsed\",\n            help=\"Nombre entier — Périodes d'enseignement en laboratoire ou atelier par an.\",\n        )\n    with r_col5:\n        st.number_input(\n            label=f\"Groupes {cid}\",\n            min_value=0,\n            max_value=100,\n            value=row[\"groupes\"],\n            step=1,\n            key=f\"grp_{cid}\",\n            label_visibility=\"collapsed\",\n            help=\"Nombre entier de groupes d'élèves inscrits à ce cours.\",\n        )\n    with r_col6:\n        st.markdown(f\"<div style='padding-top: 6px; font-weight: 700; color: #003399;'>{row['tot_niveau']} pér.</div>\", unsafe_allow_html=True)\n    with r_col7:\n        with st.popover(\"❓\"):\n            st.markdown(f\"**{row['parcours']} ({row['code']})**\")\n            st.markdown(row[\"detail\"])\n            st.markdown(f\"- Périodes / groupe : `{row['tot_prat']}`\")\n            st.markdown(f\"- Groupes prévus : `{row['groupes']}`\")\n            st.markdown(f\"- Total pour le cours : `{row['tot_prat']} × {row['groupes']} = {row['tot_niveau']} périodes`\")\n\n# Ligne de synthèse / totaux\nst.markdown(\"<hr style='margin: 0.5rem 0; border: 0; border-top: 2px solid #003399;' />\", unsafe_allow_html=True)\ntot_c1, tot_c2, tot_c3, tot_c4, tot_c5, tot_c6, tot_c7 = st.columns([0.7, 1.0, 1.8, 1.4, 1.3, 1.3, 0.5])\nwith tot_c1:\n    st.markdown(\"**TOTAL**\")\nwith tot_c2:\n    st.markdown(\"-\")\nwith tot_c3:\n    st.markdown(f\"*{len(table_data)} cours répertoriés*\")\nwith tot_c4:\n    st.markdown(f\"**{total_prat_base} pér./an**\")\nwith tot_c5:\n    st.markdown(f\"**{total_groupes} groupes**\")\nwith tot_c6:\n    st.markdown(f\"<span style='color: #003399; font-size: 1.1rem; font-weight: 800;'>{total_prat_annee_par_niveau} pér.</span>\", unsafe_allow_html=True)\nwith tot_c7:\n    st.markdown(\"∑\")\n\n# -----------------------------------------------------------------------------\n# Ventilation et analyse graphique épurée\n# -----------------------------------------------------------------------------\nst.markdown(\"<br/>\", unsafe_allow_html=True)\ncol_visu, col_formule = st.columns([1.2, 1.0])\n\nwith col_visu:\n    st.markdown(\"#### 📈 Répartition de la charge de travail du TTP\")\n    \n    # Création d'un tableau récapitulatif pour visualisation\n    chart_df = pd.DataFrame({\n        \"Composante\": [\"Tâches Pédagogiques (Laboratoires & Préparation)\", \"Tâches Administratives (Entretien, SIMDUT, Commandes)\"],\n        \"Périodes\": [ttp_pedago, ttp_admin],\n        \"Pourcentage\": [\n            f\"{(ttp_pedago / total_travail * 100):.1f}%\" if total_travail > 0 else \"0%\",\n            f\"{(ttp_admin / total_travail * 100):.1f}%\" if total_travail > 0 else \"0%\"\n        ],\n        \"Équivalent TTP\": [\n            f\"{(ttp_pedago / BASE_PER_AN):.3f} ETP\",\n            f\"{(ttp_admin / BASE_PER_AN):.3f} ETP\"\n        ]\n    })\n    \n    st.dataframe(\n        chart_df,\n        column_config={\n            \"Composante\": st.column_config.TextColumn(\"Volet de la tâche\"),\n            \"Périodes\": st.column_config.ProgressColumn(\n                \"Volume (Périodes)\",\n                help=\"Nombre de périodes annuelles consacrées à ce volet\",\n                format=\"%.1f pér.\",\n                min_value=0,\n                max_value=float(max(total_travail, 1.0)),\n            ),\n            \"Pourcentage\": st.column_config.TextColumn(\"Part de la tâche\"),\n            \"Équivalent TTP\": st.column_config.TextColumn(\"ETP associé\"),\n        },\n        use_container_width=True,\n        hide_index=True,\n    )\n\nwith col_formule:\n    st.markdown(\"#### 📐 Formules de calcul déduites de l'Excel\")\n    st.markdown(\n        f\"\"\"\n        1. **Périodes pratiques par niveau** :\n           $$\\\\text{{Pratique total}} = \\\\sum (\\\\text{{tot prat./an}} \\\\times \\\\text{{nb groupes}}) = {total_prat_annee_par_niveau}$$\n        2. **Volet Pédagogique (Préparation + Présence labo)** :\n           $$\\\\text{{Pédago}} = {total_prat_annee_par_niveau} \\\\times {facteur_prep:.1f} = {ttp_pedago:.1f}\\\\text{{ périodes}}$$\n        3. **Total Périodes Travaillées** :\n           $$\\\\text{{Total}} = {ttp_pedago:.1f} + {ttp_admin:.1f} = {total_travail:.1f}\\\\text{{ périodes}}$$\n        4. **Nombre de TTP requis (Base 160 jours × 4 pér./jour = 640 pér./an)** :\n           $$\\\\mathbf{{\\\\text{{Besoin TTP}}}} = \\\\frac{{{total_travail:.1f}}}{{{BASE_PER_AN}}} = \\\\mathbf{{{ttp_requis:.3f}\\\\text{{ TTP}}}}$$\n        \"\"\"\n    )\n";
+
+      async function startApp() {
+        const statusEl = document.getElementById("status-text");
+        let pythonCode = defaultAppCode;
+
+        // Tente de récupérer la version la plus fraîche de app.py via HTTP (serveur local ou Azure)
+        try {
+          statusEl.textContent = "Vérification des sources...";
+          const response = await fetch("app.py?v=" + Date.now(), { cache: "no-store" });
+          if (response.ok) {
+            pythonCode = await response.text();
+            console.log("app.py chargé avec succès dynamiquement.");
+          }
+        } catch (err) {
+          console.log("Utilisation du code applicatif embarqué.");
+        }
+
+        statusEl.textContent = "Initialisation de Python & Streamlit...";
+
+        try {
+          stlite.mount(
+            {
+              requirements: ["pandas"],
+              entrypoint: "app.py",
+              files: {
+                "app.py": pythonCode,
+              },
+              streamlitConfig: {
+                "theme.primaryColor": "#003399",
+                "theme.backgroundColor": "#ffffff",
+                "theme.secondaryBackgroundColor": "#f8fafc",
+                "theme.textColor": "#1e293b",
+                "client.toolbarMode": "minimal"
+              }
+            },
+            document.getElementById("root")
+          );
+
+          // Masquer le splash screen dès que Stlite est monté
+          const observer = new MutationObserver(() => {
+            const stContainer = document.querySelector(".stApp");
+            if (stContainer) {
+              const loader = document.getElementById("loading-screen");
+              if (loader) {
+                loader.style.opacity = "0";
+                loader.style.pointerEvents = "none";
+                setTimeout(() => loader.remove(), 500);
+              }
+              observer.disconnect();
+            }
+          });
+          observer.observe(document.getElementById("root"), { childList: true, subtree: true });
+
+        } catch (error) {
+          statusEl.textContent = "Erreur de chargement : " + error.message;
+          statusEl.style.backgroundColor = "#fee2e2";
+          statusEl.style.color = "#b91c1c";
+        }
+      }
+
+      startApp();
+    </script>
+  </body>
+</html>
