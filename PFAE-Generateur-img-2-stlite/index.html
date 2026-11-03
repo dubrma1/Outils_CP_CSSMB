@@ -1,0 +1,4956 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio de séquences visuelles (TSA/TDL) | Assemblage & Vectorisation A4/Lettre</title>
+  <style>
+/* ==========================================================================
+   STYLE QUÉBEC (INCLU DIRECTEMENT POUR DÉPLOIEMENT SHAREPOINT .ASPX)
+   ========================================================================== */
+/* ==========================================================================
+   STYLE QUÉBEC SOBRE & ÉPURÉ - PORTAIL PFAE (CSSMB)
+   Design System sobre, épuré, institutionnel et accessible (sans émoji)
+   Inspiré des normes graphiques du Gouvernement du Québec & CSSMB
+   ========================================================================== */
+
+:root {
+  /* Palette officielle Québec */
+  --qc-bleu-principal: #095797;
+  --qc-bleu-fonce: #002855;
+  --qc-bleu-clair: #e6eef6;
+  --qc-bleu-subtil: #f0f7ff;
+  --qc-accent-interactif: #005f73;
+
+  /* Couleurs thématiques des parcours */
+  --fms-color: #0b69a3;
+  --fpt-color: #0284c7;
+  --commun-color: #0f766e;
+
+  /* Nuances neutres de surface et texte */
+  --qc-gris-fond: #f4f6f9;
+  --qc-gris-bordure: #d1d5db;
+  --qc-gris-bordure-legere: #e2e8f0;
+  --qc-texte: #1f2937;
+  --qc-texte-secondaire: #4b5563;
+  --qc-texte-discret: #64748b;
+  --qc-blanc: #ffffff;
+
+  /* Alias de compatibilité pour templates existants */
+  --qc-blue-primary: var(--qc-bleu-principal);
+  --qc-blue-accent: #1472bf;
+  --qc-blue-dark: var(--qc-bleu-fonce);
+  --qc-blue-light: var(--qc-bleu-clair);
+  --qc-blue-subtle: var(--qc-bleu-subtil);
+
+  --bg-main: var(--qc-gris-fond);
+  --bg-surface: var(--qc-blanc);
+  --bg-subtle: #f1f5f9;
+
+  --border-light: var(--qc-gris-bordure-legere);
+  --border-medium: var(--qc-gris-bordure);
+  --border-accent: #93c5fd;
+
+  --text-main: var(--qc-texte);
+  --text-muted: var(--qc-texte-secondaire);
+  --text-subtle: var(--qc-texte-discret);
+  --text-white: var(--qc-blanc);
+
+  /* Badges de ressources */
+  --badge-legal: #7c3aed;
+  --badge-guide: #0284c7;
+  --badge-outil: #4b5563;
+  --badge-programme: #1d4ed8;
+  --badge-grille: #059669;
+  --badge-formulaire: #d97706;
+  --badge-pdf: #dc2626;
+
+  /* Rayons et ombres sobres */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--qc-gris-fond);
+  color: var(--qc-texte);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   1. EN-TÊTE INSTITUTIONNEL QUÉBEC
+   ========================================================================== */
+header,
+.qc-header {
+  background-color: var(--qc-bleu-fonce);
+  color: var(--qc-blanc);
+  border-bottom: 4px solid var(--qc-bleu-principal);
+  padding: 1.25rem 2rem;
+}
+
+.header-container,
+.qc-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.qc-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--qc-blanc);
+}
+
+.qc-brand:hover {
+  text-decoration: none;
+}
+
+.qc-titles h1,
+header h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--qc-blanc);
+  margin: 0;
+}
+
+.qc-titles p,
+header .sous-titre {
+  font-size: 0.88rem;
+  color: var(--qc-bleu-clair);
+  margin-top: 2px;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+/* Recherche rapide */
+.qc-search-box {
+  display: flex;
+  align-items: center;
+}
+
+.qc-search-input {
+  padding: 8px 14px;
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  width: 250px;
+  transition: all 0.2s ease;
+  background-color: var(--qc-blanc);
+  color: var(--qc-texte);
+}
+
+.qc-search-input:focus {
+  outline: none;
+  border-color: var(--qc-bleu-principal);
+  box-shadow: 0 0 0 3px rgba(9, 87, 151, 0.25);
+  width: 290px;
+}
+
+/* ==========================================================================
+   2. NAVIGATION PRINCIPALE
+   ========================================================================== */
+nav.nav-principale,
+.qc-nav {
+  background-color: var(--qc-bleu-principal);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+nav.nav-principale ul,
+.qc-nav-links {
+  max-width: 1200px;
+  margin: 0 auto;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 2rem;
+  gap: 2px;
+}
+
+.qc-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  overflow-x: auto;
+}
+
+nav.nav-principale li a,
+.qc-nav-link {
+  display: block;
+  color: var(--qc-blanc);
+  text-decoration: none;
+  padding: 0.85rem 1.15rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: background-color 0.15s ease;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+}
+
+nav.nav-principale li a:hover,
+nav.nav-principale li a.actif,
+.qc-nav-link:hover,
+.qc-nav-link.active {
+  background-color: var(--qc-bleu-fonce);
+  color: var(--qc-blanc);
+  text-decoration: none;
+  border-bottom-color: var(--qc-bleu-clair);
+}
+
+/* ==========================================================================
+   3. CONTENEUR PRINCIPAL & HERO BANNER
+   ========================================================================== */
+main,
+.main-container {
+  max-width: 1200px;
+  margin: 2rem auto 4rem auto;
+  padding: 0 1.5rem;
+}
+
+.hero-banner {
+  background: linear-gradient(135deg, var(--qc-bleu-fonce) 0%, var(--qc-bleu-principal) 100%);
+  color: var(--qc-blanc);
+  border-radius: var(--radius-md);
+  padding: 2rem 2.25rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+  border-left: 6px solid #1472bf;
+}
+
+.hero-banner h2 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  color: var(--qc-blanc);
+}
+
+.hero-banner p {
+  font-size: 0.98rem;
+  max-width: 850px;
+  line-height: 1.6;
+  color: #f1f5f9;
+  margin-bottom: 0;
+}
+
+/* Alerte institutionnelle sobre */
+.qc-alert {
+  background-color: #f0f7ff;
+  border: 1px solid #bfdbfe;
+  border-left: 4px solid var(--qc-bleu-principal);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 2rem;
+  font-size: 0.92rem;
+  color: #1e3a8a;
+  line-height: 1.55;
+}
+
+.qc-alert strong {
+  font-weight: 600;
+  color: var(--qc-bleu-fonce);
+}
+
+/* Titres de section épurés */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 2.5rem 0 1rem 0;
+  font-size: 1.35rem;
+  color: var(--qc-bleu-fonce);
+  border-bottom: 2px solid var(--qc-bleu-principal);
+  padding-bottom: 0.5rem;
+}
+
+.section-title h2,
+.section-title h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+}
+
+.section-desc {
+  font-size: 0.92rem;
+  color: var(--qc-texte-secondaire);
+  margin-top: -0.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   4. SYSTÈME DE COLONNES (3 COLONNES SUR 1 LIGNE ET 2 COLONNES SELON LES THÈMES)
+   ========================================================================== */
+
+/* Présentation en 3 colonnes de base (Desktop 3 colonnes sur 1 ligne, Mobile 1 colonne) */
+.flex-cols-3,
+.grid-cols-3,
+.portes-entree {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.flex-cols-3 > *,
+.grid-cols-3 > *,
+.portes-entree > .porte-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Présentation en 2 colonnes (Desktop 2 colonnes sur 1 ligne, Mobile 1 colonne) */
+.flex-cols-2,
+.grid-cols-2,
+.grid-container-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.flex-cols-2 > *,
+.grid-cols-2 > *,
+.grid-container-2 > * {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grille générique auto-adaptative pour les tuiles de ressources */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.grid-container.flex-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-container.flex-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Rupture responsive : passage en colonne unique */
+@media (max-width: 850px) {
+  .flex-cols-3,
+  .grid-cols-3,
+  .portes-entree,
+  .grid-container.flex-cols-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .flex-cols-2,
+  .grid-cols-2,
+  .grid-container-2,
+  .grid-container.flex-cols-2 {
+    grid-template-columns: 1fr;
+  }
+  header, .qc-header { padding: 1rem; }
+  .header-container, .qc-header-inner { flex-direction: column; align-items: flex-start; }
+  .qc-search-box { width: 100%; margin-top: 0.5rem; }
+  .qc-search-input { width: 100% !important; }
+  main, .main-container { padding: 0 1rem; }
+}
+
+/* ==========================================================================
+   5. CARTES DES 3 ESPACES DÉDIÉS (STRUCTURE ÉPURÉE INSPIRÉE DE FPT.HTML)
+   ========================================================================== */
+.porte-card {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-top: 5px solid var(--qc-bleu-principal);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.porte-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: #94a3b8;
+}
+
+.porte-card.porte-commun {
+  border-top-color: var(--commun-color);
+}
+
+.porte-card.porte-fms {
+  border-top-color: var(--fms-color);
+}
+
+.porte-card.porte-fpt {
+  border-top-color: var(--fpt-color);
+}
+
+/* Entête de carte avec badge et repère textuel (sans émoji) */
+.card-header-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.card-header-tag {
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+
+.porte-commun .card-header-tag { color: var(--commun-color); }
+.porte-fms .card-header-tag { color: var(--fms-color); }
+.porte-fpt .card-header-tag { color: var(--fpt-color); }
+
+.porte-card h3 {
+  margin: 0 0 0.85rem 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.porte-commun h3 { color: var(--commun-color); }
+.porte-fms h3 { color: var(--fms-color); }
+.porte-fpt h3 { color: var(--fpt-color); }
+
+/* Blocs de caractéristiques structurés */
+.card-details {
+  font-size: 0.88rem;
+  color: var(--qc-texte);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.card-section-label {
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.card-details p {
+  color: var(--qc-texte-secondaire);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.card-details ul {
+  padding-left: 1.15rem;
+  margin: 0.2rem 0 0 0;
+  color: var(--qc-texte-secondaire);
+}
+
+.card-details li {
+  margin-bottom: 0.25rem;
+  line-height: 1.45;
+}
+
+.card-details strong {
+  color: var(--qc-texte);
+}
+
+/* Boîte d'Objectif clé (exactement conforme à la maquette fpt.html) */
+.boite-objectif {
+  background: var(--bg-subtle);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.84rem;
+  line-height: 1.45;
+  border-left: 3px solid var(--fms-color);
+  color: #074771;
+  margin-top: auto;
+  margin-bottom: 1.25rem;
+}
+
+.boite-objectif strong {
+  font-weight: 700;
+  color: inherit;
+}
+
+.boite-objectif.boite-commun {
+  background: #f0fdfa;
+  border-left: 3px solid var(--commun-color);
+  color: #115e59;
+}
+
+.boite-objectif.boite-fms {
+  background: #f0f7ff;
+  border-left: 3px solid var(--fms-color);
+  color: #074771;
+}
+
+.boite-objectif.boite-fpt {
+  background: #f0f9ff;
+  border-left: 3px solid var(--fpt-color);
+  color: #0c4a6e;
+}
+
+/* Boutons d'action sobres et harmonisés */
+.porte-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  background-color: var(--qc-bleu-principal);
+  color: var(--qc-blanc);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.15s ease;
+  text-align: center;
+}
+
+.porte-btn:hover {
+  background-color: var(--qc-bleu-fonce);
+  color: var(--qc-blanc);
+  text-decoration: none;
+}
+
+.porte-commun .porte-btn,
+.porte-btn.btn-commun {
+  background-color: var(--commun-color);
+}
+.porte-commun .porte-btn:hover,
+.porte-btn.btn-commun:hover {
+  background-color: #115e59;
+}
+
+.porte-fms .porte-btn,
+.porte-btn.btn-fms {
+  background-color: var(--fms-color);
+}
+.porte-fms .porte-btn:hover,
+.porte-btn.btn-fms:hover {
+  background-color: #074771;
+}
+
+.porte-fpt .porte-btn,
+.porte-btn.btn-fpt {
+  background-color: var(--fpt-color);
+}
+.porte-fpt .porte-btn:hover,
+.porte-btn.btn-fpt:hover {
+  background-color: #0369a1;
+}
+
+/* ==========================================================================
+   6. TUILES DE RESSOURCES ET INCONTOURNABLES MINISTÉRIELS
+   ========================================================================== */
+.tile {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-top: 4px solid var(--qc-bleu-principal);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.4rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tile:hover {
+  border-color: #94a3b8;
+  box-shadow: var(--shadow-md);
+}
+
+.tile h3,
+.tile h4 {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+  border-bottom: 1px solid var(--qc-gris-bordure-legere);
+  padding-bottom: 0.5rem;
+}
+
+.tile p.tile-desc {
+  font-size: 0.86rem;
+  color: var(--qc-texte-secondaire);
+  margin-top: 0;
+  margin-bottom: 0.85rem;
+  line-height: 1.45;
+}
+
+.tile ul {
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  flex-grow: 1;
+}
+
+.tile li {
+  font-size: 0.88rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.tile a {
+  color: var(--qc-bleu-principal);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+.tile a:hover {
+  text-decoration: underline;
+  color: var(--qc-bleu-fonce);
+}
+
+.res-meta {
+  font-size: 0.78rem;
+  color: var(--qc-texte-discret);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  line-height: 1.35;
+}
+
+/* ==========================================================================
+   7. BADGES INSTITUTIONNELS QUÉBEC
+   ========================================================================== */
+.badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  color: var(--qc-blanc);
+  vertical-align: middle;
+  line-height: 1.35;
+}
+
+.badge-legal { background-color: var(--badge-legal); }
+.badge-guide { background-color: var(--badge-guide); }
+.badge-outil { background-color: var(--badge-outil); }
+.badge-programme { background-color: var(--badge-programme); }
+.badge-grille { background-color: var(--badge-grille); }
+.badge-formulaire { background-color: var(--badge-formulaire); }
+.badge-pdf { background-color: var(--badge-pdf); }
+
+.badge-interactif {
+  display: inline-block;
+  background-color: var(--qc-accent-interactif);
+  color: var(--qc-blanc);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-xs);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.badge-adaptation {
+  display: inline-block;
+  background-color: var(--qc-bleu-clair);
+  color: var(--qc-bleu-fonce);
+  border: 1px solid var(--qc-bleu-principal);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-xs);
+}
+
+/* ==========================================================================
+   8. COMPOSANTS COMPATIBLES AVEC PAGES SPÉCIALISÉES (INDEX-1, FMS, ETC.)
+   ========================================================================== */
+.sommaire-page {
+  background-color: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-left: 4px solid var(--qc-bleu-principal);
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: var(--radius-sm);
+}
+
+.sommaire-page h2 {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  color: var(--qc-bleu-fonce);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.03em;
+}
+
+.sommaire-page ul {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.sommaire-page a {
+  color: var(--qc-bleu-principal);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.sommaire-page a:hover {
+  text-decoration: underline;
+}
+
+section.bloc-section {
+  background-color: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  border-radius: var(--radius-md);
+}
+
+section.bloc-section h2 {
+  color: var(--qc-bleu-fonce);
+  font-size: 1.35rem;
+  border-bottom: 2px solid var(--qc-bleu-principal);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.grille-cartes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.carte {
+  border: 1px solid var(--qc-gris-bordure);
+  background-color: var(--qc-blanc);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: var(--radius-sm);
+}
+
+.carte-entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.carte h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--qc-bleu-fonce);
+}
+
+.carte p {
+  font-size: 0.9rem;
+  color: var(--qc-texte-secondaire);
+  margin-bottom: 1rem;
+}
+
+.lien-action {
+  display: inline-block;
+  color: var(--qc-bleu-principal);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-top: 1px solid var(--qc-gris-bordure-legere);
+  padding-top: 0.75rem;
+}
+
+.lien-action:hover {
+  color: var(--qc-bleu-fonce);
+  text-decoration: underline;
+}
+
+table.tableau-meq {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+table.tableau-meq th,
+table.tableau-meq td {
+  border: 1px solid var(--qc-gris-bordure);
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+table.tableau-meq th {
+  background-color: var(--qc-bleu-clair);
+  color: var(--qc-bleu-fonce);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   9. PIED DE PAGE SOBRE INSTITUTIONNEL
+   ========================================================================== */
+footer,
+.qc-footer {
+  background-color: var(--qc-bleu-fonce);
+  color: var(--qc-blanc);
+  border-top: 4px solid var(--qc-bleu-principal);
+  padding: 2rem 1.5rem;
+  margin-top: 4rem;
+  text-align: center;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.qc-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+footer a,
+.qc-footer a {
+  color: #bfdbfe;
+  text-decoration: none;
+}
+
+footer a:hover,
+.qc-footer a:hover {
+  text-decoration: underline;
+  color: var(--qc-blanc);
+}
+
+/* ==========================================================================
+   10. MODULES DÉPLIABLES / COLLAPSE (STYLE QUÉBEC)
+   ========================================================================== */
+.collapse-box {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.65rem;
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.collapse-box:hover {
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-sm);
+}
+
+.collapse-header {
+  background: #f8fafc;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease;
+}
+
+.collapse-header:hover {
+  background-color: #f1f5f9;
+}
+
+.collapse-header.open {
+  border-bottom: 1px solid var(--qc-gris-bordure);
+}
+
+.collapse-header .card-section-label {
+  margin: 0 !important;
+  font-size: 0.85rem;
+}
+
+.collapse-toggle-icon {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted, #64748b);
+  background: rgba(0, 90, 156, 0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.collapse-header:hover .collapse-toggle-icon {
+  background: rgba(0, 90, 156, 0.18);
+  color: var(--qc-bleu-principal);
+}
+
+.collapse-content {
+  padding: 12px 14px;
+  display: none;
+  background: var(--qc-blanc);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.collapse-content.open {
+  display: block !important;
+}
+
+/* ==========================================================================
+   TUILES DÉPLIABLES DES ZONES DE VIGILANCE (INDEX.HTML)
+   ========================================================================== */
+.tile-vigilance {
+  padding: 0 !important;
+  overflow: hidden;
+  border-top: 4px solid #dc2626 !important;
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tile-vigilance:hover {
+  border-color: #f87171;
+  box-shadow: var(--shadow-md);
+}
+
+.tile-vigilance .collapse-header {
+  padding: 1rem 1.25rem;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.tile-vigilance .collapse-header:hover {
+  background-color: #fef2f2;
+}
+
+.tile-vigilance .collapse-header.open {
+  border-bottom: 1px solid #fee2e2;
+  background-color: #fffafb;
+}
+
+.tile-vigilance .collapse-header h3 {
+  margin: 0 !important;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #991b1b;
+  line-height: 1.35;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+  text-align: left;
+}
+
+.tile-vigilance .collapse-toggle-icon {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #991b1b;
+  background: rgba(220, 38, 38, 0.08);
+  padding: 3px 8px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tile-vigilance .collapse-header:hover .collapse-toggle-icon {
+  background: rgba(220, 38, 38, 0.18);
+  color: #7f1d1d;
+}
+
+.tile-vigilance .collapse-content {
+  padding: 1.1rem 1.25rem 1.25rem 1.25rem;
+  background: #ffffff;
+}
+
+.tile-vigilance .collapse-content p.tile-desc {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 0.88rem;
+  color: var(--qc-texte-secondaire);
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.tile-vigilance .collapse-content ul {
+  font-size: 0.88rem;
+  color: #4b5563;
+  line-height: 1.5;
+  padding-left: 1.15rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.tile-vigilance .collapse-content li {
+  margin: 0;
+}
+
+/* Carte dépliable pour les grandes sections (fpt.html) */
+.section-collapse-card {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-md);
+  margin-bottom: 2rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s ease;
+}
+
+.section-collapse-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.06);
+}
+
+.section-collapse-header {
+  background: #ffffff;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  border-left: 5px solid var(--fpt-color, #005a9c);
+  transition: background-color 0.15s ease;
+}
+
+.section-collapse-header:hover {
+  background-color: #f8fafc;
+}
+
+.section-collapse-header.open {
+  border-bottom: 1px solid var(--qc-gris-bordure);
+}
+
+.section-collapse-content {
+  padding: 20px;
+  display: none;
+  background: #ffffff;
+}
+
+.section-collapse-content.open {
+  display: block !important;
+}
+
+/* ==========================================================================
+   12. MODULE STAGES : DISPOSITION EN DEUX THÈMES FLEXBOX ET TROUSSE DE DÉPART
+   ========================================================================== */
+.stages-trousse-box {
+  background-color: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-left: 5px solid var(--qc-bleu-principal);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.stages-trousse-header {
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--qc-gris-bordure-legere);
+  padding-bottom: 0.75rem;
+}
+
+.stages-trousse-header h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+  margin: 0 0 0.35rem 0;
+}
+
+.stages-trousse-header p {
+  font-size: 0.92rem;
+  color: var(--qc-texte-secondaire);
+  margin: 0;
+}
+
+.stages-trousse-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 850px) {
+  .stages-trousse-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.trousse-col {
+  background-color: var(--qc-gris-fond);
+  border: 1px solid var(--qc-gris-bordure-legere);
+  border-radius: var(--radius-sm);
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.trousse-col-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--qc-gris-bordure);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.trousse-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  flex-grow: 1;
+}
+
+.trousse-col li {
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.trousse-col a {
+  color: var(--qc-bleu-principal);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.trousse-col a:hover {
+  text-decoration: underline;
+  color: var(--qc-bleu-fonce);
+}
+
+.trousse-tag {
+  font-size: 0.72rem;
+  color: var(--qc-texte-discret);
+  display: block;
+  margin-top: 2px;
+}
+
+/* DEUX THÈMES FLEXBOX CÔTE-À-CÔTE */
+.stages-flex-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-bottom: 2.5rem;
+}
+
+.stages-theme-col {
+  flex: 1 1 50%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .stages-flex-layout {
+    flex-direction: column;
+  }
+  .stages-theme-col {
+    width: 100%;
+  }
+}
+
+.stages-theme-banner {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.4rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.stages-theme-banner.theme-1 {
+  border-top: 5px solid var(--fpt-color);
+}
+
+.stages-theme-banner.theme-2 {
+  border-top: 5px solid var(--fms-color);
+}
+
+.stages-theme-banner h2 {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+}
+
+.stages-theme-banner p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--qc-texte-secondaire);
+  line-height: 1.45;
+}
+
+/* CARTE DE RESSOURCE STAGE */
+.stage-card {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.4rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.stage-card:hover {
+  transform: translateY(-2px);
+  border-color: #94a3b8;
+  box-shadow: var(--shadow-md);
+}
+
+.stage-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.stage-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+  line-height: 1.35;
+}
+
+.stage-card-desc {
+  font-size: 0.88rem;
+  color: var(--qc-texte-secondaire);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.stage-sub-items {
+  background-color: var(--qc-gris-fond);
+  border: 1px solid var(--qc-gris-bordure-legere);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.84rem;
+}
+
+.stage-sub-items-title {
+  font-weight: 700;
+  color: var(--qc-texte);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.stage-sub-items ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.stage-sub-items li {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  line-height: 1.4;
+}
+
+.stage-sub-items a {
+  color: var(--qc-bleu-principal);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.stage-sub-items a:hover {
+  text-decoration: underline;
+  color: var(--qc-bleu-fonce);
+}
+
+.stage-card-footer {
+  border-top: 1px solid var(--qc-gris-bordure-legere);
+  padding-top: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.stage-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background-color: var(--qc-bleu-principal);
+  color: var(--qc-blanc);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.stage-card-btn:hover {
+  background-color: var(--qc-bleu-fonce);
+  color: var(--qc-blanc);
+  text-decoration: none;
+}
+
+.stage-card-btn.btn-outline {
+  background-color: transparent;
+  color: var(--qc-bleu-principal);
+  border: 1px solid var(--qc-bleu-principal);
+}
+
+.stage-card-btn.btn-outline:hover {
+  background-color: var(--qc-bleu-clair);
+  color: var(--qc-bleu-fonce);
+}
+
+.stage-source-label {
+  font-size: 0.78rem;
+  color: var(--qc-texte-discret);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   13. MODULE CATALOGUE UNIFIÉ ET COMPATIBILITÉ GOOGLE SITES
+   ========================================================================== */
+.catalogue-panel {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.catalogue-search-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.catalogue-input {
+  flex: 1;
+  min-width: 280px;
+  padding: 11px 16px;
+  font-size: 0.95rem;
+  border: 2px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  background-color: var(--qc-blanc);
+  color: var(--qc-texte);
+}
+
+.catalogue-input:focus {
+  outline: none;
+  border-color: var(--qc-bleu-principal);
+  box-shadow: 0 0 0 3px rgba(9, 87, 151, 0.2);
+}
+
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.filter-label {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--qc-texte-secondaire);
+  min-width: 80px;
+}
+
+.filter-btn {
+  background: var(--qc-gris-fond);
+  border: 1px solid var(--qc-gris-bordure);
+  padding: 5px 13px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--qc-texte);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.filter-btn:hover {
+  background: var(--qc-bleu-clair);
+  border-color: var(--qc-bleu-principal);
+}
+
+.filter-btn.active {
+  background: var(--qc-bleu-principal);
+  border-color: var(--qc-bleu-principal);
+  color: var(--qc-blanc);
+}
+
+.catalogue-stats-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid var(--qc-gris-bordure-legere);
+  margin-top: 14px;
+  font-size: 0.88rem;
+  color: var(--qc-texte-secondaire);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.catalogue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.resource-card {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.4rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  position: relative;
+  border-top: 4px solid var(--qc-bleu-principal);
+}
+
+.resource-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: #94a3b8;
+}
+
+.resource-card.profil-COMMUN { border-top-color: var(--commun-color); }
+.resource-card.profil-FMS { border-top-color: var(--fms-color); }
+.resource-card.profil-FPT { border-top-color: var(--fpt-color); }
+.resource-card.profil-CSRN { border-top-color: #0891b2; }
+
+.resource-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.resource-card h3 {
+  font-size: 1.05rem;
+  margin: 0 0 8px 0;
+  line-height: 1.35;
+  color: var(--qc-bleu-fonce);
+  font-weight: 700;
+}
+
+.resource-desc {
+  font-size: 0.88rem;
+  color: var(--qc-texte-secondaire);
+  line-height: 1.45;
+  margin-bottom: 14px;
+  flex-grow: 1;
+}
+
+.resource-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.tag-pill {
+  font-size: 0.72rem;
+  background: var(--qc-gris-fond);
+  border: 1px solid var(--qc-gris-bordure-legere);
+  padding: 2px 8px;
+  border-radius: 12px;
+  color: var(--qc-texte-secondaire);
+}
+
+.resource-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--qc-gris-bordure-legere);
+  padding-top: 10px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--qc-bleu-principal);
+  color: var(--qc-blanc);
+  padding: 7px 13px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.82rem;
+  transition: background-color 0.15s ease;
+}
+
+.btn-download:hover {
+  background-color: var(--qc-bleu-fonce);
+  color: var(--qc-blanc);
+  text-decoration: none;
+}
+
+.btn-download.btn-drive {
+  background-color: #059669;
+}
+.btn-download.btn-drive:hover {
+  background-color: #047857;
+}
+
+.btn-download.btn-web {
+  background-color: #475569;
+}
+.btn-download.btn-web:hover {
+  background-color: #334155;
+}
+
+/* ==========================================================================
+   BULLE INFO / GUIDE CO-GESTIONNAIRES (GOOGLE SITES ÉDUCATION)
+   ========================================================================== */
+.co-gestion-box {
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-left: 5px solid var(--qc-bleu-principal);
+  border-radius: var(--radius-md);
+  margin-bottom: 1.75rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.co-gestion-header {
+  padding: 12px 16px;
+  background-color: #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease;
+}
+
+.co-gestion-header:hover {
+  background-color: #e2e8f0;
+}
+
+.co-gestion-header h3 {
+  margin: 0;
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.co-gestion-content {
+  padding: 16px 20px;
+  display: none;
+  background: var(--qc-blanc);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.co-gestion-content.open {
+  display: block;
+}
+
+.co-gestion-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin: 14px 0;
+}
+
+.co-gestion-step-card {
+  background: var(--qc-gris-fond);
+  border: 1px solid var(--qc-gris-bordure-legere);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+
+.co-gestion-step-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--qc-bleu-principal);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.co-gestion-step-title {
+  font-weight: 700;
+  color: var(--qc-texte);
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.co-gestion-code {
+  background: #1e293b;
+  color: #f8fafc;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 0.8rem;
+  overflow-x: auto;
+  margin-top: 8px;
+}
+
+/* Mode Intégration Iframe / Google Sites Embed */
+body.embed-mode .qc-header,
+body.embed-mode .qc-nav,
+body.embed-mode .qc-footer {
+  display: none !important;
+}
+
+body.embed-mode .main-container {
+  margin: 0 auto !important;
+  padding: 12px !important;
+  max-width: 100% !important;
+}
+
+
+
+</style>
+  <style>
+    /* ==========================================================================
+       TYPOGRAPHIE HAUTE LISIBILITÉ & DESIGN SYSTEM SOBRE QUÉBEC
+       ========================================================================== */
+    @import url('https://fonts.googleapis.com/css2?family=Andika:wght@400;700&display=swap');
+
+    :root {
+      --police-lisible: 'Luciole', 'Andika', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --qc-noir-encre: #000000;
+      --qc-blanc-pur: #ffffff;
+      --qc-bordure-cadre: #111827;
+      --qc-accent-falc: #095797;
+      --qc-fond-zone: #f8fafc;
+      --qc-gris-clair: #f1f5f9;
+      --qc-gris-moyen: #94a3b8;
+    }
+
+    body {
+      font-family: var(--police-lisible);
+      color: #1f2937;
+      background-color: #f4f6f9;
+      line-height: 1.5;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* En-tête et navigation */
+    .header-studio {
+      background-color: #002855;
+      color: #ffffff;
+      padding: 1.5rem 2rem;
+      border-bottom: 4px solid #095797;
+    }
+
+    .header-studio h1 {
+      margin: 0 0 0.4rem 0;
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .badge-studio {
+      font-size: 0.8rem;
+      background-color: #0284c7;
+      color: #ffffff;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .header-studio p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      max-width: 950px;
+    }
+
+    /* Barre de progression / Onglets d'étapes */
+    .stepper-nav {
+      display: flex;
+      background-color: #ffffff;
+      border-bottom: 2px solid #cbd5e1;
+      padding: 0 2rem;
+      overflow-x: auto;
+    }
+
+    .step-tab {
+      padding: 0.9rem 1.4rem;
+      border: none;
+      background: none;
+      font-family: var(--police-lisible);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .step-tab:hover {
+      color: #095797;
+      background-color: #f8fafc;
+    }
+
+    .step-tab.actif {
+      color: #095797;
+      border-bottom-color: #095797;
+      background-color: #f0f7ff;
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-color: #cbd5e1;
+      color: #1e293b;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .step-tab.actif .step-num {
+      background-color: #095797;
+      color: #ffffff;
+    }
+
+    /* Conteneur principal */
+    .conteneur-page {
+      max-width: 1240px;
+      margin: 1.5rem auto;
+      padding: 0 1.5rem 3rem 1.5rem;
+    }
+
+    .section-volet {
+      display: none;
+      background-color: #ffffff;
+      border: 1px solid #d1d5db;
+      padding: 1.75rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .section-volet.actif {
+      display: block;
+    }
+
+    /* Grilles et formulaires */
+    .grille-champs-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .grille-champs-2col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .groupe-form {
+      margin-bottom: 1.25rem;
+    }
+
+    .groupe-form label {
+      display: block;
+      font-weight: 700;
+      color: #002855;
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    .consigne-aide {
+      display: block;
+      font-size: 0.83rem;
+      color: #4b5563;
+      margin-bottom: 0.45rem;
+      line-height: 1.4;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid #94a3b8;
+      font-family: inherit;
+      font-size: 0.95rem;
+      background-color: #ffffff;
+      color: #111827;
+    }
+
+    input[type="text"]:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid #095797;
+      border-color: #095797;
+    }
+
+    textarea.zone-liste {
+      min-height: 180px;
+      font-family: var(--police-lisible);
+      line-height: 1.5;
+    }
+
+    textarea.zone-code-prompt {
+      min-height: 320px;
+      font-family: "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.86rem;
+      background-color: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      padding: 1rem;
+      white-space: pre-wrap;
+    }
+
+    /* Boutons et actions */
+    .barre-boutons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1.25rem;
+      align-items: center;
+    }
+
+    .btn-action-principale {
+      background-color: #095797;
+      color: #ffffff;
+      border: 1px solid #095797;
+      padding: 0.65rem 1.3rem;
+      font-weight: 700;
+      font-size: 0.93rem;
+      font-family: var(--police-lisible);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.15s ease;
+    }
+
+    .btn-action-principale:hover {
+      background-color: #002855;
+      border-color: #002855;
+    }
+
+    .btn-action-secondaire {
+      background-color: #ffffff;
+      color: #002855;
+      border: 1px solid #002855;
+      padding: 0.65rem 1.2rem;
+      font-weight: 600;
+      font-size: 0.93rem;
+      font-family: var(--police-lisible);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.15s ease;
+    }
+
+    .btn-action-secondaire:hover {
+      background-color: #e2e8f0;
+    }
+
+    .btn-vert {
+      background-color: #0f766e;
+      border-color: #0f766e;
+    }
+
+    .btn-vert:hover {
+      background-color: #115e59;
+      border-color: #115e59;
+    }
+
+    /* Table interactive FALC */
+    .table-falc-container {
+      margin-top: 1.25rem;
+      border: 1px solid #cbd5e1;
+      overflow-x: auto;
+    }
+
+    .table-falc {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .table-falc th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      text-align: left;
+      padding: 0.65rem 0.85rem;
+      border-bottom: 2px solid #cbd5e1;
+      font-weight: 700;
+    }
+
+    .table-falc td {
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    .table-falc tr:last-child td {
+      border-bottom: none;
+    }
+
+    .input-falc-inline {
+      width: 100%;
+      font-weight: 600;
+      color: #0f172a;
+      border: 1px solid #94a3b8;
+      padding: 0.4rem 0.6rem;
+      background-color: #ffffff;
+      font-size: 0.92rem;
+    }
+
+    /* Sélecteur d'ÉPI */
+    .grille-epi {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.65rem;
+      margin-top: 0.5rem;
+    }
+
+    .carte-epi {
+      border: 1px solid #cbd5e1;
+      padding: 0.55rem 0.75rem;
+      background-color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      user-select: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .carte-epi:hover {
+      background-color: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .carte-epi input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .carte-epi svg {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    /* Dropzone Ctrl+V et zone de glisser-déposer */
+    .dropzone-studio {
+      border: 3px dashed #095797;
+      background-color: #f8fafc;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .dropzone-studio:hover,
+    .dropzone-studio.dragover {
+      background-color: #f0f7ff;
+      border-color: #002855;
+    }
+
+    .dropzone-icone {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 0.75rem auto;
+      color: #095797;
+    }
+
+    .dropzone-titre {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #002855;
+      margin-bottom: 0.35rem;
+    }
+
+    .dropzone-detail {
+      font-size: 0.9rem;
+      color: #4b5563;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .touche-clavier {
+      background-color: #e2e8f0;
+      border: 1px solid #94a3b8;
+      border-radius: 4px;
+      padding: 0.15rem 0.5rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    /* Barre d'options de post-traitement */
+    .barre-options-cv {
+      background-color: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .option-cv-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .curseur-seuil {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .curseur-seuil input[type="range"] {
+      width: 140px;
+    }
+
+    .valeur-seuil-badge {
+      display: inline-block;
+      min-width: 38px;
+      text-align: center;
+      font-weight: 700;
+      background-color: #ffffff;
+      border: 1px solid #94a3b8;
+      padding: 0.15rem 0.4rem;
+      font-size: 0.85rem;
+    }
+
+    /* Grille d'assemblage / Cartes normées A4 */
+    .grille-assemblage-apercu {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (max-width: 768px) {
+      .grille-assemblage-apercu {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Gabarit normé d'une case de séquence */
+    .panneau-sequence-norme {
+      background-color: #ffffff;
+      border: 3px solid #000000;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 380px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .entete-panneau {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #000000;
+      padding-bottom: 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .pastille-etape-num {
+      width: 38px;
+      height: 38px;
+      background-color: #000000;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 1.25rem;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .picto-securite-entete {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .picto-securite-entete svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .case-autoevaluation {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #000000;
+      background-color: #ffffff;
+      display: inline-block;
+      box-sizing: border-box;
+    }
+
+    /* Zone visuelle centrale pour l'illustration vectorielle / binarisée */
+    .zone-visuel-action {
+      flex: 1;
+      min-height: 220px;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 0.75rem;
+    }
+
+    .zone-visuel-action svg {
+      width: 100%;
+      height: 100%;
+      max-height: 240px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .zone-visuel-action canvas {
+      max-width: 100%;
+      max-height: 240px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .zone-visuel-action .visuel-vide-placeholder {
+      color: #64748b;
+      font-size: 0.88rem;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .bandeau-falc-texte {
+      border-top: 2px solid #000000;
+      padding-top: 0.65rem;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #000000;
+      text-align: left;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+    }
+
+    /* Actions contextuelles par carte */
+    .actions-carte-panneau {
+      margin-top: 0.5rem;
+      display: flex;
+      gap: 0.4rem;
+      justify-content: flex-end;
+    }
+
+    .btn-micro-action {
+      background-color: #f1f5f9;
+      border: 1px solid #94a3b8;
+      padding: 0.25rem 0.55rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #1e293b;
+    }
+
+    .btn-micro-action:hover {
+      background-color: #e2e8f0;
+      border-color: #64748b;
+    }
+
+    /* Statut et notification */
+    .zone-statut-toast {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background-color: #002855;
+      color: #ffffff;
+      padding: 0.85rem 1.4rem;
+      border-left: 4px solid #0284c7;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      font-size: 0.92rem;
+      font-weight: 600;
+      z-index: 9999;
+      display: none;
+    }
+
+    /* Modal plein écran pour l'affiche atelier */
+    .modal-affiche-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+
+    .modal-affiche-contenu {
+      background-color: #ffffff;
+      max-width: 800px;
+      width: 100%;
+      border: 4px solid #000000;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .modal-affiche-fermer {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.75rem;
+      font-size: 1.5rem;
+      font-weight: 900;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: #000000;
+    }
+
+    /* ==========================================================================
+       FEUILLE DE STYLE D'IMPRESSION RIGIDE @media print (A4 / Lettre)
+       Impression laser haute fidélité noir et blanc sans bordures d'interface
+       ========================================================================== */
+    @media print {
+      @page {
+        size: letter portrait;
+        margin: 10mm;
+      }
+
+      body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        font-size: 12pt;
+      }
+
+      header,
+      nav,
+      .stepper-nav,
+      .barre-boutons,
+      .dropzone-studio,
+      .barre-options-cv,
+      .actions-carte-panneau,
+      .section-volet:not(#volet-assemblage),
+      .zone-statut-toast,
+      footer {
+        display: none !important;
+      }
+
+      .conteneur-page {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      #volet-assemblage {
+        display: block !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        background: transparent !important;
+      }
+
+      .titre-impression-en-tete {
+        display: block !important;
+        font-size: 16pt !important;
+        font-weight: 900 !important;
+        text-transform: uppercase;
+        border-bottom: 3pt solid #000000 !important;
+        padding-bottom: 4mm !important;
+        margin-bottom: 6mm !important;
+      }
+
+      /* Mode Fiche de tâche 2x2 par défaut sur 1 page */
+      .grille-assemblage-apercu {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: 1fr 1fr !important;
+        gap: 6mm !important;
+        page-break-inside: avoid !important;
+      }
+
+      .panneau-sequence-norme {
+        border: 3pt solid #000000 !important;
+        padding: 4mm !important;
+        min-height: 110mm !important;
+        page-break-inside: avoid !important;
+      }
+
+      .entete-panneau {
+        border-bottom: 2pt solid #000000 !important;
+        padding-bottom: 3mm !important;
+        margin-bottom: 3mm !important;
+      }
+
+      .pastille-etape-num {
+        background-color: #000000 !important;
+        color: #ffffff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .case-autoevaluation {
+        border: 2.5pt solid #000000 !important;
+        width: 8mm !important;
+        height: 8mm !important;
+      }
+
+      .bandeau-falc-texte {
+        border-top: 2.5pt solid #000000 !important;
+        font-size: 13pt !important;
+        font-weight: 800 !important;
+        color: #000000 !important;
+      }
+
+      /* Mode Affiche d'atelier (1 étape par page) si classe appliquée */
+      .impression-mode-affiche .grille-assemblage-apercu {
+        display: block !important;
+      }
+
+      .impression-mode-affiche .panneau-sequence-norme {
+        page-break-after: always !important;
+        min-height: 250mm !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+      }
+
+      .impression-mode-affiche .zone-visuel-action {
+        min-height: 170mm !important;
+      }
+
+      .impression-mode-affiche .zone-visuel-action svg {
+        max-height: 170mm !important;
+      }
+
+      .impression-mode-affiche .bandeau-falc-texte {
+        font-size: 20pt !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- EN-TÊTE SOBRE GOUVERNEMENTAL QUÉBEC -->
+  <header class="header-studio">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <h1 style="margin: 0 0 0.4rem 0;">
+          Studio d'assemblage de séquences visuelles
+          <span class="badge-studio">FPT / FMS (TSA & TDL)</span>
+        </h1>
+        <p style="margin: 0;">
+          Génération de prompts spatiaux ISO 7001 (IKEA style), traitement CV local (binarisation Otsu, gomme de bordure 5 %, vectorisation Potrace) et assemblage déterministe en gabarits A4/Lettre conformes aux règles du FALC.
+        </p>
+      </div>
+      <button type="button" class="btn-action-secondaire" id="btn-ouvrir-aide" style="background-color: #ffffff; color: #002855; font-weight: 700; border: 2px solid #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.15);">
+        📖 Mode d'emploi novice
+      </button>
+    </div>
+  </header>
+
+  <!-- NAVIGATION D'ÉTAPES DU STUDIO -->
+  <nav class="stepper-nav" aria-label="Étapes du studio">
+    <button type="button" class="step-tab actif" data-target="volet-falc">
+      <span class="step-num">1</span> Saisie & Simplification FALC
+    </button>
+    <button type="button" class="step-tab" data-target="volet-prompt">
+      <span class="step-num">2</span> Prompts Spatialisés ISO (Gemini / Copilot)
+    </button>
+    <button type="button" class="step-tab" data-target="volet-cv">
+      <span class="step-num">3</span> Dépôt Ctrl+V & Post-traitement CV
+    </button>
+    <button type="button" class="step-tab" data-target="volet-assemblage">
+      <span class="step-num">4</span> Gabarit d'Assemblage & Impression A4
+    </button>
+  </nav>
+
+  <main class="conteneur-page">
+
+    <!-- ======================================================================
+         VOLET 1 : SAISIE DES TÂCHES ET SIMPLIFICATION FALC DYNAMIQUE
+         ====================================================================== -->
+    <section id="volet-falc" class="section-volet actif" aria-labelledby="titre-v1">
+      <h2 id="titre-v1" style="color: #002855; margin-top: 0;">1. Paramétrage de la tâche et adaptation langagière (FALC)</h2>
+      <p class="consigne-aide">
+        Selon la norme du <strong>Facile à lire et à comprendre (FALC)</strong> pour élèves TSA/TDL, chaque étape doit contenir <em>1 seul verbe d'action à l'infinitif ou à l'impératif</em> et <em>1 seul complément concret</em>, sans subordonnées ni bruit linguistique.
+      </p>
+
+      <div class="grille-champs-2col" style="margin-top: 1.25rem;">
+        <div>
+          <div class="groupe-form">
+            <label for="titre-sequence">Titre du poste ou de la tâche d'atelier</label>
+            <input type="text" id="titre-sequence" value="Nettoyer et ranger le poste d'atelier">
+          </div>
+
+          <div class="groupe-form">
+            <label for="select-preset-metier">Exemples de métiers semi-spécialisés (FMS / FPT)</label>
+            <select id="select-preset-metier">
+              <option value="">-- Sélectionner un gabarit métier pré-rempli --</option>
+              <option value="boulanger">Aide-boulanger : Soulever le sac de farine et pétrir</option>
+              <option value="concierge">Aide-concierge : Passer la vadrouille et désinfecter</option>
+              <option value="menuiserie">Atelier de menuiserie : Découper et balayer l'établi</option>
+              <option value="magasinier">Magasinier : Réceptionner et empiler les caisses</option>
+            </select>
+          </div>
+
+          <div class="groupe-form">
+            <label>Équipements de protection individuelle (ÉPI requis)</label>
+            <span class="consigne-aide">Ces ÉPI seront explicitement imposés dans le prompt ISO et affichés sur la fiche.</span>
+            <div class="grille-epi">
+              <label class="carte-epi">
+                <input type="checkbox" class="epi-chk" value="safety goggles (lunettes de sécurité)" data-picto="lunettes" checked>
+                <!-- SVG Lunettes -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2"><circle cx="7" cy="12" r="4"/><circle cx="17" cy="12" r="4"/><path d="M11 12h2M3 12h-1M21 12h1"/></svg>
+                Lunettes
+              </label>
+
+              <label class="carte-epi">
+                <input type="checkbox" class="epi-chk" value="work apron (tablier de travail)" data-picto="tablier" checked>
+                <!-- SVG Tablier -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2"><path d="M9 3h6l2 5v13H7V8l2-5z"/><circle cx="12" cy="6" r="1.5"/></svg>
+                Tablier
+              </label>
+
+              <label class="carte-epi">
+                <input type="checkbox" class="epi-chk" value="protective work gloves (gants de protection)" data-picto="gants">
+                <!-- SVG Gants -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2"><path d="M6 10V5a1.5 1.5 0 0 1 3 0v4m0-4V3.5a1.5 1.5 0 0 1 3 0V9m0-4V4a1.5 1.5 0 0 1 3 0v6m0-4v2a1.5 1.5 0 0 1 3 0v7a6 6 0 0 1-12 0V10a1.5 1.5 0 0 1 3 0"/></svg>
+                Gants
+              </label>
+
+              <label class="carte-epi">
+                <input type="checkbox" class="epi-chk" value="steel toe boots (bottes à cap d'acier)" data-picto="bottes">
+                <!-- SVG Bottes -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2"><path d="M5 4h5v8l6 3v5H5V4z"/></svg>
+                Bottes d'acier
+              </label>
+
+              <label class="carte-epi">
+                <input type="checkbox" class="epi-chk" value="hearing protection (casque antibruit)" data-picto="casque-bruit">
+                <!-- SVG Casque -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2"><path d="M4 12a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3m-16 5a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H4"/></svg>
+                Casque antibruit
+              </label>
+
+              <label class="carte-epi">
+                <input type="checkbox" class="epi-chk" value="dust mask (masque anti-poussière)" data-picto="masque">
+                <!-- SVG Masque -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2"><path d="M4 10l8-4 8 4-3 9H7l-3-9z"/><path d="M4 10h16"/></svg>
+                Masque
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="groupe-form">
+            <label for="texte-brut-etapes">Liste des consignes brutes (1 par ligne)</label>
+            <span class="consigne-aide">Collez le protocole ou la méthode habituelle. L'outil nettoie les fioritures et extrait la structure FALC.</span>
+            <textarea id="texte-brut-etapes" class="zone-liste">1. Il faut absolument mettre ses lunettes de sécurité avant de démarrer.
+2. Débrancher l'outil électrique pour éviter tout accident.
+3. Balayer les copeaux sur l'établi avec la balayette en bois.
+4. Jeter les résidus dans le bac gris identifié.</textarea>
+          </div>
+
+          <div class="barre-boutons">
+            <button type="button" class="btn-action-principale" id="btn-simplifier-falc">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Valider et simplifier en FALC
+            </button>
+            <button type="button" class="btn-action-secondaire" id="btn-reinitialiser-texte">Effacer</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABLE DE VALIDATION FALC INTERACTIVE -->
+      <div style="margin-top: 1.75rem;">
+        <h3 style="color: #002855; font-size: 1.1rem; margin-bottom: 0.5rem;">Validation et ajustement des consignes FALC</h3>
+        <p class="consigne-aide">Vous pouvez modifier directement les textes ci-dessous avant de générer le prompt ou d'imprimer la planche.</p>
+        <div class="table-falc-container">
+          <table class="table-falc">
+            <thead>
+              <tr>
+                <th style="width: 70px;">Étape</th>
+                <th style="width: 45%;">Texte brut initial</th>
+                <th>Consigne FALC finale (Verbe infinitif + complément)</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-falc-preview">
+              <!-- Rempli par JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="barre-boutons" style="justify-content: flex-end; margin-top: 1.5rem;">
+          <button type="button" class="btn-action-principale btn-vert" id="btn-passer-etape-2">
+            Continuer vers la génération de prompts (Étape 2) &rarr;
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VOLET 2 : GÉNÉRATEUR DE PROMPTS SPATIALISÉ ISO 7001 (IKEA STYLE)
+         ====================================================================== -->
+    <section id="volet-prompt" class="section-volet" aria-labelledby="titre-v2">
+      <h2 id="titre-v2" style="color: #002855; margin-top: 0;">2. Prompts spatialisés ISO 7001 pour Google Gemini / Copilot</h2>
+      <p class="consigne-aide">
+        Ce prompt impose une matrice stricte 2×2, un trait vectoriel d'ingénierie (3pt), un mannequin ergonomique neutre sans visage, et <strong>l'interdiction absolue de texte ou chiffres</strong> à l'intérieur de l'image (pour éviter toute hallucination de l'IA).
+      </p>
+
+      <div class="barre-boutons" style="margin-bottom: 1rem;">
+        <button type="button" class="btn-action-principale" id="btn-mode-grille-2x2">Mode Matrice Grille 2×2</button>
+        <button type="button" class="btn-action-secondaire" id="btn-mode-vignettes-unitaires">Mode Vignettes unitaires (1 par 1)</button>
+      </div>
+
+      <div class="groupe-form">
+        <label for="prompt-texte-affiche" id="label-prompt-mode">Prompt spatialisé 2×2 (à copier dans Gemini / Copilot)</label>
+        <textarea id="prompt-texte-affiche" class="zone-code-prompt" readonly></textarea>
+      </div>
+
+      <div class="barre-boutons">
+        <button type="button" class="btn-action-principale" id="btn-copier-prompt">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copier le prompt dans le presse-papiers
+        </button>
+        <button type="button" class="btn-action-secondaire" id="btn-passer-etape-3">
+          Aller au studio de collage et traitement CV (Étape 3) &rarr;
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VOLET 3 : STUDIO DE RÉCUPÉRATION CTRL+V & POST-TRAITEMENT CV
+         ====================================================================== -->
+    <section id="volet-cv" class="section-volet" aria-labelledby="titre-v3">
+      <h2 id="titre-v3" style="color: #002855; margin-top: 0;">3. Récupération Ctrl+V & Post-traitement CV (Canvas, Otsu & Potrace)</h2>
+      <p class="consigne-aide">
+        Copiez l'image générée dans Gemini ou Copilot, puis faites simplement <span class="touche-clavier">Ctrl</span> + <span class="touche-clavier">V</span> n'importe où sur cette page. L'application découpe les 4 cadrans, applique la binarisation d'Otsu, efface les bordures parasites à 5 % et vectorise le tracé en SVG.
+      </p>
+
+      <!-- ZONE DE DÉPÔT / DROPZONE -->
+      <div class="dropzone-studio" id="zone-drop-image" tabindex="0" role="button" aria-label="Zone de dépôt d'image">
+        <svg class="dropzone-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        <div class="dropzone-titre">Collez votre image ici (<span class="touche-clavier">Ctrl</span> + <span class="touche-clavier">V</span>) ou glissez un fichier</div>
+        <div class="dropzone-detail">
+          Prend en charge les planches 2×2 complètes ou les vignettes isolées. Traitement 100 % local dans le navigateur (aucune donnée envoyée vers le cloud).
+        </div>
+        <input type="file" id="input-fichier-image" accept="image/*" style="display: none;">
+        <div style="margin-top: 1rem;">
+          <button type="button" class="btn-action-secondaire" id="btn-ouvrir-selecteur-fichier">📁 Parcourir un fichier image</button>
+          <button type="button" class="btn-action-secondaire" id="btn-simuler-exemple" style="margin-left: 0.5rem; background-color: #f0fdf4; border-color: #16a34a; color: #15803d;">
+            🧪 Charger un exemple visuel simulé (Test direct)
+          </button>
+        </div>
+      </div>
+
+      <!-- BARRE D'OPTIONS ET DE CONTRÔLE CV -->
+      <div class="barre-options-cv">
+        <label class="option-cv-item">
+          <input type="checkbox" id="chk-auto-decoupage-2x2" checked>
+          <span>Découpage automatique en grille 2×2 (4 cadrans)</span>
+        </label>
+
+        <label class="option-cv-item">
+          <input type="checkbox" id="chk-gomme-5pct" checked>
+          <span>Gomme de bordure 5 % (efface faux numéros et cadres IA)</span>
+        </label>
+
+        <label class="option-cv-item">
+          <input type="checkbox" id="chk-vectorisation-potrace" checked>
+          <span>Vectorisation SVG (Potrace JS à la volée)</span>
+        </label>
+
+        <div class="curseur-seuil">
+          <span>Seuil de luminance :</span>
+          <input type="range" id="slider-seuil-luminance" min="10" max="250" value="180">
+          <span class="valeur-seuil-badge" id="valeur-seuil-texte">Auto (Otsu)</span>
+          <button type="button" class="btn-micro-action" id="btn-reset-otsu">Calculer Otsu</button>
+        </div>
+      </div>
+
+      <!-- APERÇU DES CADRANS DÉCOUPÉS ET TRAITÉS -->
+      <h3 style="color: #002855; font-size: 1.1rem; margin-bottom: 0.5rem;">Cadrans extraits et vectorisés</h3>
+      <div id="conteneur-apercu-cv" class="grille-assemblage-apercu">
+        <!-- Rempli dynamiquement -->
+      </div>
+
+      <div class="barre-boutons" style="justify-content: flex-end; margin-top: 1.5rem;">
+        <button type="button" class="btn-action-principale btn-vert" id="btn-passer-etape-4">
+          Visualiser et imprimer le gabarit A4 (Étape 4) &rarr;
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VOLET 4 : GABARIT D'ASSEMBLAGE ET IMPRESSION A4 / LETTRE
+         ====================================================================== -->
+    <section id="volet-assemblage" class="section-volet" aria-labelledby="titre-v4">
+      <div class="titre-impression-en-tete" style="display: none;">
+        FICHE DE TÂCHE D'ATELIER : <span id="print-titre-tache">SÉQUENCE DE TRAVAIL</span>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+        <div>
+          <h2 id="titre-v4" style="color: #002855; margin: 0;">4. Gabarit d'assemblage & Impression A4/Lettre normée</h2>
+          <p class="consigne-aide" style="margin: 0.25rem 0 0 0;">
+            Chaque case intègre la numérotation géante, la case d'auto-évaluation ☐, le visuel vectoriel sans texte et la consigne FALC haute lisibilité.
+          </p>
+        </div>
+
+        <div class="barre-boutons" style="margin: 0;">
+          <button type="button" class="btn-action-principale" id="btn-imprimer-fiche">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Imprimer la fiche (A4 / Lettre)
+          </button>
+          <button type="button" class="btn-action-secondaire" id="btn-bascule-mode-affiche">
+            Basculer en mode Affiche atelier (1/page)
+          </button>
+        </div>
+      </div>
+
+      <!-- PLANCHE D'ASSEMBLAGE 2x2 IMPRIMABLE -->
+      <div id="planche-assemblage-print" class="grille-assemblage-apercu">
+        <!-- Rempli dynamiquement -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL AGRANDISSEMENT AFFICHE D'ATELIER -->
+  <div id="modal-affiche" class="modal-affiche-overlay" role="dialog" aria-modal="true" aria-label="Affiche atelier grand format">
+    <div class="modal-affiche-contenu">
+      <button type="button" class="modal-affiche-fermer" id="btn-fermer-modal">&times;</button>
+      <div id="modal-affiche-body"></div>
+    </div>
+  </div>
+
+  <!-- MODAL MODE D'EMPLOI NOVICE -->
+  <div id="modal-aide" class="modal-affiche-overlay" role="dialog" aria-modal="true" aria-label="Mode d'emploi novice">
+    <div class="modal-affiche-contenu" style="max-height: 85vh; overflow-y: auto;">
+      <button type="button" class="modal-affiche-fermer" id="btn-fermer-aide">&times;</button>
+      <h2 style="color: #002855; margin-top: 0; border-bottom: 2px solid #002855; padding-bottom: 0.5rem;">
+        📖 Mode d'emploi : Comment créer votre fiche en 4 étapes
+      </h2>
+      <div style="font-size: 0.95rem; line-height: 1.6; color: #1f2937;">
+        <p><strong>Bienvenue dans le Studio !</strong> Cet outil permet de créer rapidement des fiches de tâches claires et épurées pour les élèves TSA et TDL, prêtes à être imprimées sur les photocopieurs scolaires en noir et blanc.</p>
+
+        <h3 style="color: #095797; margin-bottom: 0.25rem;">1️⃣ Étape 1 : Choisir la tâche et les ÉPI</h3>
+        <p style="margin-top: 0;">Sélectionnez un modèle métier dans le menu déroulant (ex. <em>Aide-boulanger, Aide-concierge</em>) ou écrivez vos consignes. Cochez les équipements de sécurité (lunettes, gants, etc.). Cliquez sur <strong>« Valider et simplifier en FALC »</strong> pour obtenir des consignes concrètes (1 verbe + 1 objet).</p>
+
+        <h3 style="color: #095797; margin-bottom: 0.25rem;">2️⃣ Étape 2 : Copier le prompt dans Gemini ou Copilot</h3>
+        <p style="margin-top: 0;">Allez à l'étape 2 et cliquez sur <strong>« Copier le prompt »</strong>. Ouvrez ensuite Google Gemini ou Microsoft Copilot, collez le texte et lancez la génération. L'IA crée une grille 2×2 purement visuelle sans texte.</p>
+
+        <h3 style="color: #095797; margin-bottom: 0.25rem;">3️⃣ Étape 3 : Copier l'image et faire Ctrl+V ici</h3>
+        <p style="margin-top: 0;">Faites un clic droit sur l'image générée dans Gemini &rarr; <em>« Copier l'image »</em>. Revenez dans cette fenêtre et appuyez sur <span class="touche-clavier">Ctrl</span> + <span class="touche-clavier">V</span>. L'application s'occupe de tout : découpage des 4 cases, nettoyage du noir et blanc (Otsu), effacement des défauts de bordure (5%) et vectorisation nette (SVG).</p>
+
+        <h3 style="color: #095797; margin-bottom: 0.25rem;">4️⃣ Étape 4 : Imprimer ou agrandir</h3>
+        <p style="margin-top: 0;">Allez à l'étape 4 pour admirer le gabarit final. Cliquez sur <strong>« Imprimer la fiche »</strong> pour imprimer la feuille 2×2 complète (avec cases à cocher &#x25A2; pour l'élève), ou basculez en mode <strong>Affiche atelier</strong> pour imprimer 1 étape géante par page devant la machine !</p>
+
+        <div style="background-color: #f0f7ff; border-left: 4px solid #095797; padding: 0.75rem; margin-top: 1rem;">
+          <strong>🔒 100 % Confidentiel (Loi 25) :</strong> Aucun compte requis, aucune transmission de données sur Internet. Tout s'exécute directement dans votre navigateur.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST DE NOTIFICATION SOBRE SANS DÉCLENCHEUR AUDIO -->
+  <div id="toast-notification" class="zone-statut-toast" aria-live="polite"></div>
+
+  <!-- BIBLIOTHÈQUE LOCALE POTRACE (ZÉRO CDN, 100% CLIENT) -->
+  <script>
+/* ==========================================================================
+   POTRACE.JS (INCLU DIRECTEMENT POUR DÉPLOIEMENT SHAREPOINT .ASPX)
+   ========================================================================== */
+/* Copyright (C) 2001-2013 Peter Selinger.
+ *
+ * A javascript port of Potrace (http://potrace.sourceforge.net).
+ * 
+ * Licensed under the GPL
+ * 
+ * Usage
+ *   loadImageFromFile(file) : load image from File API
+ *   loadImageFromUrl(url): load image from URL
+ *     because of the same-origin policy, can not load image from another domain.
+ *     input color/grayscale image is simply converted to binary image. no pre-
+ *     process is performed.
+ * 
+ *   setParameter({para1: value, ...}) : set parameters
+ *     parameters:
+ *        turnpolicy ("black" / "white" / "left" / "right" / "minority" / "majority")
+ *          how to resolve ambiguities in path decomposition. (default: "minority")       
+ *        turdsize
+ *          suppress speckles of up to this size (default: 2)
+ *        optcurve (true / false)
+ *          turn on/off curve optimization (default: true)
+ *        alphamax
+ *          corner threshold parameter (default: 1)
+ *        opttolerance 
+ *          curve optimization tolerance (default: 0.2)
+ *       
+ *   process(callback) : wait for the image be loaded, then run potrace algorithm,
+ *                       then call callback function.
+ * 
+ *   getSVG(size, opt_type) : return a string of generated SVG image.
+ *                                    result_image_size = original_image_size * size
+ *                                    optional parameter opt_type can be "curve"
+ */
+
+var Potrace = (function() {
+
+  function Point(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  
+  Point.prototype.copy = function(){
+    return new Point(this.x, this.y);
+  };
+
+  function Bitmap(w, h) {
+    this.w = w;
+    this.h = h;
+    this.size = w * h;
+    this.arraybuffer = new ArrayBuffer(this.size);
+    this.data = new Int8Array(this.arraybuffer);
+  }
+
+  Bitmap.prototype.at = function (x, y) {
+    return (x >= 0 && x < this.w && y >=0 && y < this.h) && 
+        this.data[this.w * y + x] === 1;
+  };
+
+  Bitmap.prototype.index = function(i) {
+    var point = new Point();
+    point.y = Math.floor(i / this.w);
+    point.x = i - point.y * this.w;
+    return point;
+  };
+
+  Bitmap.prototype.flip = function(x, y) {
+    if (this.at(x, y)) {
+      this.data[this.w * y + x] = 0;
+    } else {
+      this.data[this.w * y + x] = 1;
+    }
+  };
+    
+  Bitmap.prototype.copy = function() {
+    var bm = new Bitmap(this.w, this.h), i;
+    for (i = 0; i < this.size; i++) {
+      bm.data[i] = this.data[i];
+    }
+    return bm;
+  };
+
+  function Path() {
+    this.area = 0;
+    this.len = 0;
+    this.curve = {};
+    this.pt = [];
+    this.minX = 100000;
+    this.minY = 100000;
+    this.maxX= -1;
+    this.maxY = -1;
+  }
+
+  function Curve(n) {
+    this.n = n;
+    this.tag = new Array(n);
+    this.c = new Array(n * 3);
+    this.alphaCurve = 0;
+    this.vertex = new Array(n);
+    this.alpha = new Array(n);
+    this.alpha0 = new Array(n);
+    this.beta = new Array(n);
+  }
+
+  var imgElement = document.createElement("img"),
+      imgCanvas = document.createElement("canvas"),
+      bm = null,
+      pathlist = [],
+      callback,
+      info = {
+        isReady: false,
+        turnpolicy: "minority", 
+        turdsize: 2,
+        optcurve: true,
+        alphamax: 1,
+        opttolerance: 0.2
+      };
+
+  imgElement.onload = function() {
+    loadCanvas();
+    loadBm();
+  };
+
+  function loadImageFromFile(file) {
+    if (info.isReady) {
+      clear();
+    }
+    imgElement.file = file;
+    var reader = new FileReader();
+    reader.onload = (function(aImg) {
+      return function(e) {
+        aImg.src = e.target.result;
+      };
+    })(imgElement);
+    reader.readAsDataURL(file);
+  }
+  
+  function loadImageFromUrl(url) {
+    if (info.isReady) {
+      clear();
+    }
+    imgElement.src = url;
+    
+  }
+  
+  function setParameter(obj) {
+   var key;
+   for (key in obj) {
+     if (obj.hasOwnProperty(key)) {
+       info[key] = obj[key];
+     }
+    }
+  }
+  
+  function loadCanvas() {
+    imgCanvas.width = imgElement.width;
+    imgCanvas.height = imgElement.height;
+    var ctx = imgCanvas.getContext('2d');
+    ctx.drawImage(imgElement, 0, 0);
+  }
+
+  function loadImageFromCanvas(sourceCanvas) {
+    if (info.isReady) {
+      clear();
+    }
+    imgCanvas.width = sourceCanvas.width;
+    imgCanvas.height = sourceCanvas.height;
+    var ctx = imgCanvas.getContext('2d');
+    ctx.drawImage(sourceCanvas, 0, 0);
+    loadBm();
+  }
+  
+  function loadBm() {
+    var ctx = imgCanvas.getContext('2d');
+    bm = new Bitmap(imgCanvas.width, imgCanvas.height);
+    var imgdataobj = ctx.getImageData(0, 0, bm.w, bm.h);
+    var l = imgdataobj.data.length, i, j, color;
+    for (i = 0, j = 0; i < l; i += 4, j++) {
+      color = 0.2126 * imgdataobj.data[i] + 0.7153 * imgdataobj.data[i + 1] +
+          0.0721 * imgdataobj.data[i + 2];
+      bm.data[j] = (color < 128 ? 1 : 0);
+    }
+    info.isReady = true;
+  }
+  
+  
+  function bmToPathlist() {
+  
+    var bm1 = bm.copy(),
+      currentPoint = new Point(0, 0),
+      path;
+    
+    function findNext(point) {
+      var i = bm1.w * point.y + point.x;
+      while (i < bm1.size && bm1.data[i] !== 1) {
+        i++;
+      }
+      return i < bm1.size && bm1.index(i);
+    }
+    
+    function majority(x, y) {
+      var i, a, ct;
+      for (i = 2; i < 5; i++) {
+        ct = 0;
+        for (a = -i + 1; a <= i - 1; a++) {
+          ct += bm1.at(x + a, y + i - 1) ? 1 : -1;
+          ct += bm1.at(x + i - 1, y + a - 1) ? 1 : -1;
+          ct += bm1.at(x + a - 1, y - i) ? 1 : -1;
+          ct += bm1.at(x - i, y + a) ? 1 : -1;
+        }
+        if (ct > 0) {
+          return 1;
+        } else if (ct < 0) {
+          return 0;
+        }
+      }
+      return 0;
+    }
+    
+    function findPath(point) {
+      var path = new Path(),
+        x = point.x, y = point.y,
+        dirx = 0, diry = 1, tmp;
+      
+      path.sign = bm.at(point.x, point.y) ? "+" : "-";
+      
+      while (1) {
+        path.pt.push(new Point(x, y));
+        if (x > path.maxX)
+          path.maxX = x;
+        if (x < path.minX)
+          path.minX = x;
+        if (y > path.maxY)
+          path.maxY = y;
+        if (y < path.minY)
+          path.minY = y;
+        path.len++;
+        
+        x += dirx;
+        y += diry;
+        path.area -= x * diry;
+        
+        if (x === point.x && y === point.y)
+          break;
+        
+        var l = bm1.at(x + (dirx + diry - 1 ) / 2, y + (diry - dirx - 1) / 2);
+        var r = bm1.at(x + (dirx - diry - 1) / 2, y + (diry + dirx - 1) / 2);
+        
+        if (r && !l) {
+          if (info.turnpolicy === "right" ||
+          (info.turnpolicy === "black" && path.sign === '+') ||
+          (info.turnpolicy === "white" && path.sign === '-') ||
+          (info.turnpolicy === "majority" && majority(x, y)) ||
+          (info.turnpolicy === "minority" && !majority(x, y))) {
+            tmp = dirx;
+            dirx = -diry;
+            diry = tmp;
+          } else {
+            tmp = dirx;
+            dirx = diry;
+            diry = -tmp;
+          }
+        } else if (r) {
+          tmp = dirx;
+          dirx = -diry;
+          diry = tmp;
+        } else if (!l) {
+          tmp = dirx;
+          dirx = diry;
+          diry = -tmp;
+        }
+      }
+      return path;
+    }
+    
+    function xorPath(path){
+      var y1 = path.pt[0].y,
+        len = path.len,
+        x, y, maxX, minY, i, j;
+      for (i = 1; i < len; i++) {
+        x = path.pt[i].x;
+        y = path.pt[i].y;
+        
+        if (y !== y1) {
+          minY = y1 < y ? y1 : y;
+          maxX = path.maxX;
+          for (j = x; j < maxX; j++) {
+            bm1.flip(j, minY);
+          }
+          y1 = y;
+        }
+      }
+      
+    }
+    
+    while (currentPoint = findNext(currentPoint)) {
+
+      path = findPath(currentPoint);
+      
+      xorPath(path);
+      
+      if (path.area > info.turdsize) {
+        pathlist.push(path);
+      }
+    }
+    
+  }
+  
+
+  function processPath() {
+  
+    function Quad() {
+      this.data = [0,0,0,0,0,0,0,0,0];
+    }
+
+    Quad.prototype.at = function(x, y) {
+      return this.data[x * 3 + y];
+    };
+    
+    function Sum(x, y, xy, x2, y2) {
+      this.x = x;
+      this.y = y;
+      this.xy = xy;
+      this.x2 = x2;
+      this.y2 = y2;
+    }
+    
+    function mod(a, n) {
+        return a >= n ? a % n : a>=0 ? a : n-1-(-1-a) % n;
+    }
+  
+    function xprod(p1, p2) {
+      return p1.x * p2.y - p1.y * p2.x;
+    }
+    
+    function cyclic(a, b, c) {
+      if (a <= c) {
+        return (a <= b && b < c);
+      } else {
+        return (a <= b || b < c);
+      }
+    }
+      
+    function sign(i) {
+      return i > 0 ? 1 : i < 0 ? -1 : 0;
+    }
+    
+    function quadform(Q, w) {
+      var v = new Array(3), i, j, sum;
+    
+      v[0] = w.x;
+      v[1] = w.y;
+      v[2] = 1;
+      sum = 0.0;
+    
+      for (i=0; i<3; i++) {
+        for (j=0; j<3; j++) {
+          sum += v[i] * Q.at(i, j) * v[j];
+        }
+      }
+      return sum;
+    }
+  
+    function interval(lambda, a, b) {
+      var res = new Point();
+    
+      res.x = a.x + lambda * (b.x - a.x);
+      res.y = a.y + lambda * (b.y - a.y);
+      return res;
+    }
+    
+    function dorth_infty(p0, p2) {
+      var r = new Point();
+      
+      r.y = sign(p2.x - p0.x);
+      r.x = -sign(p2.y - p0.y);
+    
+      return r;
+    }
+    
+    function ddenom(p0, p2) {
+      var r = dorth_infty(p0, p2);
+    
+      return r.y * (p2.x - p0.x) - r.x * (p2.y - p0.y);
+    }
+    
+    function dpara(p0, p1, p2) {
+      var x1, y1, x2, y2;
+    
+      x1 = p1.x - p0.x;
+      y1 = p1.y - p0.y;
+      x2 = p2.x - p0.x;
+      y2 = p2.y - p0.y;
+    
+      return x1 * y2 - x2 * y1;
+    }
+    
+    function cprod(p0, p1, p2, p3) {
+      var x1, y1, x2, y2;
+    
+      x1 = p1.x - p0.x;
+      y1 = p1.y - p0.y;
+      x2 = p3.x - p2.x;
+      y2 = p3.y - p2.y;
+    
+      return x1 * y2 - x2 * y1;
+    }
+      
+    function iprod(p0, p1, p2) {
+      var x1, y1, x2, y2;
+    
+      x1 = p1.x - p0.x;
+      y1 = p1.y - p0.y;
+      x2 = p2.x - p0.x;
+      y2 = p2.y - p0.y;
+    
+      return x1*x2 + y1*y2;
+    }
+      
+    function iprod1(p0, p1, p2, p3) {
+      var x1, y1, x2, y2;
+    
+      x1 = p1.x - p0.x;
+      y1 = p1.y - p0.y;
+      x2 = p3.x - p2.x;
+      y2 = p3.y - p2.y;
+    
+      return x1 * x2 + y1 * y2;
+    }
+    
+    function ddist(p, q) {
+      return Math.sqrt((p.x - q.x) * (p.x - q.x) + (p.y - q.y) * (p.y - q.y));
+    }
+    
+    function bezier(t, p0, p1, p2, p3) {
+      var s = 1 - t, res = new Point();
+    
+      res.x = s*s*s*p0.x + 3*(s*s*t)*p1.x + 3*(t*t*s)*p2.x + t*t*t*p3.x;
+      res.y = s*s*s*p0.y + 3*(s*s*t)*p1.y + 3*(t*t*s)*p2.y + t*t*t*p3.y;
+    
+      return res;
+    }
+  
+    function tangent(p0, p1, p2, p3, q0, q1) {
+      var A, B, C, a, b, c, d, s, r1, r2;
+    
+      A = cprod(p0, p1, q0, q1);
+      B = cprod(p1, p2, q0, q1);
+      C = cprod(p2, p3, q0, q1);
+    
+      a = A - 2 * B + C;
+      b = -2 * A + 2 * B;
+      c = A;
+      
+      d = b * b - 4 * a * c;
+    
+      if (a===0 || d<0) {
+        return -1.0;
+      }
+    
+      s = Math.sqrt(d);
+    
+      r1 = (-b + s) / (2 * a);
+      r2 = (-b - s) / (2 * a);
+    
+      if (r1 >= 0 && r1 <= 1) {
+        return r1;
+      } else if (r2 >= 0 && r2 <= 1) {
+        return r2;
+      } else {
+        return -1.0;
+      }
+    }
+    
+    function calcSums(path) {
+      var i, x, y;
+      path.x0 = path.pt[0].x;
+      path.y0 = path.pt[0].y;
+      
+      path.sums = [];
+      var s = path.sums;
+      s.push(new Sum(0, 0, 0, 0, 0));
+      for(i = 0; i < path.len; i++){
+        x = path.pt[i].x - path.x0;
+        y = path.pt[i].y - path.y0;
+        s.push(new Sum(s[i].x + x, s[i].y + y, s[i].xy + x * y,
+            s[i].x2 + x * x, s[i].y2 + y * y));
+      }
+    }
+   
+    function calcLon(path) {
+      
+      var n = path.len, pt = path.pt, dir,
+        pivk = new Array(n),
+        nc = new Array(n),
+        ct = new Array(4);
+      path.lon = new Array(n);
+      
+      var constraint = [new Point(), new Point()],
+          cur = new Point(),
+          off = new Point(),
+          dk = new Point(),
+          foundk;
+      
+      var i, j, k1, a, b, c, d, k = 0;
+      for(i = n - 1; i >= 0; i--){
+        if (pt[i].x != pt[k].x && pt[i].y != pt[k].y) {
+          k = i + 1;
+        }
+        nc[i] = k;
+      }
+      
+      for (i = n - 1; i >= 0; i--) {
+        ct[0] = ct[1] = ct[2] = ct[3] = 0;
+        dir = (3 + 3 * (pt[mod(i + 1, n)].x - pt[i].x) + 
+            (pt[mod(i + 1, n)].y - pt[i].y)) / 2;
+        ct[dir]++;
+        
+        constraint[0].x = 0;
+        constraint[0].y = 0;
+        constraint[1].x = 0;
+        constraint[1].y = 0;
+        
+        k = nc[i];
+        k1 = i;
+        while (1) {
+          foundk = 0;
+          dir =  (3 + 3 * sign(pt[k].x - pt[k1].x) + 
+              sign(pt[k].y - pt[k1].y)) / 2;
+          ct[dir]++;
+          
+          if (ct[0] && ct[1] && ct[2] && ct[3]) {
+            pivk[i] = k1;
+            foundk = 1;
+            break;
+          }
+          
+          cur.x = pt[k].x - pt[i].x;
+          cur.y = pt[k].y - pt[i].y;
+          
+          if (xprod(constraint[0], cur) < 0 || xprod(constraint[1], cur) > 0) {
+            break;
+          }
+              
+          if (Math.abs(cur.x) <= 1 && Math.abs(cur.y) <= 1) {
+          
+          } else {
+            off.x = cur.x + ((cur.y >= 0 && (cur.y > 0 || cur.x < 0)) ? 1 : -1);
+            off.y = cur.y + ((cur.x <= 0 && (cur.x < 0 || cur.y < 0)) ? 1 : -1);
+            if (xprod(constraint[0], off) >= 0) {
+              constraint[0].x = off.x;
+              constraint[0].y = off.y;
+            }
+            off.x = cur.x + ((cur.y <= 0 && (cur.y < 0 || cur.x < 0)) ? 1 : -1);
+            off.y = cur.y + ((cur.x >= 0 && (cur.x > 0 || cur.y < 0)) ? 1 : -1);
+            if (xprod(constraint[1], off) <= 0) {
+              constraint[1].x = off.x;
+              constraint[1].y = off.y;
+            }
+          }
+          k1 = k;
+          k = nc[k1];
+          if (!cyclic(k, i, k1)) {
+            break;
+          }
+        }
+        if (foundk === 0) {
+          dk.x = sign(pt[k].x-pt[k1].x);
+          dk.y = sign(pt[k].y-pt[k1].y);
+          cur.x = pt[k1].x - pt[i].x;
+          cur.y = pt[k1].y - pt[i].y;
+  
+          a = xprod(constraint[0], cur);
+          b = xprod(constraint[0], dk);
+          c = xprod(constraint[1], cur);
+          d = xprod(constraint[1], dk);
+  
+          j = 10000000;
+          if (b < 0) {
+            j = Math.floor(a / -b);
+          }
+          if (d > 0) {
+            j = Math.min(j, Math.floor(-c / d));
+          }
+          pivk[i] = mod(k1+j,n);
+        }
+      }
+      
+      j=pivk[n-1];
+      path.lon[n-1]=j;
+      for (i=n-2; i>=0; i--) {
+        if (cyclic(i+1,pivk[i],j)) {
+          j=pivk[i];
+        }
+        path.lon[i]=j;
+      }
+  
+      for (i=n-1; cyclic(mod(i+1,n),j,path.lon[i]); i--) {
+        path.lon[i] = j;
+      }
+    }
+    
+    function bestPolygon(path) {
+      
+      function penalty3(path, i, j) {
+        
+        var n = path.len, pt = path.pt, sums = path.sums;
+        var x, y, xy, x2, y2,
+          k, a, b, c, s,
+          px, py, ex, ey,
+          r = 0;
+        if (j>=n) {
+          j -= n;
+          r = 1;
+        }
+        
+        if (r === 0) {
+          x = sums[j+1].x - sums[i].x;
+          y = sums[j+1].y - sums[i].y;
+          x2 = sums[j+1].x2 - sums[i].x2;
+          xy = sums[j+1].xy - sums[i].xy;
+          y2 = sums[j+1].y2 - sums[i].y2;
+          k = j+1 - i;
+        } else {
+          x = sums[j+1].x - sums[i].x + sums[n].x;
+          y = sums[j+1].y - sums[i].y + sums[n].y;
+          x2 = sums[j+1].x2 - sums[i].x2 + sums[n].x2;
+          xy = sums[j+1].xy - sums[i].xy + sums[n].xy;
+          y2 = sums[j+1].y2 - sums[i].y2 + sums[n].y2;
+          k = j+1 - i + n;
+        } 
+      
+        px = (pt[i].x + pt[j].x) / 2.0 - pt[0].x;
+        py = (pt[i].y + pt[j].y) / 2.0 - pt[0].y;
+        ey = (pt[j].x - pt[i].x);
+        ex = -(pt[j].y - pt[i].y);
+      
+        a = ((x2 - 2*x*px) / k + px*px);
+        b = ((xy - x*py - y*px) / k + px*py);
+        c = ((y2 - 2*y*py) / k + py*py);
+        
+        s = ex*ex*a + 2*ex*ey*b + ey*ey*c;
+      
+        return Math.sqrt(s);
+      }
+      
+      var i, j, m, k,    
+      n = path.len,
+      pen = new Array(n + 1),
+      prev = new Array(n + 1),
+      clip0 = new Array(n),
+      clip1 = new Array(n + 1),
+      seg0 = new Array (n + 1),
+      seg1 = new Array(n + 1),
+      thispen, best, c;
+      
+      for (i=0; i<n; i++) {
+        c = mod(path.lon[mod(i-1,n)]-1,n);
+        if (c == i) {
+          c = mod(i+1,n);
+        }
+        if (c < i) {
+          clip0[i] = n;
+        } else {
+          clip0[i] = c;
+        }
+      }
+      
+      j = 1;
+      for (i=0; i<n; i++) {
+        while (j <= clip0[i]) {
+          clip1[j] = i;
+          j++;
+        }
+      }
+      
+      i = 0;
+      for (j=0; i<n; j++) {
+        seg0[j] = i;
+        i = clip0[i];
+      }
+      seg0[j] = n;
+      m = j;
+    
+      i = n;
+      for (j=m; j>0; j--) {
+        seg1[j] = i;
+        i = clip1[i];
+      }
+      seg1[0] = 0;
+      
+      pen[0]=0;
+      for (j=1; j<=m; j++) {
+        for (i=seg1[j]; i<=seg0[j]; i++) {
+          best = -1;
+          for (k=seg0[j-1]; k>=clip1[i]; k--) {
+            thispen = penalty3(path, k, i) + pen[k];
+            if (best < 0 || thispen < best) {
+              prev[i] = k;
+              best = thispen;
+            }
+          }
+          pen[i] = best;
+        }
+      }
+      path.m = m;
+      path.po = new Array(m);
+    
+      for (i=n, j=m-1; i>0; j--) {
+        i = prev[i];
+        path.po[j] = i;
+      }
+    }
+    
+    function adjustVertices(path) {
+      
+      function pointslope(path, i, j, ctr, dir) {
+    
+        var n = path.len, sums = path.sums,
+          x, y, x2, xy, y2,
+          k, a, b, c, lambda2, l, r=0;
+      
+        while (j>=n) {
+          j-=n;
+          r+=1;
+        }
+        while (i>=n) {
+          i-=n;
+          r-=1;
+        }
+        while (j<0) {
+          j+=n;
+          r-=1;
+        }
+        while (i<0) {
+          i+=n;
+          r+=1;
+        }
+        
+        x = sums[j+1].x-sums[i].x+r*sums[n].x;
+        y = sums[j+1].y-sums[i].y+r*sums[n].y;
+        x2 = sums[j+1].x2-sums[i].x2+r*sums[n].x2;
+        xy = sums[j+1].xy-sums[i].xy+r*sums[n].xy;
+        y2 = sums[j+1].y2-sums[i].y2+r*sums[n].y2;
+        k = j+1-i+r*n;
+        
+        ctr.x = x/k;
+        ctr.y = y/k;
+      
+        a = (x2-x*x/k)/k;
+        b = (xy-x*y/k)/k;
+        c = (y2-y*y/k)/k;
+        
+        lambda2 = (a+c+Math.sqrt((a-c)*(a-c)+4*b*b))/2;
+      
+        a -= lambda2;
+        c -= lambda2;
+      
+        if (Math.abs(a) >= Math.abs(c)) {
+          l = Math.sqrt(a*a+b*b);
+          if (l!==0) {
+            dir.x = -b/l;
+            dir.y = a/l;
+          }
+        } else {
+          l = Math.sqrt(c*c+b*b);
+          if (l!==0) {
+            dir.x = -c/l;
+            dir.y = b/l;
+          }
+        }
+        if (l===0) {
+          dir.x = dir.y = 0; 
+        }
+      }
+      
+      var m = path.m, po = path.po, n = path.len, pt = path.pt,
+        x0 = path.x0, y0 = path.y0,
+        ctr = new Array(m), dir = new Array(m),
+        q = new Array(m),
+        v = new Array(3), d, i, j, k, l,
+        s = new Point();
+      
+      path.curve = new Curve(m);
+  
+      for (i=0; i<m; i++) {
+        j = po[mod(i+1,m)];
+        j = mod(j-po[i],n)+po[i];
+        ctr[i] = new Point();
+        dir[i] = new Point();
+        pointslope(path, po[i], j, ctr[i], dir[i]);
+      }
+    
+      for (i=0; i<m; i++) {
+        q[i] = new Quad();
+        d = dir[i].x * dir[i].x + dir[i].y * dir[i].y;
+        if (d === 0.0) {
+          for (j=0; j<3; j++) {
+            for (k=0; k<3; k++) {
+              q[i].data[j * 3 + k] = 0;
+            }
+          }
+        } else {
+          v[0] = dir[i].y;
+          v[1] = -dir[i].x;
+          v[2] = - v[1] * ctr[i].y - v[0] * ctr[i].x;
+          for (l=0; l<3; l++) {
+            for (k=0; k<3; k++) {
+              q[i].data[l * 3 + k] = v[l] * v[k] / d;
+            }
+          }
+        }
+      }
+     
+      var Q, w, dx, dy, det, min, cand, xmin, ymin, z;
+      for (i=0; i<m; i++) {
+        Q = new Quad();
+        w = new Point();
+    
+        s.x = pt[po[i]].x-x0;
+        s.y = pt[po[i]].y-y0;
+    
+        j = mod(i-1,m);
+        
+        for (l=0; l<3; l++) {
+          for (k=0; k<3; k++) {
+            Q.data[l * 3 + k] = q[j].at(l, k) + q[i].at(l, k);
+          }
+        }
+        
+        while(1) {
+          
+          det = Q.at(0, 0)*Q.at(1, 1) - Q.at(0, 1)*Q.at(1, 0);
+          if (det !== 0.0) {
+            w.x = (-Q.at(0, 2)*Q.at(1, 1) + Q.at(1, 2)*Q.at(0, 1)) / det;
+            w.y = ( Q.at(0, 2)*Q.at(1, 0) - Q.at(1, 2)*Q.at(0, 0)) / det;
+            break;
+          }
+    
+          if (Q.at(0, 0)>Q.at(1, 1)) {
+            v[0] = -Q.at(0, 1);
+            v[1] = Q.at(0, 0);
+          } else if (Q.at(1, 1)) {
+            v[0] = -Q.at(1, 1);
+            v[1] = Q.at(1, 0);
+          } else {
+            v[0] = 1;
+            v[1] = 0;
+          }
+          d = v[0] * v[0] + v[1] * v[1];
+          v[2] = - v[1] * s.y - v[0] * s.x;
+          for (l=0; l<3; l++) {
+            for (k=0; k<3; k++) {
+              Q.data[l * 3 + k] += v[l] * v[k] / d;
+            }
+          }
+        }
+        dx = Math.abs(w.x-s.x);
+        dy = Math.abs(w.y-s.y);
+        if (dx <= 0.5 && dy <= 0.5) {
+          path.curve.vertex[i] = new Point(w.x+x0, w.y+y0);
+          continue;
+        }
+    
+        min = quadform(Q, s);
+        xmin = s.x;
+        ymin = s.y;
+    
+        if (Q.at(0, 0) !== 0.0) {
+          for (z=0; z<2; z++) {
+            w.y = s.y-0.5+z;
+            w.x = - (Q.at(0, 1) * w.y + Q.at(0, 2)) / Q.at(0, 0);
+            dx = Math.abs(w.x-s.x);
+            cand = quadform(Q, w);
+            if (dx <= 0.5 && cand < min) {
+              min = cand;
+              xmin = w.x;
+              ymin = w.y;
+            }
+          }
+        }
+  
+        if (Q.at(1, 1) !== 0.0) {
+          for (z=0; z<2; z++) {
+            w.x = s.x-0.5+z;
+            w.y = - (Q.at(1, 0) * w.x + Q.at(1, 2)) / Q.at(1, 1);
+            dy = Math.abs(w.y-s.y);
+            cand = quadform(Q, w);
+            if (dy <= 0.5 && cand < min) {
+              min = cand;
+              xmin = w.x;
+              ymin = w.y;
+            }
+          }
+        }
+  
+        for (l=0; l<2; l++) {
+          for (k=0; k<2; k++) {
+            w.x = s.x-0.5+l;
+            w.y = s.y-0.5+k;
+            cand = quadform(Q, w);
+            if (cand < min) {
+              min = cand;
+              xmin = w.x;
+              ymin = w.y;
+            }
+          }
+        }
+    
+        path.curve.vertex[i] = new Point(xmin + x0, ymin + y0);
+      }
+    }
+    
+    function reverse(path) {
+      var curve = path.curve, m = curve.n, v = curve.vertex, i, j, tmp;
+    
+      for (i=0, j=m-1; i<j; i++, j--) {
+        tmp = v[i];
+        v[i] = v[j];
+        v[j] = tmp;
+      }
+    }
+    
+    function smooth(path) {
+      var m = path.curve.n, curve = path.curve;
+
+      var i, j, k, dd, denom, alpha,
+        p2, p3, p4;
+    
+      for (i=0; i<m; i++) {
+        j = mod(i+1, m);
+        k = mod(i+2, m);
+        p4 = interval(1/2.0, curve.vertex[k], curve.vertex[j]);
+    
+        denom = ddenom(curve.vertex[i], curve.vertex[k]);
+        if (denom !== 0.0) {
+          dd = dpara(curve.vertex[i], curve.vertex[j], curve.vertex[k]) / denom;
+          dd = Math.abs(dd);
+          alpha = dd>1 ? (1 - 1.0/dd) : 0;
+          alpha = alpha / 0.75;
+        } else {
+          alpha = 4/3.0;
+        }
+        curve.alpha0[j] = alpha;
+    
+        if (alpha >= info.alphamax) { 
+          curve.tag[j] = "CORNER";
+          curve.c[3 * j + 1] = curve.vertex[j];
+          curve.c[3 * j + 2] = p4;
+        } else {
+          if (alpha < 0.55) {
+            alpha = 0.55;
+          } else if (alpha > 1) {
+            alpha = 1;
+          }
+          p2 = interval(0.5+0.5*alpha, curve.vertex[i], curve.vertex[j]);
+          p3 = interval(0.5+0.5*alpha, curve.vertex[k], curve.vertex[j]);
+          curve.tag[j] = "CURVE";
+          curve.c[3 * j + 0] = p2;
+          curve.c[3 * j + 1] = p3;
+          curve.c[3 * j + 2] = p4;
+        }
+        curve.alpha[j] = alpha;  
+        curve.beta[j] = 0.5;
+      }
+      curve.alphacurve = 1;
+    }
+    
+    function optiCurve(path) {
+      function Opti(){
+        this.pen = 0;
+        this.c = [new Point(), new Point()];
+        this.t = 0;
+        this.s = 0;
+        this.alpha = 0;
+      }
+      
+      function opti_penalty(path, i, j, res, opttolerance, convc, areac) {
+        var m = path.curve.n, curve = path.curve, vertex = curve.vertex, 
+          k, k1, k2, conv, i1,
+          area, alpha, d, d1, d2,
+          p0, p1, p2, p3, pt,
+          A, R, A1, A2, A3, A4,
+          s, t;
+      
+        if (i==j) {
+          return 1;
+        }
+      
+        k = i;
+        i1 = mod(i+1, m);
+        k1 = mod(k+1, m);
+        conv = convc[k1];
+        if (conv === 0) {
+          return 1;
+        }
+        d = ddist(vertex[i], vertex[i1]);
+        for (k=k1; k!=j; k=k1) {
+          k1 = mod(k+1, m);
+          k2 = mod(k+2, m);
+          if (convc[k1] != conv) {
+            return 1;
+          }
+          if (sign(cprod(vertex[i], vertex[i1], vertex[k1], vertex[k2])) !=
+              conv) {
+            return 1;
+          }
+          if (iprod1(vertex[i], vertex[i1], vertex[k1], vertex[k2]) <
+              d * ddist(vertex[k1], vertex[k2]) * -0.999847695156) {
+            return 1;
+          }
+        }
+    
+        p0 = curve.c[mod(i,m) * 3 + 2].copy();
+        p1 = vertex[mod(i+1,m)].copy();
+        p2 = vertex[mod(j,m)].copy();
+        p3 = curve.c[mod(j,m) * 3 + 2].copy();
+      
+        area = areac[j] - areac[i];
+        area -= dpara(vertex[0], curve.c[i * 3 + 2], curve.c[j * 3 + 2])/2;
+        if (i>=j) {
+          area += areac[m];
+        }
+      
+        A1 = dpara(p0, p1, p2);
+        A2 = dpara(p0, p1, p3);
+        A3 = dpara(p0, p2, p3);
+  
+        A4 = A1+A3-A2;    
+        
+        if (A2 == A1) {
+          return 1;
+        }
+      
+        t = A3/(A3-A4);
+        s = A2/(A2-A1);
+        A = A2 * t / 2.0;
+        
+        if (A === 0.0) {
+          return 1;
+        }
+      
+        R = area / A;
+        alpha = 2 - Math.sqrt(4 - R / 0.3);
+      
+        res.c[0] = interval(t * alpha, p0, p1);
+        res.c[1] = interval(s * alpha, p3, p2);
+        res.alpha = alpha;
+        res.t = t;
+        res.s = s;
+      
+        p1 = res.c[0].copy();
+        p2 = res.c[1].copy(); 
+      
+        res.pen = 0;
+      
+        for (k=mod(i+1,m); k!=j; k=k1) {
+          k1 = mod(k+1,m);
+          t = tangent(p0, p1, p2, p3, vertex[k], vertex[k1]);
+          if (t<-0.5) {
+            return 1;
+          }
+          pt = bezier(t, p0, p1, p2, p3);
+          d = ddist(vertex[k], vertex[k1]);
+          if (d === 0.0) {
+            return 1;
+          }
+          d1 = dpara(vertex[k], vertex[k1], pt) / d;
+          if (Math.abs(d1) > opttolerance) {
+            return 1;
+          }
+          if (iprod(vertex[k], vertex[k1], pt) < 0 ||
+              iprod(vertex[k1], vertex[k], pt) < 0) {
+            return 1;
+          }
+          res.pen += d1 * d1;
+        }
+      
+        for (k=i; k!=j; k=k1) {
+          k1 = mod(k+1,m);
+          t = tangent(p0, p1, p2, p3, curve.c[k * 3 + 2], curve.c[k1 * 3 + 2]);
+          if (t<-0.5) {
+            return 1;
+          }
+          pt = bezier(t, p0, p1, p2, p3);
+          d = ddist(curve.c[k * 3 + 2], curve.c[k1 * 3 + 2]);
+          if (d === 0.0) {
+            return 1;
+          }
+          d1 = dpara(curve.c[k * 3 + 2], curve.c[k1 * 3 + 2], pt) / d;
+          d2 = dpara(curve.c[k * 3 + 2], curve.c[k1 * 3 + 2], vertex[k1]) / d;
+          d2 *= 0.75 * curve.alpha[k1];
+          if (d2 < 0) {
+            d1 = -d1;
+            d2 = -d2;
+          }
+          if (d1 < d2 - opttolerance) {
+            return 1;
+          }
+          if (d1 < d2) {
+            res.pen += (d1 - d2) * (d1 - d2);
+          }
+        }
+      
+        return 0;
+      }
+    
+      var curve = path.curve, m = curve.n, vert = curve.vertex, 
+        pt = new Array(m + 1),
+        pen = new Array(m + 1),
+        len = new Array(m + 1),
+        opt = new Array(m + 1),
+        om, i,j,r,
+        o = new Opti(), p0,
+        i1, area, alpha, ocurve,
+        s, t;
+      
+      var convc = new Array(m), areac = new Array(m + 1);
+      
+      for (i=0; i<m; i++) {
+        if (curve.tag[i] == "CURVE") {
+          convc[i] = sign(dpara(vert[mod(i-1,m)], vert[i], vert[mod(i+1,m)]));
+        } else {
+          convc[i] = 0;
+        }
+      }
+    
+      area = 0.0;
+      areac[0] = 0.0;
+      p0 = curve.vertex[0];
+      for (i=0; i<m; i++) {
+        i1 = mod(i+1, m);
+        if (curve.tag[i1] == "CURVE") {
+          alpha = curve.alpha[i1];
+          area += 0.3 * alpha * (4-alpha) *
+              dpara(curve.c[i * 3 + 2], vert[i1], curve.c[i1 * 3 + 2])/2;
+          area += dpara(p0, curve.c[i * 3 + 2], curve.c[i1 * 3 + 2])/2;
+        }
+        areac[i+1] = area;
+      }
+    
+      pt[0] = -1;
+      pen[0] = 0;
+      len[0] = 0;
+    
+    
+      for (j=1; j<=m; j++) {
+        pt[j] = j-1;
+        pen[j] = pen[j-1];
+        len[j] = len[j-1]+1;
+    
+        for (i=j-2; i>=0; i--) {
+          r = opti_penalty(path, i, mod(j,m), o, info.opttolerance, convc, 
+              areac);
+          if (r) {
+            break;
+          }
+            if (len[j] > len[i]+1 ||
+                (len[j] == len[i]+1 && pen[j] > pen[i] + o.pen)) {
+              pt[j] = i;
+              pen[j] = pen[i] + o.pen;
+              len[j] = len[i] + 1;
+              opt[j] = o;
+              o = new Opti();
+            }
+        }
+      }
+      om = len[m];
+      ocurve = new Curve(om);
+      s = new Array(om);
+      t = new Array(om);
+    
+      j = m;
+      for (i=om-1; i>=0; i--) {
+        if (pt[j]==j-1) {
+          ocurve.tag[i]     = curve.tag[mod(j,m)];
+          ocurve.c[i * 3 + 0]    = curve.c[mod(j,m) * 3 + 0];
+          ocurve.c[i * 3 + 1]    = curve.c[mod(j,m) * 3 + 1];
+          ocurve.c[i * 3 + 2]    = curve.c[mod(j,m) * 3 + 2];
+          ocurve.vertex[i]  = curve.vertex[mod(j,m)];
+          ocurve.alpha[i]   = curve.alpha[mod(j,m)];
+          ocurve.alpha0[i]  = curve.alpha0[mod(j,m)];
+          ocurve.beta[i]    = curve.beta[mod(j,m)];
+          s[i] = t[i] = 1.0;
+        } else {
+          ocurve.tag[i] = "CURVE";
+          ocurve.c[i * 3 + 0] = opt[j].c[0];
+          ocurve.c[i * 3 + 1] = opt[j].c[1];
+          ocurve.c[i * 3 + 2] = curve.c[mod(j,m) * 3 + 2];
+          ocurve.vertex[i] = interval(opt[j].s, curve.c[mod(j,m) * 3 + 2],
+                                       vert[mod(j,m)]);
+          ocurve.alpha[i] = opt[j].alpha;
+          ocurve.alpha0[i] = opt[j].alpha;
+          s[i] = opt[j].s;
+          t[i] = opt[j].t;
+        }
+        j = pt[j];
+      }
+    
+      for (i=0; i<om; i++) {
+        i1 = mod(i+1,om);
+        ocurve.beta[i] = s[i] / (s[i] + t[i1]);
+      }
+      ocurve.alphacurve = 1;
+      path.curve = ocurve;
+    }
+    
+    for (var i = 0; i < pathlist.length; i++) {
+      var path = pathlist[i];
+      calcSums(path);
+      calcLon(path);
+      bestPolygon(path);
+      adjustVertices(path);
+      
+      if (path.sign === "-") {
+        reverse(path);
+      }
+      
+      smooth(path);
+      
+      if (info.optcurve) {
+        optiCurve(path);
+      }
+    }
+  
+  }
+
+  function process(c) {
+    if (c) {
+      callback = c;
+    }
+    if (!info.isReady) {
+      setTimeout(process, 100);
+      return;
+    }
+    bmToPathlist();
+    processPath();
+    callback();
+    callback = null;
+  }
+
+  function clear() {
+    bm = null;
+    pathlist = [];
+    callback = null;
+    info.isReady = false;
+  }
+  
+  function getSVG(size, opt_type) {
+  
+    function path(curve) {
+    
+      function bezier(i) {
+        var b = 'C ' + (curve.c[i * 3 + 0].x * size).toFixed(3) + ' ' +
+            (curve.c[i * 3 + 0].y * size).toFixed(3) + ',';
+        b += (curve.c[i * 3 + 1].x * size).toFixed(3) + ' ' +
+            (curve.c[i * 3 + 1].y * size).toFixed(3) + ',';
+        b += (curve.c[i * 3 + 2].x * size).toFixed(3) + ' ' +
+            (curve.c[i * 3 + 2].y * size).toFixed(3) + ' ';
+        return b;
+      }
+    
+      function segment(i) {
+        var s = 'L ' + (curve.c[i * 3 + 1].x * size).toFixed(3) + ' ' +
+            (curve.c[i * 3 + 1].y * size).toFixed(3) + ' ';
+        s += (curve.c[i * 3 + 2].x * size).toFixed(3) + ' ' +
+            (curve.c[i * 3 + 2].y * size).toFixed(3) + ' ';
+        return s;
+      }
+
+      var n = curve.n, i;
+      var p = 'M' + (curve.c[(n - 1) * 3 + 2].x * size).toFixed(3) +
+          ' ' + (curve.c[(n - 1) * 3 + 2].y * size).toFixed(3) + ' ';
+      for (i = 0; i < n; i++) {
+        if (curve.tag[i] === "CURVE") {
+          p += bezier(i);
+        } else if (curve.tag[i] === "CORNER") {
+          p += segment(i);
+        }
+      }
+      //p += 
+      return p;
+    }
+
+    var w = bm.w * size, h = bm.h * size,
+      len = pathlist.length, c, i, strokec, fillc, fillrule;
+
+    var svg = '<svg id="svg" version="1.1" width="' + w + '" height="' + h +
+        '" xmlns="http://www.w3.org/2000/svg">';
+    svg += '<path d="';
+    for (i = 0; i < len; i++) {
+      c = pathlist[i].curve;
+      svg += path(c);
+    }
+    if (opt_type === "curve") {
+      strokec = "black";
+      fillc = "none";
+      fillrule = '';
+    } else {
+      strokec = "none";
+      fillc = "black";
+      fillrule = ' fill-rule="evenodd"';
+    }
+    svg += '" stroke="' + strokec + '" fill="' + fillc + '"' + fillrule + '/></svg>';
+    return svg;
+  }
+  
+  return{
+    loadImageFromFile: loadImageFromFile,
+    loadImageFromUrl: loadImageFromUrl,
+    loadImageFromCanvas: loadImageFromCanvas,
+    setParameter: setParameter,
+    process: process,
+    getSVG: getSVG,
+    img: imgElement
+  };
+})();
+
+</script>
+
+  <!-- ========================================================================
+       APPLICATION COMPLÈTE EN PUR VANILLA JAVASCRIPT
+       ======================================================================== -->
+  <script>
+    /**
+     * Studio d'assemblage de séquences visuelles pour TSA / TDL
+     * Développé en Vanilla JS strict (ES6+), sans dépendance externe réseau, conforme Loi 25.
+     */
+    (function () {
+      'use strict';
+
+      // --- 1. BANQUE DE PICTOGRAMMES SVG VECTORIELS POUR ÉPI ---
+      const PICTOS_SVG = {
+        lunettes: `<svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Lunettes de sécurité requises"><circle cx="7" cy="12" r="4"/><circle cx="17" cy="12" r="4"/><path d="M11 12h2M3 12h-1M21 12h1"/></svg>`,
+        tablier: `<svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Tablier requis"><path d="M9 3h6l2 5v13H7V8l2-5z"/><circle cx="12" cy="6" r="1.5"/></svg>`,
+        gants: `<svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Gants requis"><path d="M6 10V5a1.5 1.5 0 0 1 3 0v4m0-4V3.5a1.5 1.5 0 0 1 3 0V9m0-4V4a1.5 1.5 0 0 1 3 0v6m0-4v2a1.5 1.5 0 0 1 3 0v7a6 6 0 0 1-12 0V10a1.5 1.5 0 0 1 3 0"/></svg>`,
+        bottes: `<svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Bottes de sécurité requises"><path d="M5 4h5v8l6 3v5H5V4z"/></svg>`,
+        casque_bruit: `<svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Protection auditive requise"><path d="M4 12a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3m-16 5a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H4"/></svg>`,
+        masque: `<svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Masque requis"><path d="M4 10l8-4 8 4-3 9H7l-3-9z"/><path d="M4 10h16"/></svg>`,
+        obligation: `<svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Obligation de sécurité"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r="1" fill="#000000"/></svg>`
+      };
+
+      // --- 2. PRÉSETS MÉTIERS FMS / FPT ---
+      const PRESETS_METIERS = {
+        boulanger: {
+          titre: "Aide-boulanger : Préparation et enfournement du pain",
+          etapes: [
+            "1. Enfiler le tablier blanc et le filet à cheveux propre.",
+            "2. Soulever le sac de farine de 20 kg en fléchissant les genoux.",
+            "3. Verser la farine dans la cuve du batteur-mélangeur.",
+            "4. Enfourner la pelle avec les pains dans le four chaud."
+          ],
+          epis: ["work apron (tablier de travail)", "protective work gloves (gants de protection)", "steel toe boots (bottes à cap d'acier)"]
+        },
+        concierge: {
+          titre: "Aide-concierge : Lavage sécuritaire du plancher d'atelier",
+          etapes: [
+            "1. Mettre les gants de protection en nitrile et les lunettes.",
+            "2. Poser le cône de signalisation de plancher mouillé devant la zone.",
+            "3. Passer la vadrouille sur le sol en formant des huit réguliers.",
+            "4. Vider l'eau souillée dans la cuve de vidange de l'atelier."
+          ],
+          epis: ["protective work gloves (gants de protection)", "safety goggles (lunettes de sécurité)", "steel toe boots (bottes à cap d'acier)"]
+        },
+        menuiserie: {
+          titre: "Menuiserie : Nettoyage et sécurisation de la scie à ruban",
+          etapes: [
+            "1. Mettre les lunettes de sécurité et le casque antibruit.",
+            "2. Débrancher la prise d'alimentation de la scie électrique.",
+            "3. Balayer tous les copeaux de bois sur l'établi avec la balayette.",
+            "4. Jeter les sciures de bois dans le baril de récupération identifié."
+          ],
+          epis: ["safety goggles (lunettes de sécurité)", "hearing protection (casque antibruit)", "dust mask (masque anti-poussière)"]
+        },
+        magasinier: {
+          titre: "Magasin scolaire : Réception et empilage des boîtes",
+          etapes: [
+            "1. Enfiler les gants de manutention et les bottes à cap d'acier.",
+            "2. Vérifier le bon de livraison déposé sur la boîte principale.",
+            "3. Déposer le colis lourd sur la plateforme du diable de transport.",
+            "4. Ranger la boîte sur la tablette basse de l'armoire de stockage."
+          ],
+          epis: ["protective work gloves (gants de protection)", "steel toe boots (bottes à cap d'acier)"]
+        }
+      };
+
+      // --- 3. ÉTAT GLOBAL DU STUDIO ---
+      const etat = {
+        titre: "Nettoyer et ranger le poste d'atelier",
+        etapesBrutes: [],
+        etapesFalc: [],
+        episSelectionnes: ["safety goggles (lunettes de sécurité)", "work apron (tablier de travail)"],
+        modePrompt: "grille2x2", // ou "unitaire"
+        cadransTraites: [null, null, null, null], // Contient { index, canvas, svg, threshold }
+        modeImpressionAffiche: false,
+        seuilManuel: -1 // -1 = calcul Otsu automatique
+      };
+
+      // --- 4. SÉLECTION DES ÉLÉMENTS DU DOM ---
+      const tabs = document.querySelectorAll('.step-tab');
+      const volets = document.querySelectorAll('.section-volet');
+      const inputTitre = document.getElementById('titre-sequence');
+      const selectPreset = document.getElementById('select-preset-metier');
+      const chkEpis = document.querySelectorAll('.epi-chk');
+      const textareaBrut = document.getElementById('texte-brut-etapes');
+      const tbodyFalc = document.getElementById('tbody-falc-preview');
+      const textareaPrompt = document.getElementById('prompt-texte-affiche');
+      const labelPromptMode = document.getElementById('label-prompt-mode');
+      const dropzone = document.getElementById('zone-drop-image');
+      const inputFichier = document.getElementById('input-fichier-image');
+      const conteneurApercuCV = document.getElementById('conteneur-apercu-cv');
+      const plancheAssemblagePrint = document.getElementById('planche-assemblage-print');
+      const printTitreTache = document.getElementById('print-titre-tache');
+      const sliderSeuil = document.getElementById('slider-seuil-luminance');
+      const valeurSeuilTexte = document.getElementById('valeur-seuil-texte');
+      const toast = document.getElementById('toast-notification');
+      const modalAffiche = document.getElementById('modal-affiche');
+      const modalAfficheBody = document.getElementById('modal-affiche-body');
+
+      // --- 5. GESTION DES NOTIFICATIONS SANS AUDIO (ERGONOMIE TSA) ---
+      let toastTimer = null;
+      function afficherNotification(message) {
+        if (!toast) return;
+        toast.textContent = message;
+        toast.style.display = 'block';
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.style.display = 'none';
+        }, 3200);
+      }
+
+      // --- 6. NAVIGATION PAR ONGLETS ---
+      function activerOnglet(cibleId) {
+        tabs.forEach(t => t.classList.toggle('actif', t.getAttribute('data-target') === cibleId));
+        volets.forEach(v => v.classList.toggle('actif', v.id === cibleId));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          activerOnglet(tab.getAttribute('data-target'));
+        });
+      });
+
+      document.getElementById('btn-passer-etape-2').addEventListener('click', () => {
+        genererPromptISO();
+        activerOnglet('volet-prompt');
+      });
+
+      document.getElementById('btn-passer-etape-3').addEventListener('click', () => {
+        activerOnglet('volet-cv');
+      });
+
+      document.getElementById('btn-passer-etape-4').addEventListener('click', () => {
+        mettreAJourPlancheAssemblage();
+        activerOnglet('volet-assemblage');
+      });
+
+      // --- 7. MOTEUR DE SIMPLIFICATION FALC ---
+      /**
+       * Nettoie et simplifie une phrase brute pour en extraire la formule FALC :
+       * 1 verbe infinitif/impératif + 1 complément direct d'objet concret
+       * @param {string} phrase
+       * @returns {string} Phrase simplifiée
+       */
+      function simplifierPhraseFALC(phrase) {
+        if (!phrase) return '';
+
+        let t = phrase
+          .replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u27BF]/g, '')
+          .replace(/^\s*\d+[\.\)\-\:\s]+/, '')
+          .trim();
+
+        if (!t) return '';
+
+        const introsModales = [
+          /^(il\s+faut\s+(absolument\s+|impérativement\s+)?(de\s+|d')?)/i,
+          /^(vous\s+devez\s+(absolument\s+|impérativement\s+)?)/i,
+          /^(tu\s+dois\s+(absolument\s+|impérativement\s+)?)/i,
+          /^(penser\s+à\s+|pensez\s+à\s+|ne\s+pas\s+oublier\s+de\s+|n'oubliez\s+pas\s+de\s+)/i,
+          /^(veiller\s+à\s+|veillez\s+à\s+|prendre\s+soin\s+de\s+)/i,
+          /^(l'élève\s+doit\s+|l'employé\s+doit\s+|le\s+stagiaire\s+doit\s+)/i,
+          /^(commencer\s+par\s+|finir\s+par\s+)/i,
+          /^(s'assurer\s+de\s+|assurez-vous\s+de\s+)/i
+        ];
+
+        for (const regex of introsModales) {
+          t = t.replace(regex, '').trim();
+        }
+
+        const regexCoupure = /\s+(afin\s+de|dans\s+le\s+but\s+de|pour\s+éviter|parce\s+que|car\s+|puis\s+|ensuite\s+|avant\s+de|lorsque|quand|qui\s+se\s+|qui\s+est)\b.*/i;
+        t = t.replace(regexCoupure, '').trim();
+        t = t.replace(/[\.\;\:\!\?]+$/, '').trim();
+
+        if (t.length > 0) {
+          t = t.charAt(0).toUpperCase() + t.slice(1) + '.';
+        }
+
+        return t;
+      }
+
+      function mettreAJourFALC() {
+        const texte = textareaBrut.value;
+        const lignes = texte.split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 0);
+        etat.titre = inputTitre.value.trim() || "Séquence d'atelier";
+        etat.etapesBrutes = lignes;
+        etat.etapesFalc = lignes.map(l => simplifierPhraseFALC(l));
+
+        tbodyFalc.innerHTML = '';
+        etat.etapesFalc.forEach((falc, idx) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td style="font-weight: 800; color: #095797; font-size: 1rem;">${idx + 1}</td>
+            <td style="color: #4b5563; font-size: 0.88rem;">${etat.etapesBrutes[idx]}</td>
+            <td>
+              <input type="text" class="input-falc-inline" data-index="${idx}" value="${falc.replace(/"/g, '&quot;')}">
+            </td>
+          `;
+          tbodyFalc.appendChild(tr);
+        });
+
+        tbodyFalc.querySelectorAll('.input-falc-inline').forEach(input => {
+          input.addEventListener('input', (e) => {
+            const index = parseInt(e.target.getAttribute('data-index'), 10);
+            etat.etapesFalc[index] = e.target.value.trim();
+          });
+        });
+      }
+
+      document.getElementById('btn-simplifier-falc').addEventListener('click', () => {
+        mettreAJourFALC();
+        afficherNotification("Consignes simplifiées selon la norme FALC.");
+      });
+
+      document.getElementById('btn-reinitialiser-texte').addEventListener('click', () => {
+        textareaBrut.value = '';
+        mettreAJourFALC();
+      });
+
+      // Gestion des sélections d'ÉPI
+      chkEpis.forEach(chk => {
+        chk.addEventListener('change', () => {
+          etat.episSelectionnes = Array.from(chkEpis).filter(c => c.checked).map(c => c.value);
+        });
+      });
+
+      // Gestion du preset métier
+      selectPreset.addEventListener('change', (e) => {
+        const cle = e.target.value;
+        if (!cle || !PRESETS_METIERS[cle]) return;
+        const p = PRESETS_METIERS[cle];
+        inputTitre.value = p.titre;
+        textareaBrut.value = p.etapes.join('\n');
+        chkEpis.forEach(c => {
+          c.checked = p.epis.includes(c.value);
+        });
+        etat.episSelectionnes = p.epis.slice();
+        mettreAJourFALC();
+        afficherNotification(`Gabarit métier « ${p.titre.split(':')[0]} » appliqué.`);
+      });
+
+      // --- 8. MOTEUR DE GÉNÉRATION DE PROMPTS ISO 7001 / IKEA ---
+      function genererPromptISO() {
+        const episTexte = etat.episSelectionnes.length > 0
+          ? etat.episSelectionnes.join(", ")
+          : "standard workshop safety attire";
+
+        const etapes4 = [
+          etat.etapesFalc[0] || "Step 1: Put on protective equipment",
+          etat.etapesFalc[1] || "Step 2: Unplug the machine safely",
+          etat.etapesFalc[2] || "Step 3: Sweep shavings off the workbench",
+          etat.etapesFalc[3] || "Step 4: Dispose of waste into container"
+        ];
+
+        if (etat.modePrompt === 'grille2x2') {
+          labelPromptMode.textContent = "Prompt spatialisé 2×2 (à copier dans Google Gemini / Copilot) :";
+          textareaPrompt.value =
+`Create a strict 2x2 grid technical instruction sheet (4 equal square panels separated by 4px solid black borders on a pure #FFFFFF white background).
+
+STYLE: Pure black-and-white vector line art, technical manual illustration (IKEA / ISO 7001 pictogram style), uniform 3pt black stroke, zero shading, zero grayscale, zero gradients, high contrast for laser printing.
+
+CHARACTER: Gender-neutral, non-racialized ergonomic mannequin figure, blank white circle head (NO facial features), simple geometric torso, wearing ${episTexte}.
+
+CRITICAL RULE: ABSOLUTELY NO TEXT, NO LETTERS, NO NUMBERS, NO SPEECH BUBBLES anywhere inside the image. Use only directional black arrows to show movement.
+
+- TOP-LEFT PANEL: ${etapes4[0].replace(/\.$/, '')}. Show clear hand interaction and posture.
+- TOP-RIGHT PANEL: ${etapes4[1].replace(/\.$/, '')}. Show precise tool handling.
+- BOTTOM-LEFT PANEL: ${etapes4[2].replace(/\.$/, '')}. Show directional movement with clean arrow.
+- BOTTOM-RIGHT PANEL: ${etapes4[3].replace(/\.$/, '')}. Show completed final safe state.`;
+        } else {
+          labelPromptMode.textContent = "Prompts unitaires par vignette (à copier 1 par 1 dans Gemini / Copilot) :";
+          let promptsUnitaires = '';
+          etapes4.forEach((etape, i) => {
+            promptsUnitaires +=
+`=== VIGNETTE ${i + 1} ===
+Create a single square technical instruction pictogram on a pure #FFFFFF white background.
+STYLE: Pure black-and-white vector line art, technical manual illustration (IKEA / ISO 7001 pictogram style), uniform 3pt black stroke, zero shading, zero grayscale, zero gradients, high contrast for laser printing.
+CHARACTER: Gender-neutral, non-racialized ergonomic mannequin figure, blank white circle head (NO facial features), simple geometric torso, wearing ${episTexte}.
+CRITICAL RULE: ABSOLUTELY NO TEXT, NO LETTERS, NO NUMBERS, NO SPEECH BUBBLES anywhere inside the image.
+ACTION: ${etape.replace(/\.$/, '')}. Use a directional black arrow to clarify motion.\n\n`;
+          });
+          textareaPrompt.value = promptsUnitaires.trim();
+        }
+      }
+
+      document.getElementById('btn-mode-grille-2x2').addEventListener('click', () => {
+        etat.modePrompt = 'grille2x2';
+        document.getElementById('btn-mode-grille-2x2').className = 'btn-action-principale';
+        document.getElementById('btn-mode-vignettes-unitaires').className = 'btn-action-secondaire';
+        genererPromptISO();
+      });
+
+      document.getElementById('btn-mode-vignettes-unitaires').addEventListener('click', () => {
+        etat.modePrompt = 'unitaire';
+        document.getElementById('btn-mode-vignettes-unitaires').className = 'btn-action-principale';
+        document.getElementById('btn-mode-grille-2x2').className = 'btn-action-secondaire';
+        genererPromptISO();
+      });
+
+      document.getElementById('btn-copier-prompt').addEventListener('click', () => {
+        textareaPrompt.select();
+        navigator.clipboard.writeText(textareaPrompt.value).then(() => {
+          afficherNotification("Prompt copié dans le presse-papiers !");
+        }).catch(() => {
+          afficherNotification("Sélectionnez le texte et faites Ctrl+C.");
+        });
+      });
+
+      // --- 9. MOTEUR DE POST-TRAITEMENT CV (CANVAS, OTSU, 5% GOMME, POTRACE) ---
+
+      /**
+       * Calcule le seuil de binarisation optimal d'Otsu
+       * Maximise la variance inter-classes : sigma_b^2 = w0 * w1 * (mu0 - mu1)^2
+       * @param {Uint32Array} histogramme
+       * @param {number} totalPixels
+       * @returns {number} Seuil optimal entre 0 et 255
+       */
+      function calculerSeuilOtsu(histogramme, totalPixels) {
+        let sommeTotale = 0;
+        for (let i = 0; i < 256; i++) {
+          sommeTotale += i * histogramme[i];
+        }
+        let sommeArrierePlan = 0;
+        let poidsArrierePlan = 0;
+        let varianceMax = 0;
+        let seuilOptimal = 128;
+
+        for (let t = 0; t < 256; t++) {
+          poidsArrierePlan += histogramme[t];
+          if (poidsArrierePlan === 0) continue;
+          const poidsPremierPlan = totalPixels - poidsArrierePlan;
+          if (poidsPremierPlan === 0) break;
+
+          sommeArrierePlan += t * histogramme[t];
+          const moyenneArrierePlan = sommeArrierePlan / poidsArrierePlan;
+          const moyennePremierPlan = (sommeTotale - sommeArrierePlan) / poidsPremierPlan;
+
+          const varianceInter = poidsArrierePlan * poidsPremierPlan * Math.pow(moyenneArrierePlan - moyennePremierPlan, 2);
+          if (varianceInter > varianceMax) {
+            varianceMax = varianceInter;
+            seuilOptimal = t;
+          }
+        }
+        return seuilOptimal;
+      }
+
+      /**
+       * Binarise un canvas avec Otsu et efface la marge de 5% périphérique
+       * @param {HTMLCanvasElement} canvas
+       * @param {number} forceSeuil
+       * @param {boolean} appliquerGomme
+       * @returns {number} Seuil appliqué
+       */
+      function postTraiterCadranCanvas(canvas, forceSeuil = -1, appliquerGomme = true) {
+        const ctx = canvas.getContext('2d');
+        const w = canvas.width;
+        const h = canvas.height;
+        const imgData = ctx.getImageData(0, 0, w, h);
+        const data = imgData.data;
+        const totalPixels = w * h;
+
+        // Histogramme luminance
+        const hist = new Uint32Array(256);
+        for (let i = 0; i < data.length; i += 4) {
+          const lum = Math.round(0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]);
+          hist[lum]++;
+        }
+
+        let threshold = forceSeuil;
+        if (threshold < 0 || threshold > 255) {
+          threshold = calculerSeuilOtsu(hist, totalPixels);
+        }
+
+        const marginX = appliquerGomme ? Math.round(w * 0.05) : 0;
+        const marginY = appliquerGomme ? Math.round(h * 0.05) : 0;
+
+        for (let y = 0; y < h; y++) {
+          const isMarginY = (y < marginY || y >= h - marginY);
+          for (let x = 0; x < w; x++) {
+            const idx = (y * w + x) * 4;
+            if (isMarginY || x < marginX || x >= w - marginX) {
+              // Gomme magique : forcé à blanc pur #FFFFFF
+              data[idx] = 255;
+              data[idx + 1] = 255;
+              data[idx + 2] = 255;
+              data[idx + 3] = 255;
+            } else {
+              const lum = 0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2];
+              const val = (lum >= threshold) ? 255 : 0;
+              data[idx] = val;
+              data[idx + 1] = val;
+              data[idx + 2] = val;
+              data[idx + 3] = 255;
+            }
+          }
+        }
+
+        ctx.putImageData(imgData, 0, 0);
+        return threshold;
+      }
+
+      /**
+       * Vectorise un Canvas en SVG via Potrace JS local
+       * @param {HTMLCanvasElement} canvas
+       * @returns {Promise<string>}
+       */
+      function vectoriserCanvasPotrace(canvas) {
+        return new Promise((resolve) => {
+          if (typeof Potrace === 'undefined' || !Potrace.loadImageFromCanvas) {
+            console.warn("Potrace JS local non disponible, fallback direct");
+            resolve("");
+            return;
+          }
+          Potrace.loadImageFromCanvas(canvas);
+          Potrace.setParameter({
+            turnpolicy: "minority",
+            turdsize: 3,
+            optcurve: true,
+            alphamax: 1,
+            opttolerance: 0.2
+          });
+          Potrace.process(() => {
+            const svg = Potrace.getSVG(1);
+            resolve(svg);
+          });
+        });
+      }
+
+      /**
+       * Traite une image source reçue (découpage 2x2 ou unitaire, Otsu, gomme, Potrace)
+       * @param {HTMLImageElement} img
+       */
+      async function traiterImageEntrante(img) {
+        const autoDecoupage = document.getElementById('chk-auto-decoupage-2x2').checked;
+        const appliquerGomme = document.getElementById('chk-gomme-5pct').checked;
+        const faireVectorisation = document.getElementById('chk-vectorisation-potrace').checked;
+
+        const w = img.naturalWidth || img.width;
+        const h = img.naturalHeight || img.height;
+
+        if (autoDecoupage) {
+          const halfW = Math.floor(w / 2);
+          const halfH = Math.floor(h / 2);
+
+          const quadrants = [
+            { idx: 0, sx: 0, sy: 0 },
+            { idx: 1, sx: halfW, sy: 0 },
+            { idx: 2, sx: 0, sy: halfH },
+            { idx: 3, sx: halfW, sy: halfH }
+          ];
+
+          for (let q = 0; q < 4; q++) {
+            const quad = quadrants[q];
+            const canvas = document.createElement('canvas');
+            canvas.width = halfW;
+            canvas.height = halfH;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, halfW, halfH);
+            ctx.drawImage(img, quad.sx, quad.sy, halfW, halfH, 0, 0, halfW, halfH);
+
+            const seuil = postTraiterCadranCanvas(canvas, etat.seuilManuel, appliquerGomme);
+            let svgStr = "";
+            if (faireVectorisation) {
+              svgStr = await vectoriserCanvasPotrace(canvas);
+            }
+
+            etat.cadransTraites[q] = {
+              index: q + 1,
+              canvas: canvas,
+              svg: svgStr,
+              threshold: seuil
+            };
+          }
+          afficherNotification("Grille 2×2 découpée, binarisée et vectorisée avec succès !");
+        } else {
+          // Mode vignette unique (assigne au premier cadran libre ou au cadran 1)
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+
+          const seuil = postTraiterCadranCanvas(canvas, etat.seuilManuel, appliquerGomme);
+          let svgStr = "";
+          if (faireVectorisation) {
+            svgStr = await vectoriserCanvasPotrace(canvas);
+          }
+
+          let cible = 0;
+          for (let i = 0; i < 4; i++) {
+            if (!etat.cadransTraites[i]) {
+              cible = i;
+              break;
+            }
+          }
+
+          etat.cadransTraites[cible] = {
+            index: cible + 1,
+            canvas: canvas,
+            svg: svgStr,
+            threshold: seuil
+          };
+          afficherNotification(`Vignette unique assignée à l'étape ${cible + 1}.`);
+        }
+
+        rafraichirApercuCV();
+        mettreAJourPlancheAssemblage();
+      }
+
+      function rafraichirApercuCV() {
+        conteneurApercuCV.innerHTML = '';
+        etat.cadransTraites.forEach((cadran, idx) => {
+          const carte = document.createElement('div');
+          carte.className = 'panneau-sequence-norme';
+
+          const falcTexte = etat.etapesFalc[idx] || `Étape ${idx + 1}`;
+          const num = idx + 1;
+
+          let visuelHTML = `<div class="visuel-vide-placeholder">Aucune image collée pour l'étape ${num}</div>`;
+          if (cadran) {
+            if (cadran.svg) {
+              visuelHTML = cadran.svg;
+            } else {
+              visuelHTML = `<img src="${cadran.canvas.toDataURL()}" style="max-width: 100%; max-height: 220px;" alt="Aperçu binarisé étape ${num}">`;
+            }
+          }
+
+          carte.innerHTML = `
+            <div class="entete-panneau">
+              <span class="pastille-etape-num">${num}</span>
+              <div class="picto-securite-entete">
+                ${PICTOS_SVG.lunettes}
+                ${PICTOS_SVG.tablier}
+              </div>
+              <span class="case-autoevaluation" title="Case d'auto-évaluation pour l'élève"></span>
+            </div>
+            <div class="zone-visuel-action">${visuelHTML}</div>
+            <div class="bandeau-falc-texte">${falcTexte}</div>
+            <div class="actions-carte-panneau">
+              ${cadran && cadran.svg ? `<button type="button" class="btn-micro-action btn-telecharger-svg" data-idx="${idx}">⬇ Télécharger SVG</button>` : ''}
+              ${cadran ? `<button type="button" class="btn-micro-action btn-zoom-affiche" data-idx="${idx}">🔍 Affiche atelier</button>` : ''}
+              <button type="button" class="btn-micro-action btn-effacer-cadran" data-idx="${idx}">Effacer</button>
+            </div>
+          `;
+
+          conteneurApercuCV.appendChild(carte);
+        });
+
+        // Liaison des boutons d'actions contextuelles
+        conteneurApercuCV.querySelectorAll('.btn-telecharger-svg').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const idx = parseInt(e.target.getAttribute('data-idx'), 10);
+            const item = etat.cadransTraites[idx];
+            if (item && item.svg) {
+              const blob = new Blob([item.svg], { type: 'image/svg+xml;charset=utf-8' });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = `sequence_etape_${idx + 1}.svg`;
+              a.click();
+              URL.revokeObjectURL(url);
+            }
+          });
+        });
+
+        conteneurApercuCV.querySelectorAll('.btn-zoom-affiche').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const idx = parseInt(e.target.getAttribute('data-idx'), 10);
+            ouvrirAfficheAtelier(idx);
+          });
+        });
+
+        conteneurApercuCV.querySelectorAll('.btn-effacer-cadran').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const idx = parseInt(e.target.getAttribute('data-idx'), 10);
+            etat.cadransTraites[idx] = null;
+            rafraichirApercuCV();
+            mettreAJourPlancheAssemblage();
+          });
+        });
+      }
+
+      function mettreAJourPlancheAssemblage() {
+        printTitreTache.textContent = etat.titre.toUpperCase();
+        plancheAssemblagePrint.innerHTML = '';
+
+        for (let idx = 0; idx < 4; idx++) {
+          const cadran = etat.cadransTraites[idx];
+          const num = idx + 1;
+          const falcTexte = etat.etapesFalc[idx] || `Étape ${num}`;
+
+          const carte = document.createElement('div');
+          carte.className = 'panneau-sequence-norme';
+
+          let visuelHTML = `<div class="visuel-vide-placeholder">En attente de l'image (Étape ${num})</div>`;
+          if (cadran) {
+            if (cadran.svg) {
+              visuelHTML = cadran.svg;
+            } else {
+              visuelHTML = `<img src="${cadran.canvas.toDataURL()}" style="max-width: 100%; max-height: 240px;" alt="Étape ${num}">`;
+            }
+          }
+
+          carte.innerHTML = `
+            <div class="entete-panneau">
+              <span class="pastille-etape-num">${num}</span>
+              <div class="picto-securite-entete">
+                ${PICTOS_SVG.obligation}
+              </div>
+              <span class="case-autoevaluation" title="Case d'auto-évaluation"></span>
+            </div>
+            <div class="zone-visuel-action">${visuelHTML}</div>
+            <div class="bandeau-falc-texte">${falcTexte}</div>
+          `;
+
+          plancheAssemblagePrint.appendChild(carte);
+        }
+      }
+
+      // --- 10. MODAL ZOOM AFFICHE D'ATELIER ---
+      function ouvrirAfficheAtelier(idx) {
+        const item = etat.cadransTraites[idx];
+        const num = idx + 1;
+        const falc = etat.etapesFalc[idx] || `Étape ${num}`;
+        if (!item) return;
+
+        modalAfficheBody.innerHTML = `
+          <div style="border-bottom: 3px solid #000000; padding-bottom: 0.5rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <span class="pastille-etape-num" style="width: 46px; height: 46px; font-size: 1.5rem;">${num}</span>
+              <h2 style="margin: 0; font-size: 1.4rem;">POSTE DE TRAVAIL : ÉTAPE ${num}</h2>
+            </div>
+            <span class="case-autoevaluation" style="width: 40px; height: 40px;"></span>
+          </div>
+          <div style="min-height: 350px; display: flex; align-items: center; justify-content: center; background: #ffffff;">
+            ${item.svg || `<img src="${item.canvas.toDataURL()}" style="max-width: 100%; max-height: 380px;">`}
+          </div>
+          <div style="border-top: 3px solid #000000; padding-top: 1rem; margin-top: 1rem; font-size: 1.6rem; font-weight: 900; text-align: center;">
+            ${falc}
+          </div>
+        `;
+        modalAffiche.style.display = 'flex';
+      }
+
+      document.getElementById('btn-fermer-modal').addEventListener('click', () => {
+        modalAffiche.style.display = 'none';
+      });
+
+      modalAffiche.addEventListener('click', (e) => {
+        if (e.target === modalAffiche) modalAffiche.style.display = 'none';
+      });
+
+      // Gestion du modal d'aide novice
+      const modalAide = document.getElementById('modal-aide');
+      const btnOuvrirAide = document.getElementById('btn-ouvrir-aide');
+      const btnFermerAide = document.getElementById('btn-fermer-aide');
+
+      if (btnOuvrirAide && modalAide) {
+        btnOuvrirAide.addEventListener('click', () => {
+          modalAide.style.display = 'flex';
+        });
+        btnFermerAide.addEventListener('click', () => {
+          modalAide.style.display = 'none';
+        });
+        modalAide.addEventListener('click', (e) => {
+          if (e.target === modalAide) modalAide.style.display = 'none';
+        });
+      }
+
+      // --- 11. ÉCOUTEURS GLOBALS CTRL+V & DROPZONE ---
+      window.addEventListener('paste', (e) => {
+        const items = e.clipboardData && e.clipboardData.items;
+        if (!items) return;
+
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].type.indexOf('image') !== -1) {
+            const blob = items[i].getAsFile();
+            chargerFichierImage(blob);
+            e.preventDefault();
+            break;
+          }
+        }
+      });
+
+      dropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropzone.classList.add('dragover');
+      });
+
+      dropzone.addEventListener('dragleave', () => {
+        dropzone.classList.remove('dragover');
+      });
+
+      dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('dragover');
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          chargerFichierImage(e.dataTransfer.files[0]);
+        }
+      });
+
+      document.getElementById('btn-ouvrir-selecteur-fichier').addEventListener('click', () => {
+        inputFichier.click();
+      });
+
+      inputFichier.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          chargerFichierImage(e.target.files[0]);
+        }
+      });
+
+      function chargerFichierImage(fileOrBlob) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const img = new Image();
+          img.onload = function () {
+            traiterImageEntrante(img);
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(fileOrBlob);
+      }
+
+      // --- 12. GÉNÉRATEUR D'EXEMPLE SIMULÉ 2X2 (POUR DÉMONSTRATION DIRECTE SANS CLOUD) ---
+      document.getElementById('btn-simuler-exemple').addEventListener('click', () => {
+        const canvasSim = document.createElement('canvas');
+        canvasSim.width = 600;
+        canvasSim.height = 600;
+        const ctx = canvasSim.getContext('2d');
+
+        // Fond blanc pur
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, 600, 600);
+
+        // Bordure noire centrale 4px
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(298, 0, 4, 600);
+        ctx.fillRect(0, 298, 600, 4);
+
+        // Dessin des 4 mannequins ISO selon les consignes
+        function dessinerMannequin(cx, cy, geste) {
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 4;
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+
+          // Tête blanche circulaire sans traits
+          ctx.fillStyle = '#FFFFFF';
+          ctx.beginPath();
+          ctx.arc(cx, cy - 60, 22, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+
+          // Torse ergonomique
+          ctx.beginPath();
+          ctx.moveTo(cx, cy - 38);
+          ctx.lineTo(cx, cy + 30);
+          ctx.stroke();
+
+          // Jambes
+          ctx.beginPath();
+          ctx.moveTo(cx, cy + 30);
+          ctx.lineTo(cx - 25, cy + 90);
+          ctx.moveTo(cx, cy + 30);
+          ctx.lineTo(cx + 25, cy + 90);
+          ctx.stroke();
+
+          // Bras et gestuelle spécifique
+          if (geste === 1) {
+            // Mettre lunettes : bras vers le visage
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - 20);
+            ctx.lineTo(cx - 20, cy - 45);
+            ctx.lineTo(cx - 5, cy - 60);
+            ctx.moveTo(cx, cy - 20);
+            ctx.lineTo(cx + 20, cy - 45);
+            ctx.lineTo(cx + 5, cy - 60);
+            ctx.stroke();
+          } else if (geste === 2) {
+            // Débrancher prise : bras vers la droite tenant câble
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - 20);
+            ctx.lineTo(cx + 40, cy - 10);
+            ctx.lineTo(cx + 65, cy);
+            ctx.stroke();
+            // Prise murale
+            ctx.strokeRect(cx + 65, cy - 15, 20, 25);
+          } else if (geste === 3) {
+            // Balayer : bras tenant manche de balai
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - 20);
+            ctx.lineTo(cx - 30, cy + 10);
+            ctx.lineTo(cx - 15, cy + 70);
+            ctx.stroke();
+            // Ligne de balai
+            ctx.beginPath();
+            ctx.moveTo(cx - 45, cy - 10);
+            ctx.lineTo(cx + 10, cy + 90);
+            ctx.stroke();
+            // Flèche directionnelle de mouvement
+            ctx.beginPath();
+            ctx.moveTo(cx + 25, cy + 60);
+            ctx.lineTo(cx + 55, cy + 60);
+            ctx.lineTo(cx + 45, cy + 50);
+            ctx.stroke();
+          } else {
+            // Jeter résidus dans bac
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - 20);
+            ctx.lineTo(cx + 35, cy + 10);
+            ctx.lineTo(cx + 45, cy + 40);
+            ctx.stroke();
+            // Bac gris
+            ctx.strokeRect(cx + 35, cy + 45, 35, 45);
+          }
+        }
+
+        dessinerMannequin(150, 150, 1);
+        dessinerMannequin(450, 150, 2);
+        dessinerMannequin(150, 450, 3);
+        dessinerMannequin(450, 450, 4);
+
+        // Simulation de bruit de bordure pour tester la gomme 5%
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(2, 2, 8, 8); // faux artefact coin supérieur gauche
+        ctx.fillRect(590, 590, 8, 8);
+
+        const imgSim = new Image();
+        imgSim.onload = function () {
+          traiterImageEntrante(imgSim);
+        };
+        imgSim.src = canvasSim.toDataURL();
+      });
+
+      // --- 13. CONTRÔLE MANUEL DU SEUIL D'OTSU ---
+      sliderSeuil.addEventListener('input', (e) => {
+        etat.seuilManuel = parseInt(e.target.value, 10);
+        valeurSeuilTexte.textContent = etat.seuilManuel;
+      });
+
+      document.getElementById('btn-reset-otsu').addEventListener('click', () => {
+        etat.seuilManuel = -1;
+        valeurSeuilTexte.textContent = "Auto (Otsu)";
+        afficherNotification("Mode de seuillage automatique Otsu réactivé.");
+      });
+
+      // --- 14. IMPRESSION ET BASCULE MODE AFFICHE ---
+      document.getElementById('btn-imprimer-fiche').addEventListener('click', () => {
+        window.print();
+      });
+
+      document.getElementById('btn-bascule-mode-affiche').addEventListener('click', (e) => {
+        etat.modeImpressionAffiche = !etat.modeImpressionAffiche;
+        document.body.classList.toggle('impression-mode-affiche', etat.modeImpressionAffiche);
+        if (etat.modeImpressionAffiche) {
+          e.target.textContent = "Revenir au mode Fiche 2×2 (1 page)";
+          afficherNotification("Mode impression : Affiche grand format (1 étape par page).");
+        } else {
+          e.target.textContent = "Basculer en mode Affiche atelier (1/page)";
+          afficherNotification("Mode impression : Fiche d'atelier (Grille 2×2 sur 1 page).");
+        }
+      });
+
+      // --- 15. INITIALISATION AU CHARGEMENT ---
+      mettreAJourFALC();
+      genererPromptISO();
+      rafraichirApercuCV();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1665 @@
+/* ==========================================================================
+   STYLE QUÉBEC SOBRE & ÉPURÉ - PORTAIL PFAE (CSSMB)
+   Design System sobre, épuré, institutionnel et accessible (sans émoji)
+   Inspiré des normes graphiques du Gouvernement du Québec & CSSMB
+   ========================================================================== */
+
+:root {
+  /* Palette officielle Québec */
+  --qc-bleu-principal: #095797;
+  --qc-bleu-fonce: #002855;
+  --qc-bleu-clair: #e6eef6;
+  --qc-bleu-subtil: #f0f7ff;
+  --qc-accent-interactif: #005f73;
+
+  /* Couleurs thématiques des parcours */
+  --fms-color: #0b69a3;
+  --fpt-color: #0284c7;
+  --commun-color: #0f766e;
+
+  /* Nuances neutres de surface et texte */
+  --qc-gris-fond: #f4f6f9;
+  --qc-gris-bordure: #d1d5db;
+  --qc-gris-bordure-legere: #e2e8f0;
+  --qc-texte: #1f2937;
+  --qc-texte-secondaire: #4b5563;
+  --qc-texte-discret: #64748b;
+  --qc-blanc: #ffffff;
+
+  /* Alias de compatibilité pour templates existants */
+  --qc-blue-primary: var(--qc-bleu-principal);
+  --qc-blue-accent: #1472bf;
+  --qc-blue-dark: var(--qc-bleu-fonce);
+  --qc-blue-light: var(--qc-bleu-clair);
+  --qc-blue-subtle: var(--qc-bleu-subtil);
+
+  --bg-main: var(--qc-gris-fond);
+  --bg-surface: var(--qc-blanc);
+  --bg-subtle: #f1f5f9;
+
+  --border-light: var(--qc-gris-bordure-legere);
+  --border-medium: var(--qc-gris-bordure);
+  --border-accent: #93c5fd;
+
+  --text-main: var(--qc-texte);
+  --text-muted: var(--qc-texte-secondaire);
+  --text-subtle: var(--qc-texte-discret);
+  --text-white: var(--qc-blanc);
+
+  /* Badges de ressources */
+  --badge-legal: #7c3aed;
+  --badge-guide: #0284c7;
+  --badge-outil: #4b5563;
+  --badge-programme: #1d4ed8;
+  --badge-grille: #059669;
+  --badge-formulaire: #d97706;
+  --badge-pdf: #dc2626;
+
+  /* Rayons et ombres sobres */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--qc-gris-fond);
+  color: var(--qc-texte);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   1. EN-TÊTE INSTITUTIONNEL QUÉBEC
+   ========================================================================== */
+header,
+.qc-header {
+  background-color: var(--qc-bleu-fonce);
+  color: var(--qc-blanc);
+  border-bottom: 4px solid var(--qc-bleu-principal);
+  padding: 1.25rem 2rem;
+}
+
+.header-container,
+.qc-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.qc-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--qc-blanc);
+}
+
+.qc-brand:hover {
+  text-decoration: none;
+}
+
+.qc-titles h1,
+header h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--qc-blanc);
+  margin: 0;
+}
+
+.qc-titles p,
+header .sous-titre {
+  font-size: 0.88rem;
+  color: var(--qc-bleu-clair);
+  margin-top: 2px;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+/* Recherche rapide */
+.qc-search-box {
+  display: flex;
+  align-items: center;
+}
+
+.qc-search-input {
+  padding: 8px 14px;
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  width: 250px;
+  transition: all 0.2s ease;
+  background-color: var(--qc-blanc);
+  color: var(--qc-texte);
+}
+
+.qc-search-input:focus {
+  outline: none;
+  border-color: var(--qc-bleu-principal);
+  box-shadow: 0 0 0 3px rgba(9, 87, 151, 0.25);
+  width: 290px;
+}
+
+/* ==========================================================================
+   2. NAVIGATION PRINCIPALE
+   ========================================================================== */
+nav.nav-principale,
+.qc-nav {
+  background-color: var(--qc-bleu-principal);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+nav.nav-principale ul,
+.qc-nav-links {
+  max-width: 1200px;
+  margin: 0 auto;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 2rem;
+  gap: 2px;
+}
+
+.qc-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  overflow-x: auto;
+}
+
+nav.nav-principale li a,
+.qc-nav-link {
+  display: block;
+  color: var(--qc-blanc);
+  text-decoration: none;
+  padding: 0.85rem 1.15rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: background-color 0.15s ease;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+}
+
+nav.nav-principale li a:hover,
+nav.nav-principale li a.actif,
+.qc-nav-link:hover,
+.qc-nav-link.active {
+  background-color: var(--qc-bleu-fonce);
+  color: var(--qc-blanc);
+  text-decoration: none;
+  border-bottom-color: var(--qc-bleu-clair);
+}
+
+/* ==========================================================================
+   3. CONTENEUR PRINCIPAL & HERO BANNER
+   ========================================================================== */
+main,
+.main-container {
+  max-width: 1200px;
+  margin: 2rem auto 4rem auto;
+  padding: 0 1.5rem;
+}
+
+.hero-banner {
+  background: linear-gradient(135deg, var(--qc-bleu-fonce) 0%, var(--qc-bleu-principal) 100%);
+  color: var(--qc-blanc);
+  border-radius: var(--radius-md);
+  padding: 2rem 2.25rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+  border-left: 6px solid #1472bf;
+}
+
+.hero-banner h2 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  color: var(--qc-blanc);
+}
+
+.hero-banner p {
+  font-size: 0.98rem;
+  max-width: 850px;
+  line-height: 1.6;
+  color: #f1f5f9;
+  margin-bottom: 0;
+}
+
+/* Alerte institutionnelle sobre */
+.qc-alert {
+  background-color: #f0f7ff;
+  border: 1px solid #bfdbfe;
+  border-left: 4px solid var(--qc-bleu-principal);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 2rem;
+  font-size: 0.92rem;
+  color: #1e3a8a;
+  line-height: 1.55;
+}
+
+.qc-alert strong {
+  font-weight: 600;
+  color: var(--qc-bleu-fonce);
+}
+
+/* Titres de section épurés */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 2.5rem 0 1rem 0;
+  font-size: 1.35rem;
+  color: var(--qc-bleu-fonce);
+  border-bottom: 2px solid var(--qc-bleu-principal);
+  padding-bottom: 0.5rem;
+}
+
+.section-title h2,
+.section-title h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+}
+
+.section-desc {
+  font-size: 0.92rem;
+  color: var(--qc-texte-secondaire);
+  margin-top: -0.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   4. SYSTÈME DE COLONNES (3 COLONNES SUR 1 LIGNE ET 2 COLONNES SELON LES THÈMES)
+   ========================================================================== */
+
+/* Présentation en 3 colonnes de base (Desktop 3 colonnes sur 1 ligne, Mobile 1 colonne) */
+.flex-cols-3,
+.grid-cols-3,
+.portes-entree {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.flex-cols-3 > *,
+.grid-cols-3 > *,
+.portes-entree > .porte-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Présentation en 2 colonnes (Desktop 2 colonnes sur 1 ligne, Mobile 1 colonne) */
+.flex-cols-2,
+.grid-cols-2,
+.grid-container-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.flex-cols-2 > *,
+.grid-cols-2 > *,
+.grid-container-2 > * {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grille générique auto-adaptative pour les tuiles de ressources */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.grid-container.flex-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-container.flex-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Rupture responsive : passage en colonne unique */
+@media (max-width: 850px) {
+  .flex-cols-3,
+  .grid-cols-3,
+  .portes-entree,
+  .grid-container.flex-cols-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .flex-cols-2,
+  .grid-cols-2,
+  .grid-container-2,
+  .grid-container.flex-cols-2 {
+    grid-template-columns: 1fr;
+  }
+  header, .qc-header { padding: 1rem; }
+  .header-container, .qc-header-inner { flex-direction: column; align-items: flex-start; }
+  .qc-search-box { width: 100%; margin-top: 0.5rem; }
+  .qc-search-input { width: 100% !important; }
+  main, .main-container { padding: 0 1rem; }
+}
+
+/* ==========================================================================
+   5. CARTES DES 3 ESPACES DÉDIÉS (STRUCTURE ÉPURÉE INSPIRÉE DE FPT.HTML)
+   ========================================================================== */
+.porte-card {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-top: 5px solid var(--qc-bleu-principal);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.porte-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: #94a3b8;
+}
+
+.porte-card.porte-commun {
+  border-top-color: var(--commun-color);
+}
+
+.porte-card.porte-fms {
+  border-top-color: var(--fms-color);
+}
+
+.porte-card.porte-fpt {
+  border-top-color: var(--fpt-color);
+}
+
+/* Entête de carte avec badge et repère textuel (sans émoji) */
+.card-header-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.card-header-tag {
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+
+.porte-commun .card-header-tag { color: var(--commun-color); }
+.porte-fms .card-header-tag { color: var(--fms-color); }
+.porte-fpt .card-header-tag { color: var(--fpt-color); }
+
+.porte-card h3 {
+  margin: 0 0 0.85rem 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.porte-commun h3 { color: var(--commun-color); }
+.porte-fms h3 { color: var(--fms-color); }
+.porte-fpt h3 { color: var(--fpt-color); }
+
+/* Blocs de caractéristiques structurés */
+.card-details {
+  font-size: 0.88rem;
+  color: var(--qc-texte);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.card-section-label {
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.card-details p {
+  color: var(--qc-texte-secondaire);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.card-details ul {
+  padding-left: 1.15rem;
+  margin: 0.2rem 0 0 0;
+  color: var(--qc-texte-secondaire);
+}
+
+.card-details li {
+  margin-bottom: 0.25rem;
+  line-height: 1.45;
+}
+
+.card-details strong {
+  color: var(--qc-texte);
+}
+
+/* Boîte d'Objectif clé (exactement conforme à la maquette fpt.html) */
+.boite-objectif {
+  background: var(--bg-subtle);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.84rem;
+  line-height: 1.45;
+  border-left: 3px solid var(--fms-color);
+  color: #074771;
+  margin-top: auto;
+  margin-bottom: 1.25rem;
+}
+
+.boite-objectif strong {
+  font-weight: 700;
+  color: inherit;
+}
+
+.boite-objectif.boite-commun {
+  background: #f0fdfa;
+  border-left: 3px solid var(--commun-color);
+  color: #115e59;
+}
+
+.boite-objectif.boite-fms {
+  background: #f0f7ff;
+  border-left: 3px solid var(--fms-color);
+  color: #074771;
+}
+
+.boite-objectif.boite-fpt {
+  background: #f0f9ff;
+  border-left: 3px solid var(--fpt-color);
+  color: #0c4a6e;
+}
+
+/* Boutons d'action sobres et harmonisés */
+.porte-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  background-color: var(--qc-bleu-principal);
+  color: var(--qc-blanc);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.15s ease;
+  text-align: center;
+}
+
+.porte-btn:hover {
+  background-color: var(--qc-bleu-fonce);
+  color: var(--qc-blanc);
+  text-decoration: none;
+}
+
+.porte-commun .porte-btn,
+.porte-btn.btn-commun {
+  background-color: var(--commun-color);
+}
+.porte-commun .porte-btn:hover,
+.porte-btn.btn-commun:hover {
+  background-color: #115e59;
+}
+
+.porte-fms .porte-btn,
+.porte-btn.btn-fms {
+  background-color: var(--fms-color);
+}
+.porte-fms .porte-btn:hover,
+.porte-btn.btn-fms:hover {
+  background-color: #074771;
+}
+
+.porte-fpt .porte-btn,
+.porte-btn.btn-fpt {
+  background-color: var(--fpt-color);
+}
+.porte-fpt .porte-btn:hover,
+.porte-btn.btn-fpt:hover {
+  background-color: #0369a1;
+}
+
+/* ==========================================================================
+   6. TUILES DE RESSOURCES ET INCONTOURNABLES MINISTÉRIELS
+   ========================================================================== */
+.tile {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-top: 4px solid var(--qc-bleu-principal);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.4rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tile:hover {
+  border-color: #94a3b8;
+  box-shadow: var(--shadow-md);
+}
+
+.tile h3,
+.tile h4 {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+  border-bottom: 1px solid var(--qc-gris-bordure-legere);
+  padding-bottom: 0.5rem;
+}
+
+.tile p.tile-desc {
+  font-size: 0.86rem;
+  color: var(--qc-texte-secondaire);
+  margin-top: 0;
+  margin-bottom: 0.85rem;
+  line-height: 1.45;
+}
+
+.tile ul {
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  flex-grow: 1;
+}
+
+.tile li {
+  font-size: 0.88rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.tile a {
+  color: var(--qc-bleu-principal);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+.tile a:hover {
+  text-decoration: underline;
+  color: var(--qc-bleu-fonce);
+}
+
+.res-meta {
+  font-size: 0.78rem;
+  color: var(--qc-texte-discret);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  line-height: 1.35;
+}
+
+/* ==========================================================================
+   7. BADGES INSTITUTIONNELS QUÉBEC
+   ========================================================================== */
+.badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  color: var(--qc-blanc);
+  vertical-align: middle;
+  line-height: 1.35;
+}
+
+.badge-legal { background-color: var(--badge-legal); }
+.badge-guide { background-color: var(--badge-guide); }
+.badge-outil { background-color: var(--badge-outil); }
+.badge-programme { background-color: var(--badge-programme); }
+.badge-grille { background-color: var(--badge-grille); }
+.badge-formulaire { background-color: var(--badge-formulaire); }
+.badge-pdf { background-color: var(--badge-pdf); }
+
+.badge-interactif {
+  display: inline-block;
+  background-color: var(--qc-accent-interactif);
+  color: var(--qc-blanc);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-xs);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.badge-adaptation {
+  display: inline-block;
+  background-color: var(--qc-bleu-clair);
+  color: var(--qc-bleu-fonce);
+  border: 1px solid var(--qc-bleu-principal);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-xs);
+}
+
+/* ==========================================================================
+   8. COMPOSANTS COMPATIBLES AVEC PAGES SPÉCIALISÉES (INDEX-1, FMS, ETC.)
+   ========================================================================== */
+.sommaire-page {
+  background-color: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-left: 4px solid var(--qc-bleu-principal);
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: var(--radius-sm);
+}
+
+.sommaire-page h2 {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  color: var(--qc-bleu-fonce);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.03em;
+}
+
+.sommaire-page ul {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.sommaire-page a {
+  color: var(--qc-bleu-principal);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.sommaire-page a:hover {
+  text-decoration: underline;
+}
+
+section.bloc-section {
+  background-color: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  border-radius: var(--radius-md);
+}
+
+section.bloc-section h2 {
+  color: var(--qc-bleu-fonce);
+  font-size: 1.35rem;
+  border-bottom: 2px solid var(--qc-bleu-principal);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.grille-cartes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.carte {
+  border: 1px solid var(--qc-gris-bordure);
+  background-color: var(--qc-blanc);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: var(--radius-sm);
+}
+
+.carte-entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.carte h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--qc-bleu-fonce);
+}
+
+.carte p {
+  font-size: 0.9rem;
+  color: var(--qc-texte-secondaire);
+  margin-bottom: 1rem;
+}
+
+.lien-action {
+  display: inline-block;
+  color: var(--qc-bleu-principal);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-top: 1px solid var(--qc-gris-bordure-legere);
+  padding-top: 0.75rem;
+}
+
+.lien-action:hover {
+  color: var(--qc-bleu-fonce);
+  text-decoration: underline;
+}
+
+table.tableau-meq {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+table.tableau-meq th,
+table.tableau-meq td {
+  border: 1px solid var(--qc-gris-bordure);
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+table.tableau-meq th {
+  background-color: var(--qc-bleu-clair);
+  color: var(--qc-bleu-fonce);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   9. PIED DE PAGE SOBRE INSTITUTIONNEL
+   ========================================================================== */
+footer,
+.qc-footer {
+  background-color: var(--qc-bleu-fonce);
+  color: var(--qc-blanc);
+  border-top: 4px solid var(--qc-bleu-principal);
+  padding: 2rem 1.5rem;
+  margin-top: 4rem;
+  text-align: center;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.qc-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+footer a,
+.qc-footer a {
+  color: #bfdbfe;
+  text-decoration: none;
+}
+
+footer a:hover,
+.qc-footer a:hover {
+  text-decoration: underline;
+  color: var(--qc-blanc);
+}
+
+/* ==========================================================================
+   10. MODULES DÉPLIABLES / COLLAPSE (STYLE QUÉBEC)
+   ========================================================================== */
+.collapse-box {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.65rem;
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.collapse-box:hover {
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-sm);
+}
+
+.collapse-header {
+  background: #f8fafc;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease;
+}
+
+.collapse-header:hover {
+  background-color: #f1f5f9;
+}
+
+.collapse-header.open {
+  border-bottom: 1px solid var(--qc-gris-bordure);
+}
+
+.collapse-header .card-section-label {
+  margin: 0 !important;
+  font-size: 0.85rem;
+}
+
+.collapse-toggle-icon {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted, #64748b);
+  background: rgba(0, 90, 156, 0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.collapse-header:hover .collapse-toggle-icon {
+  background: rgba(0, 90, 156, 0.18);
+  color: var(--qc-bleu-principal);
+}
+
+.collapse-content {
+  padding: 12px 14px;
+  display: none;
+  background: var(--qc-blanc);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.collapse-content.open {
+  display: block !important;
+}
+
+/* ==========================================================================
+   TUILES DÉPLIABLES DES ZONES DE VIGILANCE (INDEX.HTML)
+   ========================================================================== */
+.tile-vigilance {
+  padding: 0 !important;
+  overflow: hidden;
+  border-top: 4px solid #dc2626 !important;
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tile-vigilance:hover {
+  border-color: #f87171;
+  box-shadow: var(--shadow-md);
+}
+
+.tile-vigilance .collapse-header {
+  padding: 1rem 1.25rem;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.tile-vigilance .collapse-header:hover {
+  background-color: #fef2f2;
+}
+
+.tile-vigilance .collapse-header.open {
+  border-bottom: 1px solid #fee2e2;
+  background-color: #fffafb;
+}
+
+.tile-vigilance .collapse-header h3 {
+  margin: 0 !important;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #991b1b;
+  line-height: 1.35;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+  text-align: left;
+}
+
+.tile-vigilance .collapse-toggle-icon {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #991b1b;
+  background: rgba(220, 38, 38, 0.08);
+  padding: 3px 8px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tile-vigilance .collapse-header:hover .collapse-toggle-icon {
+  background: rgba(220, 38, 38, 0.18);
+  color: #7f1d1d;
+}
+
+.tile-vigilance .collapse-content {
+  padding: 1.1rem 1.25rem 1.25rem 1.25rem;
+  background: #ffffff;
+}
+
+.tile-vigilance .collapse-content p.tile-desc {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 0.88rem;
+  color: var(--qc-texte-secondaire);
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.tile-vigilance .collapse-content ul {
+  font-size: 0.88rem;
+  color: #4b5563;
+  line-height: 1.5;
+  padding-left: 1.15rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.tile-vigilance .collapse-content li {
+  margin: 0;
+}
+
+/* Carte dépliable pour les grandes sections (fpt.html) */
+.section-collapse-card {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-md);
+  margin-bottom: 2rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s ease;
+}
+
+.section-collapse-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.06);
+}
+
+.section-collapse-header {
+  background: #ffffff;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  border-left: 5px solid var(--fpt-color, #005a9c);
+  transition: background-color 0.15s ease;
+}
+
+.section-collapse-header:hover {
+  background-color: #f8fafc;
+}
+
+.section-collapse-header.open {
+  border-bottom: 1px solid var(--qc-gris-bordure);
+}
+
+.section-collapse-content {
+  padding: 20px;
+  display: none;
+  background: #ffffff;
+}
+
+.section-collapse-content.open {
+  display: block !important;
+}
+
+/* ==========================================================================
+   12. MODULE STAGES : DISPOSITION EN DEUX THÈMES FLEXBOX ET TROUSSE DE DÉPART
+   ========================================================================== */
+.stages-trousse-box {
+  background-color: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-left: 5px solid var(--qc-bleu-principal);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.stages-trousse-header {
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--qc-gris-bordure-legere);
+  padding-bottom: 0.75rem;
+}
+
+.stages-trousse-header h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+  margin: 0 0 0.35rem 0;
+}
+
+.stages-trousse-header p {
+  font-size: 0.92rem;
+  color: var(--qc-texte-secondaire);
+  margin: 0;
+}
+
+.stages-trousse-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 850px) {
+  .stages-trousse-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.trousse-col {
+  background-color: var(--qc-gris-fond);
+  border: 1px solid var(--qc-gris-bordure-legere);
+  border-radius: var(--radius-sm);
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.trousse-col-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--qc-gris-bordure);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.trousse-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  flex-grow: 1;
+}
+
+.trousse-col li {
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.trousse-col a {
+  color: var(--qc-bleu-principal);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.trousse-col a:hover {
+  text-decoration: underline;
+  color: var(--qc-bleu-fonce);
+}
+
+.trousse-tag {
+  font-size: 0.72rem;
+  color: var(--qc-texte-discret);
+  display: block;
+  margin-top: 2px;
+}
+
+/* DEUX THÈMES FLEXBOX CÔTE-À-CÔTE */
+.stages-flex-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-bottom: 2.5rem;
+}
+
+.stages-theme-col {
+  flex: 1 1 50%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .stages-flex-layout {
+    flex-direction: column;
+  }
+  .stages-theme-col {
+    width: 100%;
+  }
+}
+
+.stages-theme-banner {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.4rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.stages-theme-banner.theme-1 {
+  border-top: 5px solid var(--fpt-color);
+}
+
+.stages-theme-banner.theme-2 {
+  border-top: 5px solid var(--fms-color);
+}
+
+.stages-theme-banner h2 {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+}
+
+.stages-theme-banner p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--qc-texte-secondaire);
+  line-height: 1.45;
+}
+
+/* CARTE DE RESSOURCE STAGE */
+.stage-card {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.4rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.stage-card:hover {
+  transform: translateY(-2px);
+  border-color: #94a3b8;
+  box-shadow: var(--shadow-md);
+}
+
+.stage-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.stage-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+  line-height: 1.35;
+}
+
+.stage-card-desc {
+  font-size: 0.88rem;
+  color: var(--qc-texte-secondaire);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.stage-sub-items {
+  background-color: var(--qc-gris-fond);
+  border: 1px solid var(--qc-gris-bordure-legere);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.84rem;
+}
+
+.stage-sub-items-title {
+  font-weight: 700;
+  color: var(--qc-texte);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.stage-sub-items ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.stage-sub-items li {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  line-height: 1.4;
+}
+
+.stage-sub-items a {
+  color: var(--qc-bleu-principal);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.stage-sub-items a:hover {
+  text-decoration: underline;
+  color: var(--qc-bleu-fonce);
+}
+
+.stage-card-footer {
+  border-top: 1px solid var(--qc-gris-bordure-legere);
+  padding-top: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.stage-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background-color: var(--qc-bleu-principal);
+  color: var(--qc-blanc);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.stage-card-btn:hover {
+  background-color: var(--qc-bleu-fonce);
+  color: var(--qc-blanc);
+  text-decoration: none;
+}
+
+.stage-card-btn.btn-outline {
+  background-color: transparent;
+  color: var(--qc-bleu-principal);
+  border: 1px solid var(--qc-bleu-principal);
+}
+
+.stage-card-btn.btn-outline:hover {
+  background-color: var(--qc-bleu-clair);
+  color: var(--qc-bleu-fonce);
+}
+
+.stage-source-label {
+  font-size: 0.78rem;
+  color: var(--qc-texte-discret);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   13. MODULE CATALOGUE UNIFIÉ ET COMPATIBILITÉ GOOGLE SITES
+   ========================================================================== */
+.catalogue-panel {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.catalogue-search-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.catalogue-input {
+  flex: 1;
+  min-width: 280px;
+  padding: 11px 16px;
+  font-size: 0.95rem;
+  border: 2px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  background-color: var(--qc-blanc);
+  color: var(--qc-texte);
+}
+
+.catalogue-input:focus {
+  outline: none;
+  border-color: var(--qc-bleu-principal);
+  box-shadow: 0 0 0 3px rgba(9, 87, 151, 0.2);
+}
+
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.filter-label {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--qc-texte-secondaire);
+  min-width: 80px;
+}
+
+.filter-btn {
+  background: var(--qc-gris-fond);
+  border: 1px solid var(--qc-gris-bordure);
+  padding: 5px 13px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--qc-texte);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.filter-btn:hover {
+  background: var(--qc-bleu-clair);
+  border-color: var(--qc-bleu-principal);
+}
+
+.filter-btn.active {
+  background: var(--qc-bleu-principal);
+  border-color: var(--qc-bleu-principal);
+  color: var(--qc-blanc);
+}
+
+.catalogue-stats-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid var(--qc-gris-bordure-legere);
+  margin-top: 14px;
+  font-size: 0.88rem;
+  color: var(--qc-texte-secondaire);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.catalogue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.resource-card {
+  background: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.4rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  position: relative;
+  border-top: 4px solid var(--qc-bleu-principal);
+}
+
+.resource-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: #94a3b8;
+}
+
+.resource-card.profil-COMMUN { border-top-color: var(--commun-color); }
+.resource-card.profil-FMS { border-top-color: var(--fms-color); }
+.resource-card.profil-FPT { border-top-color: var(--fpt-color); }
+.resource-card.profil-CSRN { border-top-color: #0891b2; }
+
+.resource-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.resource-card h3 {
+  font-size: 1.05rem;
+  margin: 0 0 8px 0;
+  line-height: 1.35;
+  color: var(--qc-bleu-fonce);
+  font-weight: 700;
+}
+
+.resource-desc {
+  font-size: 0.88rem;
+  color: var(--qc-texte-secondaire);
+  line-height: 1.45;
+  margin-bottom: 14px;
+  flex-grow: 1;
+}
+
+.resource-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.tag-pill {
+  font-size: 0.72rem;
+  background: var(--qc-gris-fond);
+  border: 1px solid var(--qc-gris-bordure-legere);
+  padding: 2px 8px;
+  border-radius: 12px;
+  color: var(--qc-texte-secondaire);
+}
+
+.resource-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--qc-gris-bordure-legere);
+  padding-top: 10px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--qc-bleu-principal);
+  color: var(--qc-blanc);
+  padding: 7px 13px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.82rem;
+  transition: background-color 0.15s ease;
+}
+
+.btn-download:hover {
+  background-color: var(--qc-bleu-fonce);
+  color: var(--qc-blanc);
+  text-decoration: none;
+}
+
+.btn-download.btn-drive {
+  background-color: #059669;
+}
+.btn-download.btn-drive:hover {
+  background-color: #047857;
+}
+
+.btn-download.btn-web {
+  background-color: #475569;
+}
+.btn-download.btn-web:hover {
+  background-color: #334155;
+}
+
+/* ==========================================================================
+   BULLE INFO / GUIDE CO-GESTIONNAIRES (GOOGLE SITES ÉDUCATION)
+   ========================================================================== */
+.co-gestion-box {
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-left: 5px solid var(--qc-bleu-principal);
+  border-radius: var(--radius-md);
+  margin-bottom: 1.75rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.co-gestion-header {
+  padding: 12px 16px;
+  background-color: #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease;
+}
+
+.co-gestion-header:hover {
+  background-color: #e2e8f0;
+}
+
+.co-gestion-header h3 {
+  margin: 0;
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.co-gestion-content {
+  padding: 16px 20px;
+  display: none;
+  background: var(--qc-blanc);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.co-gestion-content.open {
+  display: block;
+}
+
+.co-gestion-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin: 14px 0;
+}
+
+.co-gestion-step-card {
+  background: var(--qc-gris-fond);
+  border: 1px solid var(--qc-gris-bordure-legere);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+
+.co-gestion-step-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--qc-bleu-principal);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.co-gestion-step-title {
+  font-weight: 700;
+  color: var(--qc-texte);
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.co-gestion-code {
+  background: #1e293b;
+  color: #f8fafc;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 0.8rem;
+  overflow-x: auto;
+  margin-top: 8px;
+}
+
+/* Mode Intégration Iframe / Google Sites Embed */
+body.embed-mode .qc-header,
+body.embed-mode .qc-nav,
+body.embed-mode .qc-footer {
+  display: none !important;
+}
+
+body.embed-mode .main-container {
+  margin: 0 auto !important;
+  padding: 12px !important;
+  max-width: 100% !important;
+}
+
+

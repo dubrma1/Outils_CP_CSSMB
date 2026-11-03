@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Studio de séquences visuelles (TSA/TDL) - Stlite WebAssembly</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.73.1/build/stlite.css" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    #root {
+      min-height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.73.1/build/stlite.js"></script>
+  <script>
+    stlite.mount({
+      entrypoint: "streamlit_app.py",
+      files: {
+        "streamlit_app.py": `import streamlit as st
+
+st.set_page_config(page_title="Studio TSA/TDL - PFAE (Stlite)", layout="wide")
+
+st.markdown("""
+<div style="background-color: #002855; color: white; padding: 1rem 1.5rem; border-radius: 4px; border-bottom: 4px solid #095797; margin-bottom: 1.5rem;">
+  <h2 style="margin: 0; color: white;">Studio de séquences visuelles (TSA / TDL) — PFAE</h2>
+  <p style="margin: 0.5rem 0 0 0; color: #e2e8f0;">Variante Stlite / Pyodide WebAssembly pour SharePoint</p>
+</div>
+""", unsafe_allow_html=True)
+
+st.info("💡 **Recommandation SharePoint :** Pour une rapidité maximale (démarrage en moins de 50 ms sans charger les 30 Mo de Pyodide), utilisez directement le fichier principal **index.html** (renommé en **index.aspx**). Il contient l'ensemble du studio de manière 100% autonome et hors-ligne.")
+
+st.markdown("""
+### Accès direct :
+* Si vous avez déposé ce dossier sur SharePoint : ouvrez **index.aspx** (obtenu en renommant \`index.html\`).
+* Toutes les fonctionnalités (Ctrl+V, découpage 2×2, vectorisation Potrace SVG, seuillage Otsu, export impression A4/Lettre) y sont intégrées dans un fichier unique sans aucune dépendance réseau.
+""")
+`
+      }
+    }, document.getElementById("root"));
+  </script>
+</body>
+</html>
+
