@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#095797">
+  <meta name="description" content="Répertoire ministériel des métiers semi-spécialisés (FMS/FPT) du Québec. Fiches pédagogiques et grilles d'évaluation de stage pour enseignants.">
+  <title>Répertoire des Métiers Semi-Spécialisés — Accompagnement Enseignants</title>
+
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+  <!-- Manifest PWA : injecté dynamiquement sur serveur HTTP/HTTPS pour éviter le blocage CORS en local file:/// -->
+  <script>
+    if (window.location.protocol.startsWith('http')) {
+      const manifestLink = document.createElement('link');
+      manifestLink.rel = 'manifest';
+      manifestLink.href = 'manifest.json';
+      document.head.appendChild(manifestLink);
+    }
+  </script>
+
+  <!-- Feuille de styles Québec épurée & accessible -->
+  <link rel="stylesheet" href="css/theme-quebec.css">
+</head>
+<body>
+  <!-- En-tête Institutionnel Québec -->
+  <header class="top-header" role="banner">
+    <div class="top-header-inner">
+      <div class="brand-section">
+        <div class="brand-flag" aria-hidden="true"></div>
+        <div class="brand-titles">
+          <span class="brand-inst">Gouvernement du Québec — Éducation</span>
+          <h1 class="brand-app-title">Répertoire des Métiers Semi-Spécialisés</h1>
+          <span class="brand-app-subtitle">Fiches pédagogiques &amp; Grilles de stage — Sélection urbaine Montréal</span>
+        </div>
+      </div>
+
+      <div class="header-badges">
+        <span class="badge-tag montreal">FMS / PFAE</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteneur principal de l'application -->
+  <main class="app-container" id="app" role="main" aria-live="polite">
+    <!-- Écran de chargement accessible -->
+    <div class="app-loading" id="appLoading" aria-label="Chargement du répertoire des métiers">
+      <div style="padding: 40px 20px; text-align: center; color: var(--qc-texte-discret);">
+        <p style="font-size: 1.1rem; font-weight: 600;">Chargement du répertoire officiel...</p>
+      </div>
+    </div>
+
+    <!-- Conteneur dynamique des vues (MetierList ou MetierDetail) -->
+    <div id="appContent"></div>
+  </main>
+
+  <!-- Boîte de dialogue accessible de confirmation pour réinitialisation -->
+  <dialog id="resetConfirmModal" class="accessible-dialog" aria-labelledby="dialogTitle" aria-describedby="dialogDesc">
+    <div class="dialog-content">
+      <h2 id="dialogTitle" class="dialog-title">Réinitialiser le suivi de ce stage ?</h2>
+      <p id="dialogDesc" class="dialog-desc">
+        Toutes les tâches cochées ainsi que les données d'identification de l'élève pour ce métier seront effacées. Cette opération est irréversible.
+      </p>
+      <div class="dialog-actions">
+        <button id="cancelResetBtn" class="btn btn-secondary" type="button">Annuler</button>
+        <button id="confirmResetBtn" class="btn btn-danger" type="button">Oui, réinitialiser</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Pied de page officiel -->
+  <footer class="app-footer" role="contentinfo">
+    <div class="footer-inner">
+      <p>
+        Données officielles extraites du 
+        <a href="https://prod-da.education.gouv.qc.ca/pls/apexda/r/esp_rms/rms_gp/repertoire" target="_blank" rel="noopener noreferrer" class="footer-link">
+          Répertoire ministériel des métiers semi-spécialisés du Québec (MEQ)
+        </a>.
+      </p>
+      <p>Application autonome et légère conçue pour l'accompagnement des stages en milieu scolaire québécois.</p>
+    </div>
+  </footer>
+
+  <!-- Données pré-intégrées (compatibilité universelle file:/// et HTTP sans erreur CORS) -->
+  <script src="data/metiers_data.js"></script>
+
+  <!-- Script principal autonome (exécutable sous tout protocole) -->
+  <script src="js/app.js" defer></script>
+
+  <!-- Service Worker PWA (enregistré exclusivement sur serveur HTTP/HTTPS) -->
+  <script>
+    if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .catch((err) => console.warn('Service Worker non actif:', err));
+      });
+    }
+  </script>
+</body>
+</html>

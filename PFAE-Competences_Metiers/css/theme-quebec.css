@@ -1,0 +1,1372 @@
+/* ==========================================================================
+   theme-quebec.css — Style Québec Sobre & Épuré (Portail FMS / PFAE)
+   Inspiré des normes graphiques du Gouvernement du Québec & CSSMB
+   Zéro important en écran, zéro framework, conforme WCAG AA, animations <= 150ms.
+   ========================================================================== */
+
+:root {
+  /* Palette officielle Québec */
+  --qc-bleu-principal: #095797;
+  --qc-bleu-fonce: #002855;
+  --qc-bleu-clair: #e6eef6;
+  --qc-bleu-subtil: #f0f7ff;
+  --qc-bleu-interactif: #0b69a3;
+
+  /* Surfaces & fonds neutres */
+  --qc-fond: #f4f6f9;
+  --qc-surface: #ffffff;
+  --qc-surface-survol: #f8fafc;
+  --qc-bordure: #d1d5db;
+  --qc-bordure-legere: #e2e8f0;
+  --qc-bordure-accent: #93c5fd;
+
+  /* Typographie institutionnelle */
+  --qc-texte: #1f2937;
+  --qc-texte-secondaire: #4b5563;
+  --qc-texte-discret: #64748b;
+  --qc-blanc: #ffffff;
+
+  /* Badges & Alertes */
+  --qc-succes: #047857;
+  --qc-succes-bg: #ecfdf5;
+  --qc-succes-bordure: #a7f3d0;
+  
+  --qc-alerte: #b45309;
+  --qc-alerte-bg: #fffbeb;
+  --qc-alerte-bordure: #fde68a;
+
+  --qc-danger: #b91c1c;
+  --qc-danger-bg: #fef2f2;
+  --qc-danger-bordure: #fecaca;
+
+  --qc-optionnel: #6d28d9;
+  --qc-optionnel-bg: #f5f3ff;
+  --qc-optionnel-bordure: #ddd6fe;
+
+  --qc-montreal: #095797;
+  --qc-montreal-bg: #e6eef6;
+
+  /* Géométrie & Ergonomie */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-pill: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+
+  --touch-min: 48px;
+  --transition-duree: 150ms;
+  --focus-ring: 2px solid var(--qc-bleu-principal);
+}
+
+/* --------------------------------------------------------------------------
+   Mode Sombre automatique (prefers-color-scheme)
+   -------------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --qc-bleu-principal: #38bdf8;
+    --qc-bleu-fonce: #0c4a6e;
+    --qc-bleu-clair: #1e293b;
+    --qc-bleu-subtil: #0f172a;
+    --qc-bleu-interactif: #60a5fa;
+
+    --qc-fond: #0b1120;
+    --qc-surface: #1e293b;
+    --qc-surface-survol: #273549;
+    --qc-bordure: #334155;
+    --qc-bordure-legere: #1e293b;
+    --qc-bordure-accent: #38bdf8;
+
+    --qc-texte: #f1f5f9;
+    --qc-texte-secondaire: #cbd5e1;
+    --qc-texte-discret: #94a3b8;
+
+    --qc-succes: #34d399;
+    --qc-succes-bg: #064e3b;
+    --qc-succes-bordure: #047857;
+
+    --qc-alerte: #fbbf24;
+    --qc-alerte-bg: #78350f;
+    --qc-alerte-bordure: #b45309;
+
+    --qc-danger: #f87171;
+    --qc-danger-bg: #7f1d1d;
+    --qc-danger-bordure: #b91c1c;
+
+    --qc-optionnel: #c084fc;
+    --qc-optionnel-bg: #3b0764;
+    --qc-optionnel-bordure: #6d28d9;
+
+    --qc-montreal: #38bdf8;
+    --qc-montreal-bg: #0369a1;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Réduction de mouvement (prefers-reduced-motion)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-duree: 0s;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.001ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.001ms;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Reset & Base
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--qc-fond);
+  color: var(--qc-texte);
+  line-height: 1.55;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Accessibilité Clavier */
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   En-tête Institutionnel Québec
+   -------------------------------------------------------------------------- */
+.top-header {
+  background-color: var(--qc-surface);
+  border-bottom: 3px solid var(--qc-bleu-principal);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.top-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-flag {
+  width: 4px;
+  height: 38px;
+  background-color: var(--qc-bleu-principal);
+  border-radius: var(--radius-xs);
+}
+
+.brand-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-inst {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--qc-bleu-principal);
+}
+
+.brand-app-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--qc-texte);
+  line-height: 1.25;
+}
+
+.brand-app-subtitle {
+  font-size: 0.8rem;
+  color: var(--qc-texte-discret);
+}
+
+.header-badges {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+}
+
+.badge-tag.montreal {
+  background-color: var(--qc-montreal-bg);
+  color: var(--qc-montreal);
+  border-color: var(--qc-bordure-accent);
+}
+
+/* --------------------------------------------------------------------------
+   Conteneur principal
+   -------------------------------------------------------------------------- */
+.app-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+  flex: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Barre d'outils, Recherche et Filtres
+   -------------------------------------------------------------------------- */
+.filter-card {
+  background-color: var(--qc-surface);
+  border: 1px solid var(--qc-bordure);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.filter-row-primary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .filter-row-primary {
+    grid-template-columns: 1fr;
+  }
+}
+
+.search-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.search-field-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--qc-texte-discret);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.search-field-input {
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: 10px 42px 10px 44px;
+  font-size: 0.95rem;
+  color: var(--qc-texte);
+  background-color: var(--qc-fond);
+  border: 1px solid var(--qc-bordure);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-duree), box-shadow var(--transition-duree);
+}
+
+.search-field-input:focus {
+  background-color: var(--qc-surface);
+  border-color: var(--qc-bleu-principal);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(9, 87, 151, 0.15);
+}
+
+.search-clear-btn {
+  position: absolute;
+  right: 6px;
+  min-width: 36px;
+  min-height: 36px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--qc-texte-discret);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-clear-btn:hover {
+  color: var(--qc-texte);
+  background-color: var(--qc-bordure-legere);
+}
+
+.filter-toggles {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Boutons d'action et bascules */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--touch-min);
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color var(--transition-duree), border-color var(--transition-duree), color var(--transition-duree);
+  text-decoration: none;
+  user-select: none;
+}
+
+.btn-primary {
+  background-color: var(--qc-bleu-principal);
+  color: var(--qc-blanc);
+}
+
+.btn-primary:hover {
+  background-color: var(--qc-bleu-interactif);
+}
+
+.btn-secondary {
+  background-color: var(--qc-surface);
+  color: var(--qc-texte);
+  border-color: var(--qc-bordure);
+}
+
+.btn-secondary:hover {
+  background-color: var(--qc-fond);
+  border-color: var(--qc-texte-discret);
+}
+
+.btn-toggle {
+  background-color: var(--qc-surface);
+  color: var(--qc-texte-secondaire);
+  border-color: var(--qc-bordure);
+}
+
+.btn-toggle.active {
+  background-color: var(--qc-bleu-principal);
+  color: var(--qc-blanc);
+  border-color: var(--qc-bleu-principal);
+}
+
+.btn-toggle:hover:not(.active) {
+  background-color: var(--qc-fond);
+  color: var(--qc-texte);
+}
+
+.btn-danger {
+  background-color: var(--qc-surface);
+  color: var(--qc-danger);
+  border-color: var(--qc-danger-bordure);
+}
+
+.btn-danger:hover {
+  background-color: var(--qc-danger-bg);
+}
+
+/* Ligne des sélecteurs (Secteur & Conditions) */
+.filter-row-secondary {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .filter-row-secondary {
+    grid-template-columns: 1fr;
+  }
+}
+
+.select-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.select-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--qc-texte-secondaire);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.select-input {
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  color: var(--qc-texte);
+  background-color: var(--qc-fond);
+  border: 1px solid var(--qc-bordure);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.select-input:focus {
+  border-color: var(--qc-bleu-principal);
+  outline: none;
+  background-color: var(--qc-surface);
+}
+
+/* Compteur de résultats */
+.results-info-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--qc-texte-secondaire);
+  padding: 0 4px;
+}
+
+.results-count {
+  font-weight: 600;
+  color: var(--qc-texte);
+}
+
+/* --------------------------------------------------------------------------
+   Grille des fiches métiers
+   -------------------------------------------------------------------------- */
+.metiers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 480px) {
+  .metiers-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.metier-card {
+  background-color: var(--qc-surface);
+  border: 1px solid var(--qc-bordure);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-duree), box-shadow var(--transition-duree), border-color var(--transition-duree);
+  cursor: pointer;
+  position: relative;
+}
+
+.metier-card:hover {
+  border-color: var(--qc-bleu-principal);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.metier-card:focus-within {
+  border-color: var(--qc-bleu-principal);
+  box-shadow: 0 0 0 3px rgba(9, 87, 151, 0.2);
+}
+
+.card-top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag-secteur {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--qc-bleu-principal);
+  background-color: var(--qc-bleu-subtil);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--qc-bleu-clair);
+}
+
+.tag-montreal {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--qc-succes);
+  background-color: var(--qc-succes-bg);
+  border: 1px solid var(--qc-succes-bordure);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.tag-restriction {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--qc-alerte);
+  background-color: var(--qc-alerte-bg);
+  border: 1px solid var(--qc-alerte-bordure);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--qc-texte);
+  line-height: 1.35;
+}
+
+.card-codes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: var(--qc-texte-discret);
+  font-family: monospace;
+}
+
+.card-code-item strong {
+  color: var(--qc-texte-secondaire);
+}
+
+.card-desc {
+  font-size: 0.875rem;
+  color: var(--qc-texte-secondaire);
+  line-height: 1.45;
+  margin-top: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-bottom {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--qc-bordure-legere);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card-metrics {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.78rem;
+  color: var(--qc-texte-discret);
+}
+
+.card-metrics-val {
+  font-weight: 700;
+  color: var(--qc-texte);
+}
+
+.card-action-link {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--qc-bleu-principal);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+}
+
+.metier-card:hover .card-action-link {
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Vue Détail Métier (Fiche & Grille)
+   -------------------------------------------------------------------------- */
+.detail-view {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.detail-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn-back {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--qc-bleu-principal);
+  background-color: var(--qc-surface);
+  border: 1px solid var(--qc-bordure);
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--touch-min);
+}
+
+.btn-back:hover {
+  background-color: var(--qc-bleu-subtil);
+  border-color: var(--qc-bleu-principal);
+}
+
+.detail-header-card {
+  background-color: var(--qc-surface);
+  border: 1px solid var(--qc-bordure);
+  border-left: 5px solid var(--qc-bleu-principal);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.detail-header-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.detail-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--qc-texte);
+  line-height: 1.25;
+}
+
+.detail-codes-bar {
+  display: flex;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: var(--qc-texte-secondaire);
+  flex-wrap: wrap;
+}
+
+.detail-section-block {
+  margin-top: 6px;
+}
+
+.detail-section-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--qc-texte-discret);
+  margin-bottom: 4px;
+}
+
+.detail-section-text {
+  font-size: 0.95rem;
+  color: var(--qc-texte);
+  line-height: 1.5;
+}
+
+/* Encadré d'alerte conditions d'admission */
+.conditions-alert-box {
+  background-color: var(--qc-alerte-bg);
+  border: 1px solid var(--qc-alerte-bordure);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.conditions-alert-icon {
+  color: var(--qc-alerte);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.conditions-alert-content {
+  font-size: 0.88rem;
+  color: var(--qc-texte);
+  line-height: 1.45;
+}
+
+.conditions-alert-content strong {
+  color: var(--qc-alerte);
+}
+
+/* Barre d'outils Enseignant */
+.teacher-toolbar {
+  background-color: var(--qc-surface);
+  border: 1px solid var(--qc-bordure);
+  border-radius: var(--radius-lg);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-sm);
+}
+
+.toolbar-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.tab-btn {
+  min-height: 42px;
+  padding: 6px 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--qc-bordure);
+  background-color: var(--qc-fond);
+  color: var(--qc-texte-secondaire);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tab-btn.active {
+  background-color: var(--qc-bleu-principal);
+  color: var(--qc-blanc);
+  border-color: var(--qc-bleu-principal);
+}
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Suivi de progression */
+.progress-status-bar {
+  background-color: var(--qc-surface);
+  border: 1px solid var(--qc-bordure);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.progress-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--qc-texte);
+}
+
+.progress-bar-track {
+  flex: 1;
+  min-width: 140px;
+  height: 10px;
+  background-color: var(--qc-bordure-legere);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--qc-succes);
+  border-radius: var(--radius-pill);
+  transition: width var(--transition-duree);
+}
+
+/* --------------------------------------------------------------------------
+   Groupes de Compétences
+   -------------------------------------------------------------------------- */
+.competences-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.comp-card {
+  background-color: var(--qc-surface);
+  border: 1px solid var(--qc-bordure);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.comp-header {
+  padding: 16px 20px;
+  background-color: var(--qc-fond);
+  border-bottom: 1px solid var(--qc-bordure);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.comp-header-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.comp-code-badge {
+  font-size: 0.8rem;
+  font-weight: 800;
+  font-family: monospace;
+  background-color: var(--qc-surface);
+  border: 1px solid var(--qc-bordure);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  color: var(--qc-texte);
+}
+
+.comp-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--qc-texte);
+  line-height: 1.3;
+}
+
+.comp-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge-comp-type {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.badge-comp-type.specifique {
+  background-color: var(--qc-bleu-subtil);
+  color: var(--qc-bleu-principal);
+  border: 1px solid var(--qc-bordure-accent);
+}
+
+.badge-comp-type.recurrente {
+  background-color: #f1f5f9;
+  color: var(--qc-texte-secondaire);
+  border: 1px solid var(--qc-bordure);
+}
+
+.badge-comp-opt {
+  font-size: 0.72rem;
+  font-weight: 600;
+  background-color: var(--qc-optionnel-bg);
+  color: var(--qc-optionnel);
+  border: 1px solid var(--qc-optionnel-bordure);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.badge-complexity {
+  font-size: 0.72rem;
+  font-weight: 600;
+  background-color: var(--qc-surface);
+  border: 1px solid var(--qc-bordure);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  color: var(--qc-texte-discret);
+}
+
+/* Corps de la compétence */
+.comp-body {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .comp-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.comp-subcol-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--qc-texte-secondaire);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Liste des Tâches */
+.task-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--qc-bordure-legere);
+  background-color: var(--qc-surface);
+  transition: background-color var(--transition-duree), border-color var(--transition-duree);
+}
+
+.task-item:hover {
+  background-color: var(--qc-fond);
+  border-color: var(--qc-bordure);
+}
+
+.task-item.completed {
+  background-color: var(--qc-succes-bg);
+  border-color: var(--qc-succes-bordure);
+}
+
+.task-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: 4px 0;
+  user-select: none;
+}
+
+.task-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border: 2px solid var(--qc-bordure);
+  border-radius: var(--radius-sm);
+  background-color: var(--qc-surface);
+  cursor: pointer;
+  margin-top: 2px;
+  display: grid;
+  place-content: center;
+  transition: border-color var(--transition-duree), background-color var(--transition-duree);
+}
+
+.task-checkbox:checked {
+  background-color: var(--qc-succes);
+  border-color: var(--qc-succes);
+}
+
+.task-checkbox:checked::before {
+  content: "";
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  margin-bottom: 2px;
+}
+
+.task-text {
+  font-size: 0.92rem;
+  color: var(--qc-texte);
+  line-height: 1.45;
+}
+
+.task-item.completed .task-text {
+  color: var(--qc-succes);
+  font-weight: 500;
+}
+
+.task-opt-tag {
+  font-size: 0.7rem;
+  font-style: italic;
+  color: var(--qc-optionnel);
+  margin-left: 6px;
+}
+
+/* Liste des Critères de performance */
+.criteria-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.criterion-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
+  background-color: var(--qc-fond);
+  border: 1px solid var(--qc-bordure-legere);
+}
+
+.criterion-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--qc-texte-discret);
+  min-width: 20px;
+  padding-top: 1px;
+}
+
+.criterion-text {
+  font-size: 0.88rem;
+  color: var(--qc-texte-secondaire);
+  line-height: 1.45;
+}
+
+/* --------------------------------------------------------------------------
+   Personnalisation et adaptation de la fiche de stage
+   -------------------------------------------------------------------------- */
+.custom-banner {
+  background-color: var(--qc-bleu-subtil);
+  border: 1px solid var(--qc-bordure-accent);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.custom-banner-text {
+  font-size: 0.88rem;
+  color: var(--qc-bleu-principal);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Boutons d'exclusion */
+.btn-exclude-comp {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--qc-texte-discret);
+  background-color: var(--qc-surface);
+  border: 1px solid var(--qc-bordure);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  transition: all var(--transition-duree);
+}
+
+.btn-exclude-comp:hover {
+  color: var(--qc-danger);
+  background-color: var(--qc-danger-bg);
+  border-color: var(--qc-danger-bordure);
+}
+
+.btn-exclude-item {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--qc-texte-discret);
+  cursor: pointer;
+  padding: 4px 8px;
+  min-height: 36px;
+  min-width: 36px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: color var(--transition-duree), background-color var(--transition-duree), border-color var(--transition-duree);
+  flex-shrink: 0;
+}
+
+.btn-exclude-item:hover {
+  color: var(--qc-danger);
+  background-color: var(--qc-danger-bg);
+  border-color: var(--qc-danger-bordure);
+}
+
+/* Section des éléments retirés (Volet de restauration) */
+.excluded-drawer {
+  background-color: var(--qc-surface);
+  border: 1px dashed var(--qc-bordure);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  margin-top: 8px;
+}
+
+.excluded-drawer-header {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--qc-texte);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.excluded-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.excluded-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+  background-color: var(--qc-fond);
+  border: 1px solid var(--qc-bordure-legere);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  color: var(--qc-texte-secondaire);
+}
+
+.btn-restore {
+  background-color: var(--qc-surface);
+  border: 1px solid var(--qc-bordure);
+  color: var(--qc-bleu-principal);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+  flex-shrink: 0;
+}
+
+.btn-restore:hover {
+  background-color: var(--qc-bleu-subtil);
+  border-color: var(--qc-bleu-principal);
+}
+
+/* --------------------------------------------------------------------------
+   Dialogue Modal Accessible
+   -------------------------------------------------------------------------- */
+.accessible-dialog {
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 0;
+  max-width: 480px;
+  width: 90%;
+  margin: auto;
+  box-shadow: var(--shadow-lg);
+  background-color: var(--qc-surface);
+  color: var(--qc-texte);
+}
+
+.accessible-dialog::backdrop {
+  background-color: rgba(0, 40, 85, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.dialog-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dialog-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--qc-danger);
+}
+
+.dialog-desc {
+  font-size: 0.95rem;
+  color: var(--qc-texte-secondaire);
+  line-height: 1.5;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* --------------------------------------------------------------------------
+   Pied de page
+   -------------------------------------------------------------------------- */
+.app-footer {
+  background-color: var(--qc-surface);
+  border-top: 1px solid var(--qc-bordure);
+  padding: 20px;
+  font-size: 0.82rem;
+  color: var(--qc-texte-discret);
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-link {
+  color: var(--qc-bleu-principal);
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   STYLE D'IMPRESSION ENSEIGNANT (@media print)
+   Génère une fiche de stage officielle, sobre, sans boutons ni menus.
+   -------------------------------------------------------------------------- */
+@media print {
+  body {
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 11pt;
+  }
+
+  .top-header,
+  .filter-card,
+  .detail-nav-bar,
+  .teacher-toolbar,
+  .progress-status-bar,
+  .app-footer,
+  .search-field,
+  .dialog-actions,
+  .btn,
+  .btn-exclude-comp,
+  .btn-exclude-item,
+  .custom-banner,
+  .excluded-drawer,
+  .card-action-link {
+    display: none !important;
+  }
+
+  .app-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .detail-header-card {
+    border: 1px solid #000000;
+    border-left: 6px solid #095797;
+    box-shadow: none;
+    padding: 16px;
+    margin-bottom: 16px;
+    page-break-inside: avoid;
+  }
+
+  .detail-title {
+    font-size: 16pt;
+    color: #000000;
+  }
+
+  .comp-card {
+    border: 1px solid #cccccc;
+    box-shadow: none;
+    margin-bottom: 14px;
+    page-break-inside: avoid;
+  }
+
+  .comp-header {
+    background-color: #f1f5f9;
+    border-bottom: 1px solid #cccccc;
+    padding: 8px 12px;
+  }
+
+  .comp-body {
+    padding: 12px;
+    gap: 16px;
+  }
+
+  .task-item {
+    border: none;
+    border-bottom: 1px dashed #e2e8f0;
+    padding: 4px 0;
+    background-color: transparent !important;
+  }
+
+  .task-checkbox {
+    border-color: #000000;
+    width: 16px;
+    height: 16px;
+  }
+
+  .print-signatures-block {
+    display: block !important;
+    margin-top: 30px;
+    page-break-inside: avoid;
+    border: 1px solid #000000;
+    padding: 16px;
+  }
+
+  .signatures-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 24px;
+  }
+
+  .sig-line {
+    border-top: 1px solid #000000;
+    padding-top: 6px;
+    font-size: 9pt;
+    text-align: center;
+  }
+}
+
+.print-signatures-block {
+  display: none;
+}

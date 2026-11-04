@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#195b8c"/>
+      <stop offset="100%" stop-color="#0e3b5e"/>
+    </linearGradient>
+  </defs>
+  <!-- Background with rounded corners -->
+  <rect width="512" height="512" rx="100" fill="url(#bgGrad)"/>
+  
+  <!-- Clipboard Body -->
+  <rect x="116" y="110" width="280" height="320" rx="24" fill="#ffffff"/>
+  
+  <!-- Clipboard Clip -->
+  <rect x="196" y="80" width="120" height="50" rx="14" fill="#4a5568"/>
+  <rect x="226" y="96" width="60" height="18" rx="8" fill="#cbd5e0"/>
+  
+  <!-- Task 1: Checked -->
+  <rect x="156" y="170" width="36" height="36" rx="8" fill="#1b873f"/>
+  <path d="M164 188 L172 196 L184 178" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="208" y="180" width="150" height="16" rx="8" fill="#2d3748"/>
+  
+  <!-- Task 2: Checked -->
+  <rect x="156" y="234" width="36" height="36" rx="8" fill="#1b873f"/>
+  <path d="M164 252 L172 260 L184 242" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="208" y="244" width="130" height="16" rx="8" fill="#2d3748"/>
+  
+  <!-- Task 3: In progress -->
+  <rect x="156" y="298" width="36" height="36" rx="8" fill="#e2e8f0" stroke="#005ea2" stroke-width="4"/>
+  <circle cx="174" cy="316" r="6" fill="#005ea2"/>
+  <rect x="208" y="308" width="160" height="16" rx="8" fill="#4a5568"/>
+
+  <!-- Task 4: To do -->
+  <rect x="156" y="362" width="36" height="36" rx="8" fill="#f7fafc" stroke="#cbd5e0" stroke-width="3"/>
+  <rect x="208" y="372" width="110" height="16" rx="8" fill="#a0aec0"/>
+</svg>
