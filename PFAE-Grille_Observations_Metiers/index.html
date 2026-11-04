@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grille d'Observation des Métiers Semi-Spécialisés | PFAE (FMS / FPT)</title>
+  <link rel="stylesheet" href="css/style-quebec.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+</head>
+<body>
+
+  <!-- EN-TÊTE INSTITUTIONNEL GOUVERNEMENTAL QUÉBEC -->
+  <header class="header-app">
+    <div class="header-inner">
+      <div class="header-titre">
+        <h1>
+          Grille d'Observation des Métiers
+          <span class="badge-fms-fpt">PFAE • FMS / FPT</span>
+          <span class="badge-loi25">Conforme Loi 25 • 100 % Client</span>
+        </h1>
+        <p>
+          Outil pédagogique de reconnaissance des compétences et de suivi de l'évolution professionnelle en milieu de stage.
+          Génération déterministe conforme aux recueils du Ministère de l'Éducation (MEQ) et compatible avec Copilot et Gemini institutionnels.
+        </p>
+      </div>
+      <div>
+        <button type="button" class="btn-secondaire" id="btn-ouvrir-modal-aide">
+          Guide d'utilisation
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION PAR ÉTAPES (STEPPER NAV) -->
+  <nav class="stepper-nav" aria-label="Étapes de création de la grille">
+    <div class="stepper-inner">
+      <button type="button" class="step-tab actif" data-target="volet-saisie">
+        <span class="step-num">1</span> Saisie & Métier
+      </button>
+      <button type="button" class="step-tab" data-target="volet-prompt">
+        <span class="step-num">2</span> Prompts IA (Copilot / Gemini)
+      </button>
+      <button type="button" class="step-tab" data-target="volet-edition">
+        <span class="step-num">3</span> Édition de la grille
+      </button>
+      <button type="button" class="step-tab" data-target="volet-impression">
+        <span class="step-num">4</span> Aperçu & Impression PDF / Word
+      </button>
+    </div>
+  </nav>
+
+  <!-- CONTENEUR PRINCIPAL DES VOLETS -->
+  <main class="conteneur-page">
+
+    <!-- ======================================================================
+         VOLET 1 : SAISIE & SÉLECTION DU MÉTIER
+         ====================================================================== -->
+    <section id="volet-saisie" class="section-volet actif">
+      <div class="volet-header">
+        <h2>Étape 1 : Sélection du métier et saisie des tâches</h2>
+        <p>Sélectionnez un profil pré-rempli ou collez les tâches d'un métier semi-spécialisé pour générer immédiatement la grille d'observation.</p>
+      </div>
+
+      <!-- Choix rapide d'un exemple -->
+      <div class="groupe-champ" style="background-color: var(--qc-bleu-subtil); padding: 1.25rem; border: 1px solid #bfdbfe; border-radius: var(--radius-sm); margin-bottom: 1.75rem;">
+        <label for="select-modele-metier" style="color: var(--qc-bleu-fonce);">
+          Charger un exemple de métier PFAE pré-configuré :
+        </label>
+        <span class="consigne-champ">
+          Les métiers ci-dessous reprennent fidèlement les compétences officielles et l'exemple de référence.
+        </span>
+        <select id="select-modele-metier" style="font-weight: 600; max-width: 550px;">
+          <option value="aide-concierge" selected>Aide-concierge (8332 / M332) — Identique à l'exemple PDF</option>
+          <option value="aide-cuisinier">Aide-cuisinier (8312 / M312)</option>
+          <option value="commis-epicerie">Commis d'épicerie / Magasinier (8321 / M321)</option>
+          <option value="entretien-paysager">Préposé à l'entretien paysager (8342 / M342)</option>
+        </select>
+      </div>
+
+      <!-- Champs de métadonnées du document -->
+      <div class="grille-form-2col">
+        <div class="groupe-champ">
+          <label for="champ-metier-nom">Titre du métier semi-spécialisé :</label>
+          <input type="text" id="champ-metier-nom" value="Aide-concierge" placeholder="Ex: Aide-concierge, Préposé...">
+        </div>
+        <div class="groupe-champ">
+          <label for="champ-metier-code">Code de programme / Parcours :</label>
+          <input type="text" id="champ-metier-code" value="8332 / M332" placeholder="Ex: 8332 / M332 ou FMS">
+        </div>
+      </div>
+
+      <div class="grille-form-2col">
+        <div class="groupe-champ">
+          <label for="champ-metier-secteur">Secteur de formation professionnelle :</label>
+          <input type="text" id="champ-metier-secteur" value="07 - Bâtiment et travaux publics" placeholder="Ex: 07 - Bâtiment et travaux publics">
+        </div>
+        <div class="groupe-champ">
+          <label for="champ-metier-centre">Centre de services scolaire / Établissement :</label>
+          <input type="text" id="champ-metier-centre" value="Centre de services scolaire Marguerite-Bourgeoys" placeholder="Ex: Centre de services scolaire Marguerite-Bourgeoys">
+        </div>
+      </div>
+
+      <div class="grille-form-2col">
+        <div class="groupe-champ">
+          <label for="select-echelle-type">Échelle d'évaluation officielle :</label>
+          <select id="select-echelle-type">
+            <option value="dev-prog-att-dep" selected>1 = À développer | 2 = En progression | 3 = Atteint | 4 = Dépasse les attentes (Standard PDF)</option>
+            <option value="na-ea-a-m">1 = Non acquis (NA) | 2 = En acquisition (EA) | 3 = Acquis (A) | 4 = Maîtrisé / Autonome (M)</option>
+          </select>
+        </div>
+        <div class="groupe-champ">
+          <label for="champ-metier-soustitre">Sous-titre explicatif :</label>
+          <input type="text" id="champ-metier-soustitre" value="Outil de reconnaissance des compétences et de suivi de l’évolution professionnelle à partir du plan de formation fourni.">
+        </div>
+      </div>
+
+      <!-- Zone d'import rapide de tâches brutes -->
+      <div class="groupe-champ" style="margin-top: 1.5rem; border-top: 2px dashed var(--qc-gris-bordure-legere); padding-top: 1.5rem;">
+        <label for="zone-taches-brutes">
+          Coller directement une liste brute de tâches (optionnel) :
+        </label>
+        <span class="consigne-champ">
+          Copiez et collez ici une liste de tâches (une par ligne). L'application créera automatiquement une compétence et y associera des critères de performance SST et qualité.
+        </span>
+        <textarea id="zone-taches-brutes" class="zone-texte-import" placeholder="Collez ici les tâches (ex:&#10;• Passer le balai dans les corridors&#10;• Vider les corbeilles de recyclage&#10;• Nettoyer les miroirs et les lavabos...)"></textarea>
+        <div style="margin-top: 0.65rem;">
+          <button type="button" class="btn-secondaire" id="btn-analyser-taches-brutes">
+            Analyser et intégrer les tâches brutes
+          </button>
+        </div>
+      </div>
+
+      <!-- Barre de boutons de progression -->
+      <div class="barre-boutons">
+        <button type="button" class="btn-primaire" data-nav-vers="volet-prompt">
+          Générer avec Copilot / Gemini (Étape 2) &rarr;
+        </button>
+        <button type="button" class="btn-secondaire" data-nav-vers="volet-edition">
+          Éditer la grille manuellement (Étape 3)
+        </button>
+        <button type="button" class="btn-vert" data-nav-vers="volet-impression">
+          Voir la grille & Imprimer (Étape 4)
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VOLET 2 : PROMPTS IA OPTIMISÉS (COPILOT & GEMINI INSTITUTIONNELS)
+         ====================================================================== -->
+    <section id="volet-prompt" class="section-volet">
+      <div class="volet-header">
+        <h2>Étape 2 : Prompts IA optimisés pour Copilot & Google Gemini</h2>
+        <p>Générez un prompt de haute précision pédagogique conforme au programme PFAE, à copier-coller dans votre outil IA institutionnel.</p>
+      </div>
+
+      <div class="carte-info-ia">
+        <h4>Confidentialité et conformité Loi 25 du Québec</h4>
+        <p>
+          Ce prompt est conçu pour être exécuté dans votre environnement scolaire sécurisé (Microsoft Copilot via Microsoft 365 Éducation ou Google Gemini sous votre compte de centre de services scolaire).
+          <strong>Aucun nom d'élève n'est requis ni transmis.</strong> Le traitement s'exécute à 100 % sur votre poste client.
+        </p>
+      </div>
+
+      <!-- Options du prompt -->
+      <div class="grille-form-2col">
+        <div class="groupe-champ">
+          <label>Plateforme d'intelligence artificielle ciblée :</label>
+          <div style="display: flex; gap: 1.5rem; margin-top: 0.5rem;">
+            <label style="font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.4rem;">
+              <input type="radio" name="plateforme-ia" value="copilot" checked> Microsoft Copilot (M365 Éducation)
+            </label>
+            <label style="font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.4rem;">
+              <input type="radio" name="plateforme-ia" value="gemini"> Google Gemini Institutionnel
+            </label>
+          </div>
+        </div>
+
+        <div class="groupe-champ">
+          <label for="select-objectif-ia">Objectif pédagogique du prompt :</label>
+          <select id="select-objectif-ia">
+            <option value="depuis-metier" selected>1. Créer la grille complète à partir du métier PFAE</option>
+            <option value="nettoyer-texte">2. Nettoyer et structurer des notes brutes ou plan de cours</option>
+            <option value="falc-specialise">3. Formuler selon la norme FALC (adaptation TSA / TDL)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Boîte de code du prompt généré -->
+      <div class="boite-prompt-container">
+        <div class="boite-prompt-barre">
+          <span class="boite-prompt-titre">
+            <span>PROMPT OPTIMISÉ POUR L'IA INSTITUTIONNELLE</span>
+          </span>
+          <button type="button" class="btn-secondaire btn-petit" id="btn-copier-prompt" style="background-color: #ffffff; color: #002855; font-weight: 700;">
+            Copier le prompt dans le presse-papiers
+          </button>
+        </div>
+        <pre class="boite-prompt-contenu"><code id="contenu-prompt-code"></code></pre>
+      </div>
+
+      <!-- Zone de collage de la réponse de l'IA -->
+      <div class="groupe-champ" style="margin-top: 2rem; background-color: var(--qc-gris-hover); padding: 1.5rem; border: 1px solid var(--qc-gris-bordure); border-radius: var(--radius-sm);">
+        <label for="zone-reponse-ia" style="color: var(--qc-bleu-fonce); font-size: 1.05rem;">
+          Coller la réponse reçue de Copilot ou Gemini :
+        </label>
+        <span class="consigne-champ">
+          Après avoir soumis le prompt dans Copilot ou Gemini, copiez la réponse de l'IA et collez-la ci-dessous. Le parseur extrait automatiquement les compétences, les tâches et les critères de performance.
+        </span>
+        <textarea id="zone-reponse-ia" class="zone-texte-import" placeholder="Collez ici la réponse de Copilot ou Gemini (JSON ou texte structuré)..."></textarea>
+        <div style="margin-top: 0.85rem; display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+          <button type="button" class="btn-vert" id="btn-importer-reponse-ia">
+            Importer la réponse dans la grille
+          </button>
+          <span style="font-size: 0.84rem; color: var(--qc-texte-discret);">
+            La grille sera immédiatement mise à jour et accessible à l'étape 3.
+          </span>
+        </div>
+      </div>
+
+      <div class="barre-boutons">
+        <button type="button" class="btn-secondaire" data-nav-vers="volet-saisie">
+          &larr; Revenir à la saisie (Étape 1)
+        </button>
+        <button type="button" class="btn-primaire" data-nav-vers="volet-edition">
+          Continuer vers l'édition (Étape 3) &rarr;
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VOLET 3 : ÉDITION DÉTAILLÉE DE LA GRILLE
+         ====================================================================== -->
+    <section id="volet-edition" class="section-volet">
+      <div class="volet-header">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h2>Étape 3 : Personnalisation des compétences, tâches et critères</h2>
+            <p>Ajustez les libellés, ajoutez ou retirez des tâches pour correspondre exactement à votre milieu de stage.</p>
+          </div>
+          <button type="button" class="btn-primaire" id="btn-ajouter-competence">
+            + Ajouter une compétence
+          </button>
+        </div>
+      </div>
+
+      <!-- Liste dynamique des cartes de compétences -->
+      <div id="liste-competences-editeur"></div>
+
+      <div class="barre-boutons">
+        <button type="button" class="btn-secondaire" data-nav-vers="volet-prompt">
+          &larr; Prompts IA (Étape 2)
+        </button>
+        <button type="button" class="btn-vert" data-nav-vers="volet-impression">
+          Visualiser la grille et imprimer (Étape 4) &rarr;
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VOLET 4 : APERÇU HAUTE FIDÉLITÉ & IMPRESSION (FORMAT IDENTIQUE PDF)
+         ====================================================================== -->
+    <section id="volet-impression" class="section-volet">
+      <div class="volet-header non-imprimable">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h2>Étape 4 : Visualisation et Impression officielle</h2>
+            <p>Rendu conforme au format de l'exemple PDF (mise en page A4 / Lettre rigide, 1 compétence par page, bordures nettes pour photocopie).</p>
+          </div>
+          <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+            <button type="button" class="btn-primaire" onclick="imprimerGrille();" style="font-size: 1rem; padding: 0.75rem 1.4rem;">
+              Imprimer / Enregistrer en PDF
+            </button>
+            <button type="button" class="btn-secondaire" onclick="exporterEnWord();">
+              Exporter Word (.doc)
+            </button>
+            <button type="button" class="btn-secondaire" onclick="exporterEnJSON();">
+              Sauvegarder JSON
+            </button>
+            <button type="button" class="btn-secondaire" onclick="declencherImportJSON();">
+              Ouvrir JSON
+            </button>
+            <input type="file" id="input-fichier-json" accept=".json" style="display: none;" onchange="gererFichierJSON(event);">
+          </div>
+        </div>
+      </div>
+
+      <!-- Zone de prévisualisation et d'impression rigoureuse -->
+      <div class="zone-apercu-grille">
+        <div id="zone-rendu-grille-document"></div>
+      </div>
+
+      <div class="barre-boutons non-imprimable" style="margin-top: 2rem;">
+        <button type="button" class="btn-secondaire" data-nav-vers="volet-edition">
+          &larr; Modifier le contenu (Étape 3)
+        </button>
+        <button type="button" class="btn-primaire" onclick="imprimerGrille();">
+          Lancer l'impression (Ctrl+P)
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL D'AIDE ET GUIDE D'UTILISATION -->
+  <div id="modal-aide" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.65); z-index: 10000; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background: #ffffff; max-width: 760px; width: 100%; border-radius: 6px; padding: 2rem; max-height: 90vh; overflow-y: auto; border: 2px solid var(--qc-bleu-principal); position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+      <button type="button" id="btn-fermer-modal-aide" style="position: absolute; top: 1rem; right: 1rem; border: none; background: none; font-size: 1.5rem; cursor: pointer; color: var(--qc-texte-secondaire); font-weight: bold;">✕</button>
+      <h3 style="color: var(--qc-bleu-fonce); font-size: 1.35rem; margin-bottom: 0.75rem;">
+        Guide d'utilisation de l'application
+      </h3>
+      <p style="color: var(--qc-texte-secondaire); font-size: 0.93rem; margin-bottom: 1.25rem;">
+        Cette application web légère et autonome permet aux enseignants et conseillers de FMS / FPT de produire des grilles d'observation prêtes pour l'évaluation en milieu de stage.
+      </p>
+
+      <ol style="padding-left: 1.25rem; font-size: 0.92rem; line-height: 1.6; color: var(--qc-texte);">
+        <li style="margin-bottom: 0.75rem;">
+          <strong>Sélection ou saisie libre :</strong> Choisissez l'un des exemples pré-remplis (ex: <em>Aide-concierge 8332</em>) ou collez directement les tâches brutes d'un plan de formation.
+        </li>
+        <li style="margin-bottom: 0.75rem;">
+          <strong>Optimisation IA avec Copilot ou Gemini :</strong> À l'étape 2, copiez le prompt optimisé et collez-le dans votre compte scolaire Microsoft Copilot ou Google Gemini. Collez ensuite la réponse pour structurer la grille instantanément.
+        </li>
+        <li style="margin-bottom: 0.75rem;">
+          <strong>Personnalisation :</strong> Ajustez ou réordonnez les compétences, les tâches observables (verbes d'action à l'infinitif) et les critères de performance SST / hygiène.
+        </li>
+        <li style="margin-bottom: 0.75rem;">
+          <strong>Impression et Export :</strong> Imprimez directement avec <kbd>Ctrl</kbd> + <kbd>P</kbd> pour obtenir un document au format Lettre / A4 avec saut de page propre par compétence, ou exportez en Word (.doc) pour modifications ultérieures.
+        </li>
+      </ol>
+
+      <div style="margin-top: 1.5rem; text-align: right;">
+        <button type="button" class="btn-primaire" id="btn-fermer-modal-aide-bas">
+          J'ai compris
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS JAVASCRIPT LÉGERS (100% CLIENT) -->
+  <script src="js/data-metiers.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Gestion de la modale d'aide
+    const modalAide = document.getElementById('modal-aide');
+    const btnOuvrirAide = document.getElementById('btn-ouvrir-modal-aide');
+    const btnFermerAide = document.getElementById('btn-fermer-modal-aide');
+    const btnFermerAideBas = document.getElementById('btn-fermer-modal-aide-bas');
+
+    if (btnOuvrirAide && modalAide) {
+      btnOuvrirAide.addEventListener('click', () => { modalAide.style.display = 'flex'; });
+    }
+    if (btnFermerAide && modalAide) {
+      btnFermerAide.addEventListener('click', () => { modalAide.style.display = 'none'; });
+    }
+    if (btnFermerAideBas && modalAide) {
+      btnFermerAideBas.addEventListener('click', () => { modalAide.style.display = 'none'; });
+    }
+    window.addEventListener('click', (e) => {
+      if (e.target === modalAide) modalAide.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

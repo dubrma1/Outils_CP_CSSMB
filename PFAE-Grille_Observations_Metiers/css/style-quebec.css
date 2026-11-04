@@ -1,0 +1,843 @@
+/* ==========================================================================
+   STYLE QUÉBEC SOBRE & ÉPURÉ - GRILLES D'OBSERVATION DES MÉTIERS (PFAE)
+   Design System institutionnel, épuré, accessible et conforme Loi 25.
+   Inspiré des chartes graphiques du MEQ & des Centres de services scolaires (CSSMB)
+   ========================================================================== */
+
+:root {
+  /* Palette institutionnelle Québec */
+  --qc-bleu-fonce: #002855;
+  --qc-bleu-principal: #095797;
+  --qc-bleu-accent: #1472bf;
+  --qc-bleu-clair: #e6eef6;
+  --qc-bleu-subtil: #f0f7ff;
+  --qc-vert-succes: #0f766e;
+  --qc-vert-hover: #115e59;
+  --qc-ambre: #d97706;
+  --qc-rouge-action: #b91c1c;
+
+  /* Neutres */
+  --qc-gris-fond: #f4f6f9;
+  --qc-gris-carte: #ffffff;
+  --qc-gris-bordure: #cbd5e1;
+  --qc-gris-bordure-legere: #e2e8f0;
+  --qc-gris-hover: #f8fafc;
+  --qc-texte: #1f2937;
+  --qc-texte-secondaire: #4b5563;
+  --qc-texte-discret: #64748b;
+  --qc-blanc: #ffffff;
+  --qc-noir: #000000;
+
+  /* Typographie */
+  --police-principale: 'Luciole', 'Andika', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --police-code: "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Rayons et ombres */
+  --radius-sm: 3px;
+  --radius-md: 5px;
+  --radius-lg: 8px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--police-principale);
+  background-color: var(--qc-gris-fond);
+  color: var(--qc-texte);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   1. EN-TÊTE INSTITUTIONNEL
+   ========================================================================== */
+.header-app {
+  background-color: var(--qc-bleu-fonce);
+  color: var(--qc-blanc);
+  padding: 1.25rem 2rem;
+  border-bottom: 4px solid var(--qc-bleu-principal);
+}
+
+.header-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header-titre h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--qc-blanc);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.25rem;
+}
+
+.header-titre p {
+  font-size: 0.92rem;
+  color: var(--qc-bleu-clair);
+  margin: 0;
+  max-width: 820px;
+}
+
+.badge-fms-fpt {
+  font-size: 0.75rem;
+  background-color: var(--qc-bleu-principal);
+  color: var(--qc-blanc);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.badge-loi25 {
+  font-size: 0.72rem;
+  background-color: rgba(15, 118, 110, 0.25);
+  color: #a7f3d0;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(167, 243, 208, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* ==========================================================================
+   2. NAVIGATION PAR ÉTAPES (STEPPER NAV)
+   ========================================================================== */
+.stepper-nav {
+  background-color: var(--qc-blanc);
+  border-bottom: 2px solid var(--qc-gris-bordure);
+  padding: 0 2rem;
+  overflow-x: auto;
+  display: flex;
+  box-shadow: var(--shadow-sm);
+}
+
+.stepper-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.step-tab {
+  padding: 0.95rem 1.35rem;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--qc-texte-secondaire);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.step-tab:hover {
+  color: var(--qc-bleu-principal);
+  background-color: var(--qc-gris-hover);
+}
+
+.step-tab.actif {
+  color: var(--qc-bleu-principal);
+  border-bottom-color: var(--qc-bleu-principal);
+  background-color: var(--qc-bleu-subtil);
+}
+
+.step-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--qc-gris-bordure);
+  color: var(--qc-texte);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.step-tab.actif .step-num {
+  background-color: var(--qc-bleu-principal);
+  color: var(--qc-blanc);
+}
+
+/* ==========================================================================
+   3. CONTENEUR PRINCIPAL & VOLETS
+   ========================================================================== */
+.conteneur-page {
+  max-width: 1240px;
+  margin: 1.5rem auto;
+  padding: 0 1.5rem 3rem 1.5rem;
+}
+
+.section-volet {
+  display: none;
+  background-color: var(--qc-blanc);
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.section-volet.actif {
+  display: block;
+}
+
+.volet-header {
+  border-bottom: 2px solid var(--qc-gris-bordure-legere);
+  padding-bottom: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.volet-header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+  margin-bottom: 0.35rem;
+}
+
+.volet-header p {
+  color: var(--qc-texte-secondaire);
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   4. FORMULAIRES ET ÉLÉMENTS DE SAISIE
+   ========================================================================== */
+.grille-form-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.grille-form-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 860px) {
+  .grille-form-2col,
+  .grille-form-3col {
+    grid-template-columns: 1fr;
+  }
+}
+
+.groupe-champ {
+  margin-bottom: 1.25rem;
+}
+
+.groupe-champ label {
+  display: block;
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+  margin-bottom: 0.35rem;
+  font-size: 0.93rem;
+}
+
+.consigne-champ {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--qc-texte-discret);
+  margin-bottom: 0.45rem;
+  line-height: 1.4;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.93rem;
+  background-color: var(--qc-blanc);
+  color: var(--qc-texte);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--qc-bleu-principal);
+  box-shadow: 0 0 0 3px rgba(9, 87, 151, 0.18);
+}
+
+textarea.zone-texte-import {
+  min-height: 220px;
+  font-family: var(--police-code);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   5. BOUTONS ET ACTIONS
+   ========================================================================== */
+.barre-boutons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  align-items: center;
+}
+
+.btn-primaire {
+  background-color: var(--qc-bleu-principal);
+  color: var(--qc-blanc);
+  border: 1px solid var(--qc-bleu-principal);
+  padding: 0.65rem 1.3rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.15s ease;
+}
+
+.btn-primaire:hover {
+  background-color: var(--qc-bleu-fonce);
+  border-color: var(--qc-bleu-fonce);
+}
+
+.btn-secondaire {
+  background-color: var(--qc-blanc);
+  color: var(--qc-bleu-fonce);
+  border: 1px solid var(--qc-bleu-fonce);
+  padding: 0.65rem 1.2rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.15s ease;
+}
+
+.btn-secondaire:hover {
+  background-color: var(--qc-gris-hover);
+  border-color: var(--qc-bleu-principal);
+  color: var(--qc-bleu-principal);
+}
+
+.btn-vert {
+  background-color: var(--qc-vert-succes);
+  border-color: var(--qc-vert-succes);
+  color: var(--qc-blanc);
+}
+
+.btn-vert:hover {
+  background-color: var(--qc-vert-hover);
+  border-color: var(--qc-vert-hover);
+}
+
+.btn-danger-subtil {
+  background-color: transparent;
+  color: var(--qc-rouge-action);
+  border: 1px solid var(--qc-gris-bordure-legere);
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.btn-danger-subtil:hover {
+  background-color: #fee2e2;
+  border-color: #fca5a5;
+}
+
+.btn-petit {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.84rem;
+}
+
+/* ==========================================================================
+   6. ZONE PROMPT IA OPTIMISÉ (COPILOT & GEMINI)
+   ========================================================================== */
+.boite-prompt-container {
+  background-color: #0f172a;
+  border-radius: var(--radius-md);
+  border: 1px solid #334155;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.boite-prompt-barre {
+  background-color: #1e293b;
+  padding: 0.65rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #334155;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.boite-prompt-titre {
+  color: #94a3b8;
+  font-size: 0.82rem;
+  font-family: var(--police-code);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.boite-prompt-contenu {
+  padding: 1.25rem;
+  font-family: var(--police-code);
+  font-size: 0.86rem;
+  color: #f8fafc;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  max-height: 380px;
+  overflow-y: auto;
+  user-select: all;
+}
+
+.carte-info-ia {
+  background-color: var(--qc-bleu-subtil);
+  border: 1px solid #bfdbfe;
+  border-left: 4px solid var(--qc-bleu-principal);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
+}
+
+.carte-info-ia h4 {
+  color: var(--qc-bleu-fonce);
+  font-size: 0.95rem;
+  margin-bottom: 0.35rem;
+}
+
+.carte-info-ia p {
+  font-size: 0.88rem;
+  color: var(--qc-texte);
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   7. ÉDITEUR INTERACTIF DE COMPÉTENCES
+   ========================================================================== */
+.carte-competence {
+  border: 1px solid var(--qc-gris-bordure);
+  border-radius: var(--radius-md);
+  background-color: var(--qc-blanc);
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.carte-competence-header {
+  background-color: var(--qc-bleu-subtil);
+  border-bottom: 1px solid var(--qc-gris-bordure-legere);
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.carte-competence-titre {
+  font-weight: 700;
+  color: var(--qc-bleu-fonce);
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.carte-competence-corps {
+  padding: 1.25rem;
+}
+
+.liste-items-editable {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.item-editable {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--qc-gris-bordure-legere);
+}
+
+.item-editable:last-child {
+  border-bottom: none;
+}
+
+.item-editable input[type="text"] {
+  flex: 1;
+  padding: 0.4rem 0.65rem;
+  font-size: 0.9rem;
+}
+
+.item-num {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--qc-texte-discret);
+  min-width: 24px;
+}
+
+/* ==========================================================================
+   8. RENDU HAUTE FIDÉLITÉ DE LA GRILLE D'OBSERVATION (IDENTIQUE AU PDF)
+   ========================================================================== */
+.zone-apercu-grille {
+  background-color: var(--qc-gris-fond);
+  padding: 2rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--qc-gris-bordure);
+}
+
+/* Conteneur d'une page imprimable / visuelle */
+.page-grille-pdf {
+  background-color: var(--qc-blanc);
+  max-width: 820px;
+  margin: 0 auto 2.5rem auto;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #d1d5db;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* En-tête principal de la grille */
+.grille-entete-document {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.grille-titre-principal {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.3;
+  margin-bottom: 0.2rem;
+}
+
+.grille-metier-nom {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.45rem;
+}
+
+.grille-sous-titre-doc {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: #374151;
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.4;
+}
+
+/* En-tête de compétence */
+.grille-competence-titre {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1f4e78;
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.grille-echelle-texte {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #374151;
+  margin-bottom: 0.85rem;
+}
+
+.grille-intertitre {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111827;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Tableaux conformes au PDF exemple */
+.tableau-grille-norme {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.25rem;
+  font-size: 0.86rem;
+  background-color: #ffffff;
+}
+
+.tableau-grille-norme th,
+.tableau-grille-norme td {
+  border: 1px solid #000000;
+  padding: 0.38rem 0.55rem;
+  vertical-align: middle;
+  line-height: 1.3;
+  color: #000000;
+}
+
+.tableau-grille-norme th {
+  background-color: #ffffff;
+  font-weight: 700;
+  text-align: left;
+}
+
+.tableau-grille-norme th.col-centre,
+.tableau-grille-norme td.col-centre {
+  text-align: center;
+}
+
+/* Proportions exactes du tableau de tâches (6 colonnes) */
+.tableau-taches th.col-tache { width: 50%; }
+.tableau-taches th.col-note { width: 5.5%; text-align: center; }
+.tableau-taches th.col-commentaires { width: 28%; }
+
+/* Proportions exactes du tableau de critères (5 colonnes) */
+.tableau-criteres th.col-critere { width: 78%; }
+.tableau-criteres th.col-note { width: 5.5%; text-align: center; }
+
+/* Cases de notation interactives ou imprimées */
+.case-note-val {
+  min-height: 18px;
+  display: block;
+  text-align: center;
+}
+
+/* Ligne Bilan / plan d'évolution */
+.grille-ligne-bilan {
+  margin-top: 1.25rem;
+  font-size: 0.88rem;
+  color: #000000;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.grille-ligne-bilan-trait {
+  flex: 1;
+  border-bottom: 1px solid #000000;
+  height: 12px;
+}
+
+/* Bilan final optionnel */
+.bilan-synthese-page {
+  border-top: 2px solid #000000;
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
+.tableau-signatures {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.88rem;
+}
+
+.tableau-signatures td {
+  border: 1px solid #000000;
+  padding: 0.85rem;
+  vertical-align: top;
+  height: 60px;
+}
+
+/* Toast de notification */
+.toast-alerte {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background-color: var(--qc-bleu-fonce);
+  color: var(--qc-blanc);
+  padding: 0.85rem 1.4rem;
+  border-left: 4px solid #38bdf8;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-size: 0.92rem;
+  font-weight: 600;
+  z-index: 99999;
+  display: none;
+  animation: glisserToast 0.25s ease;
+}
+
+@keyframes glisserToast {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ==========================================================================
+   9. FEUILLE DE STYLE RIGIDE POUR IMPRESSION & PDF (@media print)
+   Garantit le format exact du PDF exemple au photocopieur (Lettre / A4)
+   ========================================================================== */
+@media print {
+  @page {
+    size: letter portrait;
+    margin: 15mm 15mm 15mm 15mm;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-family: Calibri, 'Luciole', Arial, sans-serif !important;
+    font-size: 10.5pt !important;
+    line-height: 1.35 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Masquer tous les composants de l'interface utilisateur */
+  header,
+  .header-app,
+  nav,
+  .stepper-nav,
+  .barre-boutons,
+  .volet-header,
+  .groupe-champ,
+  .consigne-aide,
+  .carte-info-ia,
+  .boite-prompt-container,
+  .toast-alerte,
+  #btn-imprimer-flottant,
+  .non-imprimable {
+    display: none !important;
+  }
+
+  /* Déplier le volet d'impression */
+  .conteneur-page {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .section-volet {
+    display: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  #volet-impression {
+    display: block !important;
+  }
+
+  .zone-apercu-grille {
+    background: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Pages de la grille */
+  .page-grille-pdf {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+
+  .page-grille-pdf:last-child {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  .grille-titre-principal {
+    font-size: 16pt !important;
+    color: #000000 !important;
+  }
+
+  .grille-metier-nom {
+    font-size: 16pt !important;
+    color: #000000 !important;
+  }
+
+  .grille-sous-titre-doc {
+    font-size: 9.5pt !important;
+    color: #333333 !important;
+  }
+
+  .grille-competence-titre {
+    font-size: 12.5pt !important;
+    color: #1f4e78 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    margin-top: 15pt !important;
+    margin-bottom: 4pt !important;
+  }
+
+  .grille-echelle-texte {
+    font-size: 9pt !important;
+    color: #222222 !important;
+    margin-bottom: 8pt !important;
+  }
+
+  .grille-intertitre {
+    font-size: 10pt !important;
+    font-weight: 700 !important;
+    margin-top: 10pt !important;
+    margin-bottom: 4pt !important;
+  }
+
+  .tableau-grille-norme {
+    border: 1pt solid #000000 !important;
+    font-size: 9pt !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 10pt !important;
+  }
+
+  .tableau-grille-norme th,
+  .tableau-grille-norme td {
+    border: 1pt solid #000000 !important;
+    padding: 3.5pt 4.5pt !important;
+    color: #000000 !important;
+  }
+
+  .tableau-grille-norme th {
+    font-weight: 700 !important;
+    background-color: #f2f2f2 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .grille-ligne-bilan {
+    margin-top: 12pt !important;
+    font-size: 9.5pt !important;
+  }
+
+  .grille-ligne-bilan-trait {
+    border-bottom: 1pt solid #000000 !important;
+  }
+}
