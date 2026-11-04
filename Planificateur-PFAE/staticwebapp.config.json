@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json",
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/*.{css,scss,js,png,gif,ico,jpg,svg,json,py,wasm}"]
+  },
+  "mimeTypes": {
+    ".json": "application/json",
+    ".py": "text/plain",
+    ".wasm": "application/wasm"
+  },
+  "globalHeaders": {
+    "Cache-Control": "public, max-age=3600"
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/index.html",
+      "statusCode": 200
+    }
+  }
+}

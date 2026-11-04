@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planificateur PFAE (FPT 1, 2, 3 & FMS) — PFEQ Québec</title>
+  <meta name="description" content="Application interactive de planification pédagogique pour les programmes de la Formation axée sur l'emploi (FPT et FMS) au Québec.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. EN-TÊTE INSTITUTIONNEL GOUVERNEMENT DU QUÉBEC / CSSMB
+       ========================================================================= -->
+  <header class="qc-header">
+    <div class="qc-header-inner">
+      <div class="qc-brand">
+        <!-- Fleur-de-lys stylisée épurée -->
+        <svg class="qc-fleurdelis" viewBox="0 0 40 44" width="30" height="33" fill="currentColor" aria-label="Armoiries du Québec">
+          <path d="M20 2c-1.6 4.6-3.2 8.2-6.2 10.7-2 1.7-4.6 2.5-7.2 2.5 1 2 2.6 3.5 4.6 4 3.1.8 6.2-1 8.8-3.6V35h-4.2v3h16.4v-3H28V15.6c2.6 2.6 5.7 4.4 8.8 3.6 2-.5 3.6-2 4.6-4-2.6 0-5.2-.8-7.2-2.5-3-2.5-4.6-6.1-6.2-10.7h-8z"/>
+          <rect x="12" y="26" width="16" height="2.5" rx="1"/>
+        </svg>
+        <div class="qc-brand-text">
+          <h1>Planificateur PFAE <span class="app-version">v2.0 Client-Side</span></h1>
+          <p>Formation préparatoire au travail (FPT 1, 2, 3) & Métier semi-spécialisé (FMS) • PFEQ</p>
+        </div>
+      </div>
+
+      <div class="qc-header-controls">
+        <div class="parcours-selector-wrapper">
+          <label for="parcoursSelect">Programme :</label>
+          <select id="parcoursSelect" class="parcours-select" aria-label="Sélectionner le parcours PFAE">
+            <option value="FPT1">🎓 FPT 1 (An 1 - Transition & Ateliers)</option>
+            <option value="FPT2">🛠️ FPT 2 (An 2 - Stages 1-2 jours)</option>
+            <option value="FPT3">💼 FPT 3 (An 3 - Stages intensifs 3 jours)</option>
+            <option value="FMS">📜 FMS (Métier semi-spécialisé - 1 an)</option>
+          </select>
+        </div>
+        <div id="statusBadge" class="header-status-badge">
+          <span class="dot"></span> Données officielles de référence
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. BARRE DE NAVIGATION PAR ONGLETS
+       ========================================================================= -->
+  <nav class="qc-nav" aria-label="Navigation principale de l'application">
+    <div class="qc-nav-inner">
+      <div class="qc-tabs" role="tablist">
+        <button type="button" class="qc-tab-btn active" data-view="matiere" role="tab" aria-selected="true">
+          📋 Planification par matière (3 étapes)
+        </button>
+        <button type="button" class="qc-tab-btn" data-view="globale" role="tab" aria-selected="false">
+          🌐 Vue intégrée annuelle (Globale)
+        </button>
+        <button type="button" class="qc-tab-btn" data-view="gestion" role="tab" aria-selected="false">
+          💾 Sauvegarde & Téléversement
+        </button>
+      </div>
+
+      <div class="qc-nav-actions">
+        <button type="button" id="btnNavPrint" class="btn-nav-action" title="Imprimer ou exporter en PDF">
+          🖨️ Imprimer
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================================================
+       3. CONTENEUR PRINCIPAL DE L'APPLICATION
+       ========================================================================= -->
+  <main class="main-wrapper">
+
+    <!-- Bandeau synthétique du parcours actif -->
+    <section class="parcours-summary-banner" aria-label="Résumé du programme en cours">
+      <div class="parcours-summary-info">
+        <h2 id="summaryParcoursTitle">Formation préparatoire au travail - An 1 (FPT 1)</h2>
+        <p id="summaryParcoursDesc">Première année du cycle FPT. Accent sur les apprentissages de base en français, mathématiques et ateliers.</p>
+      </div>
+      <div class="parcours-stat-chips">
+        <div class="stat-chip">
+          <span id="statCountMatieres" class="val">9</span>
+          <span class="lbl">Matières</span>
+        </div>
+        <div class="stat-chip">
+          <span id="statCountThemes" class="val">90</span>
+          <span class="lbl">Thèmes planifiés</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         VUE 1 : PLANIFICATION PAR MATIÈRE (3 ÉTAPES DALBÉ-VIAU)
+         ===================================================================== -->
+    <section id="viewMatiere" class="view-matiere-container" aria-label="Planification par matière">
+      
+      <!-- Sélecteur horizontal de matière -->
+      <nav id="matieresNavBar" class="matieres-nav-bar" aria-label="Matières au programme"></nav>
+
+      <!-- Volet d'informations pédagogiques et compétences ministérielles -->
+      <article class="matiere-info-card">
+        <div id="matiereInfoHeader" class="matiere-info-header" title="Cliquer pour afficher ou masquer les compétences">
+          <div id="matiereInfoTitle" class="matiere-info-title">
+            ℹ️ Références et compétences ministérielles
+          </div>
+          <span class="btn-card-action">Afficher / Masquer les détails ▾</span>
+        </div>
+        <div id="matiereInfoBody" class="matiere-info-body">
+          <p><strong>Enseignant(e)s / Document de référence :</strong> <span id="infoEnseignantRef">Planification officielle</span></p>
+          
+          <div style="margin-top: 10px;">
+            <strong>Compétences ministérielles ciblées (PFEQ) :</strong>
+            <div id="competencesGrid" class="competences-grid"></div>
+          </div>
+
+          <div class="ponderation-strip">
+            <strong>Pondération officielle aux bulletins scolaires :</strong>
+            <span>• Étape 1 : <code id="infoPondEtape1">20 %</code></span>
+            <span>• Étape 2 : <code id="infoPondEtape2">20 %</code></span>
+            <span>• Étape 3 : <code id="infoPondEtape3">60 %</code></span>
+          </div>
+          <p id="infoEvaluationsDesc" style="margin-top: 8px; font-size: 0.8rem; color: var(--qc-texte-discret);"></p>
+        </div>
+      </article>
+
+      <!-- Tableau en 3 colonnes pour les étapes -->
+      <div class="etapes-board">
+        
+        <!-- Colonne Étape 1 -->
+        <div id="col_etape1" class="etape-column" data-step="etape1">
+          <div class="etape-col-header col-etape-1">
+            <span>Étape 1 (Automne)</span>
+            <span id="count_etape1" class="col-badge">20 % | 0 thème</span>
+          </div>
+          <div class="etape-col-actions">
+            <button type="button" id="btnAddTheme_etape1" class="btn-add-theme">
+              ➕ Ajouter un thème à l'étape 1
+            </button>
+          </div>
+          <div id="list_etape1" class="etape-theme-list"></div>
+        </div>
+
+        <!-- Colonne Étape 2 -->
+        <div id="col_etape2" class="etape-column" data-step="etape2">
+          <div class="etape-col-header col-etape-2">
+            <span>Étape 2 (Hiver)</span>
+            <span id="count_etape2" class="col-badge">20 % | 0 thème</span>
+          </div>
+          <div class="etape-col-actions">
+            <button type="button" id="btnAddTheme_etape2" class="btn-add-theme">
+              ➕ Ajouter un thème à l'étape 2
+            </button>
+          </div>
+          <div id="list_etape2" class="etape-theme-list"></div>
+        </div>
+
+        <!-- Colonne Étape 3 -->
+        <div id="col_etape3" class="etape-column" data-step="etape3">
+          <div class="etape-col-header col-etape-3">
+            <span>Étape 3 (Printemps / Bilan)</span>
+            <span id="count_etape3" class="col-badge">60 % | 0 thème</span>
+          </div>
+          <div class="etape-col-actions">
+            <button type="button" id="btnAddTheme_etape3" class="btn-add-theme">
+              ➕ Ajouter un thème à l'étape 3
+            </button>
+          </div>
+          <div id="list_etape3" class="etape-theme-list"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         VUE 2 : VUE INTÉGRÉE ANNUELLE (GLOBALE INTERDISCIPLINAIRE)
+         ===================================================================== -->
+    <section id="viewGlobale" class="view-globale-container" style="display: none;" aria-label="Vue intégrée annuelle">
+      
+      <!-- Barre d'outils et recherche en direct -->
+      <div class="globale-filter-toolbar">
+        <div class="filter-controls-group">
+          <div class="search-input-wrapper">
+            <span class="search-icon-placeholder">🔍</span>
+            <input type="search" id="globalSearchInput" class="search-input" placeholder="Rechercher un thème, SAE, mot-clé (ex: Budget, SIMDUT, CV, Recette)..." aria-label="Recherche textuelle">
+          </div>
+          <select id="globalStepFilter" class="filter-select" aria-label="Filtrer par étape">
+            <option value="all">Toutes les étapes (Vue annuelle complète)</option>
+            <option value="etape1">Étape 1 (Automne - 20 %)</option>
+            <option value="etape2">Étape 2 (Hiver - 20 %)</option>
+            <option value="etape3">Étape 3 (Printemps / Bilan - 60 %)</option>
+          </select>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span id="searchCountResult" style="font-size: 0.85rem; color: var(--qc-texte-discret); font-weight: 600;"></span>
+          <button type="button" id="btnPrintGlobale" class="btn-primary" style="padding: 8px 14px; font-size: 0.85rem;">
+            🖨️ Exporter PDF / Imprimer
+          </button>
+        </div>
+      </div>
+
+      <!-- Tableau croisé synoptique -->
+      <div id="synoptiqueTableWrapper" class="table-responsive-container"></div>
+
+      <!-- Matrice croisée par axes thématiques transversaux -->
+      <section class="axes-matrix-section">
+        <div class="axes-section-header">
+          <h3>🧩 Matrice des Projets Intégrés et Thèmes Ministériels</h3>
+          <p>Croisement interdisciplinaire entre les axes transversaux québécois (Santé, Monde du travail, Autonomie financière...) et l'ensemble des cours du parcours.</p>
+        </div>
+        <div id="axesAccordionList" class="axes-accordion-list"></div>
+      </section>
+
+    </section>
+
+    <!-- =====================================================================
+         VUE 3 : GESTION, SAUVEGARDE & TÉLÉVERSEMENT
+         ===================================================================== -->
+    <section id="viewGestion" class="view-gestion-container" style="display: none;" aria-label="Gestion des sauvegardes">
+      
+      <!-- Carte d'export -->
+      <div class="gestion-card">
+        <div>
+          <h3>💾 Exporter ma planification</h3>
+          <p>Téléchargez une copie complète contenant vos personnalisations (thèmes, durées, déplacements d'étapes) pour l'ensemble des parcours.</p>
+        </div>
+        <div class="gestion-card-actions">
+          <button type="button" id="btnExportJSON" class="btn-primary">
+            📥 Télécharger en JSON (.json)
+          </button>
+          <button type="button" id="btnExportMD" class="btn-secondary">
+            📝 Télécharger le rapport en Markdown (.md)
+          </button>
+        </div>
+      </div>
+
+      <!-- Carte d'importation -->
+      <div class="gestion-card">
+        <div>
+          <h3>📥 Téléverser / Reprendre une planification</h3>
+          <p>Glissez-déposez ou sélectionnez un fichier JSON préalablement sauvegardé pour recharger l'ensemble de votre travail sur n'importe quel poste.</p>
+          <div id="jsonDropZone" class="drop-zone">
+            <div class="drop-zone-icon">📁</div>
+            <div class="drop-zone-text">Glissez votre fichier .json ici ou cliquez pour parcourir</div>
+            <div class="drop-zone-hint">Format attendu : planification_pfae_*.json</div>
+          </div>
+          <input type="file" id="jsonFileInput" accept=".json" style="display: none;">
+        </div>
+      </div>
+
+      <!-- Carte de réinitialisation -->
+      <div class="gestion-card">
+        <div>
+          <h3 style="color: var(--status-danger);">🔄 Rétablissement des données par défaut</h3>
+          <p>Attention : Cette action efface vos modifications stockées dans ce navigateur et recharge les données de référence originales tirées des écoles modèles (Dalbé-Viau, etc.).</p>
+        </div>
+        <div class="gestion-card-actions">
+          <button type="button" id="btnResetDefaults" class="btn-danger">
+            ⚠️ Rétablir les données de référence
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       MODAL : AJOUT / MODIFICATION D'UN THÈME
+       ========================================================================= -->
+  <div id="themeModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modalTitle">Ajouter un thème d'apprentissage</h3>
+        <button type="button" id="btnCloseModal" class="btn-modal-close" aria-label="Fermer la boîte de dialogue">&times;</button>
+      </div>
+      <form id="themeForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="themeTitre">Titre du thème ou du projet / SAE * :</label>
+            <input type="text" id="themeTitre" class="form-control" placeholder="ex: SAE Mobilier d'atelier ou Entretien" required>
+          </div>
+
+          <div class="form-group">
+            <label for="themeDesc">Description détaillée des activités et savoirs :</label>
+            <textarea id="themeDesc" class="form-control" rows="3" placeholder="Contenu de la situation d'apprentissage, tâches pratiques, objectifs..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Compétences ciblées au programme :</label>
+            <div class="competences-checkboxes">
+              <label class="checkbox-label">
+                <input type="checkbox" name="themeComp" value="C1">
+                <span>C1 (Lire / Agir / Communiquer)</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="themeComp" value="C2">
+                <span>C2 (Écrire / Raisonner / Interagir)</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="themeComp" value="C3">
+                <span>C3 (Oral / Résolution)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="themeDuree">Durée estimée (semaines) :</label>
+              <input type="number" id="themeDuree" class="form-control" min="1" max="25" value="4">
+            </div>
+            <div class="form-group">
+              <label for="themeAxe">Axe thématique transversal :</label>
+              <input type="text" id="themeAxe" class="form-control" list="axesOptions" placeholder="ex: Monde du travail / Atelier">
+              <datalist id="axesOptions">
+                <option value="Santé - APS & ÉPS">
+                <option value="Société & Citoyenneté">
+                <option value="Consommation & Publicité">
+                <option value="Autonomie financière">
+                <option value="Transport & Déplacements">
+                <option value="Identité personnelle et professionnelle">
+                <option value="Monde du travail & Sécurité">
+                <option value="Insertion professionnelle & Stage">
+              </datalist>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="themeSae">Nom de la SAE / Projet associé :</label>
+              <input type="text" id="themeSae" class="form-control" placeholder="ex: Projet Banc de parc">
+            </div>
+            <div class="form-group">
+              <label for="themeRessources">Ressources & matériel :</label>
+              <input type="text" id="themeRessources" class="form-control" placeholder="ex: Outils à main, fiches de sécurité">
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btnCancelModal" class="btn-secondary">Annuler</button>
+          <button type="submit" class="btn-primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Conteneur des notifications Toast -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- =========================================================================
+       PIED DE PAGE INSTITUTIONNEL
+       ========================================================================= -->
+  <footer class="qc-footer">
+    <div class="qc-footer-inner">
+      <div>
+        <strong>Planificateur PFAE (FPT 1, 2, 3 & FMS)</strong> — Conforme au PFEQ du Ministère de l'Éducation du Québec.
+      </div>
+      <div>
+        100% Client-Side • Prêt pour GitHub Pages & Azure Static Web Apps • Référence : Écoles Dalbé-Viau & Rose-Virginie-Pelletier
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       SCRIPTS DE L'APPLICATION
+       ========================================================================= -->
+  <!-- 1. Données de référence intégrées sans blocage CORS (fonctionne sous file:///) -->
+  <script src="curriculum_data.js"></script>
+
+  <!-- 2. Moteur d'application JavaScript Vanilla -->
+  <script src="app.js"></script>
+
+</body>
+</html>

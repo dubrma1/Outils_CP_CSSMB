@@ -1,0 +1,304 @@
+*** planification-francais_FPT-1.docx ***
+Paragraph count: 137
+  P: FORMATION PRÉPARATOIRE AU TRAVAIL (FPT) – Domaine des langues, discipline : FRANÇAIS - 
+  P: Lien pour le programme : http://www.education.gouv.qc.ca/fileadmin/site_web/documents/dpse/formation_jeunes/PFEQ_Chap_06.1.pdf
+  P: Année 
+  P: FPT1
+  P: ☐
+  P: FPT2
+  P: ☐
+  P: FPT3
+  P: ☐
+  P: Prolongation
+  P: ☐
+  P: Compétence 1 – Lire et apprécier des textes variés :
+  P: Critères d’évaluation : – Compréhension adéquate des éléments significatifs d’un ou de plusieurs textes 
+  P: – Justification pertinente de ses réactions et de son jugement sur un texte 
+  P: – Efficacité dans l’utilisation des stratégies de lecture
+  Table 0 (rows: 5, cols: 1):
+    Row: Année
+    Row: FPT1 | ☐
+    Row: FPT2 | ☐
+    Row: FPT3 | ☐
+    Row: Prolongation | ☐
+  Table 1 (rows: 20, cols: 5):
+    Row: Notion | Écriture | Lecture | Oral (écoute) | Oral (prise de parole, individuel ou en groupe) (volume, prononciation et débit adapté)
+    Row: Trouver un formulaire |  | Lire les titres, sous-titres, images.Pertinence du formulaire quant à son besoin. | Écouter les informations, savoir identifier les mots-clés. | Expliquer pourquoi on a besoin de ce formulaire.
+    Row: Remplir un formulaire, une fiche d’entretien | Faire une phrase complète lorsque requis.Utiliser le bon type et la bonne forme de phrase (déclarative, interrogative, etc. ; positive, négative), vocabulaire approprié; ponctuation (point, virgule); accords; participe passé avec être et avoir. | Signification des mots.Comprendre les questions.Planifier ses loisirs. | Écouter les réponses d’un autre. | S’informer auprès d’un autre si on ne comprend pas la question.Demander des éclaircissements, des clarifications.Savoir se mettre en valeur.
+    Row: Manuel ou fiche d’instructions | Cocher les étapes effectuées pour mieux se situer | Lire et suivre des instructions, l’ordre des consignes, schémas, illustrations, matériel nécessaire |  | Faire des demandes pour de l’aide, des précisions, expliquer son besoin
+    Row: Remplir un questionnaire d’entrevue, demande d’emploi | Faire une demande d’emploi, qualités, valeurs et défautsJustesse du vocabulaireConcis | Améliorer et augmenter son vocabulaire, utiliser les mots justes, |  | Offrir ses services, se faire valoir; s’adapter en fonction du destinataire
+    Row: Voir des annonces publicitaires | Sens des mots; variation linguistique selon le destinataire; | Cibler les informations, justesse de l’information, vérification des sources, observer, mémoriserImplicite/explicite |  | Réagir à ses publicités, s’adresse à qui, échanger sur la pertinence, jugement critique, se situer quant à ses valeurs; différence langue écrite et orale.
+    Row: Article de journal, de revue, web, petites annonces | Savoir rédiger une petite annonce en utilisant des mots clés pour trouver un bien, un coloc, un appartement, etc.Genres littéraires (descriptif, informatif, narratif); manipulation syntaxique (addition, effacement, déplacement, remplacement).Accords; participe passé avec être et avoir. | Trouver les idées principales, crédibilité et validité des sources, vocabulaire, approfondir ses connaissances, établir des liens, identifier une plante, un animal, un minéraux, un métier, etc. découvrir d’autres ethnies et leur mode de vie; identifier les manipulations syntaxiques.Implicite/explicite |  | Lire à voix haute.
+    Row: Protocole, règles scolaires ou d’entreprise, procédures | Synthétiser l’information; phrases de base, types et formes de phrases. Utiliser un correcteur informatique. | Vocabulaire |  | 
+
+============================================================
+
+*** planification-mathematique_FPT.docx ***
+Paragraph count: 138
+  P: FORMATION PRÉPARATOIRE AU TRAVAIL (FPT) – Domaine des langues, discipline : Mathématique - 
+  P: Lien pour le programme : www.education.gouv.qc.ca/fileadmin/site_web/documents/dpse/formation_jeunes/PFEQ_Chap_07.1.pdf
+  P: Année 
+  P: FPT1
+  P: ☐
+  P: FPT2
+  P: ☐
+  P: FPT3
+  P: ☐
+  P: Prolongation
+  P: ☐
+  P: Compétence 1 – Résoudre une situation-problème :
+  P: Critères d’évaluation : – Manifestation, oralement ou par écrit, de la compréhension de la situation-problème
+  P: – Application correcte de savoirs mathématiques appropriés à la situation-problème
+  P: – Élaboration d’une solution (démarche et résultat) appropriée à la situation-problème
+  Table 0 (rows: 5, cols: 1):
+    Row: Année
+    Row: FPT1 | ☐
+    Row: FPT2 | ☐
+    Row: FPT3 | ☐
+    Row: Prolongation | ☐
+  Table 1 (rows: 17, cols: 5):
+    Row: Exemples d’activités |  | Arithmétique | Probabilité et statistique | Géométrie
+    Row: Mobilier |  | Proportion | Observations, anticipation de l’espace | Chercher des mesures manquantes (ex. : grandeur de la pièce)Figures géométriquesLongueur, angle, surface, capacitéPérimètre, circonférencePlanifier la disposition des meubles dans une résidenceSystème impérial pour certaines mesures
+    Row: Emplois, bénévolat |  | Proportion | Taux de chômage selon région/métierDiagramme, tableauNombre d’entreprises qui prennent des bénévoles (type de bénévolat) | 
+    Row: Rapport qualité-prix |  | Proportion |  | 
+    Row: Déplacements, transport |  | Données explicites et implicitesProportionnalitéManipuler, estimer, valider, interpréter des donnéesTrajet plus court, plus long, Résolution de problèmes (lieu, distance, temps, coûts). | Statistiques, observations, diagramme et tableaux pour situation-problèmeHasard ou exp. aléatoire pour valider ou invalider des conceptions de la société.Réaction des pairs et partage des solutions, efficacité des solutions proposéesFiabilité des sourcesEstimer les frais de transport | Étapes de leur démarche (longueur, etc.)
+    Row: Budget |  | Faire et équilibrer un budgetDégager l’essentiel du superfluObserver les sites de petites annonces (kijiji, market place, les pacs, circulaire.com) et les prix affichésPassage d’une forme d’écriture à une autre (0,5, ½, 50%)Faire des estimés | Déterminer si possible d’avoir un logement ou un bien avec salaire ou une rente donné.Tableau des entrées et sorties pour le budget. | 
+    Row: Taux d’intérêt |  | Utiliser une calculatrice ou la fonction calculatrice sur cellulaire.PourcentageCalculer des taux d’intérêts si on emprunte pour faire un achat ou si on ne paie pas sa carte de crédit (paiement minumum, versus un peu plus ou en entier).Payer comptant ou par mensualité | Graphique, tableau des différents taux. | 
+    Row: Logement |  | Calculer le nombre de gallon de peinture, de céramique pour une pièceEspace disponible.Prix des loyers selon le quartier.Chercher tous les frais relatifs à un loyer (locataire, colocataire, chsld, propriétaire – selon l’élève). |  | Planifier la disposition de meubles dans un appartement (volume), l’achat de peinture Décrire les propriétés des formes géométriques.Faire un plan (logement, épicerie, pharmacie, loisirs, autobus)
+
+============================================================
+
+*** planification-mathematique_FPTv2.docx ***
+Paragraph count: 200
+  P: FORMATION PRÉPARATOIRE AU TRAVAIL (FPT) – Domaine des langues, discipline : Mathématique - 
+  P: Lien pour le programme : www.education.gouv.qc.ca/fileadmin/site_web/documents/dpse/formation_jeunes/PFEQ_Chap_07.1.pdf
+  P: Année 
+  P: FPT1
+  P: ☐
+  P: FPT2
+  P: ☐
+  P: FPT3
+  P: ☐
+  P: Prolongation
+  P: ☐
+  P: Compétence 1 – Résoudre une situation-problème :
+  P: Critères d’évaluation : – Manifestation, oralement ou par écrit, de la compréhension de la situation-problème
+  P: – Application correcte de savoirs mathématiques appropriés à la situation-problème
+  P: – Élaboration d’une solution (démarche et résultat) appropriée à la situation-problème
+  Table 0 (rows: 5, cols: 1):
+    Row: Année
+    Row: FPT1 | ☐
+    Row: FPT2 | ☐
+    Row: FPT3 | ☐
+    Row: Prolongation | ☐
+  Table 1 (rows: 19, cols: 4):
+    Row: Exemples de thèmes | Arithmétique et Proportion | Probabilité et statistique | Géométrie
+    Row: Heure | Analogue/digital12h et 24hConvertir (seconde, minute, heure, jour, semaine, années, etc.)Temps écouléHeures de travailDistance/vitesse/heure |  | 
+    Row: Déplacements, transport | Déterminer les données explicites et implicitesManipuler, estimer, valider, interpréter des donnéesReconnaitre une situation de proportionnalité (vitesse)Résoudre des problèmes (lieu, distance, temps, coûts, essence). Estimer les frais de transportSystème métrique/impérial (km vs miles) | Lire et dégager des informations à partir de diagrammes, de tableaux dans des situation-problème | Étapes de leur démarche (longueur, etc.)Comparer des distances :Trajet plus court, plus long, conversion de mesures de longueur
+    Row: Environnement, température | Comparer des rapports et des taux de façon qualitative et quantitativeDonnées en regard du compost (quantité qu’on doit inclure ex. : brun, nourriture, etc.) notions des fractions. Proportion d’eau nécessaire pour diluer un produit nettoyantCalculer un mélange de terre nécessaire pour une plante. (proportions) Au printemps : des semis faciles à faire pour les élèvesLire les données d’un thermomètre, calculer les écarts, calculer une augmentation de température à partir d’un degré sous zéroConversion Celsius et Fahrenheithttp://ici.radio-canada.ca/regions/quebec/2016/03/07/002-systeme-metrique-imperial-mesures-canada.shtmlhttps://ici.radio-canada.ca/nouvelle/1465572/systeme-metrique-imperial-canada-archives#:~:text=Once%2C%20livre%2C%20pouce%2C%20pied,plus%20simple%20et%20plus%20rationnel | Analyser des informations sur les quantités de déchets produits et recyclés. (tableaux, diagrammes)Comparer des donnéesDéduire et chercher des liensAnalyser statistique eau consommée bain vs douche vs débarbouillette | Faire un aménagement pour les plantes.
+    Row: Emplois, bénévolat | Comparer le taux de chômageNombre d’emplois disponibles selon les métiers semi-spécialisés | Analyser et consulter des statistiques : Taux de chômage selon région/métierSite : statistiquecanadaLire et dégager des informations à partir de diagrammes, de tableaux : Nombre d’entreprises qui prennent des bénévoles (type de bénévolat) | 
+    Row: Recettes, cuisinehttp://threeacts.mrmeyer.com/nana/ | Comparer coûts/bénéfices selon mets préparés, mets cuisinés,Diminuer ou augmenter une recette (proportion)Calculer des rabais dans les circulaires selon prix/quantité https://www.circulaires.com/Prix de revient d’une portionPrix de revient à l’unité d’une douzaine d’œufs, muffins, etc. Tasse à mesurer/c. à thé/c. à table/once/gramme/kilogramme |  | Établir un horaire pour les repas ou la planification des repasEstimer l’espace nécessaire pour placer des produits sur une tabletteCalculer le volume d’une boîteConvertir des mesures de volume
+    Row: Rapport qualité-prix | Estimer les coûts d’achatCalculer mentalementArrondir au dollar, au 25 sous, au sousDécimalValeur équivalente (4 25 sous = 1 dollar)Additionner et soustraire de l’argentCalculer/rendre de la monnaieComparer des prix (rapport qualité/prix)Calculer des rabais et taxesReconnaitre une situation de proportionnalitéCalculer le prix de revient à l’unitéUtiliser les stratégies pour résoudre une situation de proportionnalité du Programme (Annexe D : retour à l’unité, recherche d’un facteur de changement, recherche du rapport ou du coefficient de proportionnalité et procédé additif ou mixte et non le produit croisé ou la règle de trois qui ne sont pas au Programme.)Voir les suggestions d’activités sur les proportions sur notre site Internet : http://cybersavoir.csdm.qc.ca/mat-sec/taches-et-activites/Voir sur notre site Internet les 3 capsules  vidéos sur la proportionnalité : http://cybersavoir.csdm.qc.ca/mat-sec/taches-et-activites/Valeur d’une maison vs valeur d’une voiture à travers le temps |  | 
+    Row: Budget | Faire et équilibrer un budgetDégager l’essentiel du superfluObserver les sites de petites annonces (kijiji, market place, les pacs, circulaire.com) et les prix affichésPassage d’une forme d’écriture à une autre (0,5, ½, 50%)Estimer les coûts | Déterminer si possible d’avoir un logement ou un bien avec salaire ou une rente donné :Organiser les données sous forme d’un tableau (des entrées et sorties pour le budget).Organiser les données sous forme d’un diagramme circulaire (alimentation, vêtement, loyer, etc.)Voir un exemple sur le rapport d’une carte de crédit | 
+
+============================================================
+
+*** planification_annuelle_anglais_FPT1_FPT2.docx ***
+Paragraph count: 65
+  P: FORMATION PRÉPARATOIRE AU TRAVAIL (FPT) - Domaine des langues, discipline : Anglais
+  P: Compétence 1 – Interagir oralement en anglais :
+  P: Critères d’évaluation : – Compréhension de messages oraux simples– Utilisation de stratégies de communication– Production de messages oraux clairs et appropriés
+  P: Compétence 2 – Lire et comprendre des textes en anglais :
+  P: Critères d’évaluation : – Compréhension de textes simples– Utilisation de stratégies de lecture– Réaction à des textes lus
+  P: Compétence 3 – Écrire des textes en anglais :
+  P: Critères d’évaluation : – Production de textes courts et cohérents– Utilisation de structures linguistiques appropriées– Révision et correction de ses écrits
+  P: Thème
+  P: Compétence 1 : Oral
+  P: Compétence 2 : Lecture
+  P: Compétence 3 : Écriture
+  P: Basic Oral Communication
+  P: Jeux de rôle : saluer, se présenter, poser des questions simples
+  P: Jeux de rôle sur des expressions communes en anglais utilisées dans des situations de la vie courante
+  P: Lire des dialogues simples dans un manuel
+  Table 0 (rows: 9, cols: 4):
+    Row: Thème | Compétence 1 : Oral | Compétence 2 : Lecture | Compétence 3 : Écriture
+    Row: Basic Oral Communication | Jeux de rôle : saluer, se présenter, poser des questions simplesJeux de rôle sur des expressions communes en anglais utilisées dans des situations de la vie courante | Lire des dialogues simples dans un manuelLire et interpréter de courts dialogues d’un contexte familier entre 2 personnes | Écrire une courte présentation personnelleÉcrire un court dialogue en utilisant des expressions d’introduction et de remerciements
+    Row: Access to Useful Resources | Discussion guidée sur comment demander de l’aide ou chercher une informationExpliquer comment utiliser un site internet, un jeu vidéo ou une application anglophone | Lire un horaire de transport ou une carte de bibliothèqueLire et résumer un court article d’un site WEB destiné aux jeunes | Remplir un formulaire simple (inscription, demande d'information)Écrire un court guide sur la façon d’utiliser une ressource (par exemple, une bibliothèque, un site Web) en anglais
+    Row: Easy English Publication | Présenter un article ou une nouvelle en anglais facilePrésenter oralement le résumé d’un article plus complexe qui était dans un magazine ou site anglophone | Lire un article de site web en anglais simplifiéLire et répondre aux questions de compréhension sur un court article anglophone | Écrire un résumé d’un article luRédiger un court article ou une critique pour un journal de classe ou d’école.
+    Row: Functional Language | Simuler une commande dans un restaurant ou un magasinUtiliser des expressions fonctionnelles dans un appel téléphonique simulé ou dans une situation de service client. | Lire des consignes ou des panneauxLire et identifier des expressions fonctionnelles dans un texte court. | Écrire une liste d’achats ou une noteRédiger un court courriel en utilisant des expressions fonctionnelles (par exemple, demande, remerciements).
+    Row: Leisure | Parler de ses loisirs préférésDécrire une activité de loisir préférée et expliquer pourquoi ils l’apprécient. | Lire un programme d’activités ou un dépliant touristiqueLire un court article de blog sur une activité de loisir et répondre à des questions. | Écrire une invitation ou une description d’activitéÉcrire un court paragraphe sur une activité de week-end en utilisant le passé.
+    Row: Travel | Simuler une réservation d’hôtel ou de billetSimuler une demande et demander un itinéraire en anglais. | Lire un itinéraire ou une carteLire une brochure de voyage et identifier les informations clés. | Écrire une carte postale ou un courriel de voyageÉcrire un court itinéraire pour une fin de semaine à l’extérieur de la ville
+    Row: Everyday Context (School, Work, Home) | Décrire sa routine quotidienne à la maison, à l’école, au travail | Lire un horaire ou une consigne de sécuritéExpliquer les raisons d’une consigne de sécurité | Écrire une note, un courriel à un enseignant ou à un collègue
+
+============================================================
+
+*** planification_annuelle_FPT1_experimentations.docx ***
+Paragraph count: 119
+  P: Planification annuelle - Expérimentations technologiques et scientifiques – FPT1
+  P: Compétences du programme :
+  P: 1. Chercher des réponses ou des solutions à des problèmes d’ordre scientifique ou technologique
+  P: 2. Mettre à profit ses connaissances scientifiques et technologiques
+  P: 3. Communiquer à l’aide des langages utilisés en science et en technologie
+  P: Univers
+  P: Notions abordées
+  P: Compétence 1(Chercher des solutions)
+  P: Compétence 2(Mettre à profit ses connaissances)
+  P: Compétence 3(Communiquer en science et technologie)
+  P: Univers matériel
+  P: Catégories de produits commerciaux
+  P: Comparer des étiquettes de produits ménagers pour identifier les pictogrammes de sécurité.
+  P: Expliquer pourquoi certains matériaux sont recyclables ou non.
+  P: Présenter oralement les résultats d’un test de pH.
+  Table 0 (rows: 21, cols: 5):
+    Row: Univers | Notions abordées | Compétence 1(Chercher des solutions) | Compétence 2(Mettre à profit ses connaissances) | Compétence 3(Communiquer en science et technologie)
+    Row: Univers matériel | Catégories de produits commerciaux | Comparer des étiquettes de produits ménagers pour identifier les pictogrammes de sécurité. | Expliquer pourquoi certains matériaux sont recyclables ou non. | Présenter oralement les résultats d’un test de pH.
+    Row:  | Matériaux recyclables | Classer des objets selon leur matériau et discuter de leur recyclabilité. | Décrire les effets de produits acides ou basiques sur la peau ou les matériaux. | Créer une affiche illustrant les pictogrammes de sécurité.
+    Row:  | Échelle pH | Tester le pH de liquides courants (vinaigre, savon) avec du papier tournesol. | Distinguer les effets d’un changement physique et chimique dans des exemples concrets. | Expliquer à un pair la différence entre une transformation physique et chimique.
+    Row:  | Transformations physiques et chimiques | Observer une transformation chimique (vinaigre + bicarbonate) et une transformation physique (glace qui fond). | Décrire les effets de l’électricité statique dans la vie quotidienne. | Utiliser un vocabulaire simple pour décrire une expérience d’électricité statique.
+    Row:  | Types de charges électriques | Frotter un ballon sur un chandail et observer l’effet sur des cheveux ou du papier. |  | 
+    Row: Univers vivant | Types d’aliments | Classer des aliments selon leur groupe alimentaire. | Expliquer pourquoi une alimentation équilibrée est importante. | Présenter un menu équilibré à la classe.
+    Row:  | Transformations des aliments (chimiques et mécaniques) | Observer une digestion mécanique (broyage) et chimique (salive sur pain). | Décrire les effets de la pollution de l’air sur la santé. | Créer une capsule vidéo sur les bons gestes pour préserver la qualité de l’air.
+
+============================================================
+
+*** planification_EPS_FPT.docx ***
+Paragraph count: 21
+  P: Planification annuelle - Éducation physique et à la santé (FPT)
+  P: Compétence
+  P: Savoirs
+  P: Savoir-faire
+  P: Savoir-être
+  P: Repères culturels
+  P: Agir dans divers contextes de pratique d’activités physiques
+  P: Connaissance du fonctionnement du corps (ex. : respiration, muscles sollicités)
+  P: Exécuter des actions motrices variées (ex. : sauter, lancer, grimper)
+  P: Faire preuve de persévérance et respecter les consignes de sécurité
+  P: Objets patrimoniaux liés au sport (ex. : raquettes traditionnelles, équipements anciens)
+  P: Interagir dans divers contextes de pratique d’activités physiques
+  P: Règles de jeu et principes d’action (ex. : coopération, défense, attaque)
+  P: Participer à des jeux collectifs en respectant les rôles (ex. : volleyball, kin-ball)
+  P: Adopter un esprit sportif, entraide et respect des différences
+  Table 0 (rows: 4, cols: 5):
+    Row: Compétence | Savoirs | Savoir-faire | Savoir-être | Repères culturels
+    Row: Agir dans divers contextes de pratique d’activités physiques | Connaissance du fonctionnement du corps (ex. : respiration, muscles sollicités) | Exécuter des actions motrices variées (ex. : sauter, lancer, grimper) | Faire preuve de persévérance et respecter les consignes de sécurité | Objets patrimoniaux liés au sport (ex. : raquettes traditionnelles, équipements anciens)
+    Row: Interagir dans divers contextes de pratique d’activités physiques | Règles de jeu et principes d’action (ex. : coopération, défense, attaque) | Participer à des jeux collectifs en respectant les rôles (ex. : volleyball, kin-ball) | Adopter un esprit sportif, entraide et respect des différences | Événements sportifs marquants (ex. : Jeux olympiques, Jeux du Québec)
+    Row: Adopter un mode de vie sain et actif | Habitudes de vie saines (ex. : alimentation, sommeil, gestion du stress) | Planifier et suivre un programme d’activités physiques hebdomadaire | Faire preuve d’autonomie et de motivation dans ses choix de vie | Valeurs liées à la santé dans les médias et la société (ex. : campagnes de prévention)
+
+============================================================
+
+*** Planification-globale-annee-1.docx ***
+Paragraph count: 166
+  P: Thème
+  P: Français
+  P: Mathématiques
+  P: Géo/His
+  P: PMT
+  P: APS
+  P: SMT
+  P: Anglais
+  P: Sciences
+  P: Éducation Phys.
+  P: Santé - APS
+  P: ÉTAT DE SANTÉ                                                     
+  P: L’hygiène SAE
+  P: C1 – Lecture d’un document sur l’hygiène avec questions de compréhension
+  P: L’hygiène SAE
+  Table 0 (rows: 28, cols: 11):
+    Row:  | Thème | Français | Mathématiques | Géo/His | PMT | APS | SMT | Anglais | Sciences | Éducation Phys.
+    Row: Santé - APS | ÉTAT DE SANTÉ | L’hygiène SAEC1 – Lecture d’un document sur l’hygiène avec questions de compréhension |  |  |  | L’hygiène SAEAborder l’hygiène buccal, capillaire, intime, etc. |  |  |  | 
+    Row:  | BESOINS |  |  |  |  | Voir la publicité |  |  |  | 
+    Row:  | ACTIVITÉ PHYSIQUE ET ALIMENTATION | Lire et faire une recetteC-2 Travailler sur le vocabulaire de la cuisine (instruments et lexique)C-1 Lire une recette et en ressortir les étapes.Saine alimentationC-3 Visionnement de documentairesClip sur guide alimentaire canadienC-1 Lecture de documents sur la bonne alimentation et nutriments | Lire et faire une recetteCalculer la quantité des ingrédients pour 1 ou plusieurs recettes. | Lire et faire une recetteRegarder l’origine d’une recette et ouvrir son palet à de nouvelles saveurs d’ailleurs. |  | Saine alimentationC-1 Lire et comprendre les informations sur les étiquettes d’emballage, construire un menu santéC-2 faire des choix selon les recommandations du guide canadien, se questionner sur ses habit. Aliment. | Lire et faire une recetteAdopter les comportements adéquats et sécuritaires nécessaires à la réalisation d’activités culinaires en respectant les normes du MAPAQ. Explorer les différentes tâches à effectuer en cuisine. |  |  | 
+    Row:  | SOMMEIL | Table ronde sur le sommeilC1 – lecture d’un article sur les habitudes à mettre en place pour un sommeil réparateur. C3 – Discussion autour de l’article et des répercussions sur notre mode de vie au quotidien. | Table ronde sur le sommeilCréation d’un horaire pour améliorer le sommeil selon le 10-3-2-1-0 en partant de l’heure du couché. Paris match |  |  | Table ronde sur le sommeilS’informer et se questionner sur l’importance du sommeil et des effets sur la santé. |  |  |  | 
+    Row:  | LOISIRS | Club de lectureDécouvrir des univers littéraires Critique et justificationStratégies de lectureActivité communautaireLire des dépliants et sites pour connaitre les activitésPrésenter des activités | Activité communautaireVérifier le prix des activités et les comparer (prix à l’heure, la semaine, etc.) | Club de lectureRepérer les différentes bibliothèques du quartier.Activité communautairePositionner sur une carte les principaux centres, parcs et lieux culturels de sa région |  |  |  |  |  | 
+    Row:  | FACTEURS D’INFLUENCE | Table ronde sur les facteurs d’influenceC1 – lire des dépliants sur les éléments qui influencent nos choix et notre santéC3 – discussion autour des facteurs et des comportements à adopter selon les situations choisies. (voir aussi saine alimentation) |  | Table ronde sur les facteurs d’influenceDiscussion autour des restaurants disponibles près des écoles secondaires. Trouver un moyen de diminuer les sources néfastes d’influence. Faire une proposition à la ville? |  | Table ronde sur les facteurs d’influence |  |  |  | 
+    Row:  | SERVICES ET RESSOURCES |  |  | Identifier et repérer les ressourcesC1- Construire une carte de ressource de son quartier en positionnant et identifiant les principales ressources disponibles. |  | Identifier et repérer les ressourcesRepérer et identifier les différentes ressources de son milieu pour répondre à ses besoins. |  |  |  | 
+
+============================================================
+
+*** Planification-globale-annee-2.docx ***
+Paragraph count: 47
+  P: Thème
+  P: Français
+  P: Mathématiques
+  P: Géo/His
+  P: PMT
+  P: APS
+  P: Stages (IP)
+  P: Anglais
+  P: Éducation Phys
+  P: Santé - APS
+  P: ACTIVITÉ PHYSIQUE ET ALIMENTATION
+  P: TABAGISME, ALCOOL ET DROGUES
+  P: LOISIRS
+  P: FACTEURS D’INFLUENCE
+  P: PRÉVENTION
+  Table 0 (rows: 32, cols: 10):
+    Row:  | Thème | Français | Mathématiques | Géo/His | PMT | APS | Stages (IP) | Anglais | Éducation Phys
+    Row: Santé - APS | ACTIVITÉ PHYSIQUE ET ALIMENTATION |  |  |  |  |  |  |  | 
+    Row:  | TABAGISME, ALCOOL ET DROGUES |  |  |  |  |  |  |  | 
+    Row:  | LOISIRS |  |  |  |  |  |  |  | 
+    Row:  | FACTEURS D’INFLUENCE |  |  |  |  |  |  |  | 
+    Row:  | PRÉVENTION |  |  |  |  |  |  |  | 
+    Row:  | SERVICES ET RESSOURCES |  |  |  |  |  |  |  | 
+    Row: Société - APS | HABILETÉS SOCIALES |  |  |  |  |  |  |  | 
+
+============================================================
+
+*** Planification-globale-annee-3.docx ***
+Paragraph count: 46
+  P: Thème
+  P: Français
+  P: Mathématiques
+  P: Géo/His
+  P: PMT
+  P: APS
+  P: Stages (IP)
+  P: Santé - APS
+  P: ACTIVITÉ PHYSIQUE ET ALIMENTATION
+  P: SEXUALITÉ
+  P: SOMMEIL
+  P: LOISIRS
+  P: FACTEURS D’INFLUENCE
+  P: SERVICES ET RESSOURCES
+  P: Société - APS
+  Table 0 (rows: 32, cols: 8):
+    Row:  | Thème | Français | Mathématiques | Géo/His | PMT | APS | Stages (IP)
+    Row: Santé - APS | ACTIVITÉ PHYSIQUE ET ALIMENTATION |  |  |  |  |  | 
+    Row:  | SEXUALITÉ |  |  |  |  |  | 
+    Row:  | SOMMEIL |  |  |  |  |  | 
+    Row:  | LOISIRS |  |  |  |  |  | 
+    Row:  | FACTEURS D’INFLUENCE |  |  |  |  |  | 
+    Row:  | SERVICES ET RESSOURCES |  |  |  |  |  | 
+    Row: Société - APS | HABILETÉS SOCIALES |  |  |  |  |  | 
+
+============================================================
+
+*** Themes-et-ressources-fpt-fms.docx ***
+Paragraph count: 102
+  P: Thèmes
+  P: Vidéos / sites / documents
+  P: Justice, droit de vote, immigration / élections 
+  P: https://cliquezjustice.ca/education
+  P: https://cliquezjustice.ca/ressources-pedagogiques/droit-de-l-immigration
+  P: http://www.in-terre-actif.com/nos_outils_par_types/fiches_pedagogiques/democratie_et_droits_humains
+  P: http://www.in-terre-actif.com/nos_outils_par_themes/democratie_et_droits_humains/droits_des_femmes
+  P: https://www.youtube.com/watch?v=NfG5GWtUbKU
+  P: https://www.youtube.com/watch?v=LDkpfvSxhZQ
+  P: https://www.youtube.com/watch?v=42AmIO9knUQ
+  P: https://educaloi.qc.ca/categories/travail/
+  P: https://www.electionsquebec.qc.ca/francais/enseignant-etudiant/activites-a-la-carte.php
+  P: Logement / relevé 31
+  P: https://www.tal.gouv.qc.ca
+  P: https://www.revenuquebec.ca/fr/services-en-ligne/formulaires-et-publications/details-courant/in-165/
+  Table 0 (rows: 14, cols: 2):
+    Row: Thèmes | Vidéos / sites / documents
+    Row: Justice, droit de vote, immigration / élections | https://cliquezjustice.ca/educationhttps://cliquezjustice.ca/ressources-pedagogiques/droit-de-l-immigrationhttp://www.in-terre-actif.com/nos_outils_par_types/fiches_pedagogiques/democratie_et_droits_humainshttp://www.in-terre-actif.com/nos_outils_par_themes/democratie_et_droits_humains/droits_des_femmeshttps://www.youtube.com/watch?v=NfG5GWtUbKUhttps://www.youtube.com/watch?v=LDkpfvSxhZQhttps://www.youtube.com/watch?v=42AmIO9knUQhttps://educaloi.qc.ca/categories/travail/https://www.electionsquebec.qc.ca/francais/enseignant-etudiant/activites-a-la-carte.php
+    Row: Logement / relevé 31 | https://www.tal.gouv.qc.cahttps://www.revenuquebec.ca/fr/services-en-ligne/formulaires-et-publications/details-courant/in-165/https://www.revenuquebec.ca/fr/services-en-ligne/formulaires-et-publications/details-courant/rl-31/http://www.ohrc.on.ca/fr/les-droits-de-la-personne-pour-les-locataires-brochurehttps://educaloi.qc.ca/categories/habitation/https://www.lepointdufle.net/penseigner/lexique_la_maison-fiches-pedagogiques.htmhttps://bv.cdeacf.ca/RA_PDF/9276.pdfhttps://fr.islcollective.com/francais-fle-fiches-pedagogiques/rechercher/logementhttps://ifprofs.org/bo/decouvrir-ifprofs/proposition-activites-pedagogiques-fle/17636
+    Row: Sécurité au volant | https://saaq.gouv.qc.ca/saaq/documentation/materiel-educatifhttps://www.transports.gouv.qc.ca/fr/code-securite-routiere/Pages/csr.aspx/https://www.mpi.mb.ca/documents/RSLR_GrS1-fr.pdfhttp://www.autoexpert.ca/fr-ca/securite-routiere/sensibilisation-jeunes-conducteurs
+    Row: Vidéos actualité / Documentaires | https://www.onf.ca
+    Row: Sexualité | https://www.onf.ca/film/franchir-la-ligne/?docs-hp_fr=feature_4&feature_type=w_free-film&banner_id=80035https://www.youtube.com/watch?v=-hhowlWwy2I&t=337shttps://www.youtube.com/watch?v=JXVft9F89LAhttps://www.youtube.com/watch?v=1AKAmFw14P4https://educaloi.qc.ca/capsules/le-consentement-sexuel/https://www.justice.gc.ca/fra/pr-rp/autre-other/clp/faq.htmlhttps://www.troussehypersexualisation.tcmfcq.com/animerhttps://les3sex.com/fr/news/1430/activites-pedagogiques-abordant-la-diversite-sexuelle-et-de-genre
+    Row: Ménage et astuces | https://www.youtube.com/watch?v=5yELcMX0grwhttps://www.youtube.com/watch?v=6cXirsAVzAEhttps://www.youtube.com/watch?v=qeGhAcGTQ4Yhttps://www.youtube.com/watch?v=G1AA7RO17pwhttps://www.youtube.com/watch?v=Kiu5sym9Dishttps://sbssa.ac-versailles.fr/spip.php?article147https://www.ecophylle.org/l-accompagnement-de-demarches-3/53-fiches-resources/793-produits-ecologiqueshttps://www.canada.ca/fr/sante-canada/services/produits-menagers.htmlhttps://www.aflyon.org/wp-content/uploads/2019/01/FASP-A2-Comment-fabriquer-sa-lessive-enseignant.pdf
+    Row: Travail PMT SMT IP | https://www.youtube.com/watch?v=HTTescvqh1Mhttps://www.youtube.com/watch?v=WrdbiRJXBlchttps://www.youtube.com/watch?v=47aBq2MuPK8https://www.youtube.com/watch?v=qtmUClAzjR0https://www.youtube.com/watch?v=etIz9G-4zV0https://www.youtube.com/watch?v=6THTh4_OnxYhttps://www.youtube.com/watch?v=UuY21o2mG2khttps://www.youtube.com/watch?v=oMDoPONC5kMhttps://bap.acelf.ca/resultats.php?motscles=&theme=24https://cybersavoir.csdm.qc.ca/fpt1/?page_id=640https://cybersavoir.csdm.qc.ca/fpt1/?page_id=581https://cybersavoir.csdm.qc.ca/fpt1/?page_id=605https://www.aqisep.qc.ca/ao/activit16/guide_enseignant.pdfhttps://regardsurlefrancais.com/2021/02/16/activite-pedagogique-la-recherche-demploi/https://www.lepointdufle.net/penseigner/lexique_recherche_d_emploi-fiches-pedagogiques.htmhttps://www.reseau-canope.fr/savoirscdi/cdi-outil-pedagogique/base-initiatives/initiatives-pedagogiques/techniques-de-recherche-demploi/methodologie-de-lentretien-dembauche.htmlhttps://www.lyceegaudier.com/fichiers/documents/documents_viedulycee/fiches_methodo/entretien_embauche.pdf
+
+============================================================
+

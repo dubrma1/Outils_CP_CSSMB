@@ -1,0 +1,56 @@
+ROW 0:  /// Thème /// Français /// Mathématiques /// Géo/His /// PMT /// APS /// SMT /// Anglais /// Sciences /// Éducation Phys.
+
+ROW 1: Santé - APS /// ÉTAT DE SANTÉ /// L’hygiène SAEC1 – Lecture d’un document sur l’hygiène avec questions de compréhension ///  ///  ///  /// L’hygiène SAEAborder l’hygiène buccal, capillaire, intime, etc. ///  ///  ///  /// 
+
+ROW 2:  /// BESOINS ///  ///  ///  ///  /// Voir la publicité ///  ///  ///  /// 
+
+ROW 3:  /// ACTIVITÉ PHYSIQUE ET ALIMENTATION /// Lire et faire une recetteC-2 Travailler sur le vocabulaire de la cuisine (instruments et lexique)C-1 Lire une recette et en ressortir les étapes.Saine alimentationC-3 Visionnement de documentairesClip sur guide alimentaire canadienC-1 Lecture de documents sur la bonne alimentation et nutriments /// Lire et faire une recetteCalculer la quantité des ingrédients pour 1 ou plusieurs recettes. /// Lire et faire une recetteRegarder l’origine d’une recette et ouvrir son palet à de nouvelles saveurs d’ailleurs. ///  /// Saine alimentationC-1 Lire et comprendre les informations sur les étiquettes d’emballage, construire un menu santéC-2 faire des choix selon les recommandations du guide canadien, se questionner sur ses habit. Aliment. /// Lire et faire une recetteAdopter les comportements adéquats et sécuritaires nécessaires à la réalisation d’activités culinaires en respectant les normes du MAPAQ. Explorer les différentes tâches à effectuer en cuisine. ///  ///  /// 
+
+ROW 4:  /// SOMMEIL /// Table ronde sur le sommeilC1 – lecture d’un article sur les habitudes à mettre en place pour un sommeil réparateur. C3 – Discussion autour de l’article et des répercussions sur notre mode de vie au quotidien. /// Table ronde sur le sommeilCréation d’un horaire pour améliorer le sommeil selon le 10-3-2-1-0 en partant de l’heure du couché. Paris match ///  ///  /// Table ronde sur le sommeilS’informer et se questionner sur l’importance du sommeil et des effets sur la santé. ///  ///  ///  /// 
+
+ROW 5:  /// LOISIRS /// Club de lectureDécouvrir des univers littéraires Critique et justificationStratégies de lectureActivité communautaireLire des dépliants et sites pour connaitre les activitésPrésenter des activités /// Activité communautaireVérifier le prix des activités et les comparer (prix à l’heure, la semaine, etc.) /// Club de lectureRepérer les différentes bibliothèques du quartier.Activité communautairePositionner sur une carte les principaux centres, parcs et lieux culturels de sa région ///  ///  ///  ///  ///  /// 
+
+ROW 6:  /// FACTEURS D’INFLUENCE /// Table ronde sur les facteurs d’influenceC1 – lire des dépliants sur les éléments qui influencent nos choix et notre santéC3 – discussion autour des facteurs et des comportements à adopter selon les situations choisies. (voir aussi saine alimentation) ///  /// Table ronde sur les facteurs d’influenceDiscussion autour des restaurants disponibles près des écoles secondaires. Trouver un moyen de diminuer les sources néfastes d’influence. Faire une proposition à la ville? ///  /// Table ronde sur les facteurs d’influence ///  ///  ///  /// 
+
+ROW 7:  /// SERVICES ET RESSOURCES ///  ///  /// Identifier et repérer les ressourcesC1- Construire une carte de ressource de son quartier en positionnant et identifiant les principales ressources disponibles. ///  /// Identifier et repérer les ressourcesRepérer et identifier les différentes ressources de son milieu pour répondre à ses besoins. ///  ///  ///  /// 
+
+ROW 8: Société - APS /// HABILETÉS SOCIALES /// Jeux de sociétéC3 - Participer à un jeu de société qui demande de la coopération et du travail d’équipe. Travail sur la communication entre les coéquipiers.Affiche de sensibilisationÉlaboration d’une affiche collective pour sensibiliser l’école à un enjeu (ex. composte ou recyclage). Les élèves doivent composer un texte en groupe et une campagne de sensibilisation. ///  /// Jeux de sociétéTrouver des solutions afin de résoudre une situation problème en utilisant les ressources mises à sa disposition.Affiche de sensibilisationImplication sociale pour le changement des habitudes dans notre entourage immédiat. ///  /// Jeux de sociétéCommuniquer en équipe afin d’arriver à notre objectif. ///  ///  ///  /// 
+
+ROW 9:  /// FACTEURS D’INFLUENCE ///  ///  ///  ///  ///  ///  ///  ///  /// 
+
+ROW 10:  /// SERVICES ET RESSOURCES ///  ///  ///  ///  ///  ///  ///  ///  /// 
+
+ROW 11: Consommation - APS /// FACTEURS D’INFLUENCE /// La publicitéC-3 visionnement de publicitéC-1 lecture de textes informatifs sur la publicité, lecture de publicités.C-2 Écriture de texte publicitaire pour le magasin et le coffre aux trésors. ///  ///  ///  /// La publicitéRéflexion sur l’influence de la publicité sur nos choix, la consommation de boissons énergisantes.Réflexion sur la notion de besoin, de besoin personnel et de besoin de groupe. ///  ///  ///  /// 
+
+ROW 12:  /// PRÉVENTION ///  ///  ///  ///  ///  ///  ///  ///  /// 
+
+ROW 13:  /// SERVICES ET RESSOURCES ///  ///  ///  ///  ///  ///  ///  ///  /// 
+
+ROW 14: Autonomie financière - APS /// BUDGET /// Atelier MFMC – module 1 /// Atelier MFMC – module 1 ///  ///  /// Atelier MFMC – module 1 ///  ///  ///  /// 
+
+ROW 15:  /// REVENUS /// Atelier MFMC – Module 12 /// Atelier MFMC – Module 12 ///  ///  /// Atelier MFMC – Module 12 ///  ///  ///  /// 
+
+ROW 16:  /// DÉPENSES /// Atelier MFMC – Module 4 /// Atelier MFMC – Module 4 ///  ///  /// Atelier MFMC – Module 4 ///  ///  ///  /// 
+
+ROW 17: Transport - APS /// DÉPLACEMENT /// Planifier une sortie culturelle personnelleC1 – Faire une recherche sur les différentes activités culturelles offertes et en retirer les informations pertinentes /// Planifier une sortie culturelle personnellePlanifier une sortie culturelle en respectant un budget (coût de l’activité, du transport). Considérer aussi l’horaire de l’activité et l’horaire des transports pour s’y rendre. /// Planifier une sortie culturelle personnelleSituer les principaux centres culturels de ma région et planifier le trajet et les moyens de transports à utiliser pour s’y rendre. ///  /// Planifier une sortie culturelle personnelle ///  ///  ///  /// 
+
+ROW 18:  /// SÉCURITÉ ///  ///  ///  ///  ///  ///  ///  ///  /// 
+
+ROW 19: Identité personnelle et professionnelle - PMT /// REGARD SUR SON HISTOIRE FAMILIALE, SCOLAIRE ET SOCIALE /// Mon portrait - AfficheC-2 conception d’une affiche présentant les différents aspects de son portraitC-3 Présentation orale du résultat et de la démarche ///  /// Mon portrait - AfficheUtilisation de documents (photos) pour parler du passé, présent et futur. Faire des liens entre les différents éléments à travers le temps. /// Mon portrait - AfficheC-1 Examiner ses caract. perso. Et profes. En faisant son histoire personnelle ///  ///  ///  ///  /// 
+
+ROW 20:  /// EXPLORATION DE SES RÊVES D’AVENIR ET PROJECTION DE SOI DANS DIFFÉRENTS RÔLES ///  ///  ///  /// RIASEC ET IVIPC-1 Examiner ses caract. perso. Et profes. ///  ///  ///  ///  /// 
+
+ROW 21: Monde du travail - PMT /// CONNAISSANCE DE CERTAINES PARTICULARITÉS DU MONDE DU TRAVAIL /// Un métier de rêveC-1 Lecture de dépliants et de site sur un métier choisi afin de répondre aux questions d’un document de travail.C-3 Présentation orale des tâches, formations, débouchés, etc. d’un métier choisi /// Un métier de rêveCalculer le salaire mensuel afin de voir le pouvoir d’achat associer à un métier (ex. loyer et épicerie selon un pourcentage). Comparer le salaire avec l’assistance sociale et le salaire minimum. /// Un métier de rêveTrouver un lieu où il serait possible de réaliser ce travail près de chez soi et faire un itinéraire pour s’y rendre en utilisant différents moyens de transport. /// Un métier de rêveC-2 Se donner une représentation du monde du travail. ///  ///  ///  ///  /// 
+
+ROW 22:  /// EXPLORATION DE TÂCHES DE TRAVAIL /// Le marchandC-2 écrire des phrases interrogatives. C-3 Pratiquer rôles de caissier et client,Fonctionnement en cuisineC-1 Lire et reconnaitre les règles sanitaire et de sécurité en cuisine /// Le marchandFaire un inventaire d’objets, faire un sondage, lire et construire un diag. à bandes, manipuler l’argent, calculer un coût et remettre le change, notions de coûts et profit, calcul du prix de venteFonctionnement en cuisineCalculer la durée des aliments ///  /// Fonctionnement en cuisineC-1 règles d’hygiène et de conservation des aliments. ///  /// Le marchandFaire un inventaire de matériel, pratiquer le rôle de caissier et client(Voir les recettes en alimentation) ///  ///  /// 
+
+ROW 23:  /// RECONNAISSANCE DE L’IMPORTANCE DES CHANGEMENTS TECHNOLOGIQUES DANS LE MONDE DU TRAVAIL /// Un métier de rêve ///  ///  /// Un métier de rêve ///  ///  ///  ///  /// 
+
+ROW 24:  /// EXPLORATION DES LIENS ENTRE LA FORMATION ET LE TYPE D’EMPLOI ACCESSIBLE /// Un métier de rêve ///  ///  /// Un métier de rêve ///  ///  ///  ///  /// 
+
+ROW 25:  /// INITIATIVES : ACTIONS À ENTREPRENDRE ///  ///  ///  ///  ///  ///  ///  ///  /// 
+
+ROW 26: Insertion professionnelle - PMT /// MISE EN ŒUVRE • PRISE DE CONTACT AVEC LE MILIEU • ENGAGEMENTUTILISATION DE STRATÉGIES • PASSAGE À L’ACTION ///  ///  ///  ///  ///  ///  ///  ///  /// 
+
+ROW 27:  ///  ///  ///  ///  ///  ///  ///  ///  ///  /// 
+
