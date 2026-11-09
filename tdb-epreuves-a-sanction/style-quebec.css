@@ -1,0 +1,199 @@
+/* =========================================================
+   THÈME ET VARIABLES CSS (Normes Gouvernement du Québec)
+   ========================================================= */
+:root {
+    --bg: #ffffff;       /* Fenêtre principale blanche */
+    --sidebar-bg: #e8f4f6; /* Barre latérale bleu-vert pâle */
+    --panel: #ffffff;    /* Fond des panneaux */
+    --border: #cbd5e1;   /* Bordures douces */
+    --text: #0f172a;     /* Texte principal */
+    --muted: #64748b;    /* Texte secondaire */
+    
+    /* Palette de bleus requise */
+    --primary: #1472BF;  /* Bleu standard */
+    --secondary: #095797;/* Bleu PIV foncé */
+    --accent: #f59e0b;   /* Couleur d'accentuation (Orange) */
+    --danger: #ef4444;   /* Rouge (erreurs) */
+    --success: #10b981;  /* Vert (validation) */
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* EN-TÊTE COMPACTE */
+header {
+    width: 100%;
+    padding: 8px 24px;
+    background: var(--panel);
+    border-bottom: 4px solid var(--primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.title-group { display: flex; align-items: center; gap: 12px; }
+.title-group h1 { margin: 0; font-size: 1.1rem; color: var(--secondary); font-weight: bold; }
+
+.icon-btn {
+    background: none; border: none; color: var(--primary);
+    cursor: pointer; padding: 4px; border-radius: 50%;
+    transition: 0.2s; display: flex; align-items: center; justify-content: center;
+}
+.icon-btn:hover { background-color: #e2e8f0; }
+
+/* MODALE COMMUN */
+dialog { 
+    border: none; 
+    border-radius: 8px; 
+    padding: 24px; 
+    max-width: 450px; 
+    background: var(--panel);
+    color: var(--text);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+dialog::backdrop { background: rgba(15, 23, 42, 0.5); }
+dialog h2 {
+    color: var(--secondary);
+    margin-top: 0;
+}
+dialog p, dialog ul {
+    color: var(--text);
+    line-height: 1.5;
+}
+dialog button.btn-close {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 16px;
+    transition: background 0.2s;
+}
+dialog button.btn-close:hover {
+    background-color: var(--secondary);
+}
+
+/* ADAPTATION STREAMLIT & STLITE (Normes Gouvernement du Québec) */
+.stApp {
+    background-color: var(--bg) !important;
+    color: var(--text);
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+[data-testid="stHeader"] {
+    background: var(--panel) !important;
+    border-bottom: 3px solid var(--primary);
+}
+
+[data-testid="stSidebar"],
+[data-testid="stSidebar"] > div,
+[data-testid="stSidebarContent"],
+[data-testid="stSidebarUserContent"],
+section[data-testid="stSidebar"] {
+    background-color: var(--sidebar-bg) !important;
+    border-right: 1px solid var(--border);
+}
+
+[data-testid="stSidebar"] h1, 
+[data-testid="stSidebar"] h2, 
+[data-testid="stSidebar"] h3 {
+    color: var(--secondary);
+    font-weight: 700;
+}
+
+h1 {
+    color: var(--secondary);
+    font-weight: 700;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+}
+
+h2, h3, h4 {
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+/* Boutons principaux */
+.stButton > button[kind="primary"],
+button[data-testid="baseButton-primary"] {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: #ffffff !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    transition: background-color 0.2s ease;
+}
+
+.stButton > button[kind="primary"]:hover,
+button[data-testid="baseButton-primary"]:hover {
+    background-color: var(--secondary) !important;
+    border-color: var(--secondary) !important;
+}
+
+/* Boutons secondaires / standards */
+.stButton > button[kind="secondary"],
+button[data-testid="baseButton-secondary"] {
+    background-color: #ffffff !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text) !important;
+    border-radius: 4px !important;
+    font-weight: 500 !important;
+}
+
+.stButton > button[kind="secondary"]:hover,
+button[data-testid="baseButton-secondary"]:hover {
+    background-color: #f1f5f9 !important;
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+}
+
+/* Onglets (Tabs) */
+button[data-baseweb="tab"] {
+    font-family: system-ui, -apple-system, sans-serif !important;
+    color: var(--muted) !important;
+    font-weight: 500 !important;
+}
+
+button[data-baseweb="tab"][aria-selected="true"] {
+    color: var(--primary) !important;
+    border-bottom-color: var(--primary) !important;
+    font-weight: 700 !important;
+}
+
+/* Expanders */
+[data-testid="stExpander"] {
+    background: var(--panel);
+    border: 1px solid var(--border) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+[data-testid="stExpander"] summary {
+    color: var(--secondary) !important;
+    font-weight: 600 !important;
+}
+
+/* Métriques */
+[data-testid="stMetricValue"] {
+    color: var(--secondary) !important;
+    font-weight: 700 !important;
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--muted) !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    font-size: 0.8rem !important;
+}
