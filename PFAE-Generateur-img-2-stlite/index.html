@@ -1982,6 +1982,24 @@ body.embed-mode .main-container {
       font-size: 0.92rem;
     }
 
+    .select-camera-inline {
+      width: 100%;
+      font-weight: 500;
+      color: #0f172a;
+      border: 1px solid #94a3b8;
+      padding: 0.4rem 0.5rem;
+      background-color: #ffffff;
+      font-size: 0.85rem;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .select-camera-inline:focus {
+      outline: none;
+      border-color: #0284c7;
+      box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+    }
+
     /* Sélecteur d'ÉPI */
     .grille-epi {
       display: grid;
@@ -2194,17 +2212,11 @@ body.embed-mode .main-container {
       margin-bottom: 0.75rem;
     }
 
-    .zone-visuel-action svg {
-      width: 100%;
-      height: 100%;
-      max-height: 240px;
-      display: block;
-      object-fit: contain;
-    }
     .zone-visuel-action svg,
     .zone-visuel-action img,
     .zone-visuel-action canvas {
-      max-width: 100%;
+      width: 100%;
+      height: 100%;
       max-height: 240px;
       display: block;
       object-fit: contain;
@@ -2292,6 +2304,17 @@ body.embed-mode .main-container {
       position: relative;
     }
 
+    .modal-affiche-contenu svg,
+    .modal-affiche-contenu img,
+    .modal-affiche-contenu canvas {
+      max-width: 100%;
+      max-height: 380px;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
     .modal-affiche-fermer {
       position: absolute;
       top: 0.5rem;
@@ -2324,6 +2347,7 @@ body.embed-mode .main-container {
       nav,
       .stepper-nav,
       .barre-boutons,
+      .barre-options-gabarit,
       .dropzone-studio,
       .barre-options-cv,
       .actions-carte-panneau,
@@ -2373,6 +2397,22 @@ body.embed-mode .main-container {
         page-break-inside: avoid !important;
       }
 
+      .zone-visuel-action {
+        min-height: 60mm !important;
+        max-height: 75mm !important;
+      }
+
+      .zone-visuel-action svg,
+      .zone-visuel-action img,
+      .zone-visuel-action canvas {
+        max-height: 75mm !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        height: 100% !important;
+        display: block !important;
+        object-fit: contain !important;
+      }
+
       .entete-panneau {
         border-bottom: 2pt solid #000000 !important;
         padding-bottom: 3mm !important;
@@ -2416,8 +2456,15 @@ body.embed-mode .main-container {
         min-height: 170mm !important;
       }
 
-      .impression-mode-affiche .zone-visuel-action svg {
+      .impression-mode-affiche .zone-visuel-action svg,
+      .impression-mode-affiche .zone-visuel-action img,
+      .impression-mode-affiche .zone-visuel-action canvas {
         max-height: 170mm !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        height: 100% !important;
+        display: block !important;
+        object-fit: contain !important;
       }
 
       .impression-mode-affiche .bandeau-falc-texte {
@@ -2524,8 +2571,22 @@ body.embed-mode .main-container {
               </label>
 
               <label class="carte-epi">
-                <input type="checkbox" class="epi-chk" value="hearing protection (casque antibruit)" data-picto="casque-bruit">
-                <!-- SVG Casque -->
+                <input type="checkbox" class="epi-chk" value="hard hat / safety helmet (casque dur de sécurité)" data-picto="casque_dur">
+                <!-- SVG Casque dur -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a8 8 0 0 1 16 0"/><path d="M2 14h20"/><path d="M12 6v8"/></svg>
+                Casque dur
+              </label>
+
+              <label class="carte-epi">
+                <input type="checkbox" class="epi-chk" value="hairnet / food service cap (filet à cheveux / charlotte de travail alimentaire)" data-picto="filet_cheveux">
+                <!-- SVG Filet à cheveux -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a9 8 0 0 1 18 0"/><path d="M3 15c1 1 2 1 3 0 1-1 2-1 3 0 1 1 2 1 3 0 1-1 2-1 3 0 1 1 2 1 3 0 1-1 2-1 3 0"/><path d="M7 10a14 14 0 0 0 10 0"/><path d="M5 12.5a18 18 0 0 0 14 0"/></svg>
+                Filet à cheveux
+              </label>
+
+              <label class="carte-epi">
+                <input type="checkbox" class="epi-chk" value="hearing protection (casque antibruit)" data-picto="casque_bruit">
+                <!-- SVG Casque antibruit -->
                 <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2"><path d="M4 12a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3m-16 5a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H4"/></svg>
                 Casque antibruit
               </label>
@@ -2568,9 +2629,10 @@ body.embed-mode .main-container {
           <table class="table-falc">
             <thead>
               <tr>
-                <th style="width: 70px;">Étape</th>
-                <th style="width: 45%;">Texte brut initial</th>
+                <th style="width: 55px; text-align: center;">Étape</th>
+                <th style="width: 32%;">Texte brut initial</th>
                 <th>Consigne FALC finale (Verbe infinitif + complément)</th>
+                <th style="width: 220px;">Cadrage caméra</th>
               </tr>
             </thead>
             <tbody id="tbody-falc-preview">
@@ -2663,11 +2725,8 @@ body.embed-mode .main-container {
           <span>Vectorisation SVG (Potrace JS à la volée)</span>
         </label>
 
-        <div class="curseur-seuil">
-          <span>Seuil de luminance :</span>
-          <input type="range" id="slider-seuil-luminance" min="10" max="250" value="180">
-          <span class="valeur-seuil-badge" id="valeur-seuil-texte">Auto (Otsu)</span>
-          <button type="button" class="btn-micro-action" id="btn-reset-otsu">Calculer Otsu</button>
+        <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; color: #0284c7; background: #f0f7ff; padding: 0.35rem 0.65rem; border-radius: 4px; border: 1px solid #bfdbfe; font-weight: 600;">
+          <span>⚡ Binarisation Otsu automatique</span>
         </div>
       </div>
 
@@ -2708,6 +2767,22 @@ body.embed-mode .main-container {
           <button type="button" class="btn-action-secondaire" id="btn-bascule-mode-affiche">
             Basculer en mode Affiche atelier (1/page)
           </button>
+        </div>
+      </div>
+
+      <!-- BARRE D'OPTIONS D'ASSEMBLAGE (CONSIGNES & NUMÉROTATION) -->
+      <div class="barre-options-gabarit" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; background-color: #f8fafc; border: 1px solid #cbd5e1; padding: 0.65rem 1rem; border-radius: 4px; margin-bottom: 1.25rem;">
+        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+          <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: 600; font-size: 0.92rem; color: #1e293b; cursor: pointer;">
+            <input type="checkbox" id="chk-afficher-consignes" checked style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Afficher les consignes textuelles (FALC)</span>
+          </label>
+
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.92rem; font-weight: 600; color: #1e293b;">
+            <label for="input-numero-depart">Premier numéro de la séquence :</label>
+            <input type="number" id="input-numero-depart" min="1" max="16" value="1" style="width: 65px; padding: 0.35rem 0.5rem; border: 1px solid #94a3b8; border-radius: 4px; font-weight: 700; text-align: center;">
+            <span style="font-size: 0.8rem; color: #64748b; font-weight: normal;">(1 à 16, ex. 5 pour étapes 5 à 8)</span>
+          </div>
         </div>
       </div>
 
@@ -4100,6 +4175,8 @@ var Potrace = (function() {
         tablier: `<svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Tablier requis"><path d="M9 3h6l2 5v13H7V8l2-5z"/><circle cx="12" cy="6" r="1.5"/></svg>`,
         gants: `<svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Gants requis"><path d="M6 10V5a1.5 1.5 0 0 1 3 0v4m0-4V3.5a1.5 1.5 0 0 1 3 0V9m0-4V4a1.5 1.5 0 0 1 3 0v6m0-4v2a1.5 1.5 0 0 1 3 0v7a6 6 0 0 1-12 0V10a1.5 1.5 0 0 1 3 0"/></svg>`,
         bottes: `<svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Bottes de sécurité requises"><path d="M5 4h5v8l6 3v5H5V4z"/></svg>`,
+        casque_dur: `<svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Casque dur de sécurité requis"><path d="M4 14a8 8 0 0 1 16 0"/><path d="M2 14h20"/><path d="M12 6v8"/></svg>`,
+        filet_cheveux: `<svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Filet à cheveux alimentaire requis"><path d="M3 15a9 8 0 0 1 18 0"/><path d="M3 15c1 1 2 1 3 0 1-1 2-1 3 0 1 1 2 1 3 0 1-1 2-1 3 0 1 1 2 1 3 0 1-1 2-1 3 0"/><path d="M7 10a14 14 0 0 0 10 0"/><path d="M5 12.5a18 18 0 0 0 14 0"/></svg>`,
         casque_bruit: `<svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Protection auditive requise"><path d="M4 12a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3m-16 5a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H4"/></svg>`,
         masque: `<svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Masque requis"><path d="M4 10l8-4 8 4-3 9H7l-3-9z"/><path d="M4 10h16"/></svg>`,
         obligation: `<svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Obligation de sécurité"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r="1" fill="#000000"/></svg>`
@@ -4115,7 +4192,7 @@ var Potrace = (function() {
             "3. Verser la farine dans la cuve du batteur-mélangeur.",
             "4. Enfourner la pelle avec les pains dans le four chaud."
           ],
-          epis: ["work apron (tablier de travail)", "protective work gloves (gants de protection)", "steel toe boots (bottes à cap d'acier)"]
+          epis: ["work apron (tablier de travail)", "protective work gloves (gants de protection)", "steel toe boots (bottes à cap d'acier)", "hairnet / food service cap (filet à cheveux / charlotte de travail alimentaire)"]
         },
         concierge: {
           titre: "Aide-concierge : Lavage sécuritaire du plancher d'atelier",
@@ -4149,16 +4226,31 @@ var Potrace = (function() {
         }
       };
 
+      // Options de cadrage caméra disponibles
+      const OPTIONS_CAMERA = [
+        { val: "auto", label: "Automatique (pédagogique)", en: "Use the most pedagogically appropriate framing for this action" },
+        { val: "close-up on hands", label: "Gros plan : Mains (geste)", en: "Close-up on hands performing the action" },
+        { val: "close-up on tools", label: "Gros plan : Outils / matériel", en: "Close-up on tools and materials (character partially visible or omitted)" },
+        { val: "close-up on tools and hands", label: "Gros plan : Outils et mains", en: "Close-up on tools and hands performing the precise task" },
+        { val: "overhead workstation view", label: "Vue de dessus : Établi / poste", en: "Overhead workstation view looking down onto the workbench surface" },
+        { val: "side view", label: "Vue de côté / profil", en: "Side view showing profile angle, clearance and posture" },
+        { val: "isometric view", label: "Vue isométrique (3D)", en: "Isometric three-quarter view of the workspace and action" },
+        { val: "full-body view", label: "Plein pied : Mannequin complet", en: "Full-body view showing complete ergonomic posture of the character" }
+      ];
+
       // --- 3. ÉTAT GLOBAL DU STUDIO ---
       const etat = {
         titre: "Nettoyer et ranger le poste d'atelier",
         etapesBrutes: [],
         etapesFalc: [],
+        etapesCamera: ["auto", "auto", "auto", "auto"],
         episSelectionnes: ["safety goggles (lunettes de sécurité)", "work apron (tablier de travail)"],
         modePrompt: "grille2x2", // ou "unitaire"
         cadransTraites: [null, null, null, null], // Contient { index, canvas, svg, threshold }
         modeImpressionAffiche: false,
-        seuilManuel: -1 // -1 = calcul Otsu automatique
+        seuilManuel: -1, // -1 = calcul Otsu automatique
+        afficherConsignes: true,
+        numeroDepart: 1
       };
 
       // --- 4. SÉLECTION DES ÉLÉMENTS DU DOM ---
@@ -4176,8 +4268,8 @@ var Potrace = (function() {
       const conteneurApercuCV = document.getElementById('conteneur-apercu-cv');
       const plancheAssemblagePrint = document.getElementById('planche-assemblage-print');
       const printTitreTache = document.getElementById('print-titre-tache');
-      const sliderSeuil = document.getElementById('slider-seuil-luminance');
-      const valeurSeuilTexte = document.getElementById('valeur-seuil-texte');
+      const chkAfficherConsignes = document.getElementById('chk-afficher-consignes');
+      const inputNumeroDepart = document.getElementById('input-numero-depart');
       const toast = document.getElementById('toast-notification');
       const modalAffiche = document.getElementById('modal-affiche');
       const modalAfficheBody = document.getElementById('modal-affiche-body');
@@ -4271,14 +4363,29 @@ var Potrace = (function() {
         etat.etapesBrutes = lignes;
         etat.etapesFalc = lignes.map(l => simplifierPhraseFALC(l));
 
+        if (!etat.etapesCamera) etat.etapesCamera = [];
+        while (etat.etapesCamera.length < etat.etapesFalc.length) {
+          etat.etapesCamera.push("auto");
+        }
+
         tbodyFalc.innerHTML = '';
         etat.etapesFalc.forEach((falc, idx) => {
           const tr = document.createElement('tr');
+          const camVal = etat.etapesCamera[idx] || "auto";
+          const optionsHTML = OPTIONS_CAMERA.map(opt =>
+            `<option value="${opt.val}" ${opt.val === camVal ? 'selected' : ''}>${opt.label}</option>`
+          ).join('');
+
           tr.innerHTML = `
-            <td style="font-weight: 800; color: #095797; font-size: 1rem;">${idx + 1}</td>
-            <td style="color: #4b5563; font-size: 0.88rem;">${etat.etapesBrutes[idx]}</td>
+            <td style="font-weight: 800; color: #095797; font-size: 1rem; text-align: center;">${idx + 1}</td>
+            <td style="color: #4b5563; font-size: 0.88rem;">${etat.etapesBrutes[idx] || ''}</td>
             <td>
               <input type="text" class="input-falc-inline" data-index="${idx}" value="${falc.replace(/"/g, '&quot;')}">
+            </td>
+            <td>
+              <select class="select-camera-inline" data-index="${idx}">
+                ${optionsHTML}
+              </select>
             </td>
           `;
           tbodyFalc.appendChild(tr);
@@ -4288,6 +4395,17 @@ var Potrace = (function() {
           input.addEventListener('input', (e) => {
             const index = parseInt(e.target.getAttribute('data-index'), 10);
             etat.etapesFalc[index] = e.target.value.trim();
+            genererPromptISO();
+            rafraichirApercuCV();
+            mettreAJourPlancheAssemblage();
+          });
+        });
+
+        tbodyFalc.querySelectorAll('.select-camera-inline').forEach(sel => {
+          sel.addEventListener('change', (e) => {
+            const index = parseInt(e.target.getAttribute('data-index'), 10);
+            etat.etapesCamera[index] = e.target.value;
+            genererPromptISO();
           });
         });
       }
@@ -4302,10 +4420,28 @@ var Potrace = (function() {
         mettreAJourFALC();
       });
 
+      function obtenirPictosSecuriteHTML() {
+        const pictos = [];
+        chkEpis.forEach(c => {
+          if (c.checked) {
+            const cle = (c.getAttribute('data-picto') || '').replace('-', '_');
+            if (PICTOS_SVG[cle]) {
+              pictos.push(PICTOS_SVG[cle]);
+            }
+          }
+        });
+        if (pictos.length === 0) {
+          return PICTOS_SVG.obligation;
+        }
+        return pictos.slice(0, 3).join('');
+      }
+
       // Gestion des sélections d'ÉPI
       chkEpis.forEach(chk => {
         chk.addEventListener('change', () => {
           etat.episSelectionnes = Array.from(chkEpis).filter(c => c.checked).map(c => c.value);
+          rafraichirApercuCV();
+          mettreAJourPlancheAssemblage();
         });
       });
 
@@ -4321,6 +4457,8 @@ var Potrace = (function() {
         });
         etat.episSelectionnes = p.epis.slice();
         mettreAJourFALC();
+        rafraichirApercuCV();
+        mettreAJourPlancheAssemblage();
         afficherNotification(`Gabarit métier « ${p.titre.split(':')[0]} » appliqué.`);
       });
 
@@ -4337,6 +4475,12 @@ var Potrace = (function() {
           etat.etapesFalc[3] || "Step 4: Dispose of waste into container"
         ];
 
+        const panelFramings = [0, 1, 2, 3].map(i => {
+          const cam = (etat.etapesCamera && etat.etapesCamera[i]) ? etat.etapesCamera[i] : "auto";
+          const opt = OPTIONS_CAMERA.find(o => o.val === cam);
+          return opt ? opt.en : "Use the most pedagogically appropriate framing for this action";
+        });
+
         if (etat.modePrompt === 'grille2x2') {
           labelPromptMode.textContent = "Prompt spatialisé 2×2 (à copier dans Google Gemini / Copilot) :";
           textareaPrompt.value =
@@ -4346,12 +4490,23 @@ STYLE: Pure black-and-white vector line art, technical manual illustration (IKEA
 
 CHARACTER: Gender-neutral, non-racialized ergonomic mannequin figure, blank white circle head (NO facial features), simple geometric torso, wearing ${episTexte}.
 
+CAMERA:
+Use the most pedagogically appropriate framing for the action.
+Possible framings:
+- close-up on hands
+- close-up on tools
+- overhead workstation view
+- side view
+- isometric view
+- full-body view
+The character may be partially visible or omitted if the task is better represented by the tools and materials alone.
+
 CRITICAL RULE: ABSOLUTELY NO TEXT, NO LETTERS, NO NUMBERS, NO SPEECH BUBBLES anywhere inside the image. Use only directional black arrows to show movement.
 
-- TOP-LEFT PANEL: ${etapes4[0].replace(/\.$/, '')}. Show clear hand interaction and posture.
-- TOP-RIGHT PANEL: ${etapes4[1].replace(/\.$/, '')}. Show precise tool handling.
-- BOTTOM-LEFT PANEL: ${etapes4[2].replace(/\.$/, '')}. Show directional movement with clean arrow.
-- BOTTOM-RIGHT PANEL: ${etapes4[3].replace(/\.$/, '')}. Show completed final safe state.`;
+- TOP-LEFT PANEL: ${etapes4[0].replace(/\.$/, '')}. Framing: ${panelFramings[0]}.
+- TOP-RIGHT PANEL: ${etapes4[1].replace(/\.$/, '')}. Framing: ${panelFramings[1]}.
+- BOTTOM-LEFT PANEL: ${etapes4[2].replace(/\.$/, '')}. Framing: ${panelFramings[2]}.
+- BOTTOM-RIGHT PANEL: ${etapes4[3].replace(/\.$/, '')}. Framing: ${panelFramings[3]}.`;
         } else {
           labelPromptMode.textContent = "Prompts unitaires par vignette (à copier 1 par 1 dans Gemini / Copilot) :";
           let promptsUnitaires = '';
@@ -4361,6 +4516,7 @@ CRITICAL RULE: ABSOLUTELY NO TEXT, NO LETTERS, NO NUMBERS, NO SPEECH BUBBLES any
 Create a single square technical instruction pictogram on a pure #FFFFFF white background.
 STYLE: Pure black-and-white vector line art, technical manual illustration (IKEA / ISO 7001 pictogram style), uniform 3pt black stroke, zero shading, zero grayscale, zero gradients, high contrast for laser printing.
 CHARACTER: Gender-neutral, non-racialized ergonomic mannequin figure, blank white circle head (NO facial features), simple geometric torso, wearing ${episTexte}.
+CAMERA: ${panelFramings[i]}. The character may be partially visible or omitted if the task is better represented by the tools and materials alone.
 CRITICAL RULE: ABSOLUTELY NO TEXT, NO LETTERS, NO NUMBERS, NO SPEECH BUBBLES anywhere inside the image.
 ACTION: ${etape.replace(/\.$/, '')}. Use a directional black arrow to clarify motion.\n\n`;
           });
@@ -4506,12 +4662,12 @@ ACTION: ${etape.replace(/\.$/, '')}. Use a directional black arrow to clarify mo
           });
           Potrace.process(() => {
             let svg = Potrace.getSVG(1);
-            // Injecter l'attribut viewBox basé sur les dimensions exactes du cadran découpé
             if (svg && !svg.includes('viewBox')) {
               svg = svg.replace('<svg ', `<svg viewBox="0 0 ${canvas.width} ${canvas.height}" preserveAspectRatio="xMidYMid meet" `);
             }
             resolve(svg);
           });
+        });
       }
 
       /**
@@ -4598,12 +4754,13 @@ ACTION: ${etape.replace(/\.$/, '')}. Use a directional black arrow to clarify mo
 
       function rafraichirApercuCV() {
         conteneurApercuCV.innerHTML = '';
+        const depart = etat.numeroDepart || 1;
         etat.cadransTraites.forEach((cadran, idx) => {
           const carte = document.createElement('div');
           carte.className = 'panneau-sequence-norme';
 
-          const falcTexte = etat.etapesFalc[idx] || `Étape ${idx + 1}`;
-          const num = idx + 1;
+          const num = depart + idx;
+          const falcTexte = etat.etapesFalc[idx] || `Étape ${num}`;
 
           let visuelHTML = `<div class="visuel-vide-placeholder">Aucune image collée pour l'étape ${num}</div>`;
           if (cadran) {
@@ -4618,8 +4775,7 @@ ACTION: ${etape.replace(/\.$/, '')}. Use a directional black arrow to clarify mo
             <div class="entete-panneau">
               <span class="pastille-etape-num">${num}</span>
               <div class="picto-securite-entete">
-                ${PICTOS_SVG.lunettes}
-                ${PICTOS_SVG.tablier}
+                ${obtenirPictosSecuriteHTML()}
               </div>
               <span class="case-autoevaluation" title="Case d'auto-évaluation pour l'élève"></span>
             </div>
@@ -4641,11 +4797,12 @@ ACTION: ${etape.replace(/\.$/, '')}. Use a directional black arrow to clarify mo
             const idx = parseInt(e.target.getAttribute('data-idx'), 10);
             const item = etat.cadransTraites[idx];
             if (item && item.svg) {
+              const numEtape = (etat.numeroDepart || 1) + idx;
               const blob = new Blob([item.svg], { type: 'image/svg+xml;charset=utf-8' });
               const url = URL.createObjectURL(blob);
               const a = document.createElement('a');
               a.href = url;
-              a.download = `sequence_etape_${idx + 1}.svg`;
+              a.download = `sequence_etape_${numEtape}.svg`;
               a.click();
               URL.revokeObjectURL(url);
             }
@@ -4672,10 +4829,12 @@ ACTION: ${etape.replace(/\.$/, '')}. Use a directional black arrow to clarify mo
       function mettreAJourPlancheAssemblage() {
         printTitreTache.textContent = etat.titre.toUpperCase();
         plancheAssemblagePrint.innerHTML = '';
+        const depart = etat.numeroDepart || 1;
+        const afficherConsignes = (etat.afficherConsignes !== false);
 
         for (let idx = 0; idx < 4; idx++) {
           const cadran = etat.cadransTraites[idx];
-          const num = idx + 1;
+          const num = depart + idx;
           const falcTexte = etat.etapesFalc[idx] || `Étape ${num}`;
 
           const carte = document.createElement('div');
@@ -4690,16 +4849,20 @@ ACTION: ${etape.replace(/\.$/, '')}. Use a directional black arrow to clarify mo
             }
           }
 
+          const consigneHTML = afficherConsignes
+            ? `<div class="bandeau-falc-texte">${falcTexte}</div>`
+            : '';
+
           carte.innerHTML = `
             <div class="entete-panneau">
               <span class="pastille-etape-num">${num}</span>
               <div class="picto-securite-entete">
-                ${PICTOS_SVG.obligation}
+                ${obtenirPictosSecuriteHTML()}
               </div>
               <span class="case-autoevaluation" title="Case d'auto-évaluation"></span>
             </div>
             <div class="zone-visuel-action">${visuelHTML}</div>
-            <div class="bandeau-falc-texte">${falcTexte}</div>
+            ${consigneHTML}
           `;
 
           plancheAssemblagePrint.appendChild(carte);
@@ -4709,9 +4872,15 @@ ACTION: ${etape.replace(/\.$/, '')}. Use a directional black arrow to clarify mo
       // --- 10. MODAL ZOOM AFFICHE D'ATELIER ---
       function ouvrirAfficheAtelier(idx) {
         const item = etat.cadransTraites[idx];
-        const num = idx + 1;
+        const depart = etat.numeroDepart || 1;
+        const num = depart + idx;
         const falc = etat.etapesFalc[idx] || `Étape ${num}`;
+        const afficherConsignes = (etat.afficherConsignes !== false);
         if (!item) return;
+
+        const consigneModalHTML = afficherConsignes
+          ? `<div style="border-top: 3px solid #000000; padding-top: 1rem; margin-top: 1rem; font-size: 1.6rem; font-weight: 900; text-align: center;">${falc}</div>`
+          : '';
 
         modalAfficheBody.innerHTML = `
           <div style="border-bottom: 3px solid #000000; padding-bottom: 0.5rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
@@ -4724,9 +4893,7 @@ ACTION: ${etape.replace(/\.$/, '')}. Use a directional black arrow to clarify mo
           <div style="min-height: 350px; display: flex; align-items: center; justify-content: center; background: #ffffff;">
             ${item.svg || `<img src="${item.canvas.toDataURL()}" style="max-width: 100%; max-height: 380px;">`}
           </div>
-          <div style="border-top: 3px solid #000000; padding-top: 1rem; margin-top: 1rem; font-size: 1.6rem; font-weight: 900; text-align: center;">
-            ${falc}
-          </div>
+          ${consigneModalHTML}
         `;
         modalAffiche.style.display = 'flex';
       }
@@ -4921,17 +5088,24 @@ ACTION: ${etape.replace(/\.$/, '')}. Use a directional black arrow to clarify mo
         imgSim.src = canvasSim.toDataURL();
       });
 
-      // --- 13. CONTRÔLE MANUEL DU SEUIL D'OTSU ---
-      sliderSeuil.addEventListener('input', (e) => {
-        etat.seuilManuel = parseInt(e.target.value, 10);
-        valeurSeuilTexte.textContent = etat.seuilManuel;
-      });
+      // --- 13. CONTRÔLE DES OPTIONS DU GABARIT (CONSIGNES & NUMÉROTATION) ---
+      if (chkAfficherConsignes) {
+        chkAfficherConsignes.addEventListener('change', (e) => {
+          etat.afficherConsignes = e.target.checked;
+          mettreAJourPlancheAssemblage();
+        });
+      }
 
-      document.getElementById('btn-reset-otsu').addEventListener('click', () => {
-        etat.seuilManuel = -1;
-        valeurSeuilTexte.textContent = "Auto (Otsu)";
-        afficherNotification("Mode de seuillage automatique Otsu réactivé.");
-      });
+      if (inputNumeroDepart) {
+        inputNumeroDepart.addEventListener('input', (e) => {
+          let val = parseInt(e.target.value, 10);
+          if (isNaN(val) || val < 1) val = 1;
+          if (val > 16) val = 16;
+          etat.numeroDepart = val;
+          rafraichirApercuCV();
+          mettreAJourPlancheAssemblage();
+        });
+      }
 
       // --- 14. IMPRESSION ET BASCULE MODE AFFICHE ---
       document.getElementById('btn-imprimer-fiche').addEventListener('click', () => {
