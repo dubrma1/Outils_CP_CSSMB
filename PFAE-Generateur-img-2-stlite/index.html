@@ -2201,7 +2201,8 @@ body.embed-mode .main-container {
       display: block;
       object-fit: contain;
     }
-
+    .zone-visuel-action svg,
+    .zone-visuel-action img,
     .zone-visuel-action canvas {
       max-width: 100%;
       max-height: 240px;
@@ -4504,10 +4505,13 @@ ACTION: ${etape.replace(/\.$/, '')}. Use a directional black arrow to clarify mo
             opttolerance: 0.2
           });
           Potrace.process(() => {
-            const svg = Potrace.getSVG(1);
+            let svg = Potrace.getSVG(1);
+            // Injecter l'attribut viewBox basé sur les dimensions exactes du cadran découpé
+            if (svg && !svg.includes('viewBox')) {
+              svg = svg.replace('<svg ', `<svg viewBox="0 0 ${canvas.width} ${canvas.height}" preserveAspectRatio="xMidYMid meet" `);
+            }
             resolve(svg);
           });
-        });
       }
 
       /**
