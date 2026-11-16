@@ -33,7 +33,7 @@ from core.privacy import filter_small_cells, sanitize_teacher_display
 from ui.theme import (
     BLEU_QUEBEC, BLEU_QUEBEC_LIGHT, PALETTE_ACCESSIBLE,
     PRIMARY_QUEBEC, SECONDARY_QUEBEC, ACCENT_QUEBEC, DANGER_QUEBEC, SUCCESS_QUEBEC,
-    inject_quebec_theme
+    build_matiere_color_map, build_ecole_color_map, inject_quebec_theme
 )
 from ui.kpi_cards import render_kpi_card
 from ui.charts import (
@@ -478,9 +478,11 @@ with col_c1:
         mat_counts.columns = ["Discipline", "Nb_Anomalies"]
         fig_mat = px.bar(
             mat_counts, x="Discipline", y="Nb_Anomalies",
-            color_discrete_sequence=[PRIMARY_QUEBEC],
+            color="Discipline",
+            color_discrete_map=build_matiere_color_map(mat_counts["Discipline"].unique()),
             title="Surévaluations par Discipline"
         )
+        fig_mat.update_layout(showlegend=False)
         fig_mat.update_xaxes(tickangle=45)
         st.plotly_chart(apply_standard_layout(fig_mat, height=340), use_container_width=True)
     else:
@@ -494,9 +496,11 @@ with col_c2:
         ecole_counts.columns = ["École", "Nb_Anomalies"]
         fig_ecole = px.bar(
             ecole_counts, x="École", y="Nb_Anomalies",
-            color_discrete_sequence=[ACCENT_QUEBEC],
+            color="École",
+            color_discrete_map=build_ecole_color_map(ecole_counts["École"].unique()),
             title="Culture d'Indulgence par École"
         )
+        fig_ecole.update_layout(showlegend=False)
         fig_ecole.update_xaxes(type="category", tickangle=45)
         st.plotly_chart(apply_standard_layout(fig_ecole, height=340), use_container_width=True)
     else:

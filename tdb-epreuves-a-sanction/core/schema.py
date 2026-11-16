@@ -42,6 +42,12 @@ ECOLES_NOMS: Dict[str, str] = {
 # Écoles d'adaptation scolaire (Special Ed) à faible effectif et clientèle ciblée
 ECOLES_ADAPTATION: Set[str] = {"135", "238", "237", "037", "280"}
 
+ECOLES_SECTEURS: Dict[str, str] = {
+    "037": "NORD", "038": "NORD", "040": "NORD", "041": "NORD", "042": "NORD", "280": "NORD",
+    "135": "SUD", "136": "SUD", "137": "SUD", "138": "SUD", "139": "SUD", "142": "SUD", "144": "SUD",
+    "236": "OUEST", "237": "OUEST", "238": "OUEST", "240": "OUEST", "241": "OUEST", "243": "OUEST", "245": "OUEST"
+}
+
 # Cartographie officielle des bassins RÉTAC du CSSMB
 RETAC_LIST: List[str] = [
     "Tous",
@@ -298,6 +304,7 @@ SANCTION_4E_MATIERES: List[str] = [
 def _build_code_mappings():
     code_to_mat: Dict[str, str] = {}
     code_to_mat_court: Dict[str, str] = {}
+    code_to_competence: Dict[str, Dict[str, str]] = {}
     matieres_cibles_full: Dict[str, Dict[str, Any]] = {}
     sanction_mat_map: Dict[str, Dict[str, Any]] = {}
 
@@ -315,6 +322,32 @@ def _build_code_mappings():
         all_codes = list(info["global"])
         for comp in info["composantes"]:
             all_codes.extend(comp["codes"])
+            comp_nom = comp["nom"]
+            comp_payload = {
+                "matiere_full": mat_full,
+                "matiere_court": nom_court,
+                "competence": comp_nom,
+                "label": f"{nom_court} — {comp_nom}",
+            }
+            for c in comp["codes"]:
+                c_clean = str(c).strip().replace(".0", "")
+                code_to_competence[c_clean] = comp_payload
+                code_to_competence[c_clean.lstrip("0")] = comp_payload
+                code_to_competence[c_clean.zfill(6)] = comp_payload
+
+        if not info["composantes"]:
+            hist_payload = {
+                "matiere_full": mat_full,
+                "matiere_court": nom_court,
+                "competence": "Épreuve",
+                "label": f"{nom_court} — Épreuve",
+            }
+            for c in info["global"]:
+                c_clean = str(c).strip().replace(".0", "")
+                code_to_competence[c_clean] = hist_payload
+                code_to_competence[c_clean.lstrip("0")] = hist_payload
+                code_to_competence[c_clean.zfill(6)] = hist_payload
+
         sanction_mat_map[mat_full] = {
             "codes": all_codes,
             "labels": {c: c.lstrip("0") for c in all_codes}
@@ -345,7 +378,15 @@ def _build_code_mappings():
         if epr_name:
             epr_to_mat[epr_name] = mat_full
 
-    return code_to_mat, code_to_mat_court, code_to_epr, epr_to_mat, matieres_cibles_full, sanction_mat_map
+    return (
+        code_to_mat,
+        code_to_mat_court,
+        code_to_epr,
+        epr_to_mat,
+        matieres_cibles_full,
+        sanction_mat_map,
+        code_to_competence,
+    )
 
 
 (
@@ -354,6 +395,18 @@ def _build_code_mappings():
     CODE_TO_EPREUVE,
     EPREUVE_TO_MATIERE,
     MATIERES_CIBLES_FULL,
-    SANCTION_MATIERES_MAP
+    SANCTION_MATIERES_MAP,
+    CODE_TO_COMPETENCE
 ) = _build_code_mappings()
+
+from ui.theme import (
+    MATIERE_BASE_COLORS,
+    MATIERE_COLOR_MAP,
+    COMPETENCE_COLOR_MAP,
+    ECOLE_COLOR_MAP,
+    get_matiere_color,
+    get_ecole_color,
+    build_matiere_color_map,
+    build_ecole_color_map,
+)
 

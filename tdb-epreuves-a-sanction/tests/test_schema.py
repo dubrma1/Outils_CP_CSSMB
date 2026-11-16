@@ -25,7 +25,7 @@ def test_clean_cd_orgns():
 
 
 def test_ecoles_and_secteurs():
-    assert len(ECOLES_LIST) == 16
+    assert len(ECOLES_LIST) == 20
     for ecole in ECOLES_LIST:
         assert ecole in ECOLES_SECTEURS
         assert ECOLES_SECTEURS[ecole] in ["NORD", "SUD", "OUEST"]

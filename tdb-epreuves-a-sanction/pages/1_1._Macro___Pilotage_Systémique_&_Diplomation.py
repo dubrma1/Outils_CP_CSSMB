@@ -20,8 +20,8 @@ if root_dir not in sys.path:
 from core.schema import (
     clean_cd_orgns, ECOLES_LIST, SUBJECT_MAP, CODE_TO_MATIERE_COURT,
     get_course_level, ENRICHED_CODES, RETAC_LIST, get_ecoles_for_retac,
-    get_retac_for_ecole, SANCTION_4E_MATIERES, ECOLES_NOMS, ECOLES_ADAPTATION,
-    get_ecole_nom
+    get_retac_for_ecole, SANCTION_4E_MATIERES, SANCTION_MATIERES_MAP,
+    ECOLES_NOMS, ECOLES_ADAPTATION, get_ecole_nom
 )
 from core.state import (
     get_df_main, get_df_moderation, get_df_aout, set_df_aout
@@ -34,7 +34,7 @@ from core.data_loader import clean_moderation_df, sanitize_df_for_stlite, load_c
 from ui.theme import (
     BLEU_QUEBEC, BLEU_QUEBEC_LIGHT, PALETTE_ACCESSIBLE,
     PRIMARY_QUEBEC, SECONDARY_QUEBEC, ACCENT_QUEBEC, DANGER_QUEBEC, SUCCESS_QUEBEC,
-    inject_quebec_theme
+    get_matiere_color, build_matiere_color_map, inject_quebec_theme
 )
 from ui.kpi_cards import render_kpi_card
 from ui.charts import (
@@ -67,7 +67,7 @@ if df_main.empty and df_mod_raw.empty:
 filters = render_sidebar_filters(
     show_retac=True,
     show_ecoles=True,
-    show_matieres=False,
+    show_matieres=True,
     show_enriched=True,
     show_thresholds=True,
     show_teacher_opt_in=False,
@@ -76,8 +76,19 @@ filters = render_sidebar_filters(
 
 selected_retac = filters.get("selected_retac", "Tous")
 selected_ecole = filters.get("selected_ecole", "Toutes")
+selected_matiere = filters.get("selected_matiere", "Toutes")
 filter_enriched = filters.get("filter_enriched", False)
 seuil_effet = filters.get("seuil_cohen", 0.8)
+
+selected_mat_codes: set[str] = set()
+selected_mat_court = SUBJECT_MAP.get(selected_matiere, {}).get("nom_court") if selected_matiere != "Toutes" else None
+if selected_matiere != "Toutes":
+    raw_codes = list(SANCTION_MATIERES_MAP.get(selected_matiere, {}).get("codes", []))
+    for c in raw_codes:
+        c_str = str(c).strip()
+        selected_mat_codes.add(c_str)
+        selected_mat_codes.add(c_str.lstrip("0"))
+        selected_mat_codes.add(c_str.zfill(6))
 
 # Slider de filtrage des petits groupes pour stabiliser les calculs de taux et pourcentages
 st.sidebar.markdown("---")
@@ -101,6 +112,7 @@ total_eleves = 0
 ci_reussite = (0.0, 0.0)
 
 df_f = df_main.copy() if not df_main.empty else pd.DataFrame()
+df_f_mat = pd.DataFrame()
 if not df_f.empty:
     # Filtrage RETAC
     if selected_retac != "Tous" and "CD_ORGNS" in df_f.columns:
@@ -114,13 +126,17 @@ if not df_f.empty:
         enr_set = set(df_f.loc[df_f["CD_COURS_str"].isin(ENRICHED_CODES), "CD_PERMN"].unique())
         df_f = df_f[~df_f["CD_PERMN"].isin(enr_set)]
 
-    if "Reussite" in df_f.columns and "CD_PERMN" in df_f.columns:
-        if "Type_Cours" in df_f.columns:
-            df_final = df_f[df_f["Type_Cours"] == "Note globale"].drop_duplicates(subset=["CD_PERMN"])
+    df_f_mat = df_f.copy()
+    if selected_mat_codes and "CD_COURS_str" in df_f_mat.columns:
+        df_f_mat = df_f_mat[df_f_mat["CD_COURS_str"].astype(str).str.strip().isin(selected_mat_codes)].copy()
+
+    if not df_f_mat.empty and "Reussite" in df_f_mat.columns and "CD_PERMN" in df_f_mat.columns:
+        if "Type_Cours" in df_f_mat.columns:
+            df_final = df_f_mat[df_f_mat["Type_Cours"] == "Note globale"].drop_duplicates(subset=["CD_PERMN"])
         else:
             df_final = pd.DataFrame()
         if df_final.empty:
-            df_final = df_f.drop_duplicates(subset=["CD_PERMN"])
+            df_final = df_f_mat.drop_duplicates(subset=["CD_PERMN"])
         if not df_final.empty:
             succ = int(df_final["Reussite"].sum())
             total_eleves = int(df_final["CD_PERMN"].nunique())
@@ -135,6 +151,9 @@ if not df_mod.empty:
         df_mod = df_mod[df_mod["Organisme"].isin(retac_ecoles)]
     if selected_ecole != "Toutes" and "Organisme" in df_mod.columns:
         df_mod = df_mod[df_mod["Organisme"] == selected_ecole]
+    if selected_matiere != "Toutes" and "Matiere" in df_mod.columns:
+        target_color = get_matiere_color(selected_matiere)
+        df_mod = df_mod[df_mod["Matiere"].apply(get_matiere_color) == target_color]
 
 ecart_moyen_mod = 0.0
 pct_ecrasement = 0.0
@@ -576,6 +595,11 @@ if not df_f.empty and "CD_COURS_str" in df_f.columns and "RESLT_FINAL" in df_f.c
 
     # Agréger par école et par matière à sanction
     df_4e_sanction = df_4e[df_4e["Matiere_Simple"].isin(SANCTION_4E_MATIERES)].copy()
+    if selected_mat_codes and "CD_COURS_str" in df_4e_sanction.columns:
+        if selected_mat_court in SANCTION_4E_MATIERES:
+            df_4e_sanction = df_4e_sanction[df_4e_sanction["CD_COURS_str"].astype(str).str.strip().isin(selected_mat_codes)].copy()
+        else:
+            st.caption(f"ℹ️ Affichage des matières de 4e sec. ({selected_matiere} relève de la 5e sec.).")
     df_quad_ecoles = df_4e_sanction.groupby(["CD_ORGNS", "Matiere_Simple"], observed=True).agg(
         Total_Inscrits=("CD_PERMN", "nunique"),
         Nb_Echecs=("RESLT_FINAL", lambda s: (s < 60).sum())
@@ -604,7 +628,7 @@ if not df_f.empty and "CD_COURS_str" in df_f.columns and "RESLT_FINAL" in df_f.c
             hover_name="Label_Puce",
             hover_data={"Total_Inscrits": True, "Nb_Echecs": True, "Taux_Echec_Pct": ":.1f%"},
             title="Matrice 4 Quadrants : Vulnérabilité Globale vs Multi-Échecs",
-            color_discrete_sequence=PALETTE_ACCESSIBLE
+            color_discrete_map=build_matiere_color_map(df_quad_ecoles["Matiere_Simple"].unique())
         )
         fig_quad_ec.add_vline(x=med_x, line=dict(color="#64748b", dash="dot"))
         fig_quad_ec.add_hline(y=med_y, line=dict(color="#64748b", dash="dot"))
@@ -731,9 +755,9 @@ if not df_f.empty and "CD_COURS_str" in df_f.columns and "RESLT_FINAL" in df_f.c
         "les discontinuités docimologiques (creux à 58-59 % et pic de complaisance / repêchage local à 60 %)."
     )
 
-    notes_globales_df = df_f[df_f["Type_Cours"] == "Note globale"] if "Type_Cours" in df_f.columns else df_f
+    notes_globales_df = df_f_mat[df_f_mat["Type_Cours"] == "Note globale"] if (not df_f_mat.empty and "Type_Cours" in df_f_mat.columns) else df_f_mat
     if notes_globales_df.empty:
-        notes_globales_df = df_f
+        notes_globales_df = df_f_mat
     notes_seuil = pd.to_numeric(notes_globales_df["RESLT_FINAL"], errors="coerce").dropna()
     notes_zone_55_65 = notes_seuil[(notes_seuil >= 55.0) & (notes_seuil <= 65.0)].round().astype(int)
 
@@ -818,8 +842,9 @@ if df_aout_loaded.empty:
                 st.success("Résultats d'août intégrés avec succès !")
                 st.rerun()
 
-# Comparaison de l'état des échecs Juin vs Août (Rendement de la récupération estivale)
-if not df_aout_loaded.empty and not df_f.empty and "CD_PERMN" in df_f.columns and "RESLT_FINAL" in df_f.columns:
+# Préparation filtrée de la session d'août (si disponible)
+df_ao_clean = pd.DataFrame()
+if not df_aout_loaded.empty:
     df_ao_clean = df_aout_loaded.copy()
     if "CD_ORGNS" in df_ao_clean.columns:
         df_ao_clean["CD_ORGNS"] = df_ao_clean["CD_ORGNS"].apply(clean_cd_orgns)
@@ -827,12 +852,20 @@ if not df_aout_loaded.empty and not df_f.empty and "CD_PERMN" in df_f.columns an
             df_ao_clean = df_ao_clean[df_ao_clean["CD_ORGNS"].isin(set(get_ecoles_for_retac(selected_retac)))]
         if selected_ecole != "Toutes":
             df_ao_clean = df_ao_clean[df_ao_clean["CD_ORGNS"] == selected_ecole]
+    if selected_mat_codes:
+        col_c = "CD_COURS_str" if "CD_COURS_str" in df_ao_clean.columns else ("CD_COURS" if "CD_COURS" in df_ao_clean.columns else None)
+        if col_c:
+            df_ao_clean = df_ao_clean[
+                df_ao_clean[col_c].astype(str).str.replace(r"\.0$", "", regex=True).str.strip().isin(selected_mat_codes)
+            ]
     if "CD_PERMN" in df_ao_clean.columns:
         df_ao_clean["CD_PERMN"] = df_ao_clean["CD_PERMN"].astype(str).str.replace(r"\.0$", "", regex=True).str.strip()
     if "RESLT_FINAL" in df_ao_clean.columns:
         df_ao_clean["RESLT_FINAL"] = pd.to_numeric(df_ao_clean["RESLT_FINAL"], errors="coerce")
 
-    echecs_juin_ids = set(df_f[pd.to_numeric(df_f["RESLT_FINAL"], errors="coerce") < 60.0]["CD_PERMN"].unique())
+# Comparaison de l'état des échecs Juin vs Août (Rendement de la récupération estivale)
+if not df_ao_clean.empty and not df_f_mat.empty and "CD_PERMN" in df_f_mat.columns and "RESLT_FINAL" in df_f_mat.columns:
+    echecs_juin_ids = set(df_f_mat[pd.to_numeric(df_f_mat["RESLT_FINAL"], errors="coerce") < 60.0]["CD_PERMN"].unique())
     echecs_aout_ids = set(df_ao_clean[df_ao_clean["RESLT_FINAL"] < 60.0]["CD_PERMN"].unique()) if "RESLT_FINAL" in df_ao_clean.columns else set()
     presents_aout_ids = set(df_ao_clean["CD_PERMN"].unique()) if "CD_PERMN" in df_ao_clean.columns else set()
 
@@ -881,11 +914,11 @@ if not df_aout_loaded.empty and not df_f.empty and "CD_PERMN" in df_f.columns an
         )
         fig_ete.update_traces(textposition="outside")
         st.plotly_chart(apply_standard_layout(fig_ete, height=300), use_container_width=True)
-elif not df_f.empty:
+elif not df_f_mat.empty:
     st.caption("ℹ️ *Chargez le fichier CHAP060105 d'août pour activer le calcul automatique du **Rendement de la récupération estivale (Taux de conversion post-août)**.*")
 
 # Source active pour le GPS (session d'août si dispo, sinon session régulière de juin)
-df_gps_source = df_aout_loaded if not df_aout_loaded.empty else df_f
+df_gps_source = df_ao_clean if not df_aout_loaded.empty else df_f_mat
 if not df_aout_loaded.empty:
     st.info("**Données actives : Session d'août (post-école d'été)** — Analyse de la persévérance consolidée.")
 

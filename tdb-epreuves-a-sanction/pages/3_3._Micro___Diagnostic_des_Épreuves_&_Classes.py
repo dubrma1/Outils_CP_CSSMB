@@ -21,8 +21,8 @@ if root_dir not in sys.path:
 
 from core.schema import (
     clean_cd_orgns, ECOLES_LIST, SUBJECT_MAP, EPREUVES_MAP,
-    CODE_TO_MATIERE, CODE_TO_EPREUVE, classify_group_type, ENRICHED_CODES,
-    ECOLES_ADAPTATION
+    CODE_TO_MATIERE, CODE_TO_EPREUVE, EPREUVE_TO_MATIERE, SANCTION_MATIERES_MAP,
+    CODE_TO_COMPETENCE, classify_group_type, ENRICHED_CODES, ECOLES_ADAPTATION
 )
 from core.state import get_df_main, get_teacher_opt_in
 from core.metrics import (
@@ -33,11 +33,11 @@ from core.privacy import filter_small_cells, sanitize_teacher_display
 from ui.theme import (
     BLEU_QUEBEC, BLEU_QUEBEC_LIGHT, PALETTE_ACCESSIBLE,
     PRIMARY_QUEBEC, SECONDARY_QUEBEC, ACCENT_QUEBEC, DANGER_QUEBEC, SUCCESS_QUEBEC,
-    inject_quebec_theme
+    build_matiere_color_map, build_ecole_color_map, inject_quebec_theme
 )
 from ui.kpi_cards import render_kpi_card
 from ui.charts import (
-    plot_rates_bar_with_ci, apply_standard_layout, download_csv_button
+    plot_rates_bar_with_ci, plot_competencies_avg_bar, apply_standard_layout, download_csv_button
 )
 from ui.action_panel import render_action_panel
 from ui.explainers import render_explainer, render_about_data
@@ -94,6 +94,21 @@ selected_ecoles = st.sidebar.multiselect(
     key="micro_ecoles"
 )
 
+selected_matieres = st.sidebar.multiselect(
+    "Sélection des matières :",
+    options=list(SUBJECT_MAP.keys()),
+    default=list(SUBJECT_MAP.keys()),
+    key="micro_matieres"
+)
+
+allowed_codes_sel: set[str] = set()
+for m in selected_matieres:
+    for c in SANCTION_MATIERES_MAP.get(m, {}).get("codes", []):
+        c_str = str(c).strip()
+        allowed_codes_sel.add(c_str)
+        allowed_codes_sel.add(c_str.lstrip("0"))
+        allowed_codes_sel.add(c_str.zfill(6))
+
 allow_teacher = get_teacher_opt_in()
 
 # -----------------------------------------------------------------------------
@@ -130,6 +145,8 @@ else:
     mask_mat = df_sub["CD_COURS_str"].isin(CODE_TO_MATIERE.keys())
 df_mat_sub = df_sub[mask_mat].copy()
 df_mat_sub["Nom_Matiere"] = df_mat_sub["CD_COURS_str"].map(CODE_TO_MATIERE)
+if len(selected_matieres) < len(SUBJECT_MAP):
+    df_mat_sub = df_mat_sub[df_mat_sub["Nom_Matiere"].isin(selected_matieres)].copy()
 
 stats_mat = pd.DataFrame()
 if not df_mat_sub.empty and "CD_PERMN" in df_mat_sub.columns and "Reussite" in df_mat_sub.columns:
@@ -147,6 +164,8 @@ if not df_mat_sub.empty and "CD_PERMN" in df_mat_sub.columns and "Reussite" in d
 mask_epr = df_sub["CD_COURS_str"].isin(CODE_TO_EPREUVE.keys())
 df_epr_sub = df_sub[mask_epr].copy()
 df_epr_sub["Nom_Epreuve"] = df_epr_sub["CD_COURS_str"].map(CODE_TO_EPREUVE)
+if len(selected_matieres) < len(SUBJECT_MAP):
+    df_epr_sub = df_epr_sub[df_epr_sub["Nom_Epreuve"].map(EPREUVE_TO_MATIERE).isin(selected_matieres)].copy()
 
 stats_epr = pd.DataFrame()
 if not df_epr_sub.empty and "NOTE_MINST_CONVR" in df_epr_sub.columns:
@@ -174,7 +193,8 @@ with col_bar1:
         fig_mat = plot_rates_bar_with_ci(
             stats_mat_vis,
             x_col="École", y_col="Taux de réussite (%)", color_col="Nom_Matiere",
-            title="Réussite globale par matière et établissement (IC 95%)"
+            title="Réussite globale par matière et établissement (IC 95%)",
+            color_map=build_matiere_color_map(stats_mat_vis["Nom_Matiere"].unique())
         )
         st.plotly_chart(fig_mat, use_container_width=True)
     else:
@@ -187,15 +207,23 @@ with col_bar2:
         fig_epr = plot_rates_bar_with_ci(
             stats_epr_vis,
             x_col="École", y_col="Taux de réussite (%)", color_col="Nom_Epreuve",
-            title="Réussite aux épreuves uniques par établissement (IC 95%)"
+            title="Réussite aux épreuves uniques par établissement (IC 95%)",
+            color_map=build_matiere_color_map(stats_epr_vis["Nom_Epreuve"].unique())
         )
         st.plotly_chart(fig_epr, use_container_width=True)
     else:
         st.info("Données d'épreuves uniques non disponibles.")
 
-# C. Compétences disciplinaires ministérielles : Taux de réussite (%) et Moyennes (%) par établissement
-st.markdown("##### C. Visualisation des Compétences Disciplinaires par Établissement (Taux de Réussite & Moyennes)")
-st.caption("Profil comparatif des compétences d'évaluation : Mathématiques (Résoudre C1 vs Raisonner C2), Sciences (Pratique C1 vs Théorie C2) et Français (Oral C1, Lecture C2, Écriture C3).")
+st.markdown("---")
+
+# -----------------------------------------------------------------------------
+# 2. MOYENNES AUX COMPÉTENCES ET VOLETS & COHÉRENCE INTRA-MATIÈRE
+# -----------------------------------------------------------------------------
+st.subheader("2. Moyennes aux compétences et volets : quelles composantes disciplinaires fragilisent les résultats ?")
+st.caption(
+    "Vue volontairement dense par défaut (toutes les écoles et matières sélectionnées) — "
+    "utilisez les filtres **Établissements** et **Matières** dans le menu de gauche pour isoler une comparaison ciblée."
+)
 
 # Extraction des composantes de compétences (tolérant aux filtres amont)
 df_comp_in = df_sub.copy()
@@ -211,13 +239,61 @@ if not has_comp and not df_main.empty:
         enrichis_ids = set(df_comp_in.loc[df_comp_in["CD_COURS_str"].isin(["058404", "058402", "58404", "58402"]), "CD_PERMN"].unique())
         df_comp_in = df_comp_in[~df_comp_in["CD_PERMN"].isin(enrichis_ids)]
 
-s_c_code = df_comp_in["CD_COURS_str"].astype(str).str.replace(r"\.0$", "", regex=True).str.strip() if "CD_COURS_str" in df_comp_in.columns else pd.Series(index=df_comp_in.index)
-mapped_c = s_c_code.map(_map_code_to_comp)
+if len(selected_matieres) < len(SUBJECT_MAP) and "CD_COURS_str" in df_comp_in.columns:
+    if selected_matieres:
+        df_comp_in = df_comp_in[df_comp_in["CD_COURS_str"].astype(str).str.strip().isin(allowed_codes_sel)].copy()
+    else:
+        df_comp_in = df_comp_in.iloc[0:0].copy()
 
+s_c_code = df_comp_in["CD_COURS_str"].astype(str).str.replace(r"\.0$", "", regex=True).str.strip() if "CD_COURS_str" in df_comp_in.columns else pd.Series(dtype=str, index=df_comp_in.index)
 s_c_note = pd.to_numeric(df_comp_in["RESLT_FINAL"].astype(str).str.replace(",", "."), errors="coerce") if "RESLT_FINAL" in df_comp_in.columns else pd.Series(np.nan, index=df_comp_in.index)
 for fb in ("NOTE_ECOLE_BRUT", "NOTE_ECOLE_BRUTE", "NOTE_ECOLE_MODR", "NOTE_MINST_CONVR"):
     if fb in df_comp_in.columns:
         s_c_note = s_c_note.fillna(pd.to_numeric(df_comp_in[fb].astype(str).str.replace(",", "."), errors="coerce"))
+
+# 2.A Vue d'ensemble multi-compétences / volets
+st.markdown("##### 2.A Vue d'ensemble multi-compétences / volets (filtrable par établissement et matière)")
+mapped_comp_meta = s_c_code.map(CODE_TO_COMPETENCE)
+mask_comp_bar = mapped_comp_meta.notna() & s_c_note.notna()
+if mask_comp_bar.any():
+    df_comp_bar = pd.DataFrame({
+        "CD_PERMN": df_comp_in.loc[mask_comp_bar, "CD_PERMN"].astype(str).str.strip() if "CD_PERMN" in df_comp_in.columns else df_comp_in.index[mask_comp_bar].astype(str),
+        "École": df_comp_in.loc[mask_comp_bar, "CD_ORGNS"].apply(clean_cd_orgns) if "CD_ORGNS" in df_comp_in.columns else "",
+        "Groupe": df_comp_in.loc[mask_comp_bar, "Groupe_Virtuel"].astype(str) if "Groupe_Virtuel" in df_comp_in.columns else (df_comp_in.loc[mask_comp_bar, "CD_ORGNS"].apply(clean_cd_orgns) if "CD_ORGNS" in df_comp_in.columns else ""),
+        "Note": s_c_note.loc[mask_comp_bar].astype("float32"),
+        "Compétence / Volet": [m["label"] for m in mapped_comp_meta.loc[mask_comp_bar]],
+        "Matière": [m["matiere_court"] for m in mapped_comp_meta.loc[mask_comp_bar]],
+    }, index=df_comp_in.index[mask_comp_bar])
+
+    x_col_comp = "Groupe" if len(selected_ecoles) == 1 else "École"
+    df_comp_agg = df_comp_bar.groupby([x_col_comp, "Compétence / Volet", "Matière"], observed=True).agg(
+        Moyenne_Raw=("Note", "mean"),
+        Effectif=("CD_PERMN", "nunique")
+    ).reset_index()
+    df_comp_agg["Moyenne (%)"] = df_comp_agg["Moyenne_Raw"].round(1)
+    df_comp_vis_bar, _ = filter_small_cells(df_comp_agg.drop(columns=["Moyenne_Raw"]), count_col="Effectif", min_count=5)
+
+    if not df_comp_vis_bar.empty:
+        fig_comp_bar = plot_competencies_avg_bar(
+            df_comp_vis_bar,
+            x_col=x_col_comp,
+            y_col="Moyenne (%)",
+            color_col="Compétence / Volet",
+            title=f"Moyennes aux compétences et volets par {'groupe' if x_col_comp == 'Groupe' else 'établissement'} (%)",
+            color_map=build_matiere_color_map(df_comp_vis_bar["Compétence / Volet"].unique()),
+        )
+        st.plotly_chart(fig_comp_bar, use_container_width=True)
+        download_csv_button(df_comp_vis_bar, "moyennes_competences_volets.csv", "Télécharger les moyennes par compétence (CSV)")
+    else:
+        st.info("Effectif insuffisant (N < 5) pour afficher les moyennes par compétence.")
+else:
+    st.info("Données de compétences/volets non disponibles pour la sélection active.")
+
+# 2.B Profil comparatif ciblé par famille disciplinaire (Taux de Réussite & Moyennes)
+st.markdown("##### 2.B Profil comparatif par famille disciplinaire (Taux de Réussite & Moyennes)")
+st.caption("Comparaison ciblée par famille : Mathématiques (Résoudre C1 vs Raisonner C2), Sciences (Pratique C1 vs Théorie C2) et Français (Oral C1, Lecture C2, Écriture C3).")
+
+mapped_c = s_c_code.map(_map_code_to_comp)
 
 mask_c = mapped_c.notna() & s_c_note.notna()
 if mask_c.any():
@@ -320,9 +396,9 @@ else:
 st.markdown("---")
 
 # -----------------------------------------------------------------------------
-# 2. ANALYSE DES ÉCARTS SIGNIFICATIFS ENTRE LES COMPÉTENCES D'UNE MÊME MATIÈRE
+# 2.C ANALYSE DES ÉCARTS SIGNIFICATIFS ENTRE LES COMPÉTENCES D'UNE MÊME MATIÈRE
 # -----------------------------------------------------------------------------
-st.subheader("2. Cohérence intra-matière : quels groupes-écoles présentent un écart significatif entre les compétences d'une même discipline ?")
+st.markdown("#### 2.C Cohérence intra-matière : quels groupes-écoles présentent un écart significatif entre les compétences d'une même discipline ?")
 st.markdown(
     "Analyse comparative au sein des groupes-écoles pour détecter les ruptures didactiques et les effets de compensation "
     f"entre compétences d'une même matière (seuil d'écart $|\\Delta| \\ge {seuil_ecart_comp:.0f}\\text{{ pts}}$ ou $|d| \\ge {seuil_cohen_comp:.1f}$, test $t$ apparié $p < 0{{,}}05$) : "
@@ -749,6 +825,11 @@ mask_reg = (
     (~df_sub["CD_ORGNS"].isin(ECOLES_ADAPTATION))
 )
 df_reguliers = df_sub[mask_reg].copy()
+if len(selected_matieres) < len(SUBJECT_MAP) and "CD_COURS_str" in df_reguliers.columns:
+    if selected_matieres:
+        df_reguliers = df_reguliers[df_reguliers["CD_COURS_str"].astype(str).str.strip().isin(allowed_codes_sel)].copy()
+    else:
+        df_reguliers = df_reguliers.iloc[0:0].copy()
 
 if not df_reguliers.empty and "Groupe_Virtuel" in df_reguliers.columns and "Reussite" in df_reguliers.columns:
     df_reguliers["Reussite_Num"] = df_reguliers["Reussite"].astype(int)
@@ -769,11 +850,13 @@ if not df_reguliers.empty and "Groupe_Virtuel" in df_reguliers.columns and "Reus
             grp_stats,
             x="CD_ORGNS",
             y="Taux_Reussite_Pct",
+            color="CD_ORGNS",
+            color_discrete_map=build_ecole_color_map(grp_stats["CD_ORGNS"].unique()),
             points="all",
             title=f"Dispersion des Taux de Réussite entre Groupes Réguliers (Groupes ≥ {min_eleves_micro} élèves)",
             labels={"CD_ORGNS": "Établissement", "Taux_Reussite_Pct": "Taux de Réussite du Groupe (%)"},
-            color_discrete_sequence=[BLEU_QUEBEC]
         )
+        fig_seg.update_layout(showlegend=False)
         fig_seg.update_xaxes(type="category", tickangle=45)
         st.plotly_chart(apply_standard_layout(fig_seg, height=420), use_container_width=True)
 
@@ -823,6 +906,11 @@ On calcule le ratio d'écrasement par groupe pour isoler les **valeurs extrêmes
 
 if "NOTE_MINST_CONVR" in df_sub.columns and "NOTE_ECOLE_MODR" in df_sub.columns and "Groupe_Virtuel" in df_sub.columns:
     df_ecras_in = df_sub.dropna(subset=["NOTE_MINST_CONVR", "NOTE_ECOLE_MODR"]).copy()
+    if len(selected_matieres) < len(SUBJECT_MAP) and "CD_COURS_str" in df_ecras_in.columns:
+        if selected_matieres:
+            df_ecras_in = df_ecras_in[df_ecras_in["CD_COURS_str"].astype(str).str.strip().isin(allowed_codes_sel)].copy()
+        else:
+            df_ecras_in = df_ecras_in.iloc[0:0].copy()
     df_ecras_in["NOTE_MINST_CONVR"] = pd.to_numeric(df_ecras_in["NOTE_MINST_CONVR"], errors="coerce")
     df_ecras_in["NOTE_ECOLE_MODR"] = pd.to_numeric(df_ecras_in["NOTE_ECOLE_MODR"], errors="coerce")
     df_ecras_in["Ecrasee"] = df_ecras_in["NOTE_MINST_CONVR"] >= df_ecras_in["NOTE_ECOLE_MODR"]

@@ -2,9 +2,15 @@
 import pandas as pd
 import numpy as np
 import pytest
-from ui.theme import STATUS_CONFIG, ANOMALIE_MAP, QUEBEC_CSS, PRIMARY_QUEBEC, SECONDARY_QUEBEC, ACCENT_QUEBEC, DANGER_QUEBEC, SUCCESS_QUEBEC, inject_quebec_theme
+from ui.theme import (
+    STATUS_CONFIG, ANOMALIE_MAP, QUEBEC_CSS, PRIMARY_QUEBEC, SECONDARY_QUEBEC,
+    ACCENT_QUEBEC, DANGER_QUEBEC, SUCCESS_QUEBEC, inject_quebec_theme,
+    MATIERE_COLOR_MAP, COMPETENCE_COLOR_MAP, ECOLE_COLOR_MAP,
+    get_matiere_color, get_ecole_color
+)
 from ui.charts import (
     plot_rates_bar_with_ci,
+    plot_competencies_avg_bar,
     plot_moderation_scatter,
     plot_quadrants_matrix,
     plot_venn2_plotly,
@@ -148,9 +154,112 @@ def test_sidebar_pages_hierarchy_and_naming():
     resolved_labels = []
     for f in py_files:
         _, name = su.page_icon_and_name(f)
-        resolved_labels.append(name.replace("_", " "))
+        s = name.replace("_", " ")
+        for pfx in ("Macro", "Méso", "Micro", "Prescription"):
+            if f"{pfx} :" not in s and f"{pfx} " in s:
+                s = s.replace(f"{pfx} ", f"{pfx} : ", 1)
+        while "  " in s:
+            s = s.replace("  ", " ")
+        resolved_labels.append(s.strip())
 
     assert resolved_labels == expected_labels
 
 
+def test_color_consistency_across_subjects_and_schools():
+    from core.schema import SUBJECT_MAP, ECOLES_LIST, CODE_TO_COMPETENCE
+
+    # Cohérence inter-graphiques et inter-pages pour toutes les matières de SUBJECT_MAP
+    for mat_full, info in SUBJECT_MAP.items():
+        c_full = get_matiere_color(mat_full)
+        c_court = get_matiere_color(info["nom_court"])
+        c_epr = get_matiere_color(info["epreuve_nom"])
+        assert c_full == c_court == c_epr
+
+    # Vérification explicite Science ST et Math CST
+    assert get_matiere_color("Science ST (55444)") == get_matiere_color("Science ST") == get_matiere_color("Science ST (Théorie)")
+    assert get_matiere_color("Science ST") != get_matiere_color("Math CST")
+
+    # Toutes les écoles de ECOLES_LIST sont couvertes
+    for ecole in ECOLES_LIST:
+        assert ecole in ECOLE_COLOR_MAP
+        assert get_ecole_color(ecole) == ECOLE_COLOR_MAP[ecole]
+        assert get_ecole_color(f"763{ecole}") == ECOLE_COLOR_MAP[ecole]
+
+    # Les compétences sont présentes dans CODE_TO_COMPETENCE et COMPETENCE_COLOR_MAP
+    assert CODE_TO_COMPETENCE["55410"]["label"] == "Science ST — Théorie"
+    assert "Science ST — Théorie" in COMPETENCE_COLOR_MAP
+
+
+def test_plot_competencies_avg_bar_and_fixed_colors():
+    df_comp = pd.DataFrame({
+        "École": ["041", "041", "245", "245"],
+        "Matière": ["Science ST (55444)", "Science ST (55444)", "Math CST (63414)", "Math CST (63414)"],
+        "Compétence / Volet": ["Science ST — Théorie", "Science ST — Pratique", "Math CST — Raisonner", "Math CST — Résoudre"],
+        "Moyenne (%)": [71.5, 78.2, 68.0, 64.5],
+        "Effectif": [30, 30, 28, 28],
+        "Écart-type (%)": [9.4, 8.1, 11.2, 12.0]
+    })
+    fig = plot_competencies_avg_bar(df_comp)
+    assert fig is not None
+    assert len(fig.data) == 4
+    trace_colors = {t.name: t.marker.color for t in fig.data}
+    assert trace_colors["Science ST — Théorie"] == COMPETENCE_COLOR_MAP["Science ST — Théorie"]
+    assert trace_colors["Math CST — Raisonner"] == COMPETENCE_COLOR_MAP["Math CST — Raisonner"]
+
+    # Vérifie que plot_rates_bar_with_ci applique aussi le dictionnaire cohérent
+    df_rates = pd.DataFrame({
+        "École": ["041", "041"],
+        "Taux de réussite (%)": [82.0, 74.0],
+        "Nom_Matiere": ["Science ST (55444)", "Math CST (63414)"],
+        "CI_lower": [75.0, 66.0],
+        "CI_upper": [88.0, 81.0],
+        "Effectif": [40, 40],
+        "Echecs": [7, 10]
+    })
+    fig_rates = plot_rates_bar_with_ci(df_rates)
+    rate_colors = {t.name: t.marker.color for t in fig_rates.data}
+    assert rate_colors["Science ST (55444)"] == MATIERE_COLOR_MAP["Science ST"]
+    assert rate_colors["Math CST (63414)"] == MATIERE_COLOR_MAP["Math CST"]
+
+
+def test_micro_page_sections_and_filters():
+    from pathlib import Path
+
+    pages_dir = Path(__file__).resolve().parent.parent / "pages"
+    micro_path = next(p for p in pages_dir.glob("*Micro*.py") if p.is_file())
+    content = micro_path.read_text(encoding="utf-8")
+    assert "Sélection des matières :" in content
+    assert "1. Évaluation locale vs Épreuve unique" in content
+    assert "2. Moyennes aux compétences et volets" in content
+    assert "3. Composition des classes" in content
+    assert "4. Outliers de sanction" in content
+    assert content.index("1. Évaluation locale") < content.index("2. Moyennes aux compétences") < content.index("2.C Cohérence intra-matière") < content.index("3. Composition des classes") < content.index("4. Outliers de sanction")
+
+
+def test_github_20_schools_anglais_enrichi_and_no_whatif():
+    from pathlib import Path
+    from core.schema import ECOLES_LIST, ECOLES_ADAPTATION
+    from ui.theme import get_ecole_color, get_matiere_color, ECOLE_COLOR_MAP, MATIERE_COLOR_MAP
+
+    assert len(ECOLES_LIST) == 20
+    for code in ("135", "137", "237", "280"):
+        assert code in ECOLES_LIST
+        assert code in ECOLE_COLOR_MAP
+        assert get_ecole_color(code) == ECOLE_COLOR_MAP[code]
+        assert get_ecole_color(f"{code} - École test") == ECOLE_COLOR_MAP[code]
+    assert len(ECOLES_ADAPTATION) == 5
+
+    assert "Anglais enrichi" in MATIERE_COLOR_MAP
+    assert get_matiere_color("Anglais enrichi") == MATIERE_COLOR_MAP["Anglais enrichi"]
+    assert get_matiere_color("Anglais 5 enrichi (136504)") == MATIERE_COLOR_MAP["Anglais enrichi"]
+
+    root = Path(__file__).resolve().parent.parent
+    macro_path = next(p for p in (root / "pages").glob("*Macro*.py") if p.is_file())
+    macro_txt = macro_path.read_text(encoding="utf-8")
+    assert "show_matieres=True" in macro_txt
+    assert "plot_janosz_matrix_2d" in macro_txt
+
+    for py_file in [root / "ui" / "filters.py", *sorted((root / "pages").glob("*.py"))]:
+        txt = py_file.read_text(encoding="utf-8")
+        assert "What-If" not in txt, f"Mention 'What-If' résiduelle trouvée dans {py_file.name}"
 

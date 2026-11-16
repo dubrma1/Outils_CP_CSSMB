@@ -125,10 +125,10 @@ def render_sidebar_filters(
         update_global_filter("filter_enriched", sel_reg)
         selected["filter_enriched"] = sel_reg
 
-    # 4. Sliders docimologiques What-If
+    # 4. Sliders docimologiques
     if show_thresholds:
         st.sidebar.markdown("---")
-        st.sidebar.subheader("Seuils d'alerte (What-If)")
+        st.sidebar.subheader("Seuils d'alerte")
         cohen_val = st.sidebar.slider(
             "Seuil d'anomalie |Taille de l'effet| :",
             min_value=0.2, max_value=2.0, value=0.8, step=0.1,

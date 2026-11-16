@@ -125,9 +125,9 @@ sel_finissants_tension = st.sidebar.checkbox(
     help="Isole les élèves cumulant ≥ 48 crédits (NB_CREDITS_CUMUL >= 48) et à qui il ne manque que 1 ou 2 cours de sanction."
 )
 
-# Sliders What-If de ciblage
+# Sliders de ciblage
 st.sidebar.markdown("---")
-st.sidebar.subheader("Ciblage Docimologique (What-If)")
+st.sidebar.subheader("Ciblage Docimologique")
 default_max_note = 100 if sel_profil_janosz in ("Désengagé", "Non à risque") else 59
 default_min_note = 0 if sel_profil_janosz in ("Sous-performant", "Inadapté (Multi-risques)", "Désengagé", "Non à risque") else 50
 plage_notes = st.sidebar.slider(

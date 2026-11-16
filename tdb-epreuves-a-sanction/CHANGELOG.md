@@ -4,6 +4,38 @@ Toutes les modifications notables apportées au projet `tdb-ingenierie-pedagogiq
 
 ---
 
+## [2.4.0] - Fusion Base GitHub (Typologie Janosz, 20 Écoles, Cohérence Intra-matière) & Améliorations UX
+
+### Intégration complète des évolutions de la base GitHub
+- **Référentiel complet CSSMB (20 écoles)** : Support des 20 établissements (`ECOLES_NOMS`, `ECOLES_ADAPTATION`, bassins RÉTAC élargis) tout en préservant `ECOLES_SECTEURS` et `CODE_TO_COMPETENCE`.
+- **Typologie de risque Janosz & données primaires** : Intégration du téléversement primaire (`generer_donnees_primaires.py`), des profils Janosz (`assigner_typologie_janosz`, matrices 2D et barres), des enseignants (`generer_liste_enseignants.py`), ainsi que des sections Macro étendues (Bloc 4e, chevauchement 4e/5e, seuil 55–65 %, récupération estivale Juin/Août), Méso (cartes Top-5, matrice 4 quadrants agrandie) et Prescription (5 filtres, matrice GPS).
+- **Cohérence intra-matière (`compute_competency_gaps_by_group`)** : Conservation intégrale des analyses par tests $t$ appariés et $|d|$ de Cohen en Page 3 (Micro).
+
+### Harmonisation Visuelle, Filtres & Nettoyage
+- **Couleurs fixes 20 écoles & matières (incl. Anglais enrichi)** : Extension du dictionnaire cohérent dans `ui/theme.py` / `core/schema.py` à l'ensemble des 20 écoles et à `Anglais enrichi` (`#be185d`), appliqué sur Macro, Méso, Micro et `ui/charts.py`.
+- **Page 3 (Micro)** : Vue multi-compétences/volets en section `2.A` (`plot_competencies_avg_bar`), conservation des profils par famille (`2.B`) et de la cohérence intra-matière (`2.C`), puis `3. Composition des classes` et `4. Outliers de sanction`; ajout du filtre **Sélection des matières** dans la barre latérale.
+- **Page 1 (Macro)** : Activation du filtre matière dans la barre latérale (`show_matieres=True`) relié aux KPIs, à la matrice 4 quadrants, à l'analyse de seuil et au GPS estival.
+- **Suppression de `(What-If)`** : Retrait de la mention dans `ui/filters.py` et en Page 4 (`Ciblage Docimologique`).
+- **Empaquetage Stlite (`index.html`)** : Synchronisation des 27 modules dans `stliteConfig.files`.
+
+---
+
+## [2.3.2] - Moyennes aux Compétences, Filtres Matières & Dictionnaire Cohérent de Couleurs
+
+### Moyennes aux Compétences / Volets & Réorganisation (Page 3 - Micro)
+- **Nouvelle section 2 (`2. Moyennes aux compétences et volets`)** : Ajout après `1. Évaluation locale vs Épreuve unique` d'un diagramme à bandes groupées illustrant les moyennes (%) aux différentes compétences et volets (`CODE_TO_COMPETENCE`, `plot_competencies_avg_bar`), avec ligne de référence à 60 % et respect Loi 25 ($N \ge 5$). Dense par défaut (toutes écoles et matières sélectionnées) afin de guider le filtrage par l'utilisateur.
+- **Décalage d'un niveau** : `Composition des classes` passe au niveau `3.` et `Outliers de sanction` au niveau `4.`.
+
+### Dictionnaire Cohérent de Couleurs (Matières, Compétences & Écoles)
+- **Couleurs fixes inter-graphiques et inter-pages** : Création dans `ui/theme.py` (et exposition dans `core/schema.py`) des dictionnaires `MATIERE_BASE_COLORS`, `MATIERE_COLOR_MAP`, `COMPETENCE_COLOR_MAP` et `ECOLE_COLOR_MAP`, accompagnés des résolveurs `get_matiere_color`, `get_ecole_color`, `build_matiere_color_map` et `build_ecole_color_map`.
+- **Application transversale** : Intégration dans `ui/charts.py` (`plot_rates_bar_with_ci`, `plot_competencies_avg_bar`, `plot_venn3_plotly`) ainsi que dans les pages Macro, Méso et Micro.
+
+### Filtres Matières dans la Barre Latérale
+- **Page 3 (Micro)** : Ajout du filtre `Sélection des matières :` en plus de `Sélection des établissements :`, pilotant l'ensemble des graphiques de la page.
+- **Page 1 (Macro) & Page 2 (Méso)** : Activation / ajout des filtres matières et établissements dans la barre latérale.
+
+---
+
 ## [2.3.1] - Inversion des Couleurs de Fond & Révision des Titres de Navigation
 
 ### Inversion des Couleurs de Fond (Barre Latérale Bleu-Vert Pâle & Fenêtre Principale Blanche)

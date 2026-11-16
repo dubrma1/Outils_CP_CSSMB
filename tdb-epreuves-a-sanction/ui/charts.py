@@ -22,7 +22,13 @@ from ui.theme import (
     SECONDARY_QUEBEC,
     MUTED_QUEBEC,
     DANGER_QUEBEC,
-    SUCCESS_QUEBEC
+    SUCCESS_QUEBEC,
+    MATIERE_COLOR_MAP,
+    ECOLE_COLOR_MAP,
+    get_matiere_color,
+    get_ecole_color,
+    build_matiere_color_map,
+    build_ecole_color_map,
 )
 
 
@@ -89,7 +95,8 @@ def plot_rates_bar_with_ci(
     y_col: str = "Taux de réussite (%)",
     color_col: str = "Nom_Matiere",
     title: str = "Taux de réussite avec intervalles de confiance à 95%",
-    show_ci: bool = True
+    show_ci: bool = True,
+    color_map: Optional[Dict[str, str]] = None,
 ) -> go.Figure:
     """Diagramme en bandes accessible avec barres d'erreur Wilson IC 95% (LAD P4 & P6)."""
     if df_stats is None or df_stats.empty:
@@ -100,6 +107,15 @@ def plot_rates_bar_with_ci(
     if "Texte_Echecs" not in df_plot.columns and "Echecs" in df_plot.columns:
         df_plot["Texte_Echecs"] = df_plot["Echecs"].apply(lambda x: f"{int(x)} éch.")
 
+    resolved_color_map: Optional[Dict[str, str]] = None
+    if color_col in df_plot.columns:
+        if color_map is not None:
+            resolved_color_map = color_map
+        elif any(k in color_col.lower() for k in ("ecole", "école", "orgns")):
+            resolved_color_map = build_ecole_color_map(df_plot[color_col].dropna().unique())
+        else:
+            resolved_color_map = build_matiere_color_map(df_plot[color_col].dropna().unique())
+
     fig = px.bar(
         df_plot,
         x=x_col,
@@ -108,6 +124,7 @@ def plot_rates_bar_with_ci(
         barmode="group",
         text="Texte_Echecs" if "Texte_Echecs" in df_plot.columns else None,
         hover_data=[c for c in ["Effectif", "Echecs", "CI_lower", "CI_upper"] if c in df_plot.columns],
+        color_discrete_map=resolved_color_map,
         color_discrete_sequence=PALETTE_ACCESSIBLE
     )
 
@@ -129,6 +146,47 @@ def plot_rates_bar_with_ci(
     fig.update_xaxes(type="category", tickangle=45)
     fig.update_yaxes(range=[0, 115], title_text="Taux de réussite (%)")
     return apply_standard_layout(fig, title=title)
+
+
+def plot_competencies_avg_bar(
+    df_comp: pd.DataFrame,
+    x_col: str = "École",
+    y_col: str = "Moyenne (%)",
+    color_col: str = "Compétence / Volet",
+    title: str = "Moyennes aux compétences et volets d'épreuves",
+    color_map: Optional[Dict[str, str]] = None,
+) -> go.Figure:
+    """Diagramme à bandes groupées des moyennes par compétence/volet avec couleurs fixes."""
+    if df_comp is None or df_comp.empty:
+        return apply_standard_layout(go.Figure(), title="Aucune donnée de compétence disponible")
+
+    df_plot = df_comp.copy()
+    resolved_color_map: Optional[Dict[str, str]] = None
+    if color_col in df_plot.columns:
+        if color_map is not None:
+            resolved_color_map = color_map
+        elif any(k in color_col.lower() for k in ("ecole", "école", "orgns")):
+            resolved_color_map = build_ecole_color_map(df_plot[color_col].dropna().unique())
+        else:
+            resolved_color_map = build_matiere_color_map(df_plot[color_col].dropna().unique())
+
+    fig = px.bar(
+        df_plot,
+        x=x_col,
+        y=y_col,
+        color=color_col if color_col in df_plot.columns else None,
+        barmode="group",
+        text=y_col,
+        hover_data=[c for c in ["Effectif", "Matière", "Groupe"] if c in df_plot.columns],
+        color_discrete_map=resolved_color_map,
+        color_discrete_sequence=PALETTE_ACCESSIBLE,
+    )
+    fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
+    fig.add_hline(y=60, line_dash="dash", line_color="#64748b", opacity=0.65)
+    fig.update_xaxes(type="category", tickangle=45)
+    fig.update_yaxes(range=[0, 112], title_text=y_col)
+    fig.update_layout(legend_title_text=color_col)
+    return apply_standard_layout(fig, title=title, height=520)
 
 
 def plot_moderation_scatter(
@@ -344,6 +402,20 @@ def plot_venn2_plotly(set_a: Set[Any], set_b: Set[Any], label_a: str = "A", labe
     return apply_standard_layout(fig, title=title, height=360)
 
 
+def _hex_to_rgba(hex_color: str, alpha: float = 0.32) -> str:
+    """Convertit un code hexadécimal (#RRGGBB) en rgba(r, g, b, alpha)."""
+    h = str(hex_color).strip().lstrip("#")
+    if len(h) == 3:
+        h = "".join(c * 2 for c in h)
+    if len(h) != 6:
+        return f"rgba(20, 114, 191, {alpha})"
+    try:
+        r, g, b = int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
+        return f"rgba({r}, {g}, {b}, {alpha})"
+    except ValueError:
+        return f"rgba(20, 114, 191, {alpha})"
+
+
 def plot_venn3_plotly(
     set_a: Set[Any], set_b: Set[Any], set_c: Set[Any],
     label_a: str = "A", label_b: str = "B", label_c: str = "C",
@@ -358,13 +430,17 @@ def plot_venn3_plotly(
     bc_only = len((set_b & set_c) - set_a)
     all_three = len(set_a & set_b & set_c)
 
+    col_a = get_matiere_color(label_a)
+    col_b = get_matiere_color(label_b)
+    col_c = get_matiere_color(label_c)
+
     fig = go.Figure()
     fig.add_shape(type="circle", xref="x", yref="y", x0=-0.95, y0=-0.35, x1=0.25, y1=0.85,
-                  fillcolor="rgba(0, 114, 178, 0.35)", line_color="#0072B2", line_width=2)
+                  fillcolor=_hex_to_rgba(col_a, 0.32), line_color=col_a, line_width=2)
     fig.add_shape(type="circle", xref="x", yref="y", x0=-0.25, y0=-0.35, x1=0.95, y1=0.85,
-                  fillcolor="rgba(213, 94, 0, 0.35)", line_color="#D55E00", line_width=2)
+                  fillcolor=_hex_to_rgba(col_b, 0.32), line_color=col_b, line_width=2)
     fig.add_shape(type="circle", xref="x", yref="y", x0=-0.6, y0=-0.95, x1=0.6, y1=0.25,
-                  fillcolor="rgba(0, 158, 115, 0.35)", line_color="#009E73", line_width=2)
+                  fillcolor=_hex_to_rgba(col_c, 0.32), line_color=col_c, line_width=2)
 
     fig.add_annotation(x=-0.50, y=0.38, text=f"<b>{only_a}</b>", showarrow=False, font=dict(size=13, color="#1e293b"))
     fig.add_annotation(x=0.50, y=0.38, text=f"<b>{only_b}</b>", showarrow=False, font=dict(size=13, color="#1e293b"))
@@ -374,9 +450,9 @@ def plot_venn3_plotly(
     fig.add_annotation(x=0.32, y=-0.15, text=f"<b>{bc_only}</b>", showarrow=False, font=dict(size=12, color="#1e293b"))
     fig.add_annotation(x=0.0, y=0.08, text=f"<b>{all_three}</b>", showarrow=False, font=dict(size=14, color="#7c3aed"))
 
-    fig.add_annotation(x=-0.55, y=0.95, text=f"<b>{label_a}</b>", showarrow=False, font=dict(size=12, color="#0072B2"))
-    fig.add_annotation(x=0.55, y=0.95, text=f"<b>{label_b}</b>", showarrow=False, font=dict(size=12, color="#D55E00"))
-    fig.add_annotation(x=0.0, y=-1.05, text=f"<b>{label_c}</b>", showarrow=False, font=dict(size=12, color="#009E73"))
+    fig.add_annotation(x=-0.55, y=0.95, text=f"<b>{label_a}</b>", showarrow=False, font=dict(size=12, color=col_a))
+    fig.add_annotation(x=0.55, y=0.95, text=f"<b>{label_b}</b>", showarrow=False, font=dict(size=12, color=col_b))
+    fig.add_annotation(x=0.0, y=-1.05, text=f"<b>{label_c}</b>", showarrow=False, font=dict(size=12, color=col_c))
 
     fig.update_xaxes(visible=False, range=[-1.3, 1.3])
     fig.update_yaxes(visible=False, range=[-1.2, 1.1])
