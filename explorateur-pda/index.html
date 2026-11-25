@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explorateur PDA PFEQ &amp; Constellation des méconceptions (Science secondaire)</title>
+  <link rel="stylesheet" href="theme-quebec.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="piv-header">
+    <div class="piv-brand">
+      <div class="piv-emblem" aria-hidden="true">PFEQ</div>
+      <div>
+        <h1>Explorateur PDA Science &amp; Technologie</h1>
+        <p class="piv-sub">Progression des apprentissages (ST · STE · ATS · SE · Chimie · Physique) × Méconceptions BSCS</p>
+      </div>
+    </div>
+
+    <nav class="tab-nav" role="tablist" aria-label="Vues de l'explorateur">
+      <button type="button" class="tab-btn is-active" role="tab" aria-selected="true" data-action="switch-tab" data-tab="explorer">
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8.5 3a5.5 5.5 0 1 0 3.473 9.766l3.63 3.63a1 1 0 0 0 1.414-1.414l-3.63-3.63A5.5 5.5 0 0 0 8.5 3ZM5 8.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0Z" clip-rule="evenodd"/></svg>
+        <span>Recherche PDA</span>
+      </button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" data-action="switch-tab" data-tab="graph">
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M10 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-6.5-3a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm13 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-13 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm13 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/><path stroke="currentColor" stroke-width="1.4" d="M5 6.8 8 8.6M15 6.8 12 8.6M5 13.2 8 11.4M15 13.2 12 11.4"/></svg>
+        <span>Constellation (Nœuds)</span>
+      </button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" data-action="switch-tab" data-tab="matrix">
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M3 4a1 1 0 0 1 1-1h3v4H3V4Zm6-1h4v4H9V3Zm6 0h1a1 1 0 0 1 1 1v3h-2V3ZM3 9h4v4H3V9Zm6 0h4v4H9V9Zm6 0h2v4h-2V9ZM3 15h4v2H4a1 1 0 0 1-1-1v-1Zm6 0h4v2H9v-2Zm6 0h2v1a1 1 0 0 1-1 1h-1v-2Z"/></svg>
+        <span>Nœuds critiques</span>
+      </button>
+    </nav>
+
+    <div class="piv-tools">
+      <a class="btn-header-link" href="../catalogue_conceptions/index.html" title="Ouvrir le catalogue distinct des méconceptions BSCS">Catalogue BSCS ↗</a>
+      <button type="button" class="btn-header-icon" data-action="open-legend" title="Légende officielle MEQ et mode d'emploi" aria-label="Légende officielle MEQ">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== ONGLET 1 : RECHERCHE PDA ==================== -->
+  <section id="tab-explorer" class="tab-panel is-active" role="tabpanel">
+    <div class="workbench">
+      <!-- Barre latérale de filtres PFEQ -->
+      <aside class="filter-rail" aria-label="Filtres de la Progression des apprentissages">
+        <div class="rail-header">
+          <h2>Filtres PFEQ</h2>
+          <button type="button" id="resetExplorerBtn" class="btn-text-sm" data-action="reset-explorer" hidden>Réinitialiser</button>
+        </div>
+
+        <div class="rail-group">
+          <label for="pdaSearch" class="rail-label">Recherche plein texte</label>
+          <div class="input-clear-wrap">
+            <input type="search" id="pdaSearch" class="rail-input" placeholder="Ex. agitation, pH, ADN, lentille, U = RI, PTM011…" autocomplete="off">
+            <button type="button" id="clearPdaSearch" class="mini-clear" data-action="clear-search" hidden>&times;</button>
+          </div>
+        </div>
+
+        <div class="rail-group">
+          <span class="rail-label">Programme / Niveau</span>
+          <div id="progChips" class="chip-grid" role="group" aria-label="Filtrer par programme"></div>
+        </div>
+
+        <div class="rail-group">
+          <label for="univSelect" class="rail-label">Univers PFEQ</label>
+          <select id="univSelect" class="rail-select" data-filter="univ">
+            <option value="">Tous les univers (4)</option>
+          </select>
+        </div>
+
+        <div class="rail-group">
+          <label for="secSelect" class="rail-label">Section du programme</label>
+          <select id="secSelect" class="rail-select" data-filter="sec">
+            <option value="">Toutes les sections</option>
+          </select>
+        </div>
+
+        <div class="rail-row-2">
+          <div class="rail-group">
+            <label for="typeSelect" class="rail-label">Type de savoir</label>
+            <select id="typeSelect" class="rail-select" data-filter="type">
+              <option value="">Tous</option>
+              <option value="Connaissances">Connaissances</option>
+              <option value="Techniques">Techniques</option>
+              <option value="Stratégies">Stratégies</option>
+            </select>
+          </div>
+          <div class="rail-group">
+            <label for="bloomSelect" class="rail-label">Niveau Bloom</label>
+            <select id="bloomSelect" class="rail-select" data-filter="bloom">
+              <option value="">Tous</option>
+              <option value="Mémoriser">Mémoriser</option>
+              <option value="Comprendre">Comprendre</option>
+              <option value="Appliquer">Appliquer</option>
+              <option value="Analyser">Analyser</option>
+              <option value="Évaluer">Évaluer</option>
+              <option value="Créer">Créer</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="rail-group">
+          <label for="statutSelect" class="rail-label">Statut MEQ (sur le programme choisi)</label>
+          <select id="statutSelect" class="rail-select" data-filter="statut">
+            <option value="">Tous les statuts</option>
+            <option value="Planifié (→)">Planifié (→) — En apprentissage</option>
+            <option value="Maîtrisé (★)">Maîtrisé (★) — Fin d'année</option>
+            <option value="Réutilisé (grisé)">Réutilisé (■ grisé)</option>
+          </select>
+        </div>
+
+        <div class="rail-group">
+          <label for="mcFilterSelect" class="rail-label">Méconceptions BSCS liées</label>
+          <select id="mcFilterSelect" class="rail-select" data-filter="mcMode">
+            <option value="all">Toutes les manifestations (810)</option>
+            <option value="linked">Avec méconceptions liées</option>
+            <option value="high">À fort risque POE (≥ 40 %)</option>
+            <option value="none">Sans méconception liée</option>
+          </select>
+        </div>
+
+        <div class="rail-group">
+          <label for="pdaSortSelect" class="rail-label">Trier par</label>
+          <select id="pdaSortSelect" class="rail-select" data-filter="sort">
+            <option value="mc-desc">Méconceptions liées (décroissant)</option>
+            <option value="prev-desc">Prévalence max. BSCS (décroissant)</option>
+            <option value="section">Univers &amp; Section PFEQ</option>
+            <option value="verb">Verbe d'action (A → Z)</option>
+          </select>
+        </div>
+
+        <div class="rail-group">
+          <span class="rail-label">Tags populaires de la sélection</span>
+          <div id="topTagsCloud" class="tag-cloud"></div>
+        </div>
+      </aside>
+
+      <!-- Zone de résultats PDA -->
+      <main class="explorer-content">
+        <div class="content-topbar">
+          <div class="kpi-strip" id="explorerKpis"></div>
+          <div class="topbar-actions">
+            <button type="button" class="btn-outline" data-action="export-pda-csv">
+              Exporter sélection (CSV)
+            </button>
+          </div>
+        </div>
+
+        <div class="legend-inline" aria-label="Légende rapide de la frise MEQ">
+          <span class="leg-chip leg-plan">→ Planifié</span>
+          <span class="leg-chip leg-mait">★ Maîtrisé</span>
+          <span class="leg-chip leg-reut">■ Réutilisé</span>
+          <span class="leg-sep">|</span>
+          <span class="leg-note">Cliquez sur un tag pour filtrer ou sur <strong>Constellation</strong> pour placer le concept au centre du graphe.</span>
+        </div>
+
+        <div id="pdaList" class="pda-list"></div>
+        <nav id="pdaPagination" class="pagination-bar" aria-label="Pagination"></nav>
+      </main>
+    </div>
+  </section>
+
+  <!-- ==================== ONGLET 2 : CONSTELLATION DE NŒUDS (SYNERGIE) ==================== -->
+  <section id="tab-graph" class="tab-panel" role="tabpanel" hidden>
+    <div class="graph-toolbar">
+      <div class="graph-mode-switch" role="group" aria-label="Mode du graphe de nœuds">
+        <button type="button" class="gmode-btn is-active" data-action="set-graph-mode" data-mode="ego" aria-pressed="true">
+          Concept au centre (Égo-réseau)
+        </button>
+        <button type="button" class="gmode-btn" data-action="set-graph-mode" data-mode="global" aria-pressed="false">
+          Constellation globale (Synergies)
+        </button>
+      </div>
+
+      <div id="egoPickerWrap" class="graph-control-inline">
+        <label for="centerConceptSelect" class="sr-only">Concept central</label>
+        <select id="centerConceptSelect" class="graph-select graph-select--wide"></select>
+        <label class="toggle-check">
+          <input type="checkbox" id="showNeighborsChk" checked>
+          <span>Concepts PDA en synergie</span>
+        </label>
+      </div>
+
+      <div id="globalControlsWrap" class="graph-control-inline" hidden>
+        <select id="graphLimitSelect" class="graph-select">
+          <option value="25">Top 25 concepts pivots</option>
+          <option value="45" selected>Top 45 concepts pivots</option>
+          <option value="80">Top 80 concepts pivots</option>
+          <option value="200">Tous les concepts liés (181)</option>
+        </select>
+      </div>
+
+      <div class="graph-filters-inline">
+        <select id="graphUnivSelect" class="graph-select">
+          <option value="">Tous les univers</option>
+          <option value="Univers matériel">Univers matériel</option>
+          <option value="Univers vivant">Univers vivant</option>
+          <option value="Terre et espace">Terre et espace</option>
+          <option value="Univers technologique">Univers technologique</option>
+        </select>
+        <select id="graphProgSelect" class="graph-select">
+          <option value="">Tous les programmes</option>
+        </select>
+        <select id="graphLinkTypeSelect" class="graph-select">
+          <option value="">Tous les liens</option>
+          <option value="DIRECT">DIRECT uniquement</option>
+          <option value="PREREQUIS">PRÉREQUIS uniquement</option>
+          <option value="CONCEPT_VOISIN">CONCEPT VOISIN uniquement</option>
+        </select>
+        <select id="graphPrevSelect" class="graph-select">
+          <option value="0">Prévalence : toutes</option>
+          <option value="25">≥ 25 %</option>
+          <option value="40">≥ 40 % (critiques)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="graph-workspace">
+      <div class="graph-stage-wrap">
+        <canvas id="graphCanvas" class="graph-canvas" aria-label="Graphe interactif des concepts PDA et méconceptions BSCS"></canvas>
+
+        <!-- Contrôles flottants de la scène -->
+        <div class="canvas-controls">
+          <button type="button" class="ctrl-btn" data-action="graph-zoom-in" title="Zoom avant">+</button>
+          <button type="button" class="ctrl-btn" data-action="graph-zoom-out" title="Zoom arrière">−</button>
+          <button type="button" class="ctrl-btn" data-action="graph-fit" title="Recentrer la vue">⌖</button>
+          <button type="button" class="ctrl-btn" id="freezeBtn" data-action="graph-freeze" title="Figer / relancer la physique">⏸</button>
+          <button type="button" class="ctrl-btn" data-action="graph-export-png" title="Télécharger l'image PNG du graphe">📷</button>
+        </div>
+
+        <!-- Légende visuelle du graphe -->
+        <div class="graph-legend" id="graphLegend">
+          <div class="gleg-row"><span class="dot dot--center"></span> Concept PDA central</div>
+          <div class="gleg-row"><span class="dot dot--mc-high"></span> Méconception ≥ 40 %</div>
+          <div class="gleg-row"><span class="dot dot--mc-mid"></span> Méconception 25–39 %</div>
+          <div class="gleg-row"><span class="dot dot--mc-low"></span> Méconception &lt; 25 %</div>
+          <div class="gleg-row"><span class="dot dot--neighbor"></span> Concept PDA en synergie</div>
+          <div class="gleg-sep"></div>
+          <div class="gleg-row"><span class="line-sample line--direct"></span> Lien DIRECT</div>
+          <div class="gleg-row"><span class="line-sample line--prereq"></span> Lien PRÉREQUIS</div>
+          <div class="gleg-row"><span class="line-sample line--voisin"></span> Concept voisin</div>
+        </div>
+
+        <div id="graphTooltip" class="graph-tooltip" hidden></div>
+      </div>
+
+      <!-- Panneau d'inspection du nœud sélectionné -->
+      <aside class="inspector-panel" id="inspectorPanel" aria-label="Détails du nœud sélectionné">
+        <div id="inspectorContent" class="inspector-content"></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ==================== ONGLET 3 : MATRICE DES NŒUDS CRITIQUES ==================== -->
+  <section id="tab-matrix" class="tab-panel" role="tabpanel" hidden>
+    <div class="matrix-shell">
+      <div class="matrix-header">
+        <div>
+          <h2>Cartographie des nœuds critiques par programme</h2>
+          <p class="matrix-desc">Repérez les manifestations du PDA concentrant le plus grand nombre d'obstacles épistémologiques (méconceptions BSCS) pour prioriser vos séquences POE.</p>
+        </div>
+        <div class="matrix-filters">
+          <select id="matrixProgSelect" class="graph-select">
+            <option value="">Tous les programmes (10)</option>
+          </select>
+          <select id="matrixUnivSelect" class="graph-select">
+            <option value="">Tous les univers</option>
+            <option value="Univers matériel">Univers matériel</option>
+            <option value="Univers vivant">Univers vivant</option>
+            <option value="Terre et espace">Terre et espace</option>
+            <option value="Univers technologique">Univers technologique</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="matrixStats" class="kpi-strip"></div>
+      <div id="matrixTableWrap" class="matrix-table-wrap"></div>
+    </div>
+  </section>
+
+  <!-- Modale Légende officielle MEQ -->
+  <dialog id="legendModal" class="legend-dialog" aria-labelledby="legendTitle">
+    <h2 id="legendTitle">Légende officielle MEQ &amp; Mode d'emploi</h2>
+    <p>Cet explorateur combine les <strong>810 manifestations uniques</strong> (3 512 entrées de progression) extraites des 4 PDF officiels du MEQ avec les <strong>1 587 liens validés</strong> vers les 656 conceptions erronées BSCS/AAAS.</p>
+    <h3>Symboles de la Progression des apprentissages (PFEQ)</h3>
+    <ul class="legend-list">
+      <li><span class="leg-chip leg-plan">→ Planifié</span> L'élève entreprend l'apprentissage avec l'intervention systématique de l'enseignant(e).</li>
+      <li><span class="leg-chip leg-mait">★ Maîtrisé</span> La majorité des élèves font cette tâche par eux-mêmes à la fin de l'année scolaire.</li>
+      <li><span class="leg-chip leg-reut">■ Réutilisé</span> Case bleu-gris : l'élève réutilise cette connaissance au cours de l'année scolaire.</li>
+      <li><strong>◆ Losange</strong> : manifestation propre à ST ou propre à ATS.</li>
+    </ul>
+    <h3>Visualisation « Constellation (Nœuds) »</h3>
+    <ul>
+      <li><strong>Concept au centre</strong> : place une manifestation PDA au cœur d'un réseau interactif entouré de ses méconceptions BSCS (taille proportionnelle à la prévalence) et des autres concepts PDA en synergie.</li>
+      <li><strong>Constellation globale</strong> : révèle les « carrefours conceptuels » reliés par des méconceptions partagées. <em>Double-cliquez</em> sur un nœud pour le placer au centre.</li>
+      <li><strong>Interactions</strong> : glissez un nœud pour le réorganiser, glissez le fond pour déplacer la vue, utilisez la molette pour zoomer, ou cliquez sur 📷 pour exporter une image PNG.</li>
+    </ul>
+    <button type="button" class="btn-close" data-action="close-legend">Fermer</button>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="data_pda_bscs.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

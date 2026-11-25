@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogue des conceptions erronées en sciences (BSCS / AAAS — PFEQ)</title>
+  <link rel="stylesheet" href="theme-quebec.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="title-group">
+      <div class="brand-mark" aria-hidden="true">BSCS</div>
+      <div>
+        <h1 data-i18n="appTitle">Catalogue des conceptions erronées en sciences</h1>
+        <p class="subtitle" data-i18n="appSubtitle">Base AAAS Project 2061 / BSCS adaptée aux écoles du Québec (PFEQ)</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Langue d'affichage">
+        <button type="button" class="lang-btn is-active" data-action="set-lang" data-lang="fr" aria-pressed="true">FR (QC)</button>
+        <button type="button" class="lang-btn" data-action="set-lang" data-lang="bi" aria-pressed="false">Bilingue</button>
+        <button type="button" class="lang-btn" data-action="set-lang" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+
+      <button type="button" class="btn-secondary btn-sm" data-action="export-csv" title="Exporter les résultats filtrés en CSV (compatible Excel)">
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M10 3a1 1 0 0 1 1 1v7.586l2.293-2.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 1 1 1.414-1.414L9 11.586V4a1 1 0 0 1 1-1ZM4 15a1 1 0 0 1 1 1v1h10v-1a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1Z"/></svg>
+        <span data-i18n="exportCsv">Exporter CSV</span>
+      </button>
+
+      <label class="btn-secondary btn-sm file-upload-btn" title="Charger un fichier CSV local (bscs_misconceptions_db_fr.csv ou EN)">
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M10 14a1 1 0 0 1-1-1V5.414L6.707 7.707a1 1 0 0 1-1.414-1.414l4-4a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L11 5.414V13a1 1 0 0 1-1 1ZM4 15a1 1 0 0 1 1 1v1h10v-1a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1Z"/></svg>
+        <span data-i18n="importCsv">Importer CSV</span>
+        <input type="file" id="csvFileInput" accept=".csv,text/csv" hidden>
+      </label>
+
+      <button type="button" class="icon-btn" data-action="open-info" aria-label="À propos et équivalences PFEQ" title="À propos et équivalences PFEQ">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <!-- Barre de recherche et statistiques rapides -->
+    <section class="search-panel" aria-label="Recherche et filtres">
+      <div class="search-row">
+        <div class="search-input-wrap">
+          <svg class="search-icon" viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M8.5 3a5.5 5.5 0 1 0 3.473 9.766l3.63 3.63a1 1 0 0 0 1.414-1.414l-3.63-3.63A5.5 5.5 0 0 0 8.5 3ZM5 8.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0Z" clip-rule="evenodd"/>
+          </svg>
+          <input
+            type="search"
+            id="searchInput"
+            class="search-input"
+            placeholder="Rechercher une conception, une idée scientifique, un thème ou un code (ex. tectonique, cellules, PTM011, masse, énergie)..."
+            autocomplete="off"
+            aria-label="Rechercher dans le catalogue"
+          >
+          <button type="button" id="clearSearchBtn" class="clear-search-btn" data-action="clear-search" aria-label="Effacer la recherche" hidden>&times;</button>
+        </div>
+      </div>
+
+      <!-- Pilules de domaines PFEQ -->
+      <div class="domain-pills" id="domainPills" role="group" aria-label="Filtrer par univers PFEQ"></div>
+
+      <!-- Filtres détaillés -->
+      <div class="filters-grid">
+        <div class="filter-field">
+          <label for="topicFilter" data-i18n="filterTopic">Thème</label>
+          <select id="topicFilter" data-param="topic">
+            <option value="">Tous les thèmes</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field--wide">
+          <label for="subtopicFilter" data-i18n="filterSubtopic">Idée scientifique / Sous-thème</label>
+          <select id="subtopicFilter" data-param="subtopic">
+            <option value="">Toutes les idées scientifiques</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="prevalenceFilter" data-i18n="filterPrevalence">Prévalence minimale</label>
+          <select id="prevalenceFilter" data-param="minPrevalence">
+            <option value="0">Toutes (0 % et plus)</option>
+            <option value="20">≥ 20 % des élèves</option>
+            <option value="30">≥ 30 % des élèves</option>
+            <option value="40">≥ 40 % des élèves</option>
+            <option value="50">≥ 50 % (très fréquentes)</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="gradeBasisFilter" data-i18n="filterGradeBasis">Niveau de référence</label>
+          <select id="gradeBasisFilter" data-param="gradeBasis">
+            <option value="max">Max. des deux cycles</option>
+            <option value="g68">6e année – 2e sec. (Grades 6–8)</option>
+            <option value="g912">3e – 5e sec. / Cégep (Grades 9–12)</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="itemsFilter" data-i18n="filterItems">Items d'évaluation liés</label>
+          <select id="itemsFilter" data-param="itemsOnly">
+            <option value="all">Toutes les conceptions</option>
+            <option value="with">Avec items liés (&gt; 0)</option>
+            <option value="without">Sans item lié (0)</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="sortFilter" data-i18n="filterSort">Trier par</label>
+          <select id="sortFilter" data-param="sort">
+            <option value="code">Code (A → Z)</option>
+            <option value="prev-desc">Prévalence décroissante</option>
+            <option value="prev-asc">Prévalence croissante</option>
+            <option value="items-desc">Nombre d'items liés</option>
+            <option value="topic">Thème puis code</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Barre d'état des résultats -->
+      <div class="results-toolbar">
+        <div class="results-meta">
+          <span class="result-count" id="resultCount" aria-live="polite">0 résultat</span>
+          <span class="active-source-badge" id="sourceBadge">Catalogue intégré (FR/EN)</span>
+          <button type="button" id="resetFiltersBtn" class="btn-link" data-action="reset-filters" hidden>Réinitialiser les filtres</button>
+        </div>
+
+        <div class="view-controls">
+          <div class="view-switch" role="group" aria-label="Mode d'affichage">
+            <button type="button" class="view-btn is-active" data-action="set-view" data-view="cards" aria-pressed="true" title="Affichage en cartes">
+              <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M3 4a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4Zm8 0a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V4ZM3 12a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4Zm8 0a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-4Z"/></svg>
+              <span data-i18n="viewCards">Cartes</span>
+            </button>
+            <button type="button" class="view-btn" data-action="set-view" data-view="table" aria-pressed="false" title="Affichage en tableau">
+              <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4Zm0 5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9Zm0 5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2Z" clip-rule="evenodd"/></svg>
+              <span data-i18n="viewTable">Tableau</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistiques de la sélection -->
+    <section class="stats-strip" id="statsStrip" aria-label="Statistiques de la sélection"></section>
+
+    <!-- Conteneur des résultats -->
+    <section id="resultsContainer" class="results-container" aria-label="Résultats du catalogue"></section>
+
+    <!-- Pagination -->
+    <nav id="paginationBar" class="pagination-bar" aria-label="Pagination des résultats"></nav>
+  </main>
+
+  <!-- Modale de détail d'une conception -->
+  <dialog id="detailModal" class="detail-dialog" aria-labelledby="detailTitle">
+    <div class="dialog-header">
+      <div class="dialog-title-wrap">
+        <span id="detailCodeBadge" class="code-badge"></span>
+        <span id="detailDomainBadge" class="domain-badge"></span>
+      </div>
+      <button type="button" class="icon-btn" data-action="close-detail" aria-label="Fermer">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <h2 id="detailTitle" class="detail-topic-title"></h2>
+    <div id="detailBody" class="detail-body"></div>
+    <div class="dialog-footer">
+      <button type="button" class="btn-secondary" id="copyPoeBtn" data-action="copy-poe">Copier pour fiche POE</button>
+      <a id="detailSourceLink" class="btn-secondary" href="#" target="_blank" rel="noopener noreferrer">Source AAAS / Archive</a>
+      <button type="button" class="btn-close" data-action="close-detail">Fermer</button>
+    </div>
+  </dialog>
+
+  <!-- Modale À propos / Équivalences PFEQ -->
+  <dialog id="infoModal" class="info-dialog" aria-labelledby="infoTitle">
+    <h2 id="infoTitle">À propos du catalogue BSCS / AAAS (Adaptation PFEQ)</h2>
+    <p>
+      Ce catalogue regroupe les <strong>656 conceptions erronées (conceptions alternatives)</strong> recensées par le projet
+      <em>AAAS Project 2061 / BSCS Science Assessment</em>, traduites et adaptées en français québécois conformément à la
+      terminologie du <strong>Programme de formation de l'école québécoise (PFEQ)</strong> et de l'OQLF.
+    </p>
+    <h3>Correspondance des univers (PFEQ)</h3>
+    <ul>
+      <li><strong>Terre et espace</strong> ← <em>Earth Science</em></li>
+      <li><strong>Univers vivant</strong> ← <em>Life Science</em></li>
+      <li><strong>Univers matériel</strong> ← <em>Physical Science</em></li>
+      <li><strong>Nature des sciences</strong> ← <em>Nature of Science</em></li>
+    </ul>
+    <h3>Équivalence approximative des niveaux scolaires</h3>
+    <ul>
+      <li><strong>Grades 6–8</strong> ≈ <strong>6e année du primaire à 2e secondaire</strong> (11–14 ans)</li>
+      <li><strong>Grades 9–12</strong> ≈ <strong>3e à 5e secondaire et 1re année du collégial (Cégep)</strong> (14–18 ans)</li>
+    </ul>
+    <p class="info-note">
+      Les pourcentages indiquent la proportion d'élèves ayant choisi un distracteur correspondant à cette conception lors des
+      validations psychométriques américaines. Un outil précieux pour concevoir des amorces <strong>POE (Prédire–Observer–Expliquer)</strong>
+      et cibler les obstacles épistémologiques en classe.
+    </p>
+    <p class="info-note">
+      <strong>Mode 100 % hors ligne :</strong> cette page fonctionne directement depuis votre poste (<code>file://</code>) sans connexion Internet.
+      Vous pouvez également charger une version modifiée du CSV via le bouton <em>Importer CSV</em>.
+    </p>
+    <button type="button" class="btn-close" data-action="close-info">Fermer</button>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
